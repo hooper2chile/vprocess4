@@ -8,7 +8,7 @@
     <br>
     <br>
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-    <font face="verdana" color="black">Habilitar Remontaje</font>
+    <font face="verdana" color="black"><!--Habilitar Remontaje--></font>
     <label class="switch">
       <input  type="checkbox" id="rm_enable_input_id" />
       <span class="slider round"></span>
@@ -29,11 +29,11 @@
             />
         </div>
 
-
+<!--
     <div class="caja_central">
       <!CAJA CENTRAL PARA EL DIBUJO>
     </div>
-
+-->
 
     <!caja3: duracion remontaje>
         <div class="caja3">
@@ -79,16 +79,193 @@
             <button  type="submit" class="button_apply"> + </button>
           </div>
 
+        </form>
 
 
+
+
+<!------------------------------------------------------->
+<!---nuevas funciones 4 agosto 2021 ------>
+<!-- configuracion aire -->
+<br>
+<br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<font face="verdana" color="black"><!--Habilitar Inyección Aire--></font>
+<label class="switch2">
+  <input  type="checkbox" id="a_enable_input_id" />
+  <span class="slider round"></span>
+</label>
+
+
+
+<form id="aire_formulario" method="POST" action='#'> <!--form_id: input id -->
+  <!caja9: frecuencia remontaje>
+      <div class="caja6">
+        <div id="a_periodo_div_id">Periodo Aire [Min]:</div>
+          <input type="number"
+                       id="a_periodo_input_id"
+                       value="30"
+                       style="width: 50px;"
+                       MIN="2"
+                       MAX="1440"
+                       step="1"
+          />
+      </div>
+
+
+  <!caja10: duracion aire>
+      <div class="caja7">
+        <div id="a_duracion_div_id">Ton Aire [Min]:</div>
+          <input type="number"
+                       id="a_duracion_input_id"
+                       style="width: 50px;"
+                       value="30"
+                       MIN="1"
+                       MAX="59"
+                       step="1"
+          />
+     </div>
+
+
+  <!caja11: dias inyeccion aire>
+      <div class="caja8">
+        <div id="a_ciclo_div_id">Días:</div>
+          <input type="number"
+                       id="a_ciclo_input_id"
+                       style="width: 50px;"
+                       value="1"
+                       MIN="0"
+                       MAX="20"
+                       step="1"
+          />
+          <button  type="submit" class="button_apply"> + </button>
+        </div>
+
+</form>
+
+
+
+
+
+
+<!-- configuracion bomba -->
+
+        <br>
+        <br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <font face="verdana" color="black"><!--Habilitar Bomba--></font>
+        <label class="switch3">
+          <input  type="checkbox" id="b_enable_input_id" />
+          <span class="slider round"></span>
+        </label>
+
+
+
+        <form id="bomba_formulario" method="POST" action='#'> <!--form_id: input id -->
+          <!caja9: frecuencia Bomba>
+              <div class="caja9">
+                <div id="b_periodo_div_id">Periodo Bomba[Min]:</div>
+                  <input type="number"
+                               id="b_periodo_input_id"
+                               value="30"
+                               style="width: 50px;"
+                               MIN="2"
+                               MAX="1440"
+                               step="1"
+                  />
+              </div>
+
+
+          <!caja10: duracion Bomba>
+              <div class="caja10">
+                <div id="b_duracion_div_id">Ton Bomba [Min]:</div>
+                  <input type="number"
+                               id="b_duracion_input_id"
+                               style="width: 50px;"
+                               value="30"
+                               MIN="1"
+                               MAX="59"
+                               step="1"
+                  />
+             </div>
+
+
+          <!caja11: dias Bomba>
+              <div class="caja11">
+                <div id="b_ciclo_div_id">Días:</div>
+                  <input type="number"
+                               id="b_ciclo_input_id"
+                               style="width: 50px;"
+                               value="1"
+                               MIN="0"
+                               MAX="20"
+                               step="1"
+                  />
+                  <button  type="submit" class="button_apply"> + </button>
+                </div>
+</form>
+
+<!-------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- mediciones de temperatura
     <font color="white">
     <div class="caja_derecha_arriba1" id="med1"></div>
     <div class="caja_derecha_arriba2" id="med2"></div>
     <div class="caja_derecha_arriba3" id="med3"></div>
     </font>
-
+-->
 
 </form>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
 
 <br>
 <br>

@@ -3,15 +3,15 @@
 from flask import Flask, render_template, session, request, Response, send_from_directory, make_response
 from flask_socketio import SocketIO, emit, disconnect
 
-import os, sys, time, datetime,logging, communication, reviewDB, tocsv
+import os, sys, time, datetime,logging, communication, reviewDB, tocsv, zmq
 
-logging.basicConfig(filename='/home/pi/vprocess4/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4c/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 #CREDENCIALES PARA PAGINAS WEB
 USER = "biorreactor1cii"
 PASSWD = "biorreactorCII_1_CyT"
 
-DIR="/home/pi/vprocess4/"
+DIR="/home/pi/vprocess4c/"
 SPEED_MAX = 150 #150 [rpm]
 TEMP_MAX  = 50 #130 [C]
 TIME_MAX  = 99  #99 [min]
@@ -28,10 +28,27 @@ rm5     =  0
 rm_sets = [0,0,0,0,0,0]  #se agrega rm_sets[5] para enviar este al uc
 rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para los calculos de tiempo
 
+
+#******** nuevas funciones 4-8-21 ++++++++++++++++++++++++++
+a3     =  0
+a5     =  0
+a_sets = [0,0,0,0,0,0]
+a_save = [0,0,0,0,0,0]
+
+b3     =  0
+b5     =  0
+b_sets = [0,0,0,0,0,0]
+b_save = [0,0,0,0,0,0]
+#******** nuevas funciones 4-8-21 ++++++++++++++++++++++++++
+
+
+
+
 task = ["grabar", False]
 flag_database = False
 
-set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
+#set_data = [10, 0, 7.0, 10, 25.0, 1,1,1,1,1,0,0,0,0]
+set_data = [20, 33, 66, 20, 0,    1,1,1,1,1,0,0,0]  #33 y 66 para test. 17 julio 2021
 #set_data[8] =: rst2 (reset de bomba2)
 #set_data[9] =: rst3 (reset de bomba temperatura)
 #set_data[5] =: rst1 (reset de bomba1)
@@ -105,6 +122,7 @@ def viewDB():
     return render_template('dbase.html', title_html="Data Logger")
 
 
+#se incluyen en esta pestaña las nuevas funciones el 4-8-21.
 @app.route('/remontaje', methods=['GET', 'POST'])
 def remontaje():
     global error
@@ -139,6 +157,8 @@ def function_thread():
     emit('u_calibrar_temp',     {'set': u_set_temp})
     emit('power',               {'set': task})
     emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save })
+    emit('aire_setpoints',      {'set': a_sets,  'save': a_save  })
+    emit('bomba_setpoints',     {'set': b_sets,  'save': b_save })
     emit('producto'           , {'set': ficha_producto, 'save': ficha_producto_save})
 
 
@@ -184,7 +204,7 @@ def setpoints(dato):
         elif task[0] == "no_grabar":
             flag_database = "False"
             try:
-                #os.system("rm -rf /home/pi/vprocess4/name_db.txt")
+                #os.system("rm -rf /home/pi/vprocess4c/name_db.txt")
                 f = open(DIR + "flag_database.txt","w")
                 f.write(flag_database)
                 f.close()
@@ -195,7 +215,7 @@ def setpoints(dato):
 
         elif task[0] == "reiniciar":
             os.system(DIR + "bash killall")
-            os.system("rm -rf /home/pi/vprocess4/database/*.db-journal")
+            os.system("rm -rf /home/pi/vprocess4c/database/*.db-journal")
             os.system("sudo reboot")
 
         elif task[0] == "apagar":
@@ -204,10 +224,10 @@ def setpoints(dato):
 
         elif task[0] == "limpiar":
             try:
-                os.system("rm -rf /home/pi/vprocess4/csv/*.csv")
-                os.system("rm -rf /home/pi/vprocess4/log/*.log")
-                os.system("rm -rf /home/pi/vprocess4/log/my.log.*")
-                os.system("rm -rf /home/pi/vprocess4/database/*.db")
+                os.system("rm -rf /home/pi/vprocess4c/csv/*.csv")
+                os.system("rm -rf /home/pi/vprocess4c/log/*.log")
+                os.system("rm -rf /home/pi/vprocess4c/log/my.log.*")
+                os.system("rm -rf /home/pi/vprocess4c/database/*.db")
                 os.system("rm -rf /home/pi/vprocess4/database/*.db-journal")
 
             except:
@@ -335,8 +355,17 @@ def calibrar_ph(dato):
             f = open(DIR + "coef_ph_set.txt","w")
             f.write(str(coef_ph_set) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
             f.close()
+
+
             #acá va el codigo que formatea el comando de calibración.
-            communication.calibrate(0,coef_ph_set)
+            calibrar_ph = communication.calibrate(0,coef_ph_set)
+            #Publisher set_data commands al ZMQ suscriptor de myserial.py
+            port = "5556"
+            context = zmq.Context()
+            socket = context.socket(zmq.PUB)
+            socket.bind("tcp://*:%s" % port)
+            #Publisher set_data commands
+            socket.send_string("%s %s" % (topic, calibrar_ph))
 
         except:
             pass
@@ -395,7 +424,16 @@ def calibrar_od(dato):
             f.write(str(coef_od_set) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
             f.close()
 
-            communication.calibrate(1,coef_od_set)
+            #acá va el codigo que formatea el comando de calibración.
+            calibrar_od = communication.calibrate(1,coef_od_set)
+            #Publisher set_data commands al ZMQ suscriptor de myserial.py
+            port = "5556"
+            context = zmq.Context()
+            socket = context.socket(zmq.PUB)
+            socket.bind("tcp://*:%s" % port)
+            #Publisher set_data commands
+            socket.send_string("%s %s" % (topic, calibrar_od))
+
 
 
         except:
@@ -579,6 +617,103 @@ def remontaje_functions(dato):
 	    logging.info("no se pudo guardar en setting de remontaje.txt")
 
 
+
+
+
+
+#******************** nuevas funciones 4-8-21 FH ***********************************************************************
+#aire setpoits
+@socketio.on('aire_setpoints', namespace='/biocl')
+def aire_functions(dato):
+    global a_sets, a_save
+
+    try:
+        a_sets[0] = int(dato['a_periodo'])
+        a_sets[1] = int(dato['a_duracion'])
+        a_sets[2] = int(dato['a_ciclo'])
+        #a_sets[3] = float(dato['a_flujo'])   #4-8-21: hay que evaluar quitarlo.
+        a_sets[4] = int(dato['a_enable'])
+       #rm_sets[5] = enable local no se recibe desde la pagina, se obtiene localmente en base al algoritmo de calculo de tiempos.
+        a_save = a_sets
+
+    except:
+        a_sets[0] = 22
+        a_sets[1] = 11
+        a_sets[2] = 11
+    	a_sets[3] = 11
+    	a_sets[4] = "no_llego"
+        a_save = [69,69,69,69,False]
+
+        logging.info("no se pudo evaluar rm_sets")
+
+    #se transmiten los datos de remontaje por communication, al canal ZMQ
+    #y desde ahi al micro controlador por serial
+    #communication.cook_remontaje(rm_sets)    #cambiado el 29-09-19.
+
+    #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+    socketio.emit('aire_setpoints', {'set': a_sets, 'save': a_save }, namespace='/biocl', broadcast=True)
+
+    try:
+        f = open(DIR + "aire_sets.txt","a+")
+     	f.write(str(a_sets) + ',..., ' + str(a_save) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") +'\n')
+    	f.close()
+        #logging.info("se guardo en autoclave.txt")
+
+    except:
+        #pass
+	    logging.info("no se pudo guardar en setting de aire.txt")
+
+#*******************************************************************************************
+#bomba setpoits
+@socketio.on('bomba_setpoints', namespace='/biocl')
+def bomba_functions(dato):
+    global b_sets, b_save
+
+    try:
+        b_sets[0] = int(dato['b_periodo'])
+        b_sets[1] = int(dato['b_duracion'])
+        b_sets[2] = int(dato['b_ciclo'])
+        #b_sets[3] = float(dato['a_flujo'])   #4-8-21: hay que evaluar quitarlo.
+        b_sets[4] = int(dato['b_enable'])
+       #b_sets[5] = enable local no se recibe desde la pagina, se obtiene localmente en base al algoritmo de calculo de tiempos.
+        b_save = b_sets
+
+    except:
+        b_sets[0] = 22
+        b_sets[1] = 11
+        b_sets[2] = 11
+    	b_sets[3] = 11
+    	b_sets[4] = "no_llego"
+        b_save = [69,69,69,69,False]
+
+        logging.info("no se pudo evaluar b_sets")
+
+    #se transmiten los datos de remontaje por communication, al canal ZMQ
+    #y desde ahi al micro controlador por serial
+    #communication.cook_remontaje(rm_sets)    #cambiado el 29-09-19.
+
+    #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+    socketio.emit('bomba_setpoints', {'set': b_sets, 'save': b_save }, namespace='/biocl', broadcast=True)
+
+    try:
+        f = open(DIR + "bomba_sets.txt","a+")
+     	f.write(str(b_sets) + ',..., ' + str(b_save) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") +'\n')
+    	f.close()
+        #logging.info("se guardo en autoclave.txt")
+
+    except:
+        #pass
+	    logging.info("no se pudo guardar en setting de bomba.txt")
+
+#*******************************************************************************************
+
+
+
+
+
+
+
+
 @socketio.on('producto', namespace='/biocl')
 def ficha(dato):
     global ficha_producto
@@ -618,10 +753,37 @@ def ficha(dato):
 #CONFIGURACION DE THREADS
 def background_thread1():
     measures = [0,0,0,0,0,0,0]
-    save_set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
+    measures_save = measures
+    save_set_data = [20,20,20,20,0,1,1,1,1,1,0,0,0]
 
     flag_duty_cycle = 1
     ciclo_elapsed   = 0
+
+
+    topic   = 'w'
+    #####Publisher part: publicador zmq para el suscriptor de ficha_producto en la base de datos.
+    port_pub = "5554"
+    context_pub = zmq.Context()
+    socket_pub = context_pub.socket(zmq.PUB)
+    socket_pub.bind("tcp://*:%s" % port_pub)
+    #####Publisher part: publica las lecturas obtenidas al zmq suscriptor de la base de datos.
+
+    #Publisher set_data commands al ZMQ suscriptor de myserial.py
+    port = "5556"
+    context = zmq.Context()
+    socket = context.socket(zmq.PUB)
+    socket.bind("tcp://*:%s" % port)
+    #Publisher set_data commands
+
+    #####Listen measures (suscriptor de las mediciones)
+    port_sub = "5557"
+    context_sub = zmq.Context()
+    socket_sub = context_sub.socket(zmq.SUB)
+    socket_sub.connect ("tcp://localhost:%s" % port_sub)
+    topicfilter = "w"
+    socket_sub.setsockopt(zmq.SUBSCRIBE, topicfilter)
+    #####Listen measures
+
 
     time_save1 = datetime.datetime.now()
     time_save2 = datetime.datetime.now()
@@ -684,38 +846,34 @@ def background_thread1():
             ficha_producto[12] = rm_sets[5]*rm_sets[4]    #enable global * enable del calculo de tiempo, para su registro en database
 
             myList = ','.join(map(str, ficha_producto))
-            communication.zmq_client_data_speak_website(myList)    #para database
+            #communication.zmq_client_data_speak_website(myList)
+            socket_pub.send_string("%s %s" % (topic, myList))                #se publica ficha_producto por zmq (canal 5554) para database.py. FH: 20-07-21
 
             ###### se emite remontaje solo si han cambiado!!! ####################################
-            if rm5 != rm_sets[5] or rm3 != rm_sets[3]:              #rm5 es para enable = 1 o 0 que va al uc y enciende remontaje.
-                communication.cook_setpoint(set_data,rm_sets)       #rm3 es para enviar de inmediato un cambio de flujo al uc y este regrese para la database.
+            if rm5 != rm_sets[5] or rm3 != rm_sets[3]:                       #rm5 es para enable = 1 o 0 que va al uc y enciende remontaje.
+                #preparar y enviar a myserial.py
+                my_set = communication.cook_setpoint(set_data,rm_sets)       #rm3 es para enviar de inmediato un cambio de flujo al uc y este regrese para la database.
+                socket.send_string("%s %s" % (topic, my_set))                #se reemplaza con my_set. antes era send_setpoint. FH: 20-07-21
+
                 rm5 = rm_sets[5]
                 rm3 = rm_sets[3]  #rm3 y rm5 actuan como varibales "save"
 
+
             ###### se emite setpoint solo si han cambiado!!! ####################################
-            for i in range(0,len(set_data)):
-                if save_set_data[i] != set_data[i]:
-                    communication.cook_setpoint(set_data,rm_sets)
-                    save_set_data = set_data
-                    #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
-                    ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
-                    ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
-                    ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
+            #for i in range(0,len(set_data)):
+            #    if save_set_data[i] != set_data[i]:
+                    #preperaru y enviar a myserial.py
+            my_set = communication.cook_setpoint(set_data,rm_sets)
+            socket.send_string("%s %s" % (topic, my_set))            #se reemplaza con my_set. antes era send_setpoint. FH: 20-07-21
 
-
-            ###### se emite setpoint en cada vuelta al loop!!! ####################################
-            #communication.cook_setpoint(set_data,rm_sets)
-            #save_set_data = set_data
+            save_set_data = set_data
             #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
-
-            #for i in range(0,len(ficha_producto)):
-            #    if ficha_producto_save[i] != ficha_producto[i]:
-            #        ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
-            #        ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
-            #        ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
+            ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
+            ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
+            ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
 
 
-            logging.info("\n ············· SE recalculan los tiempos de remontaje ·············\n")
+            #logging.info("\n ············· SE recalculan los tiempos de remontaje ·············\n")
             ###### se emite setpoint solo si han cambiado!!! ####################################
 
         except:
@@ -723,23 +881,38 @@ def background_thread1():
             logging.info("\n ············· no se pudieron recalcular los tiempos de remontaje ·············\n")
 
 
+
+        #####################################################################################
+        #ZMQ DAQmx download data from micro controller + acondicionamiento de variables
+        #temp_ = communication.zmq_client().split()
+        #ejecuto suscripcion al ZMQ de myserial.py, esto es las mediciones de variables fisicas (esta linea es un suscriptor al puerto 5557)
         try:
-            #####################################################################################
-            #ZMQ DAQmx download data from micro controller + acondicionamiento de variables
-            temp_ = communication.zmq_client().split()
+            temp_ = socket_sub.recv().split()
+            #temp_ = socket_sub.recv(flags=zmq.NOBLOCK).split() #por alguna razon al usar el objeto recv() con el flag NOBLOCK, todo el sistema de ZMQ deja de enviar datos hacia el uc, los motores dejan de funcionar.
+            #logging.info("\n Se ejecuto Thread 1 recibiendo %s\n" % measures)
 
-            measures[0] = temp_[1]  #Temp_ (T_Promedio)
-            measures[1] = temp_[2]  #Temp1 (T_Sombrero)
-            measures[2] = temp_[3]  #Temp2 (T_Mosto)
-            measures[3] = temp_[6]  #Itemp2
-            measures[4] = temp_[5]  #Iod
-            measures[5] = temp_[7]  #Itemp1
-            measures[6] = temp_[4]  #Iph
-            #####################################################################################
+        except zmq.Again:
+            pass
+            #logging.info("\n NO SE ACTUALIZARON LAS MEDICIONES NI SETPOINTS \n")
 
-            ##logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
-            socketio.sleep(0.025)   #probar con 0.05
-            logging.info("\n SE ACTUALIZARON LAS MEDICIONES y SETPOINTS \n")
+
+        try:
+            if temp_ != "" and len(temp_) >= 4:
+                measures[0] = temp_[1]  #Temp_ (T_Promedio)
+                measures[1] = temp_[2]  #Temp1 (T_Sombrero)
+                measures[2] = temp_[3]  #Temp2 (T_Mosto)
+                measures[3] = temp_[6]  #Itemp2
+                measures[4] = temp_[5]  #Iod
+                measures[5] = temp_[7]  #Itemp1
+                measures[6] = temp_[4]  #Iph
+
+                measures_save = measures
+                #####################################################################################
+                ##logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
+                #logging.info("\n SE ACTUALIZARON LAS MEDICIONES y SETPOINTS \n")
+
+            else:
+                measures = measures_save
 
 
         except:
@@ -747,8 +920,10 @@ def background_thread1():
             logging.info("\n NO SE ACTUALIZARON LAS MEDICIONES NI SETPOINTS \n")
 
 
+
         #se termina de actualizar y se emiten las mediciones y setpoints para hacia clientes web.-
         socketio.emit('Medidas', {'data': measures, 'set': set_data}, namespace='/biocl')
+        socketio.sleep(0.05)   #probar con 0.05
 
 
 if __name__ == '__main__':

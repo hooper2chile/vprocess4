@@ -1,13 +1,14 @@
 #!usr/bin/env python
 # -*- coding: utf-8 -*-
+# Vprocess4 - CyT: Actualizado en Julio 2021 (FH).
 '''
     Adquisición de datos por sockets (ZMQ) para la base de datos.
 '''
 import os, sys, time, datetime, sqlite3, sqlitebck, logging, communication, zmq
 
-logging.basicConfig(filename='/home/pi/vprocess4/log/database.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4c/log/database.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 TIME_MIN_BD = 1 # 1 [s]
-DIR="/home/pi/vprocess4/"
+DIR="/home/pi/vprocess4c/"
 flag_database = "False"
 flag_database_local = False
 
@@ -51,17 +52,17 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     #Backup DB in RAM to DISK SD
     if BACKUP:
 
-        filedb='/home/pi/vprocess4/database/backup__' + first_time + '__.db'
+        filedb='/home/pi/vprocess4c/database/backup__' + first_time + '__.db'
 
         bck = sqlite3.connect(filedb)
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from T_SOMBRERO;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_SOMBRERO.csv' )
-            os.system('sqlite3 -header -csv %s "select * from T_MOSTO;"    > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_MOSTO.csv'    )
-            os.system('sqlite3 -header -csv %s "select * from T_PROMEDIO;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_PROMEDIO.csv' )
+            os.system('sqlite3 -header -csv %s "select * from T_SOMBRERO;" > /home/pi/vprocess4c/csv/%s' % (filedb,filedb[28:-3])+'T_SOMBRERO.csv' )
+            os.system('sqlite3 -header -csv %s "select * from T_MOSTO;"    > /home/pi/vprocess4c/csv/%s' % (filedb,filedb[28:-3])+'T_MOSTO.csv'    )
+            os.system('sqlite3 -header -csv %s "select * from T_PROMEDIO;" > /home/pi/vprocess4c/csv/%s' % (filedb,filedb[28:-3])+'T_PROMEDIO.csv' )
 
-            os.system('sqlite3 -header -csv %s "select * from PROCESO;"    > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'PROCESO.csv' )
+            os.system('sqlite3 -header -csv %s "select * from PROCESO;"    > /home/pi/vprocess4c/csv/%s' % (filedb,filedb[28:-3])+'PROCESO.csv' )
 
             logging.info("\n Backup CSV REALIZADO \n")
 
@@ -81,43 +82,83 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
 
         return True
 
-def main():
-    ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura set point
-    ficha_producto_save = ficha_producto                                #ficha_producto[10] = set_data[0]: bomba1
-                                                                        #ficha_producto[11] = set_data[3]: bomba2
 
-    #####Listen measures - estructura para zmq listen ###################################
-    tau_zmq_connect = 0.3
-    port_sub = "5554"
-    context_sub = zmq.Context()
-    socket_sub = context_sub.socket(zmq.SUB)
-    socket_sub.connect ("tcp://localhost:%s" % port_sub)
+
+
+
+
+
+
+
+
+def main():
+    #ficha_producto = [0.0,0.0,0.0,0.0,0.0,"vacio_uchile2","vacio_uchile2",0,0.0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura set point
+    #ficha_producto_save = ficha_producto                                #ficha_producto[10] = set_data[0]: bomba1
+                                                                        #ficha_producto[11] = set_data[3]: bomba2
     topicfilter = "w"
-    socket_sub.setsockopt(zmq.SUBSCRIBE, topicfilter)
-    time.sleep(tau_zmq_connect)
+    #####Listen measures - estructura para zmq listen de ficha_producto ################
+    port_sub1 = "5554"
+    context_sub1 = zmq.Context()
+    socket_sub1 = context_sub1.socket(zmq.SUB)
+    socket_sub1.connect ("tcp://localhost:%s" % port_sub1)
+    socket_sub1.setsockopt(zmq.SUBSCRIBE, topicfilter)
+
+    #####Listen measures - estructura para zmq listen real_data (measures from myserial.py)
+    port_sub2 = "5557"
+    context_sub2 = zmq.Context()
+    socket_sub2 = context_sub2.socket(zmq.SUB)
+    socket_sub2.connect ("tcp://localhost:%s" % port_sub2)
+    socket_sub2.setsockopt(zmq.SUBSCRIBE, topicfilter)
     ####################################################################################
 
     i = 0                      #Hora__%H_%M_%S__Fecha__%d-%m-%y
     first_time = time.strftime("Fecha__%d-%m-%y__Hora__%H_%M_%S")
-    TIME_BCK = 6 #600 #10 min
+    TIME_BCK = 5 #600 #10 min
     connector = sqlite3.connect(':memory:', detect_types = sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
     c = connector.cursor()
 
     #Algoritmo de respaldo cada "TIME_BCK [s]"
     BACKUP = False
+
     start_time = time.time()
     end_time   = time.time()
+
+    real_data = 0
+    ficha_producto = 0
 
     global flag_database_local, flag_database
     #reviso constantemente
     while True:
+        ##############   ZMQ connection for download data ficha_producto ###############
+        try:
+            ficha_producto = socket_sub1.recv(flags=zmq.NOBLOCK).split()[1];
+            ficha_producto = ficha_producto.split(",")
+            ficha_producto_save = ficha_producto
+            #ficha_producto_save = ficha_producto
+            #log para depuracion
+            '''
+            f = open(DIR + "/para_basedatos.txt","a+")
+            f.write(str(ficha_producto) + "__up__" + "\n" )
+            f.close()
+            '''
+        except zmq.Again:
+            pass
+
+        #ZMQ connection for download real_data (measures from myserial.py)
+        try:
+            temporal = socket_sub2.recv(flags=zmq.NOBLOCK).split()
+            if temporal != "":
+                real_data = temporal
+        except zmq.Again:
+            pass
+        ########################## ZMQ connections #######################################
+
         #reviso la primera vez si cambio el flag, y luego sirve para revisar cuando salga por que fue apagado el flag desde app.py
         try:
-            f = open(DIR + "flag_database.txt","r")
+            f = open(DIR + "/flag_database.txt","r")
             flag_database = f.readlines()[-1]
             f.close()
-
-            logging.info("FLAG_DATABASE WHILE SUPERIOR:")
+            #logging.info("FLAG_DATABASE WHILE SUPERIOR:")
 
             if flag_database == "True":
                 flag_database_local = True
@@ -125,46 +166,35 @@ def main():
                 flag_database_local = False
 
         except:
-            logging.info("no se pudo leer el flag en el while principal")
+            pass
+            #logging.info("no se pudo leer el flag en el while principal")
 
-        time.sleep(10)
 
-        #depuracion log
-        if flag_database_local is False:
-            if i is 10:
-                try:
-                    f = open(DIR + "db_log.txt","a+")
-                    f.write("Grabando OFF: " + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n" )
-                    f.close()
-
-                    i = 0
-                    logging.info("GRABANDO OFF: " + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n")
-
-                except:
-                    logging.info("no se pudo leer grabar el log de grabar off")
-                #depuracion log
-
-        i += 1
         while flag_database_local:
-
-            #ZMQ connection for download data #string= socket_sub.recv(flags=zmq.NOBLOCK).split()
-            real_data = communication.zmq_client().split()
-
-            #ZMQ connection for download data ficha_producto
+            ##############   ZMQ connection for download data ficha_producto ###############
             try:
-                ficha_producto = socket_sub.recv(flags=zmq.NOBLOCK).split()[1];
+                ficha_producto = socket_sub1.recv(flags=zmq.NOBLOCK).split()[1];
                 ficha_producto = ficha_producto.split(",")
                 ficha_producto_save = ficha_producto
-                logging.info("ficha de producto a continuacion: ")
-                logging.info(ficha_producto)
-
+                #ficha_producto_save = ficha_producto
+                #log para depuracion
+                '''
+                f = open(DIR + "/para_basedatos.txt","a+")
+                f.write(str(ficha_producto) + "__down__" + "\n" )
+                f.close()
+                '''
             except zmq.Again:
-                ficha_producto = ficha_producto_save
                 pass
-            #ficha_producto = [1,2,3,4,5]
 
+            #ZMQ connection for download real_data (measures from myserial.py)
+            try:
+                temporal = socket_sub2.recv(flags=zmq.NOBLOCK).split()
+                if temporal != "":
+                    real_data = temporal
+            except zmq.Again:
+                pass
+            ########################## ZMQ connections #######################################
 
-            update_db(real_data, ficha_producto, connector, c, first_time, BACKUP)
 
             delta = end_time - start_time
 
@@ -177,15 +207,14 @@ def main():
                 end_time   = time.time()
                 BACKUP = True
 
-            #Aqui se determina el tiempo con que guarda datos la BD.-
+            #Aqui se determina el tiempo con que guarda datos la BD.-  23 julio: no estoy seguro que sea asi como lo puse antes...
             time.sleep(TIME_MIN_BD)
 
             try:
-                f = open(DIR + "flag_database.txt","r")
+                f = open(DIR + "/flag_database.txt","r")
                 flag_database = f.readlines()[-1][:-1]
                 f.close()
-
-                logging.info("FLAG_DATABASE WHILE SECUNDARIO:")
+                #logging.info("FLAG_DATABASE WHILE SECUNDARIO:")
 
 
                 if flag_database == "True":
@@ -198,18 +227,14 @@ def main():
 
 
             #log de grabacion: cada 10 seg (dado el time sleep: TIME_MIN_BD del while) se actualiza el log
-            if i is 10:
+            if i is 100:
                 try:
-                    f = open(DIR + "db_log.txt","a+")
-                    f.write("Grabando ON: " + time.strftime("Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n")
-                    f.close()
-
+                    #nuevo 23 julio 2020
+                    update_db(real_data, ficha_producto, connector, c, first_time, True)
                     i = 0
-                    logging.info("GRABANDO ON: " + time.strftime("Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n")
 
                 except:
                     logging.info("no se pudo leer grabar el log de grabar on")
-                #depuracion log
 
             i += 1
 

@@ -6,6 +6,12 @@
 * Electronic Engineer
 */
 
+
+/* nueva trama: 6-8-21
+w f 0 2 0 u 0 2 0 t n  0  0  3  r  1  1  1  e  0
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+*/
+
 #include <avr/wdt.h>
 #include <TimerOne.h>
 #include <slibrary.h>

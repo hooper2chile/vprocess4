@@ -14,6 +14,11 @@
     Electronic Engineer
 */
 
+/* nueva trama: 6-8-21
+wf020u020t n  0  0  3  r  1  1  1  e  0
+0123456789 10 11 12 13 14 15 16 17 18 19
+*/
+
 
 #include "Arduino.h"
 
@@ -207,10 +212,9 @@ void clean_strings() {
 }
 
 
-//message format write values: wpha140feed100unload100mix1500temp100rst111111dir111111
-//wphb040feed010unload010mix1500temp010rst000000dir111111
+
 int validate_write() {
-  if ( message[0] == 'w' ) return 1;
+  if ( message[0] == 'w' && message[9] == 't' ) return 1;
   else return 0;
 
 }
@@ -221,11 +225,11 @@ void crumble() {  //se puede alivianar usando .toFloat() directamente despues de
   myfeed   = message.substring(2,5).toInt();
   myunload = message.substring(6,9).toInt();
   //mymix    = mix_set.toInt();
-  mytemp   = message.substring(10,13).toInt();
+  mytemp   = message.substring(11,14).toInt();
 
-  rst1 = int(INT(message[14]));  //rst_feed
-  rst2 = int(INT(message[15]));  //rst_unload
-  rst3 = int(INT(message[16]));  //rest_temp
+  rst1 = int(INT(message[15]));  //rst_feed
+  rst2 = int(INT(message[16]));  //rst_unload
+  rst3 = int(INT(message[17]));  //rest_temp
 
   return;
 }

@@ -45,7 +45,7 @@ void loop() {
       if ( validate_write() ) {
         //se "desmenuza" el command de setpoints
         crumble();
-	      cooler(rst1, rst2, rst3);
+	      //cooler(rst1, rst2, rst3);
 
         //###################################################################################
         //Codigo para bomba remontaje
@@ -53,7 +53,7 @@ void loop() {
         //###################################################################################
 
         //nuevo control de temperatura con agua fria y caliente (no PID)
-        control_temp(rst3);
+        //control_temp(rst3);
         // fin control temperatura
 
         if (message[0] == 'w') broadcast_setpoint(1);

@@ -3,21 +3,16 @@
 *  Writed by: Felipe Hooper
 *  Electronic Engineer
 */
+
 #include <avr/wdt.h>
 #include "mlibrary.h"
+
 
 void setup() {
   wdt_disable();
 
   Serial.begin(9600);
   Wire.begin(); //se inicia i2c master
-  ads1.begin();
-  //ads2.begin();
-  //                                           ADS1015  ADS1115
-  //                                           -------  -------
-  ads1.setGain(GAIN_ONE);      // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
-  //ads2.setGain(GAIN_ONE);
-  //ads.setGain(GAIN_TWO);     // 2x gain   +/- 2.048V  1 bit = 1mV      0.0625mV
 
   DDRB = DDRB | (1<<PB0) | (1<<PB5);
   PORTB = (0<<PB0) | (1<<PB5);
@@ -37,28 +32,25 @@ void loop() {
       if ( validate() ) {
           //PORTB = 1<<PB0;
           switch ( message[0] ) {
-              case 'r':
+              case 'w':
+                co2_sensor();
                 rtds_sensors();
+                control_temp();         //lo mismo que en control_ph()
                 daqmx();
-                broadcast_setpoint(0);
-		            //broadcast_setpoint(1); //probando el 2 de marzo de 2020
-                //calibrate_sensor();
-                //Serial.println("CALIBRADO!");
+                forward();  //broadcast_setpoint() de vprocess4 es diferente al de vprocess6! ajustar al 6 aqui tambien!
+                //clean_strings();
                 break;
 
-              case 'w':
-                //Serial.println("w: " + message); //debug
-                daqmx();
-                broadcast_setpoint(1);
-                break;
 
               case 'c':
                 calibrate_sensor();
                 Serial.println("CALIBRADO!");
+                //clean_strings();
                 break;
 
               case 'u':
                 actuador_umbral();
+                //clean_strings();
                 break;
               /*
               case 'p': //remontaje set
@@ -68,6 +60,7 @@ void loop() {
                 break;
               */
               default:
+                //clean_strings();
                 break;
           }
           //wdt_reset(); //nuevo

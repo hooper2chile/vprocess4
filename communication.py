@@ -2,9 +2,9 @@
 # --*- coding: utf-8 -*--
 import sys, zmq, time, logging
 
-logging.basicConfig(filename='/home/pi/vprocess4/log/communication.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4c/log/communication.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
-DIR="/home/pi/vprocess4/"
+DIR="/home/pi/vprocess4c/"
 
 #5556: for download data
 #5557: for upload data
@@ -33,64 +33,6 @@ PH_MIN = 1
 PH_MAX = 14
 
 command_save = "vacio"
-
-
-#write and post send setpoint, download measures with client zmq
-def published_setpoint(set_data):
-    #Publisher set_data commands
-    port = "5556"
-    context = zmq.Context()
-    socket = context.socket(zmq.PUB)
-    socket.bind("tcp://*:%s" % port)
-    topic   = 'w'
-    #espero y envio valor
-    time.sleep(tau_zmq_connect)
-    socket.send_string("%s %s" % (topic, set_data))
-
-    return True
-
-
-def zmq_client():
-    #####Listen measures
-    port_sub = "5557"
-    context_sub = zmq.Context()
-    socket_sub = context_sub.socket(zmq.SUB)
-    socket_sub.connect ("tcp://localhost:%s" % port_sub)
-    topicfilter = "w"
-    socket_sub.setsockopt(zmq.SUBSCRIBE, topicfilter)
-    #espero y retorno valor
-    time.sleep(tau_zmq_connect)
-
-    return socket_sub.recv()
-
-
-###### Funiones para intercambio de datos entre app.py y databse.py: datos desde la web"
-def zmq_client_data_speak_website(data):
-    #####Publisher part: publica las lecturas obtenidas.
-    port_pub = "5554"
-    context_pub = zmq.Context()
-    socket_pub = context_pub.socket(zmq.PUB)
-    socket_pub.bind("tcp://*:%s" % port_pub)
-    topic   = 'w'
-    time.sleep(tau_zmq_connect)
-    socket_pub.send_string("%s %s" % (topic, data))
-    time.sleep(tau_zmq_while_read) #Tiempo de muestreo menor para todas las aplicaciones que recogen datos por ZMQ.
-    return True
-
-
-def zmq_client_data_listen_website():
-    #####Listen measures
-    port_sub = "5554"
-    context_sub = zmq.Context()
-    socket_sub = context_sub.socket(zmq.SUB)
-    socket_sub.connect ("tcp://localhost:%s" % port_sub)
-    topicfilter = "w"
-    socket_sub.setsockopt(zmq.SUBSCRIBE, topicfilter)
-    #espero y retorno valor
-    time.sleep(tau_zmq_connect)
-    data = socket_sub.recv(flags=zmq.NOBLOCK)
-    return data
-###### Funiones para intercambio de datos entre app.py y databse.py: datos desde la web"
 
 
 
@@ -158,12 +100,13 @@ def calibrate(var, coef):
         f = open(DIR + "coef_m_n.txt","w")
         f.write(coef_cook + '\n')
         f.close()
-        published_setpoint(coef_cook)
+
 
     except:
         pass
         #logging.info("no se pudo guardar set de calibrate()")
 
+    return coef_cook
 
 
 # var = 1 => ph
@@ -230,13 +173,13 @@ def actuador(var,u_set):
         f = open(DIR + "actuador.txt","w")
         f.write(u_cook + '\n')
         f.close()
-        published_setpoint(u_cook);
+
 
     except:
         pass
         #logging.info("no se pudo guardar set de actuador()")
 
-
+    return u_cook
 
 
 def cook_setpoint(set_data, rm_sets):
@@ -382,7 +325,8 @@ def cook_setpoint(set_data, rm_sets):
         enable = str(rm_sets[5])
 
         #vprocess4
-        command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'e' + enable + 'f' + flujo + '\n'
+        #command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'e' + enable + 'f' + flujo + '\n'
+        command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'e' + enable + '\n'
         logging.info('\n\n' + command + '\n')
 
         #wf000u000t009r000e1f0.2t20.12
@@ -391,7 +335,7 @@ def cook_setpoint(set_data, rm_sets):
         logging.info('\n' + "************** no se pudo construir command remontaje **************"  + '\n')
 
     #published for put in queue and write in serial port
-    published_setpoint(command)
+    #published_setpoint(command)
 
     try:
         f = open(DIR + "command.txt","a+")
@@ -402,10 +346,15 @@ def cook_setpoint(set_data, rm_sets):
         #pass
         logging.info('\n' + "no se pudo guardar el command en el archivo de texto" + '\n')
 
-    return True
+    return command
 
 
+#def published_setpoint(set_data):
+#def zmq_client():
 
+#app.py <-> database.py
+#def zmq_client_data_speak_website(data)
+#def zmq_client_data_listen_website():
 
 def main():
     while True:
