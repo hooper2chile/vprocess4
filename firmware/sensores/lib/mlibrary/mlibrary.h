@@ -169,24 +169,7 @@ void rtd1_sensor() {
         break;
       }
     }
-    Temp1 = atof(RTD_data1);
-    if      (Temp1 < 0  ) Temp1 = 1;
-    else if (Temp1 > 100) Temp1 = 111;
-    else if (Temp1 == 0) {
-	    Temp1 = Temp1_save;
-	    l++;
-	    if (l == 10) {
-		      digitalWrite(8,LOW);
-	        delay(50);
-      		digitalWrite(8,HIGH);
-		      l = 0;
-		      k++;
-	    }
-    }
-    else {
-	    Temp1_save = Temp1;
-	    Temp1 = Temp1;
-    }
+  Temp1 = atof(RTD_data1);
   }
   serial_event = false;                   //reset the serial event flag.
   return;
@@ -213,23 +196,6 @@ void rtd2_sensor() {
       }
     }
     Temp2 = atof(RTD_data2);
-    if      (Temp2 < 0)   Temp2 = 2;
-    else if (Temp2 > 100) Temp2 = 222;
-    else if (Temp2 == 0) {
-	    Temp2 = Temp2_save;
-	    j++;
-	    if (j == 10) {
-	    	digitalWrite(8,LOW);
-    		delay(50);
-    		digitalWrite(8,HIGH);
-    		j = 0;
-    		k++;
-	    }
-    }
-    else {
-	    Temp2_save = Temp2;
-	    Temp2      = Temp2;
-    }
   }
   serial_event = false;                   //reset the serial event flag.
   return;
@@ -352,10 +318,10 @@ void tx_reply(){
   Serial.print(cByte1);       Serial.print("\t");
   Serial.print(cByte2);       Serial.print("\t");
   Serial.print(cByte3);       Serial.print("\t");
-  Serial.print(cByte4);       Serial.print("\t");
-  Serial.print(cByte5);       Serial.print("\t");
-  Serial.print(cByte6);       Serial.print("\t");
-  Serial.print(cByte7);       Serial.print("\t");
+  //Serial.print(cByte4);       Serial.print("\t");
+  //Serial.print(cByte5);       Serial.print("\t");
+  //Serial.print(cByte6);       Serial.print("\t");
+  //Serial.print(cByte7);       Serial.print("\t");
   Serial.print("\t");
   Serial.print("new_write_w: ");  Serial.print(new_write_w.substring(0,20));/* Serial.print("\t"); Serial.print("message: "); Serial.print(message.substring(0,19)); */
   Serial.println("");

@@ -23,7 +23,7 @@ const int colorB = 0;
 #define AGUA_CALIENTE  A2 //D11 = rele 2 (cable amarillo)
 #define ELECTROVALVULA_AIRE  A3 //electrovalvula neumatica para presion de aire
 
-
+char relay_temp = "";
 String  new_write   = "wf000u000t000r111d111\n";
 String  new_write0  = "";
 
@@ -43,6 +43,7 @@ uint8_t rst1_save = 1;  uint8_t rst2_save = 1;  uint8_t rst3_save = 1;
 uint8_t dir1 = 1;  uint8_t dir2 = 1;  uint8_t dir3 = 1;
 
 uint8_t pump_enable = 0;
+uint8_t aire_enable = 0;
 
 float mytemp_set = 0;
 float mytemp_set_save = 0;
@@ -96,13 +97,12 @@ void remontaje(int pump_enable) {
   return;
 }
 
-/*
-void cooler(int rst1, int rst2, int rst3) {
-  if (rst1 == 0 || rst2 == 0 || rst3 == 0)
-	  digitalWrite(A3, LOW );
-  else    digitalWrite(A3, HIGH);
+
+void neumatica(int aire_enable) {
+  if (aire_enable == 1)  digitalWrite(A3, LOW );
+  else                   digitalWrite(A3, HIGH);
 }
-*/
+
 
 //function for transform numbers to string format of message
 void format_message(int var) {
@@ -167,8 +167,34 @@ void crumble() {
 
       //trama remontaja unificada el 29-09-19 con la trama de setpoint
       pump_enable = INT(message[19]);
+      relay_temp = message[10]; // c: caliente, e: frio, n: nada
+
+      //aire_enable = INT(message[21]); //6 agosto 2021: falta agregarlo en la tratama que viene desde app.py/communication.py, luego en uc_sensores en la funcion forward()
     }
     return;
+}
+
+
+void reles_temp(){
+  if (relay_temp == 'e') {
+    digitalWrite(AGUA_CALIENTE, HIGH);
+    delay(1);
+    digitalWrite(AGUA_FRIA,      LOW);
+    delay(1);
+  }
+  else if (relay_temp == 'c') {
+    digitalWrite(AGUA_CALIENTE,  LOW);
+    delay(1);
+    digitalWrite(AGUA_FRIA,     HIGH);
+    delay(1);
+  }
+  else {
+    digitalWrite(AGUA_CALIENTE, HIGH);
+    delay(1);
+    digitalWrite(AGUA_FRIA,     HIGH);
+    delay(1);
+  }
+  return;
 }
 
 

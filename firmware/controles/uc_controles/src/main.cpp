@@ -45,7 +45,9 @@ void loop() {
       if ( validate_write() ) {
         //se "desmenuza" el command de setpoints
         crumble();
-	      //cooler(rst1, rst2, rst3);
+        reles_temp();
+
+        neumatica(aire_enable);
 
         //###################################################################################
         //Codigo para bomba remontaje
@@ -56,8 +58,7 @@ void loop() {
         //control_temp(rst3);
         // fin control temperatura
 
-        if (message[0] == 'w') broadcast_setpoint(1);
-        else                   broadcast_setpoint(0);
+        broadcast_setpoint(1);
 
       }
       else Serial.println("bad validate");

@@ -33,11 +33,11 @@ void loop() {
           //PORTB = 1<<PB0;
           switch ( message[0] ) {
               case 'w':
-                co2_sensor();
-                rtds_sensors();
-                control_temp();         //lo mismo que en control_ph()
                 daqmx();
                 forward();  //broadcast_setpoint() de vprocess4 es diferente al de vprocess6! ajustar al 6 aqui tambien!
+                control_temp();         //lo mismo que en control_ph()
+                co2_sensor();
+                rtds_sensors();
                 //clean_strings();
                 break;
 
