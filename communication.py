@@ -193,10 +193,83 @@ def actuador(var,u_set):
         #logging.info("no se pudo guardar set de actuador()")
 
 
+###############################################################################
+#Se reciben localmente los datos de ac_sets desde app.py
+def cook_autoclave(ac_sets):
+    ac_sets[0] = int(ac_sets[0])  #temperatura
+    ac_sets[1] = int(ac_sets[1])  #tiempo
+
+    command = None
+    temp = 120
+    time = 30
+    flag_temp = 0
+    flag_time = 0
+
+    try:
+        #limites de temperatura
+        if ac_sets[0] >= TEMP_MAX:
+            ac_sets[0] = TEMP_MAX
+        elif ac_sets[0] <= 100:
+            ac_sets[0] = 100
+
+        #str de temp
+        temp = str(ac_sets[0])
+
+        #limites de tiempo
+        if ac_sets[1] >= 99:
+            ac_sets[1] = 99
+        elif ac_sets[1] < 10 and ac_sets[1] >= 0:
+            ac_sets[1] = '0' + str(ac_sets[1])
+        #str de time
+        time = str(ac_sets[1])
+
+
+        #ajustando flag tiempo
+        if ac_sets[2] is True:
+            ac_sets[2] = 1
+        else:
+            ac_sets[2] = 0
+        #str flag tiempo
+        flag_time = str(ac_sets[2])
+
+        #ajustando flag temperatura
+        if ac_sets[3] is True:
+            ac_sets[3] = 1
+        else:
+            ac_sets[3] = 0
+        #str flag temperatura
+        flag_temp = str(ac_sets[3])
+
+        #se construye el string de autoclavado
+        command = 'a' + time + 't' + temp + 'f' + str(flag_time) + str(flag_temp) + 'e'
+        published_setpoint(command)
+
+        #se respalda el comando
+        f = open(DIR + "autoclave_string.txt","a+")
+     	f.write(str(command) + '\n')
+    	f.close()
+
+    except:
+        logging.info("no se pudo generar el command para autoclave")
+        pass
+
+
+
+
+
+    return True
+###############################################################################
+
+
+
+
+
+
+
+
 
 def cook_setpoint(set_data):
     #format string
-
     #convert true or false in checkbox to 0 or 1
     for i in range(5,13):
         if set_data[i] is True:
@@ -237,8 +310,8 @@ def cook_setpoint(set_data):
 
     #threshold setting:
     #alimentar
-    if set_data[0] > SPEED_MAX_MIX:
-        set_data[0] = SPEED_MAX_MIX
+    if set_data[0] > SPEED_MAX:     #SPEED_MAX_MIX:
+        set_data[0] = SPEED_MAX     #SPEED_MAX_MIX
 
     elif set_data[0] < 0:
         set_data[0] = 0
@@ -250,7 +323,7 @@ def cook_setpoint(set_data):
     elif set_data[1] < 50:
         set_data[1] = 50
 
-    #ph
+    #pH
     if set_data[2] > PH_MAX:
         set_data[2] = PH_MAX
 
@@ -330,7 +403,7 @@ def cook_setpoint(set_data):
     command = 'wph' + string_ph + 'feed' + string_feed + 'unload' + string_unload + 'mix' + string_mix + \
               'temp' + string_temp + 'rst' + string_rst + 'dir' + string_dir + '\n'
 
-    #logging.info('\n' + command + '\n')
+    logging.info('\n' + command + '\n')
 
     #published for put in queue and write in serial port
     published_setpoint(command)
@@ -345,6 +418,8 @@ def cook_setpoint(set_data):
         #logging.info("no se pudo guardar el command en el archivo de texto")
 
     return True
+
+
 
 
 

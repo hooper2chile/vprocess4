@@ -5,10 +5,12 @@ from flask_socketio import SocketIO, emit, disconnect
 
 import os, sys, logging, communication, reviewDB, tocsv
 
-#logging.basicConfig(filename='/home/pi/biocl_system/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+#logging.basicConfig(filename='/home/pi/vprocess4/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
-DIR="/home/pi/biocl_system/"
+DIR="/home/pi/vprocess4/"
 SPEED_MAX = 150 #150 [rpm]
+TEMP_MAX  = 50 #130 [C]
+TIME_MAX  = 99  #99 [min]
 
 u_set_temp = [SPEED_MAX,0]
 u_set_ph   = [SPEED_MAX,SPEED_MAX]
@@ -17,10 +19,16 @@ ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
 temp_set = [0,0,0,0]
 
+temp_save  = 0
+time_save  = 0 #este se usa para info en las webpages
+time_save2 = 0 #este se usa para calculos con el timestamp
+ac_sets = [0,0,False,False]  #ac_sets = auto clave setpoints
+
 task = ["grabar", False]
 flag_database = False
 
 set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
+
 
 
 # Set this variable to "threading", "eventlet" or "gevent" to test the
@@ -73,7 +81,6 @@ def test():
 
 
 
-
 @app.route('/graphics')
 def graphics():
     return render_template('graphics.html', title_html="Variables de Proceso")
@@ -84,6 +91,9 @@ def viewDB():
     return render_template('dbase.html', title_html="Data Logger")
 
 
+@app.route('/remontaje', methods=['GET', 'POST'])
+def autoclave():
+    return render_template('remontaje.html', title_html="Remontaje")
 
 
 
@@ -165,11 +175,11 @@ def setpoints(dato):
 
         elif task[0] == "limpiar":
             try:
-                os.system("rm -rf /home/pi/biocl_system/csv/*.csv")
-                os.system("rm -rf /home/pi/biocl_system/log/*.log")
-                os.system("rm -rf /home/pi/biocl_system/log/my.log.*")
-                os.system("rm -rf /home/pi/biocl_system/database/*.db")
-                os.system("rm -rf /home/pi/biocl_system/database/*.db-journal")
+                os.system("rm -rf /home/pi/vprocess4/csv/*.csv")
+                os.system("rm -rf /home/pi/vprocss4/log/*.log")
+                os.system("rm -rf /home/pi/vprocess4/log/my.log.*")
+                os.system("rm -rf /home/pi/vprocess4/database/*.db")
+                os.system("rm -rf /home/pi/vprocess4/database/*.db-journal")
 
             except:
                 pass
@@ -475,6 +485,54 @@ def calibrar_u_temp(dato):
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('u_calibrar_temp', {'set': u_set_temp}, namespace='/biocl', broadcast=True)
+
+
+
+#remontaje setpoits
+@socketio.on('ac_setpoints', namespace='/biocl')
+def autoclave_functions(dato):
+    global ac_sets, temp_save, time_save, time_save2
+
+    try:
+        ac_sets[0] = int(dato['ac_temp'])
+        ac_sets[1] = int(dato['ac_time'])
+        ac_sets[2] = dato['time_en']
+        ac_sets[3] = dato['temp_en']
+
+        time_save = int(dato['ac_time'])
+        temp_save = int(dato['ac_temp'])
+
+    except:
+        ac_sets[0] = 22
+        ac_sets[1] = 11
+    	ac_sets[2] = "no_llego"
+    	ac_sets[3] = "no_llego"
+        time_save = "vacio"
+        temp_save = "vacio"
+        logging.info("no se pudo evaluar")
+
+    #se toma el tiempo actual para evaluar posteriormente el tiempo transcurrido, se guarda el ajuste de temperatura y se reenvian los setpoist del AutoClave
+    time_save2 = 0#time.time()
+    time_save  = ac_sets[1]
+    temp_save  = ac_sets[0]
+
+    #se transmiten los datos de autoclave por communication
+    communication.cook_autoclave(ac_sets)
+
+    #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+    socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+
+    try:
+        f = open(DIR + "autoclave_sets.txt","a+")
+     	f.write(str(ac_sets) + ', ' + str(temp_save) + ', ' + str(time_save) + '\n')
+    	f.close()
+        #logging.info("se guardo en autoclave.txt")
+
+    except:
+        pass
+	    #logging.info("no se pudo guardar en autoclave.txt")
+
+
 
 
 
