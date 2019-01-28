@@ -5,7 +5,7 @@
 '''
 import os, sys, time, datetime, sqlite3, sqlitebck, logging, communication
 
-logging.basicConfig(filename='/home/pi/biocl_system/log/database.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4/log/database.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 TIME_MIN_BD = 1 # 1 [s]
 DIR="/home/pi/biocl_system/"
 flag_database = "False"

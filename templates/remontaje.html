@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/remontaje.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/remontaje.css') }}">
+
+
+
+    <!caja1: Temperature Set>
+    <div class="caja1">
+      <div id="temp_set">Temp Set:</div>
+        Temperatura [ºC]:
+            <br>
+            <input type="number"
+                   id="temp"
+                   value="120"
+                   style="width: 50px;"
+                   MIN="100"
+                   MAX="130"
+                   step="1"
+            />
+
+            <!-- <button  type="submit" class="button_apply"> + </button>   -->   <br>
+            <input  type="checkbox" id="temp_enable"  /> Habilitar <!--habilitar  style="visibility:hidden"   -->     <br>
+    </div>
+
+
+    <div class="caja_central">
+      <!CAJA CENTRAL PARA EL DIBUJO>
+    </div>
+
+
+    <!caja3: Timer Set>
+    <form id="ac_setpoints" method="POST" action='#'>
+        <div class="caja3">
+          <div id="time_set">Timer Set:</div>
+            Tiempo [Min]:
+                  <br>
+                  <input type="number"
+                         id="time"
+                         style="width: 50px;"
+                         value="30"
+                         MIN="1"
+                         MAX="99"
+                         step="1"
+                  />
+                  <button  type="submit" class="button_apply"> + </button>
+                  <br><input  type="checkbox" id="time_enable" /> Habilitar     <!-- habilitar style="visibility:hidden" -->
+        </div>
+
+
+    <div class="caja_derecha_arriba1" id="med1"></div>
+    <div class="caja_derecha_arriba2" id="med2"></div>
+    <div class="caja_derecha_arriba3" id="med3"></div>
+
+
+
+</form>
+
+<br>
+<br>
+<br>
+
+
+
+{% endblock %}

@@ -1,7 +1,7 @@
 from multiprocessing import Process, Queue, Event
 import zmq, time, serial, sys, logging
 
-logging.basicConfig(filename='/home/pi/biocl_system/log/myserial.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4/log/myserial.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 #5556: for listen data

@@ -6,7 +6,7 @@
 
 import os, sys, time, datetime, logging
 
-logging.basicConfig(filename='/home/pi/biocl_system/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 
@@ -15,14 +15,14 @@ ID = '1A4PjVa_G6g6ZsI560ifHU2UNzvOfJ3bm'
 
 if(sys.platform=='darwin'):
     gdrive = './gdrive-osx-x64'
-    DIR1 = '/Users/hooper/Dropbox/BIOCL/biocl_system/config/'
-    DIR2 = '/Users/hooper/Dropbox/BIOCL/biocl_system/csv/'
+    DIR1 = '/Users/hooper/Dropbox/BIOCL/vprocess4/config/'
+    DIR2 = '/Users/hooper/Dropbox/BIOCL/vprocess4/csv/'
 
 else:
     time.sleep(15)
-    gdrive = '/home/pi/biocl_system/config/./gdrive-linux-rpi'
-    DIR1   = ' ' #'/home/pi/biocl_system/config/'
-    DIR2   = '/home/pi/biocl_system/csv/'
+    gdrive = '/home/pi/vprocess4/config/./gdrive-linux-rpi'
+    DIR1   = ' ' #'/home/pi/vprocess4/config/'
+    DIR2   = '/home/pi/vprocess4/csv/'
 
 
 while True:
