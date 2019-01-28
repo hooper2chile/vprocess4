@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/my_javascript.js') }}"></script>
+
+<section>
+  <form id="process" method="POST" action='#'>
+  <fieldset>
+      <select name="selection" id="select">
+            <option value="grabar" selected>Iniciar DataLogger</option>
+            <option value="no_grabar">Detener DataLogger</option>
+            <option value="reiniciar">Reiniciar</option>
+            <option value="apagar">Apagar</option>
+            <option value="limpiar">Borrar Archivos</option>
+      </select>
+
+      <input type="checkbox" id="confirm">
+      <button class="button" type="submit">+</button>
+  </fieldset>
+</form>
+</section>
+
+
+
+<form id="setpoints" method="POST" action='#'>
+
+    <div class="caja_izquierda_arriba">Alimentar [rpm]: <br>
+              <input type="number"
+                     id="alimentar"
+                     style="width: 50px;"
+                     value=""
+                     MIN="0"
+                     MAX="150"
+                     step="1"
+              />
+              <button  type="submit" class="button_apply"> + </button>
+              <br><input  type="checkbox" id="alimentar_rst" /> Deshabilitar
+              <br><input  type="checkbox" id="alimentar_dir" /> Invertir
+
+
+    </div>
+
+
+    <div class="caja_central_arriba"> Mezclar [rpm]:
+                <input type="number"
+                       id="mezclar"
+                       style="width: 50px;"
+                       MIN="0"
+                       MAX="1500"
+                       step="1"
+                       value=""
+                 />
+                 <button  type="submit" class="button_apply"> + </button>         <br>
+                 <input  type="checkbox" id="mezclar_rst" /> Deshabilitar
+    </div>
+
+    <div class="caja_central">
+      <!CAJA CENTRAL PARA EL DIBUJO>
+    </div>
+
+
+    <div class="caja_izquierda_centro"> Temperatura [ºC]: <br>
+            <input type="number"
+                   id="temperatura"
+                   value="25"
+                   style="width: 50px;"
+                   MIN="0"
+                   MAX="100"
+                   step="1"
+            />
+
+            <button  type="submit" class="button_apply"> + </button>     <br>
+            <input  type="checkbox" id="temperatura_rst" /> Deshabilitar   <br>
+            <input  type="checkbox" id="temperatura_dir" /> Invertir
+    </div>
+
+
+
+    <div class="caja_izquierda_abajo"> Configurar pH: <br>
+            <input type="number"
+                   id="ph"
+                   value=""
+                   style="width: 50px;"
+                   MIN="0"
+                   MAX="14"
+                   step="0.1"
+            />
+
+            <button  type="submit" class="button_apply"> + </button>     <br>
+            <input  type="checkbox" id="ph_rst" /> Deshabilitar   <br>
+            <input  type="checkbox" id="ph_dir" /> Invertir
+    </div>
+
+
+    <div class="caja_derecha_arriba1" id="med1"></div>
+    <div class="caja_derecha_arriba2" id="med2"></div>
+    <div class="caja_derecha_arriba3" id="med3"></div>
+
+
+    <div class="caja_derecha_abajo">Descarga [rpm]:
+            <br><input  type="number"
+                    id="descargar"
+                    style="width: 50px;"
+                    MIN="0"
+                    MAX="150"
+                    step="1"
+                    value=""
+            />
+                <button  type="submit" class="button_apply"> + </button>
+            <br><input  type="checkbox" id="descargar_rst"/> Deshabilitar
+
+  </div>
+
+</form>
+
+
+
+
+
+{% endblock %}
