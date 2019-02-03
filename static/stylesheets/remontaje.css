@@ -1,0 +1,110 @@
+
+.caja1 {
+    font-size: 16px;
+    font-family: verdana;
+    background: rgb(65, 182, 230);
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid lightblue;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    margin-right: 5px;
+    text-align: left;
+    margin-left: 80px;
+    border-radius: 20px;
+}
+
+
+
+.caja_central{
+  background-image: url("bioreactor2.svg");
+  font-size: 16px;
+  font-family: verdana;
+  width: 300px;
+  height: 450px;
+  margin-top: -150px;
+  margin-right: 40px;
+  margin-bottom: 130px;
+  text-align: center;
+  border: 2px solid lightblue;
+  margin-left: 310px;
+}
+
+
+.caja3 {
+    font-size: 16px;
+    font-family: verdana;
+    background: rgb(65, 182, 230);
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    border: 2px solid lightblue;
+    margin-top: -440px;
+    margin-right: -50px;
+    text-align: left;
+    margin-bottom: 275px;
+    margin-left: 80px;
+    border-radius: 20px;
+}
+
+
+.caja_derecha_arriba1{
+  font-size: 18px;
+  font-family: verdana;
+  background: YellowGreen;
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+  border: 2px solid lightblue;
+  margin-right: 150px;
+  text-align: center;
+  margin-left: 615px;
+
+  margin-bottom: 10px;
+  margin-top: -550px;
+  border-radius: 50px;
+}
+
+.caja_derecha_arriba2{
+  font-size: 18px;
+  font-family: verdana;
+  background: YellowGreen;
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+  border: 2px solid lightblue;
+  margin-right: 150px;
+  text-align: center;
+  margin-left: 615px;
+
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 50px;
+}
+
+.caja_derecha_arriba3{
+  font-size: 18px;
+  font-family: verdana;
+  background: YellowGreen;
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+  border: 2px solid lightblue;
+  margin-right: 150px;
+  text-align: center;
+  margin-left: 615px;
+
+  margin-bottom: 230px;
+  margin-top: 10px;
+  border-radius: 50px;
+}
+
+
+
+.centrar{
+/*  margin-left: -40px; */
+  margin-right: auto;
+  margin-left: auto;
+
+}
