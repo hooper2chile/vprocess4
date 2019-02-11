@@ -1,13 +1,24 @@
 #include "Arduino.h"
 
-#include "SoftwareSerial.h"
-SoftwareSerial mySerial(2, 3);  //RX(Digital2), TX(Digital3) Software serial port.
-SoftwareSerial mixer1(4, 5); //for control in mezclador
+//No APLICA PARA VPROCESS4
+//#include "SoftwareSerial.h"
+//SoftwareSerial mySerial(2, 3);  //RX(Digital2), TX(Digital3) Software serial port.
+//SoftwareSerial mixer1(4, 5); //for control in mezclador
 
 #include <Wire.h>
 #include "Adafruit_ADS1015.h"
-Adafruit_ADS1115 ads1;
+Adafruit_ADS1115 ads1(0x49);
+
+
 //Adafruit_ADS1115 ads2(0x49);
+
+/*
+#include "rgb_lcd.h"
+rgb_lcd lcd;
+const int colorR = 255;
+const int colorG = 0;
+const int colorB = 0;
+*/
 
 #define  INT(x)   (x-48)  //ascii convertion
 #define iINT(x)   (x+48)  //inverse ascii convertion
@@ -52,6 +63,12 @@ String  uset_temp = "";
 String  uset_ph   = "";
 String  svar      = "";
 
+float   myphset   = 0;
+float   mytempset = 0;
+
+uint8_t myfeed    = 0;
+uint8_t myunload  = 0;
+uint16_t mymix    = 0;
 
 //RESET SETUP
 char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
@@ -61,17 +78,6 @@ char rst4 = 1;  char rst5 = 1;  char rst6 = 1;
 char dir1 = 1;  char dir2 = 1;  char dir3 = 1;
 char dir4 = 1;  char dir5 = 1;  char dir6 = 1;
 
-float   myphset   = 0;
-float   mytempset = 0;
-
-uint8_t myfeed    = 0;
-uint8_t myunload  = 0;
-uint16_t mymix    = 0;
-
-int i = 0;
-int data = 0;
-int data_cero = 0;
-uint16_t s_rpm_save = 0;
 
 float umbral_a = SPEED_MAX;
 float umbral_b = SPEED_MAX;
@@ -136,6 +142,7 @@ float dpH  = 0;
 #define K 1.0 / (10.0 * RS )
 
 //for hardware serial
+
 void serialEvent() {
   while (Serial.available()) {
     char inChar = (char)Serial.read();
@@ -147,9 +154,19 @@ void serialEvent() {
 }
 
 
+void send_command(String command, uint8_t slave) {
+  Wire.beginTransmission(slave); // transmit to device #slave: [1,2]
+//String send1 = val2 + String(i) + "\n";
+  Wire.write(command.c_str());  // sends value byte
+  Wire.endTransmission();       // stop transmitting
+}
+
+
+
 //desmenuza el string de comandos
 void write_crumble() {
   //Serial.println("good");
+  /*
   ph_var = message.substring(1, 3);
   ph_set = message.substring(3, 7);
 
@@ -161,27 +178,29 @@ void write_crumble() {
 
   mix_var = message.substring(23, 26);
   mix_set = message.substring(26, 30);
-
   temp_var = message.substring(30, 34);
+*/
   temp_set = message.substring(34, 37);
-
+  mytempset= temp_set.toFloat();
+/*
   //setting setpoints
   myphset  = ph_set.toFloat();
-  mytempset= temp_set.toFloat();
 
   myfeed   = feed_set.toInt();
   myunload = unload_set.toInt();
   mymix    = mix_set.toInt();
-
+*/
 
   //setting rst
   rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
+
+/*
   rst4 = INT(message[43]);  rst5 = INT(message[44]);  rst6 = INT(message[45]);
 
   //setting dir
   dir1 = INT(message[49]);  dir2 = INT(message[50]);  dir3 = INT(message[51]);
   dir4 = INT(message[52]);  dir5 = INT(message[53]);  dir6 = INT(message[54]);
-
+*/
   return;
 }
 
@@ -281,8 +300,6 @@ void hamilton_sensors() {
 }
 
 
-
-
 void daqmx() {
   //data adquisition measures
   Byte0 = pH;
@@ -326,7 +343,6 @@ void daqmx() {
 void control_temp() {
   //for debug
   //mytemp  = 50;
-
   //touch my delta temp
   dTemp = mytempset - Temp1;
 
@@ -355,148 +371,11 @@ void control_temp() {
 }
 
 
-void control_ph() {
-  //for debug
-  //myphset = 7.0;
-
-  //touch my delta ph
-  dpH = myphset - pH;
-
-  // Escenario en que se debe aplicar acido.
-  if ( dpH > 0.0 ) {
-    if ( dpH <= Gap_pH_0 ) //5% ó OFF según sí el 5% de umbral_a sea < 1
-      u_ph = 0.05 * umbral_b;
-
-    else if ( dpH <= Gap_pH_1 )
-      u_ph = 0.1 * umbral_b;  //10%
-
-    else if ( dpH <= Gap_pH_2 )
-      u_ph = 0.2 * umbral_b;  //20%
-
-    else if ( dpH <= Gap_pH_3 )
-      u_ph = 0.3 * umbral_b;  //30%
-
-    else if ( dpH <= Gap_pH_4 )
-      u_ph = 0.5 * umbral_b; //50%
-
-    else if ( dpH <= Gap_pH_5 )
-      u_ph = 0.75 * umbral_b;//75%
-
-    else if ( dpH > Gap_pH_5 )
-      u_ph = umbral_b;       //100%
-
-    ph_select = "b";  //=> Acido
-    }
-
-  // Escenario en que se debe aplicar base.
-  else if ( dpH <= 0.0 ) {
-    if ( dpH >= -Gap_pH_0 )
-    u_ph = 0.05 * umbral_a;   //5%
-
-    else if ( dpH >= -Gap_pH_1 )
-      u_ph = 0.1 * umbral_a;  //10%
-
-    else if ( dpH >= -Gap_pH_2 )
-      u_ph = 0.2 * umbral_a;  //20%
-
-    else if ( dpH >= -Gap_pH_3 )
-      u_ph = 0.3 * umbral_a;  //30%
-
-    else if ( dpH >= -Gap_pH_4 )
-      u_ph = 0.5 * umbral_a;  //50%
-
-    else if ( dpH >= -Gap_pH_5 )
-      u_ph = 0.75 * umbral_a; //75%
-
-    else if ( dpH < -Gap_pH_5 )
-      u_ph = umbral_a;        //100%
-
-    ph_select = "a";  //=> Básico
-  }
-
-  else {
-    u_ph = 0;
-    ph_select = "N";  //no hacer nada
-  }
-
-  return;
-}
-
-
-
-
-void Motor_set_RPM(int high, int low)
-{
-  int checksum = (177 + high + low) & 0xff;
-
-  mixer1.write(254);
-  delay(100);
-  mixer1.write(177);
-  delay(100);
-  mixer1.write(high);
-  delay(100);
-  mixer1.write(low);
-  delay(100);
-  mixer1.write(data_cero);
-  delay(100);
-  mixer1.write(checksum);
-}
-//254 160 0 0 0 160       254 160 0 0 0 160     254 177 0 0 0 177       254 177 0 0 0 177      254 177 0 d 0 21      254 177
-void Motor_conectar()
-{
-  delay(100);
-  mixer1.write(254);
-  delay(100);
-  mixer1.write(160);
-  delay(100);
-  data = 0;
-  mixer1.write(data);  // data = 0
-  delay(100);
-  mixer1.write(data);
-  delay(100);
-  mixer1.write(data);
-  delay(100);
-  mixer1.write(160);
-}
-
-void agitador(uint16_t s_rpm, uint8_t rst) {
-    if( !rst2 ) {
-      if ( s_rpm_save != s_rpm ) {
-        s_rpm_save = s_rpm;
-        int rpm_h = (s_rpm >> 8) & 0xff;
-        int rpm_l = s_rpm & 0xff;
-
-        while ( i <= 1 ) {
-           Motor_conectar();
-           Motor_set_RPM(rpm_h, rpm_l);
-          i++;
-        }
-        i = 0;
-      }
-    }
-    else if ( rst ) {
-      data_cero = 0;
-      s_rpm_save = data_cero;
-      int rpm_h = (data_cero >> 8) & 0xff;
-      int rpm_l = data_cero & 0xff;
-
-      while ( i <= 1 ) {
-         Motor_conectar();
-         Motor_set_RPM(rpm_h, rpm_l);
-        i++;
-      }
-      i = 0;
-    }
-}
-
-
 void setpoint() {
   //acá se leen los nuevos setpoint para los lazos de control
   write_crumble();
-
   //aca se programa el agitador DLAB
-  if( rst2 == 0 ) agitador(mymix,rst2);
-
+  //if( rst2 == 0 ) agitador(mymix,rst2);
 
   Serial.println("good setpoint");
   return;
@@ -507,13 +386,10 @@ void setpoint() {
 void format_message(int var) {
   //reset to svar string
   svar = "";
-
   if (var < 10)
     svar = "00"+ String(var);
-
   else if (var < 100)
     svar = "0" + String(var);
-
   else
     svar = String(var);
 
@@ -523,26 +399,23 @@ void format_message(int var) {
 
 //Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
-
   //se prepara el setpoint para el renvio hacia uc slave.
   format_message(u_temp);
   uset_temp = svar; //string variable for control: uset_temp
-
-  format_message(u_ph);
-  uset_ph = ph_select + svar; //add strings for ph control: uset_ph
-
+//format_message(u_ph);   //ph_select =: [a,b], a: acido, b: base.
+//uset_ph = ph_select + svar; //add strings for ph control: uset_ph
 
   switch (select) {
     case 0: //only re-tx and update pid uset's.
       new_write0 = "";
-      new_write0 = new_write.substring(0,3) + uset_ph + new_write.substring(7,34) + uset_temp + new_write.substring(37,55) + "\n";
-      mySerial.print(new_write0);
+      new_write0 = new_write;
+      send_command(new_write0, 2);
       break;
 
     case 1: //update command and re-tx.
-      new_write = "";
-      new_write = message.substring(0,3) + uset_ph + message.substring(7,34) + uset_temp + message.substring(37,55) + "\n";
-      mySerial.print(new_write);
+      new_write  = "";
+      new_write  = message.substring(7,23) + message.substring(30,42) + "\n";
+      send_command(new_write, 2);
       break;
 
     default:
@@ -554,7 +427,12 @@ void broadcast_setpoint(uint8_t select) {
 
 
 //wph08.3feed100unload100mix1500temp022rst111111dir111111
-//wphb015feed100unload100mix1500temp150rst000000dir111111
+//wphb015feed100unload100mix1500temp150rst000000dir111111 (55 bytes)
+
+//Esquema I2C Concha y Toro:
+//wphb015(-7) feed100unload100 mix1500(-7) temp150rst000 000(-3) dir111111(-9)
+//feed100unload100temp150rst000 (29) => + "\n" = 30 bytes!
+
 void clean_strings() {
   //clean strings
   stringComplete = false;
@@ -563,8 +441,6 @@ void clean_strings() {
   uset_ph   = "";
   ph_select ="";
 }
-
-
 
 
 int validate() {
