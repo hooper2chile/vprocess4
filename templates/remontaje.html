@@ -5,13 +5,20 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/remontaje.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/remontaje.css') }}">
 
+    <br>
+    <br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    <font face="verdana" color="black">Habilitar Remontaje</font>
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
 
 
-    <!caja1: Temperature Set>
+    <!caja1: frecuencia remontaje>
     <div class="caja1">
-      <div id="temp_set">Temp Set:</div>
-        Temperatura [ºC]:
-            <br>
+      <div id="temp_set">Frecuencia [Min]:</div>
+           <br>
             <input type="number"
                    id="temp"
                    value="120"
@@ -20,9 +27,8 @@
                    MAX="130"
                    step="1"
             />
-
-            <!-- <button  type="submit" class="button_apply"> + </button>   -->   <br>
-            <input  type="checkbox" id="temp_enable"  /> Habilitar <!--habilitar  style="visibility:hidden"   -->     <br>
+             <button  type="submit" class="button_apply"> + </button>     <br>
+             <input  type="checkbox" id="temp_enable"  /> Habilitar <!--habilitar  style="visibility:hidden"   -->     <br>
     </div>
 
 
@@ -31,12 +37,10 @@
     </div>
 
 
-    <!caja3: Timer Set>
+    <!caja3: duracion remontaje>
     <form id="ac_setpoints" method="POST" action='#'>
         <div class="caja3">
-          <div id="time_set">Timer Set:</div>
-            Tiempo [Min]:
-                  <br>
+          <div id="time_set">Duración [Min]:</div>
                   <input type="number"
                          id="time"
                          style="width: 50px;"
@@ -45,15 +49,32 @@
                          MAX="99"
                          step="1"
                   />
-                  <button  type="submit" class="button_apply"> + </button>
-                  <br><input  type="checkbox" id="time_enable" /> Habilitar     <!-- habilitar style="visibility:hidden" -->
+                 <button  type="submit" class="button_apply"> + </button>
+                 <br><input  type="checkbox" id="time_enable" /> Habilitar   <!-- habilitar style="visibility:hidden" -->
         </div>
 
 
+        <!caja4: dias remontaje>
+        <form id="ac_setpoints" method="POST" action='#'>
+            <div class="caja4">
+              <div id="time_set">Ciclo [Días]:</div>
+                      <input type="number"
+                             id="time"
+                             style="width: 50px;"
+                             value="0"
+                             MIN="0"
+                             MAX="14"
+                             step="1"
+                      />
+                      <button  type="submit" class="button_apply"> + </button>
+                      <br><input  type="checkbox" id="time_enable" /> Habilitar      <!-- habilitar style="visibility:hidden" -->
+            </div>
+
+    <font color="white">
     <div class="caja_derecha_arriba1" id="med1"></div>
     <div class="caja_derecha_arriba2" id="med2"></div>
     <div class="caja_derecha_arriba3" id="med3"></div>
-
+    </font>
 
 
 </form>

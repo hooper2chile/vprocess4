@@ -38,8 +38,6 @@ def listen(q1):
     return True
 
 
-##### Queue data: q1 is for put data to   serial port #####
-##### Queue data: q2 is for get data from serial port #####
 def speak(q1,q2):
     #####Publisher part
     port_pub = "5557"
@@ -121,15 +119,15 @@ def rs232(q1,q2):
                                 ser.write(action+'\n')
                                 result = ser.readline().split()
                                 logging.info(action)
-				save_setpoint = action
+			        save_setpoint = action
                                 #print result
                                 logging.info(result)
 
                             except:
                                 #print "no se pudo escribir al uc"
                                 logging.info("no se pudo escribir al uc")
-				save_setpoint = action
-				logging.info("the last setpoint save")
+			        save_setpoint = action
+			        logging.info("the last setpoint save")
                                 ser.close()
                                 flag = False
 
@@ -142,17 +140,14 @@ def rs232(q1,q2):
 
                 time.sleep(tau_serial)
 
-
         except serial.SerialException:
             #print "conexion serial no realizada"
             logging.info("Sin Conexion Serial")
             flag = False
             time.sleep(2)
 
-
     logging.info("Fin de myserial.py")
     return True
-
 
 
 def main():

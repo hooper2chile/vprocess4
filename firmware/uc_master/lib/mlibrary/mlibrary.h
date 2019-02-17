@@ -1,24 +1,8 @@
 #include "Arduino.h"
-
-//No APLICA PARA VPROCESS4
-//#include "SoftwareSerial.h"
-//SoftwareSerial mySerial(2, 3);  //RX(Digital2), TX(Digital3) Software serial port.
-//SoftwareSerial mixer1(4, 5); //for control in mezclador
-
 #include <Wire.h>
 #include "Adafruit_ADS1015.h"
 Adafruit_ADS1115 ads1(0x49);
-
-
 //Adafruit_ADS1115 ads2(0x49);
-
-/*
-#include "rgb_lcd.h"
-rgb_lcd lcd;
-const int colorR = 255;
-const int colorG = 0;
-const int colorB = 0;
-*/
 
 #define  INT(x)   (x-48)  //ascii convertion
 #define iINT(x)   (x+48)  //inverse ascii convertion
@@ -29,21 +13,18 @@ const int colorB = 0;
 
 #define PGA1 0.125F
 #define PGA2 0.0625F
+#define alpha 0.2F
 
-//#define alpha 0.2F
+#define VOLTAGE_REF 5.0F     // before: 5  // Reference voltage for analog read
+#define RS 10.0F             // Shunt resistor value (in ohms)
+#define mA 1000.0F              // for sensors 4-20mA
+#define K 1.0 / (10.0 * RS )
 
 #define Gap_temp0 0.5
 #define Gap_temp1 1.0       //1ºC
 #define Gap_temp2 2.0
 #define Gap_temp3 3.0
 #define Gap_temp4 5.0
-
-#define Gap_pH_0  0.05
-#define Gap_pH_1  0.10     // 0.1 (pH)
-#define Gap_pH_2  0.50
-#define Gap_pH_3  0.75
-#define Gap_pH_4  1.00
-#define Gap_pH_5  2.00
 
 
 String  message     = "";  String  new_write   = "";  String  new_write0   = "";
@@ -55,7 +36,6 @@ String  feed_var    = "";   String  feed_set    = "";
 String  unload_var  = "";   String  unload_set  = "";
 String  mix_var     = "";   String  mix_set     = "";
 String  temp_var    = "";   String  temp_set    = "";
-
 
 //Re-formatting
 String  ph_select = "";
@@ -93,11 +73,6 @@ float Byte5 = 0;  char cByte5[15] = "";
 float Byte6 = 0;  char cByte6[15] = "";
 float Byte7 = 0;  char cByte7[15] = "";  //for Temp2
 
-
-const int VOLTAGE_REF  = 5;  // before: 5  // Reference voltage for analog read
-const int RS = 10;             // Shunt resistor value (in ohms)
-
-
 //calibrate function()
 char  var = '0';
 float m = 0;
@@ -121,13 +96,11 @@ float Iod = 0;
 float Itemp1 = 0;
 float Itemp2 = 0;
 
-
 //   DEFAULT:
 float pH    = m0*Iph    + n0;      //   ph = 0.75*IpH   - 3.5
 float oD    = m1*Iod    + n1;
 float Temp1 = m2*Itemp1 + n2;      // Temp = 5.31*Itemp - 42.95;
 float Temp2;
-
 
 //variable for control
 float u_temp = 0;
@@ -136,13 +109,7 @@ float dTemp= 0;
 float dpH  = 0;
 
 
-//for sensors 4-20mA
-#define mA 1000.0
-//#define K  1.0/( 10.0 * RS )
-#define K 1.0 / (10.0 * RS )
-
 //for hardware serial
-
 void serialEvent() {
   while (Serial.available()) {
     char inChar = (char)Serial.read();
@@ -153,59 +120,21 @@ void serialEvent() {
   }
 }
 
-
-void send_command(String command, uint8_t slave) {
+void i2c_send_command(String command, uint8_t slave) {
   Wire.beginTransmission(slave); // transmit to device #slave: [1,2]
-//String send1 = val2 + String(i) + "\n";
-  Wire.write(command.c_str());  // sends value byte
-  Wire.endTransmission();       // stop transmitting
+  Wire.write(command.c_str());   // sends value byte
+  Wire.endTransmission();        // stop transmitting
 }
-
-
 
 //desmenuza el string de comandos
 void write_crumble() {
-  //Serial.println("good");
-  /*
-  ph_var = message.substring(1, 3);
-  ph_set = message.substring(3, 7);
-
-  feed_var = message.substring(7, 11);
-  feed_set = message.substring(11, 14);
-
-  unload_var = message.substring(14, 20);
-  unload_set = message.substring(20, 23);
-
-  mix_var = message.substring(23, 26);
-  mix_set = message.substring(26, 30);
-  temp_var = message.substring(30, 34);
-*/
-  temp_set = message.substring(34, 37);
-  mytempset= temp_set.toFloat();
-/*
-  //setting setpoints
-  myphset  = ph_set.toFloat();
-
-  myfeed   = feed_set.toInt();
-  myunload = unload_set.toInt();
-  mymix    = mix_set.toInt();
-*/
-
+  mytempset = message.substring(34, 37).toFloat();
+  mymix     = message.substring(26, 30).toInt();
   //setting rst
   rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
 
-/*
-  rst4 = INT(message[43]);  rst5 = INT(message[44]);  rst6 = INT(message[45]);
-
-  //setting dir
-  dir1 = INT(message[49]);  dir2 = INT(message[50]);  dir3 = INT(message[51]);
-  dir4 = INT(message[52]);  dir5 = INT(message[53]);  dir6 = INT(message[54]);
-*/
   return;
 }
-
-
-
 
 //c2+00.75-03.50e // c: (0=>ph) (1=>od) (2=>temp)
 void sensor_calibrate(){
@@ -237,7 +166,6 @@ void sensor_calibrate(){
   Serial.println("Sensor calibrated");
   return;
 }
-
 
 
 //modifica los umbrales de cualquiera de los dos actuadores
@@ -272,7 +200,6 @@ void actuador_umbral(){
       umbral_temp = SPEED_MAX;
     else
       umbral_temp = umbral_temp;
-
   }
 
   Serial.println( String(umbral_a) + '_' + String(umbral_b) + '_' + String(umbral_temp) );
@@ -281,15 +208,11 @@ void actuador_umbral(){
 
 
 void hamilton_sensors() {
-  float alpha = 0.35;
-
   //Filtros de media exponencial
   Iph     = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Iph;
   Iod     = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Iod;
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(2) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(3) + (1 - alpha) * Itemp2;
-
-
   //Update measures
   pH    = m0 * Iph    + n0;
   oD    = m1 * Iod    + n1;
@@ -299,6 +222,21 @@ void hamilton_sensors() {
   return;
 }
 
+
+void tx_reply(){
+  //tx of measures
+  Serial.print(cByte0);  Serial.print("\t");
+  Serial.print(cByte1);  Serial.print("\t");
+  Serial.print(cByte2);  Serial.print("\t");
+  Serial.print(cByte3);  Serial.print("\t");
+  Serial.print(cByte4);  Serial.print("\t");
+  Serial.print(cByte5);  Serial.print("\t");
+  Serial.print(cByte6);  Serial.print("\t");
+  Serial.print(cByte7);  Serial.print("\t");
+  //for debug
+  //Serial.print("__ua="+String(umbral_a)+"__ub="+String(umbral_b)+"__myphset="+String(myphset)+"__pH="+String(pH)+"__dpH="+String(dpH)+"__u_ph="+String(u_ph)+"__ph_select="+String(ph_select));  Serial.print("\t");
+  Serial.print("\n");
+}
 
 void daqmx() {
   //data adquisition measures
@@ -311,7 +249,6 @@ void daqmx() {
   Byte6 = Itemp2;
   Byte7 = Temp2;   //Nuevo: para promedio movil o exponencial
 
-
   dtostrf(Byte0, 7, 2, cByte0);
   dtostrf(Byte1, 7, 2, cByte1);
   dtostrf(Byte2, 7, 2, cByte2);
@@ -321,24 +258,9 @@ void daqmx() {
   dtostrf(Byte6, 7, 2, cByte6);
   dtostrf(Byte7, 7, 2, cByte7);
 
-  //tx of measures
-  Serial.print(cByte0);  Serial.print("\t");
-  Serial.print(cByte1);  Serial.print("\t");
-  Serial.print(cByte2);  Serial.print("\t");
-  Serial.print(cByte3);  Serial.print("\t");
-  Serial.print(cByte4);  Serial.print("\t");
-  Serial.print(cByte5);  Serial.print("\t");
-  Serial.print(cByte6);  Serial.print("\t");
-  Serial.print(cByte7);  Serial.print("\t");
-
-  //for debug
-  Serial.print("__ua="+String(umbral_a)+"__ub="+String(umbral_b)+"__myphset="+String(myphset)+"__pH="+String(pH)+"__dpH="+String(dpH)+"__u_ph="+String(u_ph)+"__ph_select="+String(ph_select));  Serial.print("\t");
-  Serial.print("\n");
-
+  tx_reply();
   return;
 }
-
-
 
 void control_temp() {
   //for debug
@@ -366,18 +288,6 @@ void control_temp() {
   else if ( dTemp <= 0.0 )
     u_temp = SPEED_MIN;
 
-
-  return;
-}
-
-
-void setpoint() {
-  //acá se leen los nuevos setpoint para los lazos de control
-  write_crumble();
-  //aca se programa el agitador DLAB
-  //if( rst2 == 0 ) agitador(mymix,rst2);
-
-  Serial.println("good setpoint");
   return;
 }
 
@@ -402,28 +312,38 @@ void broadcast_setpoint(uint8_t select) {
   //se prepara el setpoint para el renvio hacia uc slave.
   format_message(u_temp);
   uset_temp = svar; //string variable for control: uset_temp
-//format_message(u_ph);   //ph_select =: [a,b], a: acido, b: base.
-//uset_ph = ph_select + svar; //add strings for ph control: uset_ph
 
   switch (select) {
     case 0: //only re-tx and update pid uset's.
       new_write0 = "";
       new_write0 = new_write;
-      send_command(new_write0, 2);
+      i2c_send_command(new_write0, 2);
       break;
 
     case 1: //update command and re-tx.
       new_write  = "";
       new_write  = message.substring(7,23) + message.substring(30,42) + "\n";
-      send_command(new_write, 2);
+      i2c_send_command(new_write, 2);
       break;
 
     default:
       break;
   }
-
   return;
 }
+
+/*
+void setpoint() {
+  //acá se leen los nuevos setpoint para los lazos de control
+  write_crumble();
+  control_temp();
+  broadcast_setpoint(1);
+  tx_reply();
+  //Serial.println("A A A");
+  //Serial.println("Good Setpoint Crumble");
+  return;
+}
+*/
 
 
 //wph08.3feed100unload100mix1500temp022rst111111dir111111

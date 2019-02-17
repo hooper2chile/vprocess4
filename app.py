@@ -188,7 +188,6 @@ def setpoints(dato):
 
 
 
-
 N = None
 APIRest = None
 @socketio.on('my_json', namespace='/biocl')
@@ -223,8 +222,6 @@ def my_json(dato):
     socketio.emit('my_json', {'data': APIRest, 'No': len(APIRest), 'var': var}, namespace='/biocl')
     #put files in csv with dt time for samples
     tocsv.csv_file(filedb, dt)
-
-
 
 
 @socketio.on('Setpoints', namespace='/biocl')

@@ -35,12 +35,10 @@
               <button  type="submit" class="button_apply"> + </button>
               <br><input  type="checkbox" id="alimentar_rst" /> Deshabilitar
               <br><input  type="checkbox" id="alimentar_dir" /> Invertir
-
-
     </div>
 
 
-    <div class="caja_central_arriba"> Mezclar [rpm]:
+    <div hidden class="caja_central_arriba"> Mezclar [rpm]:
                 <input type="number"
                        id="mezclar"
                        style="width: 50px;"
@@ -52,6 +50,7 @@
                  <button  type="submit" class="button_apply"> + </button>         <br>
                  <input  type="checkbox" id="mezclar_rst" /> Deshabilitar
     </div>
+
 
     <div class="caja_central">
       <!CAJA CENTRAL PARA EL DIBUJO>
@@ -75,7 +74,7 @@
 
 
 
-    <div class="caja_izquierda_abajo"> Configurar pH: <br>
+    <div hidden class="caja_izquierda_abajo"> Configurar pH: <br>
             <input type="number"
                    id="ph"
                    value=""
@@ -91,10 +90,11 @@
     </div>
 
 
+    <font color="white">
     <div class="caja_derecha_arriba1" id="med1"></div>
     <div class="caja_derecha_arriba2" id="med2"></div>
     <div class="caja_derecha_arriba3" id="med3"></div>
-
+    </font>
 
     <div class="caja_derecha_abajo">Descarga [rpm]:
             <br><input  type="number"

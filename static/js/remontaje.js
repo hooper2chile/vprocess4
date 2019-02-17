@@ -10,9 +10,9 @@ $(document).ready(function() {
     //SECCION MEDICIONES
     //Se escuchan las mediciones de ph, OD, Temp.
     socket.on('Medidas', function(msg) {
-        $('#med1').text('pH: '    + msg.data[0]          ).html();
-        $('#med2').text('OD: '    + msg.data[1] + ' %'   ).html();
-        $('#med3').text('Temp: '  + msg.data[2] + ' º[C]').html();
+        $('#med1').text('Temp_: '    + msg.data[0] + ' º[C]').html();
+        $('#med2').text('Temp1: '    + msg.data[1] + ' º[C]').html();
+        $('#med3').text('Temp2: '  + msg.data[2] + ' º[C]').html();
     });
 
     //SECCION AUTOCLAVE

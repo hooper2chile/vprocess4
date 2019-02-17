@@ -11,10 +11,7 @@ void setup() {
   wdt_disable();
 
   Serial.begin(9600);
-  //mySerial.begin(9600);
-  //mixer1.begin(9600);3
   Wire.begin(); //se inicia i2c master
-
   ads1.begin();
   //ads2.begin();
   //                                           ADS1015  ADS1115
@@ -44,14 +41,17 @@ void loop() {
                 hamilton_sensors();
                 daqmx();
                 control_temp();
+                //control_temp_pid();
                 broadcast_setpoint(0);
                 break;
 
               case 'w':
-                setpoint();
+                write_crumble();
                 control_temp();
                 broadcast_setpoint(1);
-		            daqmx();
+                tx_reply();
+                //setpoint();
+		            //daqmx();
                 break;
 
               case 'c':
