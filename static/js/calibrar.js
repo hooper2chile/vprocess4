@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-var Iph   = 0;
-var Itemp = 0;
-var Iod   = 0;
+var Itemp1 = 0;
+var Itemp2 = 0;
+var Iod    = 0;
 
 // Connect to the Socket.IO server.
 namespace = '/biocl';
@@ -12,19 +12,19 @@ var socket = io.connect(location.protocol + '//' +
 
           //mediciones de ph, OD, Temp.
           socket.on('Medidas', function(msg) {
-              $('#med1_c').text('Iph: '   + msg.data[3] + ' [mA]' ).html();
-              $('#med2_c').text('Iod: '   + msg.data[4] + ' [mA]' ).html();
-              $('#med3_c').text('Itemp: ' + msg.data[5] + ' [mA]' ).html();
+              $('#med1_c').text('Itemp: '  + msg.data[3] + ' [mA]' ).html();
+              $('#med2_c').text('Iod: '    + msg.data[4] + ' [mA]' ).html();
+              $('#med3_c').text('Itemp: '  + msg.data[5] + ' [mA]' ).html();
 
-              Iph   = msg.data[3];
-              Iod   = msg.data[4];
-              Itemp = msg.data[5];
+              Itemp1 = msg.data[3];
+              Iod    = msg.data[4];
+              Itemp2 = msg.data[5];
           });//fin de la función socket.on
 
 
-          $('#med1_c').css({ 'color': 'green', 'font-size': '120%' });
-          $('#med2_c').css({ 'color': 'green', 'font-size': '120%' });
-          $('#med3_c').css({ 'color': 'green', 'font-size': '120%' });
+          $('#med1_c').css({ 'color': 'white', 'font-size': '120%' });
+          $('#med2_c').css({ 'color': 'white', 'font-size': '120%' });
+          $('#med3_c').css({ 'color': 'white', 'font-size': '120%' });
 
 
           //CALIBRAR PH
@@ -32,24 +32,23 @@ var socket = io.connect(location.protocol + '//' +
           $('form#calibrar_ph').submit(function(event) {
               socket.emit('ph_calibrar',
                           {   ph : $('#ph').val(),
-                             iph : Iph,
+                             iph : Itemp1,
                             medx : $('#medx_ph').val()
                            });
 
-                console.log("en socket.emit PH:");
+                console.log("en socket.emit TEMP1:");
                 console.log( $('#ph').val() );
-                console.log(Iph);
-              return false;
+                console.log(Itemp1);
+                return false;
           });
 
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('ph_calibrar', function(msg) {
-            $('#ph1_set').text('Set pH1 :   ' + msg.set[0]).html();
-            $('#iph1_set').text('Set IpH1: ' + msg.set[1]).html();
-            $('#ph2_set').text('Set pH2 :   ' + msg.set[2]).html();
-            $('#iph2_set').text('Set IpH2: ' + msg.set[3]).html();
+            $('#ph1_set' ).text('Set Temp1 : ' + msg.set[0]).html();
+            $('#iph1_set').text('Set Itemp1: ' + msg.set[1]).html();
+            $('#ph2_set' ).text('Set Temp2 : ' + msg.set[2]).html();
+            $('#iph2_set').text('Set Itemp2: ' + msg.set[3]).html();
           });
-
 
 
 
@@ -70,9 +69,9 @@ var socket = io.connect(location.protocol + '//' +
 
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('od_calibrar', function(msg) {
-            $('#od1_set').text('Set OD1 :   ' + msg.set[0]).html();
+            $('#od1_set' ).text('Set OD1 : ' + msg.set[0]).html();
             $('#iod1_set').text('Set IOd1: ' + msg.set[1]).html();
-            $('#od2_set').text('Set OD2 :   ' + msg.set[2]).html();
+            $('#od2_set' ).text('Set OD2 : ' + msg.set[2]).html();
             $('#iod2_set').text('Set IOd2: ' + msg.set[3]).html();
           });
 
@@ -84,21 +83,21 @@ var socket = io.connect(location.protocol + '//' +
           $('form#calibrar_temp').submit(function(event) {
               socket.emit('temp_calibrar',
                           {   temp : $('#temp').val(),
-                             itemp : Itemp,
+                             itemp : Itemp2,
                               medx : $('#medx_temp').val()
                            });
 
-                console.log("en socket.emit TEMP:");
+                console.log("en socket.emit TEMP2:");
                 console.log( $('#temp').val() );
-                console.log(Itemp);
+                console.log(Itemp2);
               return false;
           });
 
           //se escuchan desde el servidor los valores seteados para calibración.
           socket.on('temp_calibrar', function(msg) {
-            $('#temp1_set').text('Set Temp1 :   ' + msg.set[0]).html();
+            $('#temp1_set' ).text('Set Temp1 : ' + msg.set[0]).html();
             $('#itemp1_set').text('Set Itemp1: ' + msg.set[1]).html();
-            $('#temp2_set').text('Set Temp2 :   ' + msg.set[2]).html();
+            $('#temp2_set' ).text('Set Temp2 : ' + msg.set[2]).html();
             $('#itemp2_set').text('Set Itemp2: ' + msg.set[3]).html();
           });
 

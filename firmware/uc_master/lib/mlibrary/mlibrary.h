@@ -78,18 +78,17 @@ char  var = '0';
 float m = 0;
 float n = 0;
 
-//pH=:(m0,n0)
-float m0 = +0.864553;//+0.75;
-float n0 = -3.634006;//-3.5;
+//Ahora Temp1 //Anterio: pH=:(m0,n0)
+float m0 = +12.02;  //+0.864553;//+0.75;
+float n0 = -46.28;  //-3.634006;//-3.5;
 
 //oD=:(m1,n1)
 float m1 = +6.02;
 float n1 = -20.42;
 
-//Temp1=:(m2,n2)
-float m2 = +14.95; //vrer= 2.5   //vref=5   8.58;//11.0;//+5.31;
-float n2 = -91.67; //vref= 2.5   //vref=5  -68.89;//-106.86;//-42.95;
-
+//Temp2=:(m2,n2)
+float m2 = +12.02; //+11.0;
+float n2 = -46.28; //-42.95;
 
 float Iph = 0;
 float Iod = 0;
@@ -97,10 +96,13 @@ float Itemp1 = 0;
 float Itemp2 = 0;
 
 //   DEFAULT:
-float pH    = m0*Iph    + n0;      //   ph = 0.75*IpH   - 3.5
-float oD    = m1*Iod    + n1;
-float Temp1 = m2*Itemp1 + n2;      // Temp = 5.31*Itemp - 42.95;
-float Temp2;
+float pH    = 0;//m0*Iph    + n0;      //   ph = 0.75*IpH   - 3.5
+float oD    = 0;//m1*Iod    + n1;
+
+float Temp1 = m0*Itemp1 + n0;      // Temp = 5.31*Itemp - 42.95;
+float Temp2 = m2*Itemp2 + n2;
+float Temp_ = 0.5 * ( Temp1 + Temp2 );
+
 
 //variable for control
 float u_temp = 0;
@@ -127,7 +129,7 @@ void i2c_send_command(String command, uint8_t slave) {
 }
 
 //desmenuza el string de comandos
-void write_crumble() {
+void write_crumble() {   //falta definir si se hara el control de temp aca, lo mismo el remontaje.
   mytempset = message.substring(34, 37).toFloat();
   mymix     = message.substring(26, 30).toInt();
   //setting rst
@@ -136,7 +138,7 @@ void write_crumble() {
   return;
 }
 
-//c2+00.75-03.50e // c: (0=>ph) (1=>od) (2=>temp)
+//c2+00.75-03.50e // c: (0=>temp1) (1=>od) (2=>temp2)
 void sensor_calibrate(){
   //calibrate function for "message"
   var = message[1];
@@ -144,7 +146,7 @@ void sensor_calibrate(){
   n   = message.substring(8,14).toFloat();
 
   switch (var) {
-    case '0': //pH case for calibration
+    case '0': //pH case for calibration //ver si usa este caso para calibrar temp2
       m0 = m;
       n0 = n;
       break;
@@ -154,7 +156,7 @@ void sensor_calibrate(){
       n1 = n;
       break;
 
-    case '2': //Temperature case for calibration
+    case '2': //Temperature1 case for calibration
       m2 = m;
       n2 = n;
       break;
@@ -209,15 +211,16 @@ void actuador_umbral(){
 
 void hamilton_sensors() {
   //Filtros de media exponencial
-  Iph     = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Iph;
-  Iod     = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Iod;
-  Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(2) + (1 - alpha) * Itemp1;
-  Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(3) + (1 - alpha) * Itemp2;
+  Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
+  Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
+
   //Update measures
-  pH    = m0 * Iph    + n0;
-  oD    = m1 * Iod    + n1;
-  Temp1 = m2 * Itemp1 + n2;
+  Temp1 = m0 * Itemp1 + n0;
   Temp2 = m2 * Itemp2 + n2;
+  Temp_ = 0.5 * ( Temp1 + Temp2 );
+
+  //pH    = m0 * Iph    + n0;
+  //oD    = m1 * Iod    + n1;
 
   return;
 }
@@ -233,13 +236,13 @@ void tx_reply(){
   Serial.print(cByte5);  Serial.print("\t");
   Serial.print(cByte6);  Serial.print("\t");
   Serial.print(cByte7);  Serial.print("\t");
-  //for debug
-  //Serial.print("__ua="+String(umbral_a)+"__ub="+String(umbral_b)+"__myphset="+String(myphset)+"__pH="+String(pH)+"__dpH="+String(dpH)+"__u_ph="+String(u_ph)+"__ph_select="+String(ph_select));  Serial.print("\t");
+
   Serial.print("\n");
 }
 
 void daqmx() {
   //data adquisition measures
+ /*
   Byte0 = pH;
   Byte1 = oD;
   Byte2 = Temp1;
@@ -248,6 +251,15 @@ void daqmx() {
   Byte5 = Itemp1;
   Byte6 = Itemp2;
   Byte7 = Temp2;   //Nuevo: para promedio movil o exponencial
+*/
+  Byte0 = Temp_;
+  Byte1 = Temp1;
+  Byte2 = Temp2;
+  Byte3 = Iph;
+  Byte4 = Iod;
+  Byte5 = Itemp1;
+  Byte6 = Itemp2;
+  Byte7 = oD;
 
   dtostrf(Byte0, 7, 2, cByte0);
   dtostrf(Byte1, 7, 2, cByte1);

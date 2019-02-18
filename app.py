@@ -22,7 +22,8 @@ temp_set = [0,0,0,0]
 temp_save  = 0
 time_save  = 0 #este se usa para info en las webpages
 time_save2 = 0 #este se usa para calculos con el timestamp
-ac_sets = [0,0,False,False]  #ac_sets = auto clave setpoints
+#rm_sets = [0,0,False,False]  #rm_sets = remontaje setpoints
+rm_sets = [0,0,0,False]
 
 task = ["grabar", False]
 flag_database = False
@@ -75,7 +76,6 @@ def test():
             error='validado'
             return render_template("calibrar.html", error=error)
 
-
     error = 'No Validado en Calibracion'
     return render_template("login.html", error=error)
 
@@ -92,8 +92,19 @@ def viewDB():
 
 
 @app.route('/remontaje', methods=['GET', 'POST'])
-def autoclave():
-    return render_template('remontaje.html', title_html="Remontaje")
+def remontaje():
+    global error
+
+    if request.method == 'POST':
+        if request.form['username'] != 'biocl' or request.form['password'] != 'reactor':
+            error = "Credencial Invalida"
+            return render_template("login.html", error=error)
+        else:
+            error='validado'
+            return render_template("remontaje.html", error=error)
+
+    error = 'No Validado en Calibracion'
+    return render_template('login.html', error=error)
 
 
 
@@ -166,11 +177,11 @@ def setpoints(dato):
                 #logging.info("no se pudo guardar el flag_database para detener grabacion\n")
 
         elif task[0] == "reiniciar":
-            os.system(DIR+"bash killall")
+            os.system(DIR + "bash killall")
             os.system("sudo reboot")
 
         elif task[0] == "apagar":
-            os.system(DIR+"bash killall")
+            os.system(DIR + "bash killall")
             os.system("sudo shutdown -h now")
 
         elif task[0] == "limpiar":
@@ -396,12 +407,11 @@ def calibrar_temp(dato):
     if temp_set[0]!=0 and temp_set[1]!=0 and temp_set[2]!=0 and temp_set[3]!=0 and m_temp!=0 and n_temp!=0:
         try:
             coef_temp_set = [m_temp, n_temp]
+            communication.calibrate(2,coef_temp_set)
+
             f = open(DIR + "coef_temp_set.txt","w")
             f.write(str(coef_temp_set) + '\n')
             f.close()
-
-            communication.calibrate(2,coef_temp_set)
-
 
         except:
             pass
@@ -486,50 +496,48 @@ def calibrar_u_temp(dato):
 
 
 #remontaje setpoits
-@socketio.on('ac_setpoints', namespace='/biocl')
+@socketio.on('remontaje_setpoints', namespace='/biocl')
 def autoclave_functions(dato):
-    global ac_sets, temp_save, time_save, time_save2
+    global rm_sets, temp_save, time_save, time_save2
 
     try:
-        ac_sets[0] = int(dato['ac_temp'])
-        ac_sets[1] = int(dato['ac_time'])
-        ac_sets[2] = dato['time_en']
-        ac_sets[3] = dato['temp_en']
+        rm_sets[0] = int(dato['ac_temp'])
+        rm_sets[1] = int(dato['ac_time'])
+        rm_sets[2] = dato['time_en']
+        rm_sets[3] = dato['temp_en']
 
         time_save = int(dato['ac_time'])
         temp_save = int(dato['ac_temp'])
 
     except:
-        ac_sets[0] = 22
-        ac_sets[1] = 11
-    	ac_sets[2] = "no_llego"
-    	ac_sets[3] = "no_llego"
+        rm_sets[0] = 22
+        rm_sets[1] = 11
+    	rm_sets[2] = "no_llego"
+    	rm_sets[3] = "no_llego"
         time_save = "vacio"
         temp_save = "vacio"
         logging.info("no se pudo evaluar")
 
     #se toma el tiempo actual para evaluar posteriormente el tiempo transcurrido, se guarda el ajuste de temperatura y se reenvian los setpoist del AutoClave
     time_save2 = 0#time.time()
-    time_save  = ac_sets[1]
-    temp_save  = ac_sets[0]
+    time_save  = rm_sets[1]
+    temp_save  = rm_sets[0]
 
     #se transmiten los datos de autoclave por communication
-    communication.cook_autoclave(ac_sets)
+    communication.cook_autoclave(rm_sets)
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    socketio.emit('ac_setpoints', {'set': ac_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    socketio.emit('remonta_setpoints', {'set': rm_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
 
     try:
         f = open(DIR + "autoclave_sets.txt","a+")
-     	f.write(str(ac_sets) + ', ' + str(temp_save) + ', ' + str(time_save) + '\n')
+     	f.write(str(rm_sets) + ', ' + str(temp_save) + ', ' + str(time_save) + '\n')
     	f.close()
         #logging.info("se guardo en autoclave.txt")
 
     except:
         pass
 	    #logging.info("no se pudo guardar en autoclave.txt")
-
-
 
 
 
@@ -548,13 +556,13 @@ def background_thread1():
         temp_ = communication.zmq_client().split()
 
         try:
-            measures[0] = temp_[1]  #ph
-            measures[1] = temp_[2]  #oD
-            measures[2] = temp_[3]  #Temp1
-            measures[3] = temp_[4]  #Iph
+            measures[0] = temp_[1]  #Temp_
+            measures[1] = temp_[2]  #Temp1
+            measures[2] = temp_[3]  #Temp2
+            measures[3] = temp_[6]  #Itemp2
             measures[4] = temp_[5]  #Iod
-            measures[5] = temp_[6]  #Itemp1
-            measures[6] = temp_[7]  #Itemp2
+            measures[5] = temp_[7]  #Itemp1
+            measures[6] = temp_[4]  #Iph
 
 
             for i in range(0,len(set_data)):

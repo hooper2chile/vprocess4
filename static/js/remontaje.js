@@ -10,15 +10,15 @@ $(document).ready(function() {
     //SECCION MEDICIONES
     //Se escuchan las mediciones de ph, OD, Temp.
     socket.on('Medidas', function(msg) {
-        $('#med1').text('Temp_: '    + msg.data[0] + ' º[C]').html();
-        $('#med2').text('Temp1: '    + msg.data[1] + ' º[C]').html();
-        $('#med3').text('Temp2: '  + msg.data[2] + ' º[C]').html();
+        $('#med1').text('Temp_: ' + msg.data[0] + ' º[C]').html();
+        $('#med2').text('Temp1: ' + msg.data[1] + ' º[C]').html();
+        $('#med3').text('Temp2: ' + msg.data[2] + ' º[C]').html();
     });
 
     //SECCION AUTOCLAVE
     //se emiten los setpoints hacia el servidor
-    $('form#ac_setpoints').submit(function(event) {
-        socket.emit('ac_setpoints',
+    $('form#remontaje_setpoints').submit(function(event) {
+        socket.emit('remontaje_setpoints',
                     { ac_temp: $('#temp').val(),
                       ac_time: $('#time').val(),
                       temp_en: $('#temp_enable').is(':checked'),
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     //se escuchan desde el servidor los setpoints aplicados
     //para ser desplegados en todos los clientes.
-    socket.on('ac_setpoints', function(msg) {
+    socket.on('remontaje_setpoints', function(msg) {
         document.getElementById('temp').value   = msg.set[0];
         document.getElementById('time').value   = msg.set[1];
         document.getElementById('temp_enable').checked = msg.set[2];
@@ -47,8 +47,8 @@ $(document).ready(function() {
         console.log($('#time').val());
     });
 
-    $('#temp_set').css({ 'color': 'red', 'font-size': '110%' });
-    $('#time_set').css({ 'color': 'red', 'font-size': '110%' });
+    $('#temp_set').css({ 'color': 'white', 'font-size': '110%' });
+    $('#time_set').css({ 'color': 'white', 'font-size': '110%' });
 
 
     //se emiten señal de reinicio, apagado, grabacion y limpiaza hacia el servidor
