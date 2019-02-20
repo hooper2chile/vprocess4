@@ -62,6 +62,10 @@ void loop() {
                 actuador_umbral();
                 break;
 
+              case 'a': //autoclave set
+                remontaje_setpoints();
+                break;
+
 
               default:
                 break;

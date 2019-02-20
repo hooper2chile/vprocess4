@@ -82,10 +82,7 @@ $(document).ready(function() {
         console.log($('#alimentar_dir').is(':checked'));
         console.log($('#ph_dir').is(':checked'));
         console.log($('#temperatura_dir').is(':checked'));
-
     });
-
-
 
 
 

@@ -19,11 +19,12 @@ ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
 temp_set = [0,0,0,0]
 
-temp_save  = 0
-time_save  = 0 #este se usa para info en las webpages
-time_save2 = 0 #este se usa para calculos con el timestamp
+#temp_save  = 0
+#time_save  = 0 #este se usa para info en las webpages
+#time_save2 = 0 #este se usa para calculos con el timestamp
 #rm_sets = [0,0,False,False]  #rm_sets = remontaje setpoints
 rm_sets = [0,0,0,False]
+rm_save = [0,0,0,False]
 
 task = ["grabar", False]
 flag_database = False
@@ -103,7 +104,7 @@ def remontaje():
             error='validado'
             return render_template("remontaje.html", error=error)
 
-    error = 'No Validado en Calibracion'
+    error = 'No Validado en Remontaje'
     return render_template('login.html', error=error)
 
 
@@ -124,7 +125,7 @@ def function_thread():
     emit('u_calibrar',      {'set': u_set_ph})
     emit('u_calibrar_temp', {'set': u_set_temp})
     emit('power',           {'set': task})
-
+    emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save }, namespace='/biocl', broadcast=True)
 
     global thread1
     if thread1 is None:
@@ -248,7 +249,7 @@ def setpoints(dato):
     try:
         settings = str(set_data)
         f = open(DIR + "setpoints.txt","a+")
-        f.write(settings + '\n')
+        f.write(settings + '\n')              #agregar fecha y hora a este string
         f.close()
 
     except:
@@ -498,40 +499,34 @@ def calibrar_u_temp(dato):
 #remontaje setpoits
 @socketio.on('remontaje_setpoints', namespace='/biocl')
 def autoclave_functions(dato):
-    global rm_sets, temp_save, time_save, time_save2
+    global rm_sets, rm_save
 
     try:
-        rm_sets[0] = int(dato['ac_temp'])
-        rm_sets[1] = int(dato['ac_time'])
-        rm_sets[2] = dato['time_en']
-        rm_sets[3] = dato['temp_en']
+        rm_sets[0] = int(dato['rm_periodo'])
+        rm_sets[1] = int(dato['rm_duracion'])
+        rm_sets[2] = int(dato['rm_ciclo'])
+        rm_sets[3] = dato['rm_enable']
 
-        time_save = int(dato['ac_time'])
-        temp_save = int(dato['ac_temp'])
+        rm_save = rm_sets
 
     except:
         rm_sets[0] = 22
         rm_sets[1] = 11
     	rm_sets[2] = "no_llego"
     	rm_sets[3] = "no_llego"
-        time_save = "vacio"
-        temp_save = "vacio"
+        rm_save = [69,69,69,False]
+
         logging.info("no se pudo evaluar")
-
-    #se toma el tiempo actual para evaluar posteriormente el tiempo transcurrido, se guarda el ajuste de temperatura y se reenvian los setpoist del AutoClave
-    time_save2 = 0#time.time()
-    time_save  = rm_sets[1]
-    temp_save  = rm_sets[0]
-
-    #se transmiten los datos de autoclave por communication
-    communication.cook_autoclave(rm_sets)
+    #se transmiten los datos de remontaje por communication, al canal ZMQ
+    #y desde ahi al micro controlador por serial
+    communication.cook_remontaje(rm_sets)
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
-    socketio.emit('remonta_setpoints', {'set': rm_sets, 'save': [temp_save, time_save]}, namespace='/biocl', broadcast=True)
+    socketio.emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save }, namespace='/biocl', broadcast=True)
 
     try:
-        f = open(DIR + "autoclave_sets.txt","a+")
-     	f.write(str(rm_sets) + ', ' + str(temp_save) + ', ' + str(time_save) + '\n')
+        f = open(DIR + "remontaje_sets.txt","a+")
+     	f.write(str(rm_sets) + ',..., ' + str(rm_save) + '\n')
     	f.close()
         #logging.info("se guardo en autoclave.txt")
 
@@ -580,4 +575,4 @@ def background_thread1():
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+    socketio.run(app, host='0.0.0.0', port=80, debug=True)

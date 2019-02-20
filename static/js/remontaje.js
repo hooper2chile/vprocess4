@@ -17,50 +17,46 @@ $(document).ready(function() {
 
     //SECCION AUTOCLAVE
     //se emiten los setpoints hacia el servidor
-    $('form#remontaje_setpoints').submit(function(event) {
+    $('form#remontaje_formulario').submit(function(event) {
         socket.emit('remontaje_setpoints',
-                    { ac_temp: $('#temp').val(),
-                      ac_time: $('#time').val(),
-                      temp_en: $('#temp_enable').is(':checked'),
-                      time_en: $('#time_enable').is(':checked')
+                    { rm_periodo : $('#rm_periodo_input_id').val(),
+                      rm_duracion: $('#rm_duracion_input_id').val(),
+                      rm_ciclo   : $('#rm_ciclo_input_id').val(),
+                      rm_enable  : $('#rm_enable_input_id').is(':checked')
                      });
 
         //para depurar
-        console.log('Emitiendo Valores: temp, timer, good checked: ');
-        console.log($('#time').val());
+        console.log('Emitiendo Valores: Periodo, duracion, ciclo, enable checked:');
+        console.log($('#rm_periodo_input_id').val());
+        console.log($('#rm_duracion_input_id').val());
+        console.log($('#rm_ciclo_input_id').val());
+        console.log($('#rm_enable_input_id').is(':checked'));
         return false;
     });
 
     //se escuchan desde el servidor los setpoints aplicados
     //para ser desplegados en todos los clientes.
     socket.on('remontaje_setpoints', function(msg) {
-        document.getElementById('temp').value   = msg.set[0];
-        document.getElementById('time').value   = msg.set[1];
-        document.getElementById('temp_enable').checked = msg.set[2];
-	      document.getElementById('time_enable').checked = msg.set[3];
+        document.getElementById('rm_periodo_input_id' ).value   = msg.set[0];
+        document.getElementById('rm_duracion_input_id' ).value  = msg.set[1];
+        document.getElementById('rm_ciclo_input_id').value      = msg.set[2];
+        document.getElementById('rm_enable_input_id').checked   = msg.set[3];
 
-        $('#temp_set' ).text('Temp  Set: ' + msg.save[0] + '[ºC] ' ).html();
-        $('#time_set' ).text('Timer Set: ' + msg.save[1] + '[MIN]' ).html();
+        $('#rm_periodo_div_id' ).text('Periodo_ : ' + msg.save[0] + '[MIN]').html();
+        $('#rm_duracion_div_id').text('Duración_: ' + msg.save[1] + '[MIN]').html();
+        $('#rm_ciclo_div_id'   ).text('Ciclo_   : ' + msg.save[2] + '[MIN]').html();
 
         //para depurar
-        console.log('Checkeds Recibidos');
-        console.log($('#time').val());
+        console.log('Checkeds Ya Recibidos');
+        console.log($('#rm_periodo_input_id').val());
+        console.log($('#rm_duracion_input_id').val());
+        console.log($('#rm_ciclo_input_id').val());
     });
 
-    $('#temp_set').css({ 'color': 'white', 'font-size': '110%' });
-    $('#time_set').css({ 'color': 'white', 'font-size': '110%' });
+    $('#rm_periodo_div_id'  ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#rm_duracion_div_id' ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#rm_ciclo_div_id'    ).css({ 'color': 'white', 'font-size': '110%' });
 
 
-    //se emiten señal de reinicio, apagado, grabacion y limpiaza hacia el servidor
-    $('form#process').submit(function(event) {
-        socket.emit('power',
-                    { action  : $('select[name=selection]').val(),
-                      checked : $('#confirm').is(':checked')
-                    });
-      //para depurar
-      //  console.log('Emitiendo Valores de Acción');
-      //  console.log($('select[name=selection]').val())
-      //  console.log($('#confirm').is(':checked'));
-      return false;
-    });
+
 });

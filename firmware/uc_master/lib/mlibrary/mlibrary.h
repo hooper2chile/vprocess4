@@ -219,9 +219,6 @@ void hamilton_sensors() {
   Temp2 = m2 * Itemp2 + n2;
   Temp_ = 0.5 * ( Temp1 + Temp2 );
 
-  //pH    = m0 * Iph    + n0;
-  //oD    = m1 * Iod    + n1;
-
   return;
 }
 
@@ -242,16 +239,6 @@ void tx_reply(){
 
 void daqmx() {
   //data adquisition measures
- /*
-  Byte0 = pH;
-  Byte1 = oD;
-  Byte2 = Temp1;
-  Byte3 = Iph;
-  Byte4 = Iod;
-  Byte5 = Itemp1;
-  Byte6 = Itemp2;
-  Byte7 = Temp2;   //Nuevo: para promedio movil o exponencial
-*/
   Byte0 = Temp_;
   Byte1 = Temp1;
   Byte2 = Temp2;
@@ -275,8 +262,6 @@ void daqmx() {
 }
 
 void control_temp() {
-  //for debug
-  //mytemp  = 50;
   //touch my delta temp
   dTemp = mytempset - Temp1;
 
@@ -344,27 +329,18 @@ void broadcast_setpoint(uint8_t select) {
   return;
 }
 
-/*
-void setpoint() {
-  //acá se leen los nuevos setpoint para los lazos de control
-  write_crumble();
-  control_temp();
-  broadcast_setpoint(1);
-  tx_reply();
-  //Serial.println("A A A");
-  //Serial.println("Good Setpoint Crumble");
+void remontaje_setpoints(){
+
+  Serial.println(message);
   return;
 }
-*/
 
 
 //wph08.3feed100unload100mix1500temp022rst111111dir111111
 //wphb015feed100unload100mix1500temp150rst000000dir111111 (55 bytes)
-
 //Esquema I2C Concha y Toro:
 //wphb015(-7) feed100unload100 mix1500(-7) temp150rst000 000(-3) dir111111(-9)
 //feed100unload100temp150rst000 (29) => + "\n" = 30 bytes!
-
 void clean_strings() {
   //clean strings
   stringComplete = false;
@@ -378,51 +354,8 @@ void clean_strings() {
 int validate() {
 //message format write values: wph14.0feed100unload100mix1500temp100rst111111dir111111
     // Validate SETPOINT
-    if (  message[0] == 'w'                     &&
-          message.substring(1, 3)   == "ph"     &&
-          message.substring(7, 11)  == "feed"   &&
-          message.substring(14, 20) == "unload" &&
-          message.substring(23, 26) == "mix"    &&
-          message.substring(30, 34) == "temp"   &&
-          message.substring(37, 40) == "rst"    &&
-          message.substring(46, 49) == "dir"    &&
+    if ( message[0] == 'w' )
 
-          //ph number
-          ( message.substring(3, 7).toFloat() >= 0    ) &&
-          ( message.substring(3, 7).toFloat() <= 14.0 ) &&
-
-          //feed number
-          ( message.substring(11, 14).toInt() >= 0         ) &&
-          ( message.substring(11, 14).toInt() <= SPEED_MAX ) &&
-
-          //unload number
-          ( message.substring(20, 23).toInt() >= 0         ) &&
-          ( message.substring(20, 23).toInt() <= SPEED_MAX ) &&
-
-          //mix number
-          ( message.substring(26, 30).toInt() >= 0    ) &&
-          ( message.substring(26, 30).toInt() <= 1500 ) &&
-
-          //temp number
-          ( message.substring(34, 37).toInt() >= 0        ) &&
-          ( message.substring(34, 37).toInt() <= TEMP_MAX ) &&
-
-          //rst bits
-          ( message[40] == iINT(1) || message[40] == iINT(0) ) &&
-          ( message[41] == iINT(1) || message[41] == iINT(0) ) &&
-          ( message[42] == iINT(1) || message[42] == iINT(0) ) &&
-          ( message[43] == iINT(1) || message[43] == iINT(0) ) &&
-          ( message[44] == iINT(1) || message[44] == iINT(0) ) &&
-          ( message[45] == iINT(1) || message[45] == iINT(0) ) &&
-
-          //dir bits
-          ( message[49] == iINT(1) || message[49] == iINT(0) ) &&
-          ( message[50] == iINT(1) || message[50] == iINT(0) ) &&
-          ( message[51] == iINT(1) || message[51] == iINT(0) ) &&
-          ( message[52] == iINT(1) || message[52] == iINT(0) ) &&
-          ( message[53] == iINT(1) || message[53] == iINT(0) ) &&
-          ( message[54] == iINT(1) || message[54] == iINT(0) )
-        )
         { return 1; }
 
       // Validate CALIBRATE
@@ -435,18 +368,17 @@ int validate() {
               )
           return 1;
 
-      //Validete umbral actuador ph: u1a001b001e
-      else if ( message[0]  == 'u' && message[1] == '1' &&
-                message[2]  == 'a' && message[6] == 'b' &&
-                message[10] == 'e'
-              )
-          return 1;
-
       //Validete umbral actuador temp: u2t003e
       else if ( message[0] == 'u' && message[1] == '2' &&
                 message[2] == 't' && message[6] == 'e'
               )
           return 1;
+
+      // Validate actions for remontaje - ex autoclave
+      else if (message[0]  == 'a') /*&& message[3] == 't' && message[7] == 'f' &&
+               message[10] == 'e')*/
+          return 1;
+
 
       // Validate READING
       else if ( message[0] == 'r' )

@@ -18,6 +18,15 @@ tau_zmq_connect = 0.3 #0.3 [s]: no ha funcionado con menos
 SPEED_MAX_MIX = 1500
 SPEED_MAX = 150
 TEMP_MAX  = 130
+
+T_MAX=1440
+T_MIN=10
+BOMBA_REMONTAJE_T_MAX = T_MAX - 1
+BOMBA_REMONTAJE_T_MIN = 1
+CICLO_MAX = 20
+CICLO_MIN = 1
+
+
 PH_MIN = 0
 PH_MAX = 14
 
@@ -194,59 +203,84 @@ def actuador(var,u_set):
 
 
 ###############################################################################
-#Se reciben localmente los datos de ac_sets desde app.py
-def cook_autoclave(ac_sets):
-    ac_sets[0] = int(ac_sets[0])  #temperatura
-    ac_sets[1] = int(ac_sets[1])  #tiempo
+#Se reciben localmente los datos de rm_sets desde app.py
+def cook_remontaje(rm_sets):
+    rm_sets[0] = int(rm_sets[0])  #periodo
+    rm_sets[1] = int(rm_sets[1])  #rm_duracion
+    rm_sets[2] = int(rm_sets[2])  #rm_ciclo
+    rm_sets[3] = rm_sets[3]  #rm_enable
+
 
     command = None
-    temp = 120
-    time = 30
-    flag_temp = 0
-    flag_time = 0
+
+
+    periodo = 120
+    duracion = 30
+    ciclo = 1
+    enable = 0
+
 
     try:
-        #limites de temperatura
-        if ac_sets[0] >= TEMP_MAX:
-            ac_sets[0] = TEMP_MAX
-        elif ac_sets[0] <= 100:
-            ac_sets[0] = 100
+        #limites de periodo
+        if rm_sets[0] >= T_MAX:
+            rm_sets[0] = T_MAX
+        elif rm_sets[0] <= T_MIN:
+            rm_sets[0] = T_MIN
 
-        #str de temp
-        temp = str(ac_sets[0])
-
-        #limites de tiempo
-        if ac_sets[1] >= 99:
-            ac_sets[1] = 99
-        elif ac_sets[1] < 10 and ac_sets[1] >= 0:
-            ac_sets[1] = '0' + str(ac_sets[1])
-        #str de time
-        time = str(ac_sets[1])
+        #str de periodo
+        if rm_sets[0] < 10 and rm_sets[0] >= 0:
+            rm_sets[0] = '000' + str(rm_sets[0])
+        elif rm_sets[0] < 100 and rm_sets[0] > 0:
+            rm_sets[0] = '00' + str[rm_sets[0]]
+        elif rm_sets[0] < 1000 and rm_sets[0] > 0:
+            rm_sets[0] = '0' + str[rm_sets[0]]
+        periodo = str(rm_sets[0])
 
 
-        #ajustando flag tiempo
-        if ac_sets[2] is True:
-            ac_sets[2] = 1
+        #limites de duracion
+        if rm_sets[1] >= BOMBA_REMONTAJE_T_MAX:
+            rm_sets[1] = BOMBA_REMONTAJE_T_MAX
+        elif rm_sets[1] < BOMBA_REMONTAJE_T_MIN:
+            rm_sets[1] = BOMBA_REMONTAJE_T_MIN
+
+        #str de duracion
+        if rm_sets[1] < 10 and rm_sets[1] >= 0:
+            rm_sets[1] = '000' + str(rm_sets[1])
+        elif rm_sets[1] < 100 and rm_sets[1] > 0:
+            rm_sets[1] = '00' + str[rm_sets[1]]
+        elif rm_sets[1] < 1000 and rm_sets[1] > 0:
+            rm_sets[1] = '0' + str[rm_sets[1]]
+        duracion = str(rm_sets[1])
+
+
+        #limites de ciclo
+        if rm_sets[1] >= CICLO_MAX:
+            rm_sets[1] = CICLO_MAX
+        elif rm_sets[1] < CICLO_MIN:
+            rm_sets[1] = CICLO_MIN
+
+        #str de ciclo
+        if rm_sets[2] < 10 and rm_sets[2] >= 0:
+            rm_sets[2] = '0' + str(rm_sets[2])
+        ciclo = str(rm_sets[2])
+
+
+        #ajustando flag rm_enable (rm_sets[3])
+        if rm_sets[3] is True:
+            rm_sets[3] = 1
         else:
-            ac_sets[2] = 0
-        #str flag tiempo
-        flag_time = str(ac_sets[2])
+            rm_sets[3] = 0
+        #str flag rm_enable
+        enable = str(rm_sets[3])
 
-        #ajustando flag temperatura
-        if ac_sets[3] is True:
-            ac_sets[3] = 1
-        else:
-            ac_sets[3] = 0
-        #str flag temperatura
-        flag_temp = str(ac_sets[3])
 
         #se construye el string de autoclavado
-        command = 'a' + time + 't' + temp + 'f' + str(flag_time) + str(flag_temp) + 'e'
+        command = 'p' + periodo + 'd' + duracion + 'c' + ciclo + 'e' + enable + 'e'
         published_setpoint(command)
 
         #se respalda el comando
-        f = open(DIR + "autoclave_string.txt","a+")
-     	f.write(str(command) + '\n')
+        f = open(DIR + "remontaje_string.txt","a+")
+     	f.write(str(command) + '\n')  #agregar la hora a este string
     	f.close()
 
     except:

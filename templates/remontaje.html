@@ -10,26 +10,24 @@
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
     <font face="verdana" color="black">Habilitar Remontaje</font>
     <label class="switch">
-      <input type="checkbox">
+      <input  type="checkbox" id="rm_enable_input_id" />
       <span class="slider round"></span>
     </label>
 
 
+  <form id="remontaje_formulario" method="POST" action='#'> <!--form_id: input id -->
     <!caja1: frecuencia remontaje>
-    <div class="caja1">
-      <div id="temp_set">Frecuencia [Min]:</div>
-           <br>
+        <div class="caja1">
+          <div id="rm_periodo_div_id">Periodo [Min]:</div>
             <input type="number"
-                   id="temp"
-                   value="120"
-                   style="width: 50px;"
-                   MIN="100"
-                   MAX="130"
-                   step="1"
+                         id="rm_periodo_input_id"
+                         value="30"
+                         style="width: 50px;"
+                         MIN="30"
+                         MAX="1440"
+                         step="1"
             />
-             <button  type="submit" class="button_apply"> + </button>     <br>
-             <input  type="checkbox" id="temp_enable"  /> Habilitar <!--habilitar  style="visibility:hidden"   -->     <br>
-    </div>
+        </div>
 
 
     <div class="caja_central">
@@ -38,37 +36,33 @@
 
 
     <!caja3: duracion remontaje>
-    <form id="remontaje_setpoints" method="POST" action='#'>
         <div class="caja3">
-          <div id="time_set">Duración [Min]:</div>
-                  <input type="number"
-                         id="time"
+          <div id="rm_duracion_div_id">Duración [Min]:</div>
+            <input type="number"
+                         id="rm_duracion_input_id"
                          style="width: 50px;"
                          value="30"
                          MIN="1"
-                         MAX="99"
+                         MAX="120"
                          step="1"
-                  />
-                 <button  type="submit" class="button_apply"> + </button>
-                 <br><input  type="checkbox" id="time_enable" /> Habilitar   <!-- habilitar style="visibility:hidden" -->
-        </div>
+            />
+       </div>
 
 
-        <!caja4: dias remontaje>
-        <form id="remontaje_setpoints" method="POST" action='#'>
-            <div class="caja4">
-              <div id="time_set">Ciclo [Días]:</div>
-                      <input type="number"
-                             id="time"
-                             style="width: 50px;"
-                             value="0"
-                             MIN="0"
-                             MAX="14"
-                             step="1"
-                      />
-                      <button  type="submit" class="button_apply"> + </button>
-                      <br><input  type="checkbox" id="time_enable" /> Habilitar      <!-- habilitar style="visibility:hidden" -->
-            </div>
+    <!caja4: dias remontaje>
+        <div class="caja4">
+          <div id="rm_ciclo_div_id">Ciclo [Días]:</div>
+            <input type="number"
+                         id="rm_ciclo_input_id"
+                         style="width: 50px;"
+                         value="1"
+                         MIN="1"
+                         MAX="20"
+                         step="1"
+            />
+            <button  type="submit" class="button_apply"> + </button>s
+          </div>
+
 
     <font color="white">
     <div class="caja_derecha_arriba1" id="med1"></div>
@@ -82,7 +76,4 @@
 <br>
 <br>
 <br>
-
-
-
 {% endblock %}
