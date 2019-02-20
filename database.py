@@ -37,15 +37,15 @@ def update_db(real_data, connector, c, first_time, BACKUP):
     #Backup DB in RAM to DISK SD
     if BACKUP:
 
-        filedb='/home/pi/biocl_system/database/backup__' + first_time + '__.db'
+        filedb='/home/pi/vprocess4/database/backup__' + first_time + '__.db'
 
         bck = sqlite3.connect(filedb)
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from ph;"   > /home/pi/biocl_system/csv/%s' % (filedb,filedb[31:-3])+'full_ph.csv' )
-            os.system('sqlite3 -header -csv %s "select * from od;"   > /home/pi/biocl_system/csv/%s' % (filedb,filedb[31:-3])+'full_od.csv' )
-            os.system('sqlite3 -header -csv %s "select * from temp;" > /home/pi/biocl_system/csv/%s' % (filedb,filedb[31:-3])+'full_temp.csv' )
+            os.system('sqlite3 -header -csv %s "select * from ph;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_ph.csv' )
+            os.system('sqlite3 -header -csv %s "select * from od;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_od.csv' )
+            os.system('sqlite3 -header -csv %s "select * from temp;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp.csv' )
 
             logging.info("\n Backup FULL REALIZADO \n")
 
@@ -104,11 +104,11 @@ def main():
             if i is 10:
                 try:
                     f = open(DIR + "db_log.txt","a+")
-                    f.write("Grabando OFF: " + time.strftime("Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n" )
+                    f.write("Grabando OFF: " + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n" )
                     f.close()
 
                     i = 0
-                    logging.info("GRABANDO OFF: " + time.strftime("Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n")
+                    logging.info("GRABANDO OFF: " + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + "\n")
 
                 except:
                     logging.info("no se pudo leer grabar el log de grabar off")

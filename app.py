@@ -3,7 +3,7 @@
 from flask import Flask, render_template, session, request, Response, send_from_directory, make_response
 from flask_socketio import SocketIO, emit, disconnect
 
-import os, sys, logging, communication, reviewDB, tocsv
+import os, sys, time, logging, communication, reviewDB, tocsv
 
 #logging.basicConfig(filename='/home/pi/vprocess4/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
@@ -249,7 +249,7 @@ def setpoints(dato):
     try:
         settings = str(set_data)
         f = open(DIR + "setpoints.txt","a+")
-        f.write(settings + '\n')              #agregar fecha y hora a este string
+        f.write(settings +  time.strftime("Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')              #agregar fecha y hora a este string
         f.close()
 
     except:
@@ -291,7 +291,7 @@ def calibrar_ph(dato):
         try:
             coef_ph_set = [m_ph, n_ph]
             f = open(DIR + "coef_ph_set.txt","w")
-            f.write(str(coef_ph_set) + '\n')
+            f.write(str(coef_ph_set) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
             f.close()
             #acá va el codigo que formatea el comando de calibración.
             communication.calibrate(0,coef_ph_set)
@@ -350,7 +350,7 @@ def calibrar_od(dato):
         try:
             coef_od_set = [m_od, n_od]
             f = open(DIR + "coef_od_set.txt","w")
-            f.write(str(coef_od_set) + '\n')
+            f.write(str(coef_od_set) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
             f.close()
 
             communication.calibrate(1,coef_od_set)
@@ -411,7 +411,7 @@ def calibrar_temp(dato):
             communication.calibrate(2,coef_temp_set)
 
             f = open(DIR + "coef_temp_set.txt","w")
-            f.write(str(coef_temp_set) + '\n')
+            f.write(str(coef_temp_set) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
             f.close()
 
         except:
@@ -482,7 +482,7 @@ def calibrar_u_temp(dato):
 
     try:
         f = open(DIR + "umbral_set_temp.txt","w")
-        f.write(str(u_set_temp) + '\n')
+        f.write(str(u_set_temp) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
         f.close()
         communication.actuador(2,u_set_temp)  #FALTA IMPLEMENTARIO EN communication.py
 
@@ -526,7 +526,7 @@ def autoclave_functions(dato):
 
     try:
         f = open(DIR + "remontaje_sets.txt","a+")
-     	f.write(str(rm_sets) + ',..., ' + str(rm_save) + '\n')
+     	f.write(str(rm_sets) + ',..., ' + str(rm_save) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") +'\n')
     	f.close()
         #logging.info("se guardo en autoclave.txt")
 
@@ -575,4 +575,4 @@ def background_thread1():
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=80, debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)

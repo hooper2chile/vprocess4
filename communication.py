@@ -210,15 +210,12 @@ def cook_remontaje(rm_sets):
     rm_sets[2] = int(rm_sets[2])  #rm_ciclo
     rm_sets[3] = rm_sets[3]  #rm_enable
 
-
     command = None
-
 
     periodo = 120
     duracion = 30
     ciclo = 1
     enable = 0
-
 
     try:
         #limites de periodo
@@ -231,11 +228,10 @@ def cook_remontaje(rm_sets):
         if rm_sets[0] < 10 and rm_sets[0] >= 0:
             rm_sets[0] = '000' + str(rm_sets[0])
         elif rm_sets[0] < 100 and rm_sets[0] > 0:
-            rm_sets[0] = '00' + str[rm_sets[0]]
+            rm_sets[0] = '00' + str(rm_sets[0])
         elif rm_sets[0] < 1000 and rm_sets[0] > 0:
-            rm_sets[0] = '0' + str[rm_sets[0]]
+            rm_sets[0] = '0' + str(rm_sets[0])
         periodo = str(rm_sets[0])
-
 
         #limites de duracion
         if rm_sets[1] >= BOMBA_REMONTAJE_T_MAX:
@@ -251,7 +247,6 @@ def cook_remontaje(rm_sets):
         elif rm_sets[1] < 1000 and rm_sets[1] > 0:
             rm_sets[1] = '0' + str[rm_sets[1]]
         duracion = str(rm_sets[1])
-
 
         #limites de ciclo
         if rm_sets[1] >= CICLO_MAX:
@@ -274,8 +269,15 @@ def cook_remontaje(rm_sets):
         enable = str(rm_sets[3])
 
 
+        time = 12
+        temp = 110
+        flag_time = 1
+        flag_temp = 1
+
+
         #se construye el string de autoclavado
-        command = 'p' + periodo + 'd' + duracion + 'c' + ciclo + 'e' + enable + 'e'
+        command  = 'a' + str(time) + 't' + str(temp) + 'f' + str(flag_time) + str(flag_temp) + 'e'
+        #command = 'p' + periodo + 'd' + duracion + 'c' + ciclo + 'e' + enable + 'e'
         published_setpoint(command)
 
         #se respalda el comando
@@ -284,12 +286,8 @@ def cook_remontaje(rm_sets):
     	f.close()
 
     except:
-        logging.info("no se pudo generar el command para autoclave")
+        logging.info("no se pudo generar el command para remontaje_string")
         pass
-
-
-
-
 
     return True
 ###############################################################################
