@@ -33,12 +33,12 @@ function my_chart(){
 
           //mediciones de ph, OD, Temp. Socket regenera el grafico con cada llamada!!!
           socket.on('Medidas', function(msg) {
-              $('#med1_g').text('ph: '   + msg.data[0]          ).html();
-              $('#med2_g').text('OD: '   + msg.data[1] + ' %'   ).html();
-              $('#med3_g').text('Temp: ' + msg.data[2] + ' [C]' ).html();
+              $('#med1_g').text('TEMP1: ' + msg.data[0] + '[C]' ).html();
+              $('#med2_g').text('TEMP2: ' + msg.data[1] + '[C]' ).html();
+              $('#med3_g').text('TEMP_: ' + msg.data[2] + '[C]' ).html();
 
               //muestra el setpoint de ph en el grafico real time.
-              $('#ph_g').text('pH Set: ' + msg.set[2]         ).html();
+              $('#ph_g').text('Temperatura Set: ' + msg.set[2]         ).html();
 
               //grafico ph
               set_ph.shift();
@@ -54,7 +54,7 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'pH Biorreactor',
+                    label: 'TEMP1 Bioreactor',
                     data: med_ph,
                     fill: false,
                     lineTension: 0.5,
@@ -75,7 +75,7 @@ function my_chart(){
                     pointHitRadius: 10,
                   },
                   {
-                      label: 'pH Set',
+                      label: 'Temp Set',
                       data: set_ph,
                       lineTension: 0.5,
                       borderColor: "rgba(255,0,0,1)",
@@ -95,7 +95,7 @@ function my_chart(){
                   			     ticks: {
                         			   beginAtZero: true,
                         			   min: 0,
-                        			   max: 14,
+                        			   max: 50,
                   			      }
                   		  }]
                   	}
@@ -114,7 +114,7 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'OD% Biorreactor',
+                    label: 'TEMP2 Bioreactor',
                     data: med_od,
                     fill: false,
                     lineTension: 0.5,
@@ -145,7 +145,7 @@ function my_chart(){
                              ticks: {
                                  beginAtZero: true,
                                  min: 0,
-                                 max: 100,
+                                 max: 50,
                               }
                         }]
                     }
@@ -195,7 +195,7 @@ function my_chart(){
                              ticks: {
                                  beginAtZero: true,
                                  min: 0,
-                                 max: 80,
+                                 max: 50,
                               }
                         }]
                     }

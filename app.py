@@ -19,10 +19,6 @@ ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
 temp_set = [0,0,0,0]
 
-#temp_save  = 0
-#time_save  = 0 #este se usa para info en las webpages
-#time_save2 = 0 #este se usa para calculos con el timestamp
-#rm_sets = [0,0,False,False]  #rm_sets = remontaje setpoints
 rm_sets = [0,0,0,False]
 rm_save = [0,0,0,False]
 
@@ -66,7 +62,7 @@ def login():
 
 
 @app.route('/calibrar', methods=['POST', 'GET'])
-def test():
+def calibrar():
     global error
 
     if request.method == 'POST':
