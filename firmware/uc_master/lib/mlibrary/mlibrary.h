@@ -9,7 +9,7 @@ Adafruit_ADS1115 ads1(0x49);
 
 #define SPEED_MIN 2.0
 #define SPEED_MAX 150     //[RPM]
-#define TEMP_MAX  130     //[ºC]
+#define TEMP_MAX  60     //[ºC]
 
 #define PGA1 0.125F
 #define PGA2 0.0625F
@@ -122,18 +122,19 @@ void serialEvent() {
   }
 }
 
-void i2c_send_command(String command, uint8_t slave) {
-  Wire.beginTransmission(slave); // transmit to device #slave: [1,2]
+void i2c_send_command(String command, uint8_t slave) {   //slave = 2: slave tradicional. 3 es el nuevo
+  Wire.beginTransmission(slave); // transmit to device #slave: [2,3]
   Wire.write(command.c_str());   // sends value byte
   Wire.endTransmission();        // stop transmitting
 }
 
 //desmenuza el string de comandos
-void write_crumble() {   //falta definir si se hara el control de temp aca, lo mismo el remontaje.
-  mytempset = message.substring(34, 37).toFloat();
-  mymix     = message.substring(26, 30).toInt();
+void write_crumble() {
+//falta definir si se hara el control de temp aca, lo mismo el remontaje.
+  //mytempset = message.substring(34, 37).toFloat();
+  //mymix     = message.substring(26, 30).toInt();
   //setting rst
-  rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
+  //rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
 
   return;
 }
@@ -214,22 +215,17 @@ void hamilton_sensors() {
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
 
-  if (Itemp1 >= 3.0 && Itemp1 <= 35.0) {  //3mA y 35mA
+  if (Itemp1 >= 3.0 && Itemp1 <= 25.0) {  //3mA y 35mA
     //Update measures
      Temp1 = m0 * Itemp1 + n0;
      Temp2 = m2 * Itemp2 + n2;
      Temp_ = 0.5 * ( Temp1 + Temp2 );
   }
   else {
-     Itemp1 = 0;
-     Itemp2 = 0;
-          
      Temp1 = 0;
      Temp2 = 0;
-     Temp_ = 0;     
+     Temp_ = 0;
   }
-
-	
   return;
 }
 
@@ -330,7 +326,7 @@ void broadcast_setpoint(uint8_t select) {
 
     case 1: //update command and re-tx.
       new_write  = "";
-      new_write  = message.substring(7,23) + message.substring(30,42) + "\n";
+      new_write  = message + "\n";
       i2c_send_command(new_write, 2);
       break;
 
@@ -347,11 +343,8 @@ void remontaje_setpoints(){
 }
 
 
-//wph08.3feed100unload100mix1500temp022rst111111dir111111
-//wphb015feed100unload100mix1500temp150rst000000dir111111 (55 bytes)
 //Esquema I2C Concha y Toro:
-//wphb015(-7) feed100unload100 mix1500(-7) temp150rst000 000(-3) dir111111(-9)
-//feed100unload100temp150rst000 (29) => + "\n" = 30 bytes!
+//TRAMA:	wf000u000t009r000d000  //21 caracteres: 22 sumando el '\n'
 void clean_strings() {
   //clean strings
   stringComplete = false;
@@ -363,7 +356,7 @@ void clean_strings() {
 
 
 int validate() {
-//message format write values: wph14.0feed100unload100mix1500temp100rst111111dir111111
+//message format write values: wf100u100t150r111d111
     // Validate SETPOINT
     if ( message[0] == 'w' )
 
@@ -386,8 +379,7 @@ int validate() {
           return 1;
 
       // Validate actions for remontaje - ex autoclave
-      else if (message[0]  == 'a') /*&& message[3] == 't' && message[7] == 'f' &&
-               message[10] == 'e')*/
+      else if (message[0]  == 'p')
           return 1;
 
 

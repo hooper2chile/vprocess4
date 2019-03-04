@@ -19,8 +19,8 @@ ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
 temp_set = [0,0,0,0]
 
-rm_sets = [0,0,0,False]
-rm_save = [0,0,0,False]
+rm_sets = [0,0,0,0,False]
+rm_save = [0,0,0,0,False]
 
 task = ["grabar", False]
 flag_database = False
@@ -501,16 +501,18 @@ def autoclave_functions(dato):
         rm_sets[0] = int(dato['rm_periodo'])
         rm_sets[1] = int(dato['rm_duracion'])
         rm_sets[2] = int(dato['rm_ciclo'])
-        rm_sets[3] = dato['rm_enable']
+        rm_sets[3] = float(dato['rm_flujo'])
+        rm_sets[4] = dato['rm_enable']
 
         rm_save = rm_sets
 
     except:
         rm_sets[0] = 22
         rm_sets[1] = 11
-    	rm_sets[2] = "no_llego"
-    	rm_sets[3] = "no_llego"
-        rm_save = [69,69,69,False]
+        rm_sets[2] = 11
+    	rm_sets[3] = 11
+    	rm_sets[4] = "no_llego"
+        rm_save = [69,69,69,69,False]
 
         logging.info("no se pudo evaluar")
     #se transmiten los datos de remontaje por communication, al canal ZMQ

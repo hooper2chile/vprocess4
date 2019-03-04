@@ -4,10 +4,10 @@
     font-family: verdana;
     background: #54b5db;
     width: 200px;
-    height: 100px;
+    height: 75px;
     padding: 10px;
     border: 2px solid #000;
-    margin-top: 50px;
+    margin-top: 10px;
     margin-bottom: 15px;
     margin-right: 5px;
     text-align: left;
@@ -23,7 +23,7 @@
   font-family: verdana;
   width: 300px;
   height: 450px;
-  margin-top: -150px;
+  margin-top: -110px;
   margin-right: 40px;
   margin-bottom: 130px;
   text-align: center;
@@ -37,10 +37,10 @@
     font-family: verdana;
     background: #54b5db;
     width: 200px;
-    height: 100px;
+    height: 75px;
     padding: 10px;
     border: 2px solid #000;
-    margin-top: -440px;
+    margin-top: -480px;
     margin-right: -50px;
     text-align: left;
     margin-bottom: 190px;
@@ -53,10 +53,27 @@
     font-family: verdana;
     background: #54b5db;/*YellowGreen;#004579;*/
     width: 200px;
-    height: 100px;
+    height: 75px;
     padding: 10px;
     border: 2px solid #000;
     margin-top: -180px;
+    margin-right: -50px;
+    text-align: left;
+    margin-bottom: 12px;
+    margin-left: 80px;
+    border-radius: 20px;
+}
+
+
+.caja5 {
+    font-size: 16px;
+    font-family: verdana;
+    background: #54b5db;/*YellowGreen;#004579;*/
+    width: 200px;
+    height: 75px;
+    padding: 10px;
+    border: 2px solid #000;
+    margin-top: 10px;
     margin-right: -50px;
     text-align: left;
     margin-bottom: 142px;

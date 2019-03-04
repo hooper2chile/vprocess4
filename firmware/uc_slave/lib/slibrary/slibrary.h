@@ -18,13 +18,13 @@
 #include "Arduino.h"
 #include <Wire.h>
 
-/*
+
 #include "rgb_lcd.h"
 rgb_lcd lcd;
 const int colorR = 255;
 const int colorG = 0;
 const int colorB = 0;
-*/
+
 
 #define TIME_T    20  //TIME_T [us]
 
@@ -89,61 +89,10 @@ void clean_strings() {
   mix_var    = "";  ph_set   = "";  feed_set   = "";  temp_set = "";
   unload_set = "";  mix_set  = "";  message    = "";
 }
-//message format write values: wpha140feed100unload100mix1500temp100rst111111dir111111
-//wphb040feed010unload010mix1500temp010rst000000dir111111
 
-//Esquema I2C Concha y Toro:
-//wphb015(-7) feed100unload100 mix1500(-7) temp150rst000 000(-3) dir111111(-9)
-//feed100unload100temp150rst000 (29) => + "\n" = 30 bytes!
 int validate_write() {
 
-  if (
-    message[0] == 'w'                     &&
-
-    message.substring(1, 3)   == "ph"     &&
-    message.substring(7, 11)  == "feed"   &&
-    message.substring(14, 20) == "unload" &&
-    message.substring(23, 26) == "mix"    &&
-    message.substring(30, 34) == "temp"   &&
-    message.substring(37, 40) == "rst"    &&
-    message.substring(46, 49) == "dir"    &&
-
-    //ph number
-    ( message[3] == 'a' || message[3] == 'b'         ) &&
-    ( message.substring(4, 7).toFloat() <= SPEED_MAX ) &&
-
-
-    //feed number
-    ( message.substring(11, 14).toInt() >= 0   ) &&
-    ( message.substring(11, 14).toInt() <= SPEED_MAX ) &&
-
-    //unload number
-    ( message.substring(20, 23).toInt() >= 0   ) &&
-    ( message.substring(20, 23).toInt() <= SPEED_MAX ) &&
-
-    //mix number
-    ( message.substring(26, 30).toInt() >= 0   ) &&
-    ( message.substring(26, 30).toInt() <= 1500) &&
-
-    //temp number
-    ( message.substring(34, 37).toInt() >= 0   ) &&
-    ( message.substring(34, 37).toInt() <= SPEED_MAX ) &&
-
-    //rst bits
-    ( message[40] == iINT(1) || message[40] == iINT(0) ) &&
-    ( message[41] == iINT(1) || message[41] == iINT(0) ) &&
-    ( message[42] == iINT(1) || message[42] == iINT(0) ) &&
-    ( message[43] == iINT(1) || message[43] == iINT(0) ) &&
-    ( message[44] == iINT(1) || message[44] == iINT(0) ) &&
-    ( message[45] == iINT(1) || message[45] == iINT(0) ) &&
-
-    //dir bits
-    ( message[49] == iINT(1) || message[49] == iINT(0) ) &&
-    ( message[50] == iINT(1) || message[50] == iINT(0) ) &&
-    ( message[51] == iINT(1) || message[51] == iINT(0) ) &&
-    ( message[52] == iINT(1) || message[52] == iINT(0) ) &&
-    ( message[53] == iINT(1) || message[53] == iINT(0) ) &&
-    ( message[54] == iINT(1) || message[54] == iINT(0) ))
+  if ( message[0] == 'w' )
   {
     //Serial.println("GOOD");
     return 1;
@@ -155,13 +104,17 @@ int validate_write() {
   }
 }
 
-/*
-void viewer_message_slave () {
-  lcd.setCursor(10, 2);
-  // print the number of seconds since reset:
-  lcd.print(millis()/1000);
+//wf100u100t150r111d111
+//p0031d0002c02e0f0.4
+void viewer_message_slave (String command_lcd) {
+    lcd.setCursor(0, 0);
+    lcd.print(command_lcd.substring(0,9));
+    lcd.setCursor(0, 1);
+    lcd.print(command_lcd.substring(9,21));
+    
+  return;
 }
-*/
+
 
 
 //HAY QUE REHACER crumble para el nuevo esquema I2C
@@ -188,11 +141,9 @@ void crumble() {  //se puede alivianar usando .toFloat() directamente despues de
 
   //setting rst
   rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
-  rst4 = INT(message[43]);  rst5 = INT(message[44]);  rst6 = INT(message[45]);
-
   //setting dir
   dir1 = INT(message[49]);  dir2 = INT(message[50]);  dir3 = INT(message[51]);
-  dir4 = INT(message[52]);  dir5 = INT(message[53]);  dir6 = INT(message[54]);
+
 
   return;
 }

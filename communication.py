@@ -208,13 +208,15 @@ def cook_remontaje(rm_sets):
     rm_sets[0] = int(rm_sets[0])  #periodo
     rm_sets[1] = int(rm_sets[1])  #rm_duracion
     rm_sets[2] = int(rm_sets[2])  #rm_ciclo
-    rm_sets[3] = rm_sets[3]  #rm_enable
+    rm_sets[3] = float(rm_sets[3])  #rm_flujo
+    rm_sets[4] = rm_sets[4]  #rm_enable
 
     command = None
 
     periodo = 120
     duracion = 30
     ciclo = 1
+    flujo = 2
     enable = 0
 
     try:
@@ -223,7 +225,6 @@ def cook_remontaje(rm_sets):
             rm_sets[0] = T_MAX
         elif rm_sets[0] <= T_MIN:
             rm_sets[0] = T_MIN
-
         #str de periodo
         if rm_sets[0] < 10 and rm_sets[0] >= 0:
             rm_sets[0] = '000' + str(rm_sets[0])
@@ -232,6 +233,8 @@ def cook_remontaje(rm_sets):
         elif rm_sets[0] < 1000 and rm_sets[0] > 0:
             rm_sets[0] = '0' + str(rm_sets[0])
         periodo = str(rm_sets[0])
+
+
 
         #limites de duracion
         if rm_sets[1] >= BOMBA_REMONTAJE_T_MAX:
@@ -248,36 +251,40 @@ def cook_remontaje(rm_sets):
             rm_sets[1] = '0' + str[rm_sets[1]]
         duracion = str(rm_sets[1])
 
-        #limites de ciclo
-        if rm_sets[1] >= CICLO_MAX:
-            rm_sets[1] = CICLO_MAX
-        elif rm_sets[1] < CICLO_MIN:
-            rm_sets[1] = CICLO_MIN
 
+
+        #limites de ciclo
+        if rm_sets[2] >= CICLO_MAX:
+            rm_sets[2] = CICLO_MAX
+        elif rm_sets[2] < CICLO_MIN:
+            rm_sets[2] = CICLO_MIN
         #str de ciclo
         if rm_sets[2] < 10 and rm_sets[2] >= 0:
             rm_sets[2] = '0' + str(rm_sets[2])
         ciclo = str(rm_sets[2])
 
 
-        #ajustando flag rm_enable (rm_sets[3])
-        if rm_sets[3] is True:
-            rm_sets[3] = 1
-        else:
+
+        #limites de flujo (ver escala flujemetro manual) rm_sets[3]
+        if rm_sets[3] < 0:
             rm_sets[3] = 0
+        elif rm_sets[3] >= 3:
+            rm_sets[3] = 3
+        #str de flujo
+        flujo = str(rm_sets[3])
+
+
+        #ajustando flag rm_enable (rm_sets[3])
+        if rm_sets[4] is True:
+            rm_sets[4] = 1
+        else:
+            rm_sets[4] = 0
         #str flag rm_enable
-        enable = str(rm_sets[3])
-
-
-        time = 12
-        temp = 110
-        flag_time = 1
-        flag_temp = 1
+        enable = str(rm_sets[4])
 
 
         #se construye el string de autoclavado
-        command  = 'a' + str(time) + 't' + str(temp) + 'f' + str(flag_time) + str(flag_temp) + 'e'
-        #command = 'p' + periodo + 'd' + duracion + 'c' + ciclo + 'e' + enable + 'e'
+        command = 'p' + periodo + 'd' + duracion + 'c' + ciclo + 'e' + enable + 'f' + flujo + '\n'
         published_setpoint(command)
 
         #se respalda el comando
@@ -312,6 +319,14 @@ def cook_setpoint(set_data):
     string_rst = str(set_data[5]) + str(set_data[6]) + str(set_data[7]) + str(set_data[8]) + str(set_data[9]) + str(set_data[7])
     string_dir = str(set_data[10])+ str(set_data[11])+ str(set_data[12]) + '111'
 
+
+######### para vprocess4 #####################################################
+                #       alimentar  +     ¿?           +  temperatura
+    string_dir2 = str(set_data[10])+ str(set_data[11])+ str(set_data[12])
+
+                #       alimentar  +   descarga       +  temperatura
+    string_rst2 = str(set_data[5]) + str(set_data[8]) + str(set_data[9])
+######### para vprocess4 #####################################################
 
     global temp_save_set_data
 
@@ -352,8 +367,8 @@ def cook_setpoint(set_data):
     if set_data[1] > SPEED_MAX_MIX:  #cambiar a SPEED_MAX_MIX cuando este listo el protocolo que tambien hay que modificar
         set_data[1] = SPEED_MAX_MIX
 
-    elif set_data[1] < 50:
-        set_data[1] = 50
+    elif set_data[1] < 0:
+        set_data[1] = 0
 
     #pH
     if set_data[2] > PH_MAX:
@@ -432,8 +447,11 @@ def cook_setpoint(set_data):
 
 
 
-    command = 'wph' + string_ph + 'feed' + string_feed + 'unload' + string_unload + 'mix' + string_mix + \
-              'temp' + string_temp + 'rst' + string_rst + 'dir' + string_dir + '\n'
+    #command = 'wph' + string_ph + 'feed' + string_feed + 'unload' + string_unload + 'mix' + string_mix + \
+    #          'temp' + string_temp + 'rst' + string_rst + 'dir' + string_dir + '\n'
+
+    #vprocess4
+    command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'd' + string_dir2 + '\n'
 
     logging.info('\n' + command + '\n')
 
@@ -450,7 +468,6 @@ def cook_setpoint(set_data):
         #logging.info("no se pudo guardar el command en el archivo de texto")
 
     return True
-
 
 
 

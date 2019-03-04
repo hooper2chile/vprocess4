@@ -18,7 +18,7 @@ void setup() {
   //                                           -------  -------
   ads1.setGain(GAIN_ONE);      // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
   //ads2.setGain(GAIN_ONE);
-  //ads.setGain(GAIN_TWO);    // 2x gain   +/- 2.048V  1 bit = 1mV      0.0625mV
+  //ads.setGain(GAIN_TWO);     // 2x gain   +/- 2.048V  1 bit = 1mV      0.0625mV
 
 
   DDRB = DDRB | (1<<PB0) | (1<<PB5);
@@ -40,18 +40,18 @@ void loop() {
               case 'r':
                 hamilton_sensors();
                 daqmx();
-                control_temp();
+                //control_temp();
                 //control_temp_pid();
                 broadcast_setpoint(0);
                 break;
 
               case 'w':
-                write_crumble();
-                control_temp();
+                //write_crumble();
+                //control_temp();
                 broadcast_setpoint(1);
-                tx_reply();
+                //tx_reply();
                 //setpoint();
-		            //daqmx();
+		            daqmx();
                 break;
 
               case 'c':
@@ -62,7 +62,7 @@ void loop() {
                 actuador_umbral();
                 break;
 
-              case 'a': //autoclave set
+              case 'p': //autoclave set
                 remontaje_setpoints();
                 break;
 
