@@ -215,17 +215,17 @@ void hamilton_sensors() {
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
 
-  if (Itemp1 >= 3.0 && Itemp1 <= 25.0) {  //3mA y 35mA
-    //Update measures
+  if (Itemp1 >= 3.0 && Itemp1 <= 25.0)   //3mA y 35mA
      Temp1 = m0 * Itemp1 + n0;
+  else Temp1 = 0;
+
+
+  if (Itemp2 >= 3.0 && Itemp2 <= 25.0)   //3mA y 35mA
      Temp2 = m2 * Itemp2 + n2;
-     Temp_ = 0.5 * ( Temp1 + Temp2 );
-  }
-  else {
-     Temp1 = 0;
-     Temp2 = 0;
-     Temp_ = 0;
-  }
+  else Temp2 = 0;
+
+  //Update measures
+  Temp_ = 0.5 * ( Temp1 + Temp2 );
   return;
 }
 
@@ -296,27 +296,8 @@ void control_temp() {
 }
 
 
-//function for transform numbers to string format of message
-void format_message(int var) {
-  //reset to svar string
-  svar = "";
-  if (var < 10)
-    svar = "00"+ String(var);
-  else if (var < 100)
-    svar = "0" + String(var);
-  else
-    svar = String(var);
-
-  return;
-}
-
-
 //Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
-  //se prepara el setpoint para el renvio hacia uc slave.
-  format_message(u_temp);
-  uset_temp = svar; //string variable for control: uset_temp
-
   switch (select) {
     case 0: //only re-tx and update pid uset's.
       new_write0 = "";
@@ -335,6 +316,7 @@ void broadcast_setpoint(uint8_t select) {
   }
   return;
 }
+
 
 void remontaje_setpoints(){
 

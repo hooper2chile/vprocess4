@@ -60,7 +60,18 @@ void loop() {
       Serial.println(message);
       viewer_message_slave(message);
       //se "desmenuza" el command de setpoints
-      //crumble();
+      crumble();
+
+      //###################################################################################
+      //Codigo para bomba remontaje
+
+      if (pump_enable) speed_motor(PWM1, 150, IN1, IN2);
+      else speed_motor(PWM1, 0, IN1, IN2);
+
+
+
+      //###################################################################################
+
 
       //###################################################################################
       //Codigo para motores DC.-

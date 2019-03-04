@@ -64,6 +64,7 @@ void loop() {
 
               case 'p': //autoclave set
                 remontaje_setpoints();
+                broadcast_setpoint(1);
                 break;
 
 
