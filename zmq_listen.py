@@ -2,9 +2,7 @@
 #--*- coding: utf-8 -*--
 
 import zmq, time, os
-
-tau_zmq_connect     = 0.5
-
+tau_zmq_connect     = 0.1
 
 #escucha los zmq emitidos por myserial.py
 port_sub = "5557"
@@ -15,7 +13,7 @@ topicfilter = "w"
 socket_sub.setsockopt(zmq.SUBSCRIBE, topicfilter)
 time.sleep(tau_zmq_connect)
 
-string = ['','','','']
+string = ['','','','','','','','','','','','','','','','']
 
 '''
   Byte0 = Temp_;
@@ -25,7 +23,6 @@ string = ['','','','']
   Byte4 = Iod;
   Byte5 = Itemp1;
   Byte6 = Itemp2;
-
   Byte7 = oD; 
 '''
 
@@ -33,14 +30,8 @@ os.system("clear")
 while True:
    
     string = socket_sub.recv().split()
-    os.system("clear")
-    print "\n   Temp_,  Temp1,   Temp2,    Iph,   Iod,   Itemp1,   Itemp2,  oD"
-    print string[1:9]
+    #os.system("clear")
+    print "     ,Temp_,  Temp1,   Temp2,    Iph,   Iod,   Itemp1,   Itemp2,  Flujo [L/min] \n"
+    print string
     print "\n"
-    print "Itemp1     Itemp2"  
-    print string[6] + "       " + string[7] + "\n\n"
-
-    print "Temp1      Temp2      Temp_"
-    print string[1] + "       " + string[2] + "     " + string[3] + "\n"
-
-    time.sleep(0.25)
+    time.sleep(0.1)

@@ -13,9 +13,9 @@ flag_database_local = False
 
 def update_db(real_data, connector, c, first_time, BACKUP):
     #CREACION DE TABLAS PH, OD, TEMP. CADA ITEM ES UNA COLUMNA
-    c.execute('CREATE TABLE IF NOT EXISTS   PH(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
-    c.execute('CREATE TABLE IF NOT EXISTS   OD(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
-    c.execute('CREATE TABLE IF NOT EXISTS TEMP(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS TEMP1(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS TEMP2(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS TEMP_(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
 
     #se guardan las tablas agregados en la db si no existian
     connector.commit()
@@ -23,9 +23,9 @@ def update_db(real_data, connector, c, first_time, BACKUP):
     #INSERCION DE LOS DATOS MEDIDOS
     #ph=: real_data[1];  OD=: real_data[2], Temp=: real_data[3]
     try:
-        c.execute("INSERT INTO   PH VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[1]))
-        c.execute("INSERT INTO   OD VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[2]))
-        c.execute("INSERT INTO TEMP VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[3]))
+        c.execute("INSERT INTO TEMP1 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[1]))
+        c.execute("INSERT INTO TEMP2 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[2]))
+        c.execute("INSERT INTO TEMP_ VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[3]))
 
     except:
         #print "no se pudo insertar dato en db"
@@ -43,9 +43,9 @@ def update_db(real_data, connector, c, first_time, BACKUP):
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from ph;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_ph.csv' )
-            os.system('sqlite3 -header -csv %s "select * from od;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_od.csv' )
-            os.system('sqlite3 -header -csv %s "select * from temp;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp.csv' )
+            os.system('sqlite3 -header -csv %s "select * from ph;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp1.csv' )
+            os.system('sqlite3 -header -csv %s "select * from od;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp2.csv' )
+            os.system('sqlite3 -header -csv %s "select * from temp;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_Temp_.csv' )
 
             logging.info("\n Backup FULL REALIZADO \n")
 

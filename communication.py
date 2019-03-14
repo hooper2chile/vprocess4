@@ -205,11 +205,11 @@ def actuador(var,u_set):
 ###############################################################################
 #Se reciben localmente los datos de rm_sets desde app.py
 def cook_remontaje(rm_sets):
-    rm_sets[0] = int(rm_sets[0])  #periodo
-    rm_sets[1] = int(rm_sets[1])  #rm_duracion
-    rm_sets[2] = int(rm_sets[2])  #rm_ciclo
+    rm_sets[0] = int(rm_sets[0])    #periodo
+    rm_sets[1] = int(rm_sets[1])    #rm_duracion
+    rm_sets[2] = int(rm_sets[2])    #rm_ciclo
     rm_sets[3] = float(rm_sets[3])  #rm_flujo
-    rm_sets[4] = rm_sets[4]  #rm_enable
+    rm_sets[4] = rm_sets[4]         #rm_enable
 
     command = None
 

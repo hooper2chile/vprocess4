@@ -569,7 +569,7 @@ def background_thread1():
             pass
             #logging.info("\n no se actualizaron las mediciones")
 
-        socketio.sleep(0.75)
+        socketio.sleep(0.1)
 
 
 if __name__ == '__main__':

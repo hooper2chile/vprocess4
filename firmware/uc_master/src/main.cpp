@@ -6,7 +6,6 @@
 #include <avr/wdt.h>
 #include "mlibrary.h"
 
-
 void setup() {
   wdt_disable();
 
@@ -20,7 +19,6 @@ void setup() {
   //ads2.setGain(GAIN_ONE);
   //ads.setGain(GAIN_TWO);     // 2x gain   +/- 2.048V  1 bit = 1mV      0.0625mV
 
-
   DDRB = DDRB | (1<<PB0) | (1<<PB5);
   PORTB = (0<<PB0) | (1<<PB5);
 
@@ -28,10 +26,7 @@ void setup() {
   wdt_enable(WDTO_8S);
 }
 
-
 void loop() {
-  //viewer_message_master();
-
   if ( stringComplete  ) {
       if ( validate() ) {
           PORTB = 1<<PB0;
@@ -40,18 +35,13 @@ void loop() {
               case 'r':
                 hamilton_sensors();
                 daqmx();
-                //control_temp();
-                //control_temp_pid();
                 broadcast_setpoint(0);
                 break;
 
               case 'w':
-                //write_crumble();
-                //control_temp();
+                //Serial.println("w: " + message); //debug
+                daqmx();
                 broadcast_setpoint(1);
-                //tx_reply();
-                //setpoint();
-		            daqmx();
                 break;
 
               case 'c':
@@ -62,11 +52,11 @@ void loop() {
                 actuador_umbral();
                 break;
 
-              case 'p': //autoclave set
-                remontaje_setpoints();
+              case 'p': //remontaje set
+                //Serial.println("p :" + message); //debug
+                daqmx();
                 broadcast_setpoint(1);
                 break;
-
 
               default:
                 break;
@@ -75,7 +65,7 @@ void loop() {
           PORTB = 0<<PB0;
       }
       else {
-        Serial.println("bad validate");
+        Serial.println("bad validate:" + message);
       }
 
     clean_strings();

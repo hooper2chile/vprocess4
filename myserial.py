@@ -8,14 +8,14 @@ logging.basicConfig(filename='/home/pi/vprocess4/log/myserial.log', level=loggin
 #5557: for publisher data
 
 tau_zmq_connect     = 0.5   # 0.3=300 [ms]
-tau_zmq_while_write = 0.1   # 0.5=500 [ms]
-tau_zmq_while_read  = 0.5   # 0.5=500 [ms]
-tau_serial          = 0.01   #0.02  #  0.01=10 [ms]
+tau_zmq_while_write = 0.25   # 0.5=500 [ms]
+tau_zmq_while_read  = 0.25   # 0.5=500 [ms]
+tau_serial          = 0.08   #0.02  #  0.01=10 [ms]
 
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
 def listen(q1):
-    #####Listen part
+    #####Listen part: escribe en el uc las acciones: w, p, a.
     port_sub = "5556"
     context_sub = zmq.Context()
     socket_sub = context_sub.socket(zmq.SUB)
@@ -39,7 +39,7 @@ def listen(q1):
 
 
 def speak(q1,q2):
-    #####Publisher part
+    #####Publisher part: publica las lecturas obtenidas por serial.
     port_pub = "5557"
     context_pub = zmq.Context()
     socket_pub = context_pub.socket(zmq.PUB)
@@ -61,7 +61,7 @@ def speak(q1,q2):
 
 
 def rs232(q1,q2):
-    save_setpoint = 'wph00.0feed000unload000mix0000temp000rst111111dir111111'
+    save_setpoint = 'wf000u000t000r111d111'
     flag = False
     while not flag:
         try:
@@ -74,18 +74,18 @@ def rs232(q1,q2):
             time.sleep(1)
 
             if flag:
-                #commanda start:  wph00.0feed000unload000mix000temp000rst111111dir111111
-                ser.write('wph00.0feed000unload000mix0000temp000rst111111dir111111'+'\n')
+                #commanda start:  wf000u000t000r111d111
+                ser.write('wf000u000t000r111d111'+'\n')
                 result = ser.readline().split()
                 #print result
-                logging.info(result)
+                logging.info("last command: myserial_w_reply_uc: %s ",  result)
 
             elif not flag:
                 logging.info("Conexion Serial Re-establecida")
                 logging.info("Reenviando ultimo SETPOINT %s", save_setpoint)
-                ser.write(save_setpoint+'\n')
+                ser.write(save_setpoint + '\n')
                 result = ser.readline().split()
-                logging.info(result)
+                logging.info("not flag last command: myserial_w_reply_uc: %s ", result)
 
             flag = ser.is_open
 
@@ -101,14 +101,16 @@ def rs232(q1,q2):
                         if action == "read":
                             try:
                                 if ser.is_open:
-                                    ser.write('r'+'\n')
+                                    logging.info("myserial_r_action_to_uc: %s ", action)
+                                    ser.write('r' + '\n')
+
                                     SERIAL_DATA = ser.readline()
+                                    logging.info("myserial_r_reply_uc: %s ", SERIAL_DATA)
                                     q2.put(SERIAL_DATA)
 
                                 else:
                                     ser.open()
                             except:
-                                #print "no se pudo leer SERIAL_DATA del uc"
                                 logging.error("no se pudo leer SERIAL_DATA del uc")
                                 ser.close()
                                 flag = False
@@ -116,18 +118,19 @@ def rs232(q1,q2):
                         #Action for write command to serial port
                         else:
                             try:
-                                ser.write(action+'\n')
+                                #escribiendo al uc_master
+                                logging.info("myserial_w_action_to_uc: %s ", action)
+                                ser.write(action + '\n')
+
+                                #leyendo la respuesta del uc_master al comando "action" anterior
                                 result = ser.readline().split()
-                                logging.info(action)
-			        save_setpoint = action
-                                #print result
-                                logging.info(result)
+                                logging.info("myserial_w_reply_uc: %s ", result)
+                                save_setpoint = action
 
                             except:
-                                #print "no se pudo escribir al uc"
                                 logging.info("no se pudo escribir al uc")
-			        save_setpoint = action
-			        logging.info("the last setpoint save")
+                                save_setpoint = action
+                                logging.info("the last setpoint save")
                                 ser.close()
                                 flag = False
 
@@ -154,13 +157,13 @@ def main():
     q1 = Queue()
     q2 = Queue()
 
-    p0 = Process(target=rs232, args=(q1,q2))
+    p0 = Process(target=rs232, args=(q1,q2))  #aca se conjugan los dos de abajo
     p0.start()
 
-    p1 = Process(target=listen, args=(q1,))
+    p1 = Process(target=listen, args=(q1,))   #aca se escucha zmq y se escribe en el serial
     p1.start()
 
-    p2 = Process(target=speak, args=(q1, q2))
+    p2 = Process(target=speak, args=(q1, q2)) #aca se lee el serial y se publica por zmq
     p2.start()
 
 

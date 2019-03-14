@@ -15,9 +15,7 @@ Adafruit_ADS1115 ads1(0x49);
 #define PGA2 0.0625F
 #define alpha 0.2F
 
-#define VOLTAGE_REF 5.0F     // before: 5  // Reference voltage for analog read
 #define RS 10.0F             // Shunt resistor value (in ohms)
-#define mA 1000.0F              // for sensors 4-20mA
 #define K 1.0 / (10.0 * RS )
 
 #define Gap_temp0 0.5
@@ -26,25 +24,14 @@ Adafruit_ADS1115 ads1(0x49);
 #define Gap_temp3 3.0
 #define Gap_temp4 5.0
 
-
-String  message     = "";  String  new_write   = "";  String  new_write0   = "";
+String message     = "";
+String new_write   = "";
+String new_write0  = "";
+String new_write_w = "wf000u000t009r111d111";
+String new_write_p = "p1440d0001c03e0f0.2";
+String new_write_t = "0.69";
 
 boolean stringComplete = false;  // whether the string is complete
-
-String  ph_var      = "";   String  ph_set      = "";
-String  feed_var    = "";   String  feed_set    = "";
-String  unload_var  = "";   String  unload_set  = "";
-String  mix_var     = "";   String  mix_set     = "";
-String  temp_var    = "";   String  temp_set    = "";
-
-//Re-formatting
-String  ph_select = "";
-String  uset_temp = "";
-String  uset_ph   = "";
-String  svar      = "";
-
-float   myphset   = 0;
-float   mytempset = 0;
 
 uint8_t myfeed    = 0;
 uint8_t myunload  = 0;
@@ -52,16 +39,9 @@ uint16_t mymix    = 0;
 
 //RESET SETUP
 char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
-char rst4 = 1;  char rst5 = 1;  char rst6 = 1;
 
 //DIRECTION SETUP
 char dir1 = 1;  char dir2 = 1;  char dir3 = 1;
-char dir4 = 1;  char dir5 = 1;  char dir6 = 1;
-
-
-float umbral_a = SPEED_MAX;
-float umbral_b = SPEED_MAX;
-float umbral_temp = SPEED_MAX;
 
 // for incoming serial data
 float Byte0 = 0;  char cByte0[15] = "";  //por que no a 16?
@@ -95,6 +75,8 @@ float Iod = 0;
 float Itemp1 = 0;
 float Itemp2 = 0;
 
+float umbral_a, umbral_b, umbral_temp;
+
 //   DEFAULT:
 float pH    = 0;//m0*Iph    + n0;      //   ph = 0.75*IpH   - 3.5
 float oD    = 0;//m1*Iod    + n1;
@@ -103,13 +85,7 @@ float Temp1 = m0*Itemp1 + n0;      // Temp = 5.31*Itemp - 42.95;
 float Temp2 = m2*Itemp2 + n2;
 float Temp_ = 0.5 * ( Temp1 + Temp2 );
 
-
-//variable for control
-float u_temp = 0;
-float u_ph = 0;
-float dTemp= 0;
-float dpH  = 0;
-
+float flujo = 0.0;
 
 //for hardware serial
 void serialEvent() {
@@ -126,17 +102,6 @@ void i2c_send_command(String command, uint8_t slave) {   //slave = 2: slave trad
   Wire.beginTransmission(slave); // transmit to device #slave: [2,3]
   Wire.write(command.c_str());   // sends value byte
   Wire.endTransmission();        // stop transmitting
-}
-
-//desmenuza el string de comandos
-void write_crumble() {
-//falta definir si se hara el control de temp aca, lo mismo el remontaje.
-  //mytempset = message.substring(34, 37).toFloat();
-  //mymix     = message.substring(26, 30).toInt();
-  //setting rst
-  //rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
-
-  return;
 }
 
 //c2+00.75-03.50e // c: (0=>temp1) (1=>od) (2=>temp2)
@@ -170,7 +135,6 @@ void sensor_calibrate(){
   return;
 }
 
-
 //modifica los umbrales de cualquiera de los dos actuadores
 void actuador_umbral(){
   //setting threshold ph: u1a160b141e
@@ -189,11 +153,9 @@ void actuador_umbral(){
       umbral_b = SPEED_MIN;
     else if ( umbral_b >= SPEED_MAX )
       umbral_b = SPEED_MAX;
-
   }
   //setting threshold temp: u2t011e
   else if ( message[1] == '2' ) {
-
     umbral_temp = 0;
     umbral_temp = message.substring(3,6).toFloat();
 
@@ -204,8 +166,8 @@ void actuador_umbral(){
     else
       umbral_temp = umbral_temp;
   }
-
-  Serial.println( String(umbral_a) + '_' + String(umbral_b) + '_' + String(umbral_temp) );
+  Serial.println( "Umbral_Temp: " + String(umbral_temp) );
+  //Serial.println( String(umbral_a) + '_' + String(umbral_b) + '_' + String(umbral_temp) );
   return;
 }
 
@@ -241,6 +203,7 @@ void tx_reply(){
   Serial.print(cByte6);  Serial.print("\t");
   Serial.print(cByte7);  Serial.print("\t");
 
+  //Serial.print(message);
   Serial.print("\n");
 }
 
@@ -253,7 +216,7 @@ void daqmx() {
   Byte4 = Iod;
   Byte5 = Itemp1;
   Byte6 = Itemp2;
-  Byte7 = oD;
+  Byte7 = flujo;
 
   dtostrf(Byte0, 7, 2, cByte0);
   dtostrf(Byte1, 7, 2, cByte1);
@@ -268,47 +231,37 @@ void daqmx() {
   return;
 }
 
-void control_temp() {
-  //touch my delta temp
-  dTemp = mytempset - Temp1;
-
-  if ( dTemp > 0.0 ) {
-    if ( dTemp <= Gap_temp1 )
-      u_temp = 0.20*umbral_temp;
-
-    else if ( dTemp <= Gap_temp2 )
-      u_temp = 0.35*umbral_temp; //50%
-
-    else if ( dTemp <= Gap_temp3 )
-      u_temp = 0.50*umbral_temp; //75%
-
-    else if ( dTemp <= Gap_temp4 )
-      u_temp = 0.75*umbral_temp; //100%
-
-    else if ( dTemp > Gap_temp4 )
-      u_temp = umbral_temp;
-  }
-  //dTemp < 0 => speed min in actuador temp
-  else if ( dTemp <= 0.0 )
-    u_temp = SPEED_MIN;
-
-  return;
-}
-
 
 //Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
   switch (select) {
+
     case 0: //only re-tx and update pid uset's.
-      new_write0 = "";
-      new_write0 = new_write;
-      i2c_send_command(new_write0, 2);
+      if( new_write[0] == 'w' ) {
+        new_write_w = "";
+        new_write_w = new_write;
+      }
+      else if( new_write[0] == 'p' ) {
+        new_write_p = "";
+        new_write_p = new_write;
+      }
+
+      //se actualiza medicion de temperatura para enviarla a uc_slave
+      new_write_t = "";
+      new_write_t = 't' + String(Temp_) + "\n";
+
+      i2c_send_command(new_write_w, 2); //va hacia uc_slave
+      delay(30);
+      i2c_send_command(new_write_p, 2); //va hacia uc_slave
+      delay(30);
+      i2c_send_command(new_write_t, 2); //va hacia uc_slave
+      delay(30);
       break;
 
     case 1: //update command and re-tx.
       new_write  = "";
       new_write  = message + "\n";
-      i2c_send_command(new_write, 2);
+      //i2c_send_command(new_write, 2);
       break;
 
     default:
@@ -317,59 +270,48 @@ void broadcast_setpoint(uint8_t select) {
   return;
 }
 
-
-void remontaje_setpoints(){
-
-  Serial.println(message);
-  return;
-}
-
-
 //Esquema I2C Concha y Toro:
-//TRAMA:	wf000u000t009r000d000  //21 caracteres: 22 sumando el '\n'
+//TRAMA-Proceso  : wf000u000t009r000d000  //21 caracteres: 22 sumando el '\n'
+//TRAMA-Remontaje: p1440d0001c03e1f0.2    //19 caracteres: 20 sumando el '\n'
 void clean_strings() {
   //clean strings
   stringComplete = false;
   message   = "";
-  uset_temp = "";
-  uset_ph   = "";
-  ph_select ="";
 }
 
-
+// Validate SETPOINT
 int validate() {
-//message format write values: wf100u100t150r111d111
-    // Validate SETPOINT
+    //message format write values: wf100u100t150r111d111
     if ( message[0] == 'w' )
+            return 1;
 
-        { return 1; }
+    // Validate CALIBRATE
+    else if ( message[0]  == 'c' &&
+             (message[2]  == '+' || message[2] == '-') &&
+             (message[8]  == '+' || message[8] == '-') &&
+              message[14] == 'e' &&
+              message.substring(3,8 ).toFloat() < 100 &&
+              message.substring(9,14).toFloat() < 100
+            )
+            return 1;
 
-      // Validate CALIBRATE
-      else if ( message[0]  == 'c' &&
-               (message[2]  == '+' || message[2] == '-') &&
-               (message[8]  == '+' || message[8] == '-') &&
-                message[14] == 'e' &&
-                message.substring(3,8 ).toFloat() < 100 &&
-                message.substring(9,14).toFloat() < 100
-              )
+    //Validete umbral actuador temp: u2t003e
+    else if ( message[0] == 'u' && message[1] == '2' &&
+              message[2] == 't' && message[6] == 'e'
+            )
           return 1;
 
-      //Validete umbral actuador temp: u2t003e
-      else if ( message[0] == 'u' && message[1] == '2' &&
-                message[2] == 't' && message[6] == 'e'
-              )
+    // Validate actions for remontaje - ex autoclave
+    else if ( message[0] == 'p') {
+        flujo = message.substring(16,19).toFloat();
+        return 1;
+    }
+
+   // Validate READING
+    else if ( message[0] == 'r' )
           return 1;
 
-      // Validate actions for remontaje - ex autoclave
-      else if (message[0]  == 'p')
-          return 1;
-
-
-      // Validate READING
-      else if ( message[0] == 'r' )
-          return 1;
-
-      // NOT VALIDATE
-      else
+    // NOT VALIDATE
+    else
           return 0;
 }

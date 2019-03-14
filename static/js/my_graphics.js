@@ -33,16 +33,16 @@ function my_chart(){
 
           //mediciones de ph, OD, Temp. Socket regenera el grafico con cada llamada!!!
           socket.on('Medidas', function(msg) {
-              $('#med1_g').text('TEMP1: ' + msg.data[0] + '[C]' ).html();
-              $('#med2_g').text('TEMP2: ' + msg.data[1] + '[C]' ).html();
-              $('#med3_g').text('TEMP_: ' + msg.data[2] + '[C]' ).html();
+              $('#med1_g').text('TEMP_: ' + msg.data[0] + '[C]' ).html();
+              $('#med2_g').text('TEMP1: ' + msg.data[1] + '[C]' ).html();
+              $('#med3_g').text('TEMP2: ' + msg.data[2] + '[C]' ).html();
 
               //muestra el setpoint de ph en el grafico real time.
               $('#ph_g').text('Temperatura Set: ' + msg.set[2]         ).html();
 
               //grafico ph
               set_ph.shift();
-              set_ph.push( parseFloat( [msg.set[2] ] ) )
+              set_ph.push( parseFloat( [msg.set[4] ] ) )
 
               med_ph.shift();
               med_ph.push( parseFloat( [ msg.data[0] ] ) );
@@ -54,7 +54,7 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'TEMP1 Bioreactor',
+                    label: 'TEMP_',//'TEMP1 Bioreactor',
                     data: med_ph,
                     fill: false,
                     lineTension: 0.5,
@@ -114,7 +114,7 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'TEMP2 Bioreactor',
+                    label: 'TEMP1 Bioreactor',
                     data: med_od,
                     fill: false,
                     lineTension: 0.5,
@@ -164,17 +164,17 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'Temperatura [C] Biorreactor',
-                    data: med_temp,
+                    label: 'TEMP2 Biorreactor',
+                    data: med_temp, //med_temp
                     fill: false,
                     lineTension: 0.5,
-                    backgroundColor: "rgba(200,0,0,0.4)",
-                    borderColor: "red",
+                    backgroundColor: "green",
+                    borderColor: "green",
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor: "red",
+                    pointBorderColor: "green",
                     pointBackgroundColor: "#fff",
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
