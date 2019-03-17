@@ -9,7 +9,6 @@
   * rst5, dir3: mytemp
   * rst6, dir6: rst6 is myph_b, dir2 is for two bombs  dir6 is FREE !
 
-
     write by: Felipe Hooper
     Electronic Engineer
 */
@@ -33,8 +32,9 @@ const int colorB = 0;
 
 #define ON  LOW
 #define OFF HIGH
-#define AGUA_FRIA      10 //D12
-#define AGUA_CALIENTE  11 //D11
+#define REMONTAJE_PIN  4
+#define AGUA_FRIA      10 //D10 = rele 1 (cable rojo)
+#define AGUA_CALIENTE  11 //D11 = rele 2 (cable amarillo)
 #define REMONTAJE_ON   digitalWrite(2,LOW)
 #define REMONTAJE_OFF  digitalWrite(2,HIGH)
 
@@ -66,12 +66,13 @@ String message = "";
 String state = "";
 boolean stringComplete = false;
 
-
+/*
 //Pines bomba remontaje uc_slave
 int PWM1 = 3;
 int IN1  = 2;
 int IN2  = 4;
 //fin pines de bomba remontaje
+*/
 
 //Pines bomba temperatura uc_slave
 int PWM2 = 6;
@@ -100,8 +101,6 @@ void serialEvent() {
     }
   }
 }
-
-
 //wf100u100t150r111d111
 //wf100u100t022r000d000
 //wf100u100t029r111d111
@@ -140,9 +139,9 @@ void control_temp(int rst3) {
     //CASO: necesito calentar por que setpoint es inferior a la medicion
     if ( dTemp >= 0.0 ) {
       delay(10);
-      digitalWrite(AGUA_FRIA, OFF);
+      digitalWrite(AGUA_FRIA, HIGH);
       delay(10);
-      digitalWrite(AGUA_CALIENTE, ON);
+      digitalWrite(AGUA_CALIENTE, LOW);
 
       if ( dTemp <= Gap_temp1 )
         u_temp = 0.20*umbral_temp; //20%
@@ -159,9 +158,9 @@ void control_temp(int rst3) {
     //CASO: necesito enfriar por que medicion es mayor a setpoint
     else if ( dTemp < 0.0 ) {
       delay(10);
-      digitalWrite(AGUA_FRIA, ON);
+      digitalWrite(AGUA_FRIA, LOW);
       delay(10);
-      digitalWrite(AGUA_CALIENTE, OFF);
+      digitalWrite(AGUA_CALIENTE, HIGH);
 
       dTemp2 = (-1)*dTemp;
 

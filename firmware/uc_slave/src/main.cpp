@@ -28,9 +28,16 @@ void setup() {
 
   message.reserve(65);
 
+  //electrovavulas control de temparatura
+  pinMode(AGUA_FRIA, OUTPUT);
+  pinMode(AGUA_CALIENTE, OUTPUT);
+  digitalWrite(AGUA_FRIA, HIGH);
+  digitalWrite(AGUA_CALIENTE, HIGH);
+  //electrovavulas control de temparatura
+
   //bomba remontaje
-  pinMode(2, OUTPUT);
-  digitalWrite(2, HIGH); //inicio apagado de bomba remontaje
+  pinMode(REMONTAJE_PIN, OUTPUT);
+  digitalWrite(REMONTAJE_PIN, HIGH); //inicio apagado de bomba remontaje
   //bomba remontaje
 
   wdt_enable(WDTO_8S);
@@ -44,15 +51,16 @@ void loop() {
 
       //###################################################################################
       //Codigo para bomba remontaje
-      if (pump_enable) digitalWrite(2,LOW);
-      else digitalWrite(2,HIGH);
+      if (pump_enable) digitalWrite(REMONTAJE_PIN, LOW);
+      else digitalWrite(REMONTAJE_PIN, HIGH);
       //###################################################################################
       //###################################################################################
       //Codigo para motor DC temperatura.-
+
+      //sera necesario?
       //###################################################################################
       //nuevo control de temperatura con agua fria y caliente (no PID)
       control_temp(rst3);
-      //speed_motor(PWM2, 200, IN3, IN4);
     }
 
     else {
