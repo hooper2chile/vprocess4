@@ -11,18 +11,13 @@ logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.I
 
 
 TIME_SYNC = 60 #3600 #sync for 3600 [s] = 1 [hr]
-ID = '1A4PjVa_G6g6ZsI560ifHU2UNzvOfJ3bm'
+ID = '1iYqk0kQ2xsG4EbOznnhFL0tHVX6zXkOY'
 
-if(sys.platform=='darwin'):
-    gdrive = './gdrive-osx-x64'
-    DIR1 = '/Users/hooper/Dropbox/BIOCL/vprocess4/config/'
-    DIR2 = '/Users/hooper/Dropbox/BIOCL/vprocess4/csv/'
+time.sleep(15)
 
-else:
-    time.sleep(15)
-    gdrive = '/home/pi/vprocess4/config/./gdrive-linux-rpi'
-    DIR1   = ' ' #'/home/pi/vprocess4/config/'
-    DIR2   = '/home/pi/vprocess4/csv/'
+gdrive = '/home/pi/vprocess4/config/./gdrive-linux-rpi'
+DIR1   = ' ' #'/home/pi/vprocess4/config/'
+DIR2   = '/home/pi/vprocess4/csv/'
 
 
 while True:

@@ -7,6 +7,10 @@ import os, sys, time, logging, communication, reviewDB, tocsv
 
 #logging.basicConfig(filename='/home/pi/vprocess4/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
+#CREDENCIALES PARA PAGINAS WEB
+USER = "biorreactor1cii"
+PASSWD = "biorreactorCII_1_CyT"
+
 DIR="/home/pi/vprocess4/"
 SPEED_MAX = 150 #150 [rpm]
 TEMP_MAX  = 50 #130 [C]
@@ -48,7 +52,7 @@ def login():
     global error
 
     if request.method == 'POST':
-        if request.form['username'] != 'biocl' or request.form['password'] != 'reactor':
+        if request.form['username'] != USER or request.form['password'] != PASSWD:
             error = "Credencial Invalida"
             return render_template("login.html", error=error)
         else:
@@ -66,7 +70,7 @@ def calibrar():
     global error
 
     if request.method == 'POST':
-        if request.form['username'] != 'biocl' or request.form['password'] != 'reactor':
+        if request.form['username'] != USER or request.form['password'] != PASSWD:
             error = "Credencial Invalida"
             return render_template("login.html", error=error)
         else:
@@ -93,7 +97,7 @@ def remontaje():
     global error
 
     if request.method == 'POST':
-        if request.form['username'] != 'biocl' or request.form['password'] != 'reactor':
+        if request.form['username'] != USER or request.form['password'] != PASSWD:
             error = "Credencial Invalida"
             return render_template("login.html", error=error)
         else:

@@ -27,9 +27,9 @@ Adafruit_ADS1115 ads1(0x49);
 String message     = "";
 String new_write   = "";
 String new_write0  = "";
-String new_write_w = "wf000u000t009r111d111";
-String new_write_p = "p1440d0001c03e0f0.2";
-String new_write_t = "0.69";
+String new_write_w = "wf000u000t000r111d111";
+String new_write_p = "p1440d0001c03e0f0.2\n";
+String new_write_t = "20.0";
 
 boolean stringComplete = false;  // whether the string is complete
 
@@ -177,12 +177,12 @@ void hamilton_sensors() {
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
 
-  if (Itemp1 >= 3.0 && Itemp1 <= 25.0)   //3mA y 35mA
+  if (Itemp1 >= 5.5 && Itemp1 <= 12.0)   //5.5mA y 12mA
      Temp1 = m0 * Itemp1 + n0;
   else Temp1 = 0;
 
 
-  if (Itemp2 >= 3.0 && Itemp2 <= 25.0)   //3mA y 35mA
+  if (Itemp2 >= 5.5 && Itemp2 <= 12.0)   //4.4mA y 12mA
      Temp2 = m2 * Itemp2 + n2;
   else Temp2 = 0;
 
@@ -251,11 +251,11 @@ void broadcast_setpoint(uint8_t select) {
       new_write_t = 't' + String(Temp_) + "\n";
 
       i2c_send_command(new_write_w, 2); //va hacia uc_slave
-      delay(30);
+      delay(20);
       i2c_send_command(new_write_p, 2); //va hacia uc_slave
-      delay(30);
+      delay(20);
       i2c_send_command(new_write_t, 2); //va hacia uc_slave
-      delay(30);
+      delay(20);
       break;
 
     case 1: //update command and re-tx.

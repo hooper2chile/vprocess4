@@ -12,7 +12,7 @@ flag_database = "False"
 flag_database_local = False
 
 def update_db(real_data, connector, c, first_time, BACKUP):
-    #CREACION DE TABLAS PH, OD, TEMP. CADA ITEM ES UNA COLUMNA
+    #CREACION DE TABLAS TEMP1, TEMP2, TEMP_ (promedio). CADA ITEM ES UNA COLUMNA
     c.execute('CREATE TABLE IF NOT EXISTS TEMP1(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
     c.execute('CREATE TABLE IF NOT EXISTS TEMP2(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
     c.execute('CREATE TABLE IF NOT EXISTS TEMP_(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
@@ -21,7 +21,7 @@ def update_db(real_data, connector, c, first_time, BACKUP):
     connector.commit()
 
     #INSERCION DE LOS DATOS MEDIDOS
-    #ph=: real_data[1];  OD=: real_data[2], Temp=: real_data[3]
+    #TEMP1=: real_data[1];  TEMP2=: real_data[2], TEMP_=: real_data[3]
     try:
         c.execute("INSERT INTO TEMP1 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[1]))
         c.execute("INSERT INTO TEMP2 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[2]))
@@ -43,11 +43,11 @@ def update_db(real_data, connector, c, first_time, BACKUP):
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from ph;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp1.csv' )
-            os.system('sqlite3 -header -csv %s "select * from od;"   > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp2.csv' )
-            os.system('sqlite3 -header -csv %s "select * from temp;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_Temp_.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP1;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp1.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP2;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp2.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP_;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_Temp_.csv' )
 
-            logging.info("\n Backup FULL REALIZADO \n")
+            logging.info("\n Backup CSV REALIZADO \n")
 
         except:
             logging.info("\n Backup FULL NO REALIZADO, NO REALIZADO \n")
@@ -71,7 +71,6 @@ def main():
     TIME_BCK = 600  #10 min
     connector = sqlite3.connect(':memory:', detect_types = sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
     c = connector.cursor()
-
 
     #Algoritmo de respaldo cada "TIME_BCK [s]"
     BACKUP = False

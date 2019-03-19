@@ -28,6 +28,19 @@ void setup() {
 
   message.reserve(65);
 
+  //pinout setting para puente H motor bomba temperatura
+  pinMode(PWM2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  analogWrite(PWM2, 0);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, HIGH);
+
+  //ventilador
+  pinMode(13, OUTPUT);
+  digitalWrite(13, HIGH);
+  //pinout setting para puente H motor bomba temperatura
+
   //electrovavulas control de temparatura
   pinMode(AGUA_FRIA, OUTPUT);
   pinMode(AGUA_CALIENTE, OUTPUT);

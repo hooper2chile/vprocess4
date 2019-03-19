@@ -21,9 +21,9 @@ const int colorR = 255;
 const int colorG = 0;
 const int colorB = 0;
 
-#define TIME_T    20  //TIME_T [us]
+#define TIME_T    20    //TIME_T [us]
 
-#define SPEED_MAX 150   //MIN_to_us/(STEPS*TIME_MIN)
+#define SPEED_MAX 150.0 //MIN_to_us/(STEPS*TIME_MIN)
 #define SPEED_MIN 1
 #define TEMP_MAX  60
 
@@ -137,50 +137,65 @@ void control_temp(int rst3) {
     dTemp = mytemp_set - Temp_;
 
     //CASO: necesito calentar por que setpoint es inferior a la medicion
-    if ( dTemp >= 0.0 ) {
-      delay(10);
+    if ( dTemp > 0 ) {
+      delay(2);
       digitalWrite(AGUA_FRIA, HIGH);
-      delay(10);
+      delay(2);
       digitalWrite(AGUA_CALIENTE, LOW);
 
       if ( dTemp <= Gap_temp1 )
-        u_temp = 0.20*umbral_temp; //20%
+        u_temp = 0.28*umbral_temp;
       else if ( dTemp <= Gap_temp2 )
-        u_temp = 0.35*umbral_temp; //35%
+        u_temp = 0.31*umbral_temp; 
       else if ( dTemp <= Gap_temp3 )
-        u_temp = 0.50*umbral_temp; //50%
+        u_temp = 0.35*umbral_temp; 
       else if ( dTemp <= Gap_temp4 )
-        u_temp = 0.75*umbral_temp; //75%
+        u_temp = 0.45*umbral_temp; 
       else if ( dTemp > Gap_temp4 )
-        u_temp = umbral_temp;     //100%
+        u_temp = umbral_temp;     
     }
 
     //CASO: necesito enfriar por que medicion es mayor a setpoint
-    else if ( dTemp < 0.0 ) {
-      delay(10);
+    else if ( dTemp < 0 ) {
+      delay(2);
       digitalWrite(AGUA_FRIA, LOW);
-      delay(10);
+      delay(2);
       digitalWrite(AGUA_CALIENTE, HIGH);
 
       dTemp2 = (-1)*dTemp;
 
       if ( dTemp2 <= Gap_temp1 )
-        u_temp = 0.20*umbral_temp; //20%
+        u_temp = 0.28*umbral_temp;
       else if ( dTemp2 <= Gap_temp2 )
-        u_temp = 0.35*umbral_temp; //35%
+        u_temp = 0.31*umbral_temp;
       else if ( dTemp2 <= Gap_temp3 )
-        u_temp = 0.50*umbral_temp; //50%
+        u_temp = 0.35*umbral_temp;
       else if ( dTemp2 <= Gap_temp4 )
-        u_temp = 0.75*umbral_temp; //75%
+        u_temp = 0.45*umbral_temp;
       else if ( dTemp2 > Gap_temp4 )
-        u_temp = umbral_temp;     //100%
+        u_temp = umbral_temp;
+    }
+
+    else {
+      speed_motor(PWM2, 0, IN3, IN4);  //el sistema se deja stanby
+      digitalWrite(AGUA_CALIENTE, HIGH);
+      digitalWrite(AGUA_FRIA, HIGH);
+      digitalWrite(13, HIGH);
     }
 
     u_temp = map(u_temp, 0, umbral_temp, 0, 255);
     speed_motor(PWM2, u_temp, IN3, IN4);
+    //ventilación puente-H
+    if ( u_temp > 0.3*umbral_temp ) digitalWrite(13, LOW);
+    else digitalWrite(13, HIGH);
 
   }
-  else speed_motor(PWM2, 0, IN3, IN4);
+  else {
+    speed_motor(PWM2, 0, IN3, IN4);  //el sistema se deja stanby
+    digitalWrite(AGUA_CALIENTE, HIGH);
+    digitalWrite(AGUA_FRIA, HIGH);
+    digitalWrite(13, HIGH);
+  }
 
   return;
 }
