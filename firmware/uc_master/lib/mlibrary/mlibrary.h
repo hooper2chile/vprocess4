@@ -177,12 +177,12 @@ void hamilton_sensors() {
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
 
-  if (Itemp1 >= 5.5 && Itemp1 <= 12.0)   //5.5mA y 12mA
+  if (Itemp1 >= 4.5 && Itemp1 <= 12.0)   //5.5mA y 12mA
      Temp1 = m0 * Itemp1 + n0;
   else Temp1 = 0;
 
 
-  if (Itemp2 >= 5.5 && Itemp2 <= 12.0)   //4.4mA y 12mA
+  if (Itemp2 >= 4.5 && Itemp2 <= 12.0)   //4.4mA y 12mA
      Temp2 = m2 * Itemp2 + n2;
   else Temp2 = 0;
 

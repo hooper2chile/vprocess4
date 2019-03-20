@@ -47,7 +47,7 @@ $(document).ready(function() {
 
         $('#rm_periodo_div_id' ).text('Periodo_ : ' + msg.save[0] + '[MIN]').html();
         $('#rm_duracion_div_id').text('Duración_: ' + msg.save[1] + '[MIN]').html();
-        $('#rm_ciclo_div_id'   ).text('Ciclo_   : ' + msg.save[2] + '[MIN]').html();
+        $('#rm_ciclo_div_id'   ).text('Ciclo_   : ' + msg.save[2] + '[DIAS]').html();
         $('#rm_flujo_div_id'   ).text('Flujo_   : ' + msg.save[3] + '[L/min]').html();
 
         //para depurar

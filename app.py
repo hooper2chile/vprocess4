@@ -23,8 +23,8 @@ ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
 temp_set = [0,0,0,0]
 
-rm_sets = [0,0,0,0,False]
-rm_save = [0,0,0,0,False]
+rm_sets = [0,0,0,0,0,0]  #se agrega rm_sets[5] para enviar este al uc
+rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para los calculos de tiempo
 
 task = ["grabar", False]
 flag_database = False
@@ -506,7 +506,7 @@ def autoclave_functions(dato):
         rm_sets[1] = int(dato['rm_duracion'])
         rm_sets[2] = int(dato['rm_ciclo'])
         rm_sets[3] = float(dato['rm_flujo'])
-        rm_sets[4] = dato['rm_enable']
+        rm_sets[4] = int(dato['rm_enable'])
 
         rm_save = rm_sets
 
@@ -545,7 +545,7 @@ def background_thread1():
     save_set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
 
     while True:
-        global set_data
+        global set_data, rm_sets, rm_save
         #se emiten las mediciones y setpoints para medir y graficar
         socketio.emit('Medidas', {'data': measures, 'set': set_data}, namespace='/biocl')
 
@@ -566,8 +566,15 @@ def background_thread1():
                 if save_set_data[i] != set_data[i]:
                     communication.cook_setpoint(set_data)
                     save_set_data = set_data
-
             ##logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
+
+            #################################################################################
+            # Codigo para remontaje (calculo de tiempos)
+            #if rm_sets[2] > 0 and rm_sets[4] == 1:
+
+
+
+            #################################################################################
 
         except:
             pass

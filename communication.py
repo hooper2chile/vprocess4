@@ -209,8 +209,10 @@ def cook_remontaje(rm_sets):
     rm_sets[1] = int(rm_sets[1])    #rm_duracion
     rm_sets[2] = int(rm_sets[2])    #rm_ciclo
     rm_sets[3] = float(rm_sets[3])  #rm_flujo
-    rm_sets[4] = rm_sets[4]         #rm_enable
-
+    rm_sets[5] = int(rm_sets[5])    #rm_enable
+    
+    rm_sets[5] = int(rm_sets[4])
+    
     command = None
 
     periodo = 120
@@ -275,12 +277,12 @@ def cook_remontaje(rm_sets):
 
 
         #ajustando flag rm_enable (rm_sets[3])
-        if rm_sets[4] is True:
-            rm_sets[4] = 1
+        if rm_sets[5] is 1:
+            rm_sets[5] = 1
         else:
-            rm_sets[4] = 0
+            rm_sets[5] = 0
         #str flag rm_enable
-        enable = str(rm_sets[4])
+        enable = str(rm_sets[5])
 
 
         #se construye el string de autoclavado
