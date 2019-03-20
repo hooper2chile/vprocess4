@@ -30,8 +30,7 @@ const int colorB = 0;
 #define  INT(x) (x-48)  //ascii convertion
 #define iINT(x) (x+48)  //inverse ascii convertion
 
-#define ON  LOW
-#define OFF HIGH
+
 #define REMONTAJE_PIN  4
 #define AGUA_FRIA      10 //D10 = rele 1 (cable rojo)
 #define AGUA_CALIENTE  11 //D11 = rele 2 (cable amarillo)
@@ -45,14 +44,21 @@ const int colorB = 0;
 #define Gap_temp4 5.0
 
 // RST setup
-uint8_t rst1 = 0;  uint8_t rst2 = 0;  uint8_t rst3 = 1;
-
+uint8_t rst1 = 1;  uint8_t rst2 = 1;  uint8_t rst3 = 1;
+uint8_t rst1_save = 1;  uint8_t rst2_save = 1;  uint8_t rst3_save = 1;
 //DIRECTION SETUP
 uint8_t dir1 = 1;  uint8_t dir2 = 1;  uint8_t dir3 = 1;
 
 uint8_t pump_enable = 0;
-uint8_t mytemp_set  = 0;
+
+uint8_t mytemp_set = 0;
 uint8_t mytemp_set_save = 0;
+
+uint8_t unload = 0;
+uint8_t unload_save = 0;
+
+uint8_t feed = 0;
+uint8_t feed_save = 0;
 
 //variables control temperatura
 float dTemp  = 0;
@@ -66,13 +72,6 @@ String message = "";
 String state = "";
 boolean stringComplete = false;
 
-/*
-//Pines bomba remontaje uc_slave
-int PWM1 = 3;
-int IN1  = 2;
-int IN2  = 4;
-//fin pines de bomba remontaje
-*/
 
 //Pines bomba temperatura uc_slave
 int PWM2 = 6;
@@ -119,7 +118,6 @@ void viewer_message_slave (String command_lcd, int num) {
       lcd.setCursor(1,1);
       lcd.print(command_lcd);
     }
-
     return;
 }
 
@@ -128,6 +126,50 @@ void speed_motor(int *PWM_PIN, int *pwm_set, int *A, int *B) {
     digitalWrite (B, HIGH);
 
     analogWrite(PWM_PIN, (int) pwm_set);  // ¿NO hay que usarlas con * (punteros)?
+    return;
+}
+
+void remontaje(int pump_enable) {
+  if (pump_enable) digitalWrite(REMONTAJE_PIN, LOW);
+  else digitalWrite(REMONTAJE_PIN, HIGH);
+
+  return;
+}
+
+//ventilación puente-H
+void cooler(int rst1, int rst2, int rst3) {
+  if ( (rst1_save != rst1) || (rst2_save != rst2) || (rst3_save != rst3) ) {
+    rst1_save = rst1;
+    rst2_save = rst2;
+    rst2_save = rst3;
+    if ( (rst1 == 0) || (rst2 == 0) || (rst3 == 0) ) digitalWrite(13, LOW);
+    else digitalWrite(13, HIGH);
+  }
+
+
+  return;
+}
+
+void bombas(int rst1, int rst2) {
+  //bomba alimentacion
+  if ( rst1 == 0) {
+    if ( feed_save != feed ) {
+      feed = map(feed+20, 0, SPEED_MAX, 0, 255);
+      analogWrite(5, feed);
+      feed_save = feed;
+    }
+  } else analogWrite(5, 0);
+
+  //bomba descarga
+  if ( rst2 == 0 ) {
+    if ( unload_save != unload ) {
+      unload = map(unload, 0, SPEED_MAX, 0, 255);
+      analogWrite(9,unload);
+      unload_save = unload;
+    }
+  } else analogWrite(9,0);
+
+  return;
 }
 
 //Control temperatura para agua fria y caliente
@@ -146,13 +188,13 @@ void control_temp(int rst3) {
       if ( dTemp <= Gap_temp1 )
         u_temp = 0.28*umbral_temp;
       else if ( dTemp <= Gap_temp2 )
-        u_temp = 0.31*umbral_temp; 
+        u_temp = 0.31*umbral_temp;
       else if ( dTemp <= Gap_temp3 )
-        u_temp = 0.35*umbral_temp; 
+        u_temp = 0.35*umbral_temp;
       else if ( dTemp <= Gap_temp4 )
-        u_temp = 0.45*umbral_temp; 
+        u_temp = 0.45*umbral_temp;
       else if ( dTemp > Gap_temp4 )
-        u_temp = umbral_temp;     
+        u_temp = umbral_temp;
     }
 
     //CASO: necesito enfriar por que medicion es mayor a setpoint
@@ -175,26 +217,15 @@ void control_temp(int rst3) {
       else if ( dTemp2 > Gap_temp4 )
         u_temp = umbral_temp;
     }
-
-    else {
-      speed_motor(PWM2, 0, IN3, IN4);  //el sistema se deja stanby
-      digitalWrite(AGUA_CALIENTE, HIGH);
-      digitalWrite(AGUA_FRIA, HIGH);
-      digitalWrite(13, HIGH);
-    }
-
     u_temp = map(u_temp, 0, umbral_temp, 0, 255);
     speed_motor(PWM2, u_temp, IN3, IN4);
-    //ventilación puente-H
-    if ( u_temp > 0.3*umbral_temp ) digitalWrite(13, LOW);
-    else digitalWrite(13, HIGH);
 
   }
   else {
     speed_motor(PWM2, 0, IN3, IN4);  //el sistema se deja stanby
     digitalWrite(AGUA_CALIENTE, HIGH);
     digitalWrite(AGUA_FRIA, HIGH);
-    digitalWrite(13, HIGH);
+    //digitalWrite(13, HIGH);
   }
 
   return;
@@ -203,6 +234,8 @@ void control_temp(int rst3) {
 int validate_write() {
   if ( message[0] == 'w' ) {
     Serial.println("uc_slave_echo w: " + message);
+    //String Reset = String(rst1)+String(rst2)+String(rst3);
+    //Serial.println(Reset);
     return 1;
   }
   else if ( message[0] == 'p') {
@@ -219,6 +252,7 @@ int validate_write() {
     return 0;
   }
 }
+
 //wf100u100t150r111d111
 //wf100u100t025r000d000
 //wf100u100t029r110d111
@@ -227,18 +261,22 @@ int validate_write() {
 void crumble() {
     if ( message[0] == 'w' && message[9] == 't' ) {
       mytemp_set = message.substring(10,13).toInt();
-      rst3 = int(INT(message[16]));
-      viewer_message_slave(String(mytemp_set) + ' ' + String(rst3) + ' ' + String(dir3),1);
+      feed   = message.substring(2,5).toInt();
+      unload = message.substring(6,9).toInt();
+      rst1 = int(INT(message[14]));  //rst_feed
+      rst2 = int(INT(message[15]));  //rst_unload
+      rst3 = int(INT(message[16]));  //rest_temp
+      //viewer_message_slave(String(mytemp_set) + ' ' + String(rst3) + ' ' + String(dir3),1);
     }
 
     else if ( message[0] == 'p' && message[13] == 'e' ) {
       pump_enable = INT(message[14]);
-      viewer_message_slave(String(pump_enable),2);
+      //viewer_message_slave(String(pump_enable),2);
     }
 
     else if (message[0] == 't') {
       Temp_ = message.substring(1).toFloat();
-      viewer_message_slave(String(Temp_),3);
+      //viewer_message_slave(String(Temp_),3);
     }
 
   return;

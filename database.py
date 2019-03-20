@@ -43,9 +43,9 @@ def update_db(real_data, connector, c, first_time, BACKUP):
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from TEMP1;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp1.csv' )
-            os.system('sqlite3 -header -csv %s "select * from TEMP2;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_temp2.csv' )
-            os.system('sqlite3 -header -csv %s "select * from TEMP_;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[31:-3])+'full_Temp_.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP1;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'full_temp1.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP2;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'full_temp2.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP_;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'full_Temp_.csv' )
 
             logging.info("\n Backup CSV REALIZADO \n")
 
