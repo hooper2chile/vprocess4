@@ -3,8 +3,8 @@ $(document).ready(function() {
   namespace = '/biocl';
   // Connect to the Socket.IO server.
   var socket = io.connect(location.protocol + '//' +
-    		       document.domain + ':' +
-	             location.port + namespace);
+    		          document.domain + ':' +
+	                  location.port + namespace);
 
 //se emiten los detalles de la selección hacia el servidor
   $('form#form_db"').submit(function(event) {
@@ -28,9 +28,9 @@ $(document).ready(function() {
             temp[i]    = msg.data[i][1]
           }
 
-          if(msg.var=='ph'){
-            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max:  14,}}]}}
-            var data_set     = {       labels: time_ax,
+          if(msg.var=='Temp_'){
+            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max:  50,}}]}}
+            var data_set     = {      labels: time_ax,
                                       datasets: [{
                                                     label: msg.var,
                                                     data: temp,
@@ -44,9 +44,9 @@ $(document).ready(function() {
                               }
           }
 
-          if(msg.var=='od'){
-            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max: 100,}}]}}
-            var data_set     = {       labels: time_ax,
+          if(msg.var=='temp1'){
+            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max: 50,}}]}}
+            var data_set     = {      labels: time_ax,
                                       datasets: [{
                                                     label: msg.var,
                                                     data: temp,
@@ -60,9 +60,9 @@ $(document).ready(function() {
                               }
           }
 
-          if(msg.var=='temp'){
-            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max:  80,}}]}}
-            var data_set     = {       labels: time_ax,
+          if(msg.var=='temp2'){
+            var var_options = {animation: {duration: 0}, scales: {yAxes: [{ticks: {beginAtZero: true, min: 0, max:  50,}}]}}
+            var data_set     = {      labels: time_ax,
                                       datasets: [{
                                                     label: msg.var,
                                                     data: temp,

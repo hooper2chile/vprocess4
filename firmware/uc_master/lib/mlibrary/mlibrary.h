@@ -9,7 +9,8 @@ Adafruit_ADS1115 ads1(0x49);
 
 #define SPEED_MIN 2.0
 #define SPEED_MAX 150     //[RPM]
-#define TEMP_MAX  60     //[ºC]
+#define TEMP_MAX  60      //[ºC]
+#define NOISE     1.0     //mA
 
 #define PGA1 0.125F
 #define PGA2 0.0625F
@@ -33,9 +34,11 @@ String new_write_t = "20.0";
 
 boolean stringComplete = false;  // whether the string is complete
 
+/*
 uint8_t myfeed    = 0;
 uint8_t myunload  = 0;
 uint16_t mymix    = 0;
+*/
 
 //RESET SETUP
 char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
@@ -171,11 +174,20 @@ void actuador_umbral(){
   return;
 }
 
-
+uint8_t i = 0;
+uint8_t j = 0;
+uint8_t k = 0;
 void hamilton_sensors() {
   //Filtros de media exponencial
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
+  
+  if ( rst1 == 0 ) i = 1; else i = 0;
+  if ( rst2 == 0 || rst3 == 0 ) j = 1; else j = 0;
+//if ( rst3 == 0 ) k = 1; else k = 0;
+
+  Itemp1 = Itemp1 - ( i + j + k ) * NOISE;
+  Itemp2 = Itemp2 - ( i + j + k ) * NOISE;
 
   if (Itemp1 >= 4.5 && Itemp1 <= 12.0)   //5.5mA y 12mA
      Temp1 = m0 * Itemp1 + n0;
@@ -230,7 +242,6 @@ void daqmx() {
   tx_reply();
   return;
 }
-
 
 //Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
