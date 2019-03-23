@@ -3,7 +3,7 @@
 from flask import Flask, render_template, session, request, Response, send_from_directory, make_response
 from flask_socketio import SocketIO, emit, disconnect
 
-import os, sys, time, logging, communication, reviewDB, tocsv
+import os, sys, time, datetime,logging, communication, reviewDB, tocsv
 
 #logging.basicConfig(filename='/home/pi/vprocess4/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
@@ -507,6 +507,7 @@ def autoclave_functions(dato):
         rm_sets[2] = int(dato['rm_ciclo'])
         rm_sets[3] = float(dato['rm_flujo'])
         rm_sets[4] = int(dato['rm_enable'])
+       #rm_sets[5] = enable local no se recibe desde la pagina, se calcula localmente.
 
         rm_save = rm_sets
 
@@ -544,6 +545,16 @@ def background_thread1():
     measures = [0,0,0,0,0,0,0]
     save_set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
 
+    #ciclo_seg    = 30#rm_sets[2]*3600*24                  #se configura ciclo de dias a segundos.
+    #duracion_seg = 5#rm_sets[1]*60                        #se configura duracion de minutos a segundos.
+    #periodo_seg  = 10#rm_sets[0]*60                       #se configura periodo  de munutos a segundos.
+
+    flag_duty_cycle = 1
+    ciclo_elapsed   = 0
+
+    time_save1 = datetime.datetime.now()
+    time_save2 = datetime.datetime.now()
+
     while True:
         global set_data, rm_sets, rm_save
         #se emiten las mediciones y setpoints para medir y graficar
@@ -561,7 +572,6 @@ def background_thread1():
             measures[5] = temp_[7]  #Itemp1
             measures[6] = temp_[4]  #Iph
 
-
             for i in range(0,len(set_data)):
                 if save_set_data[i] != set_data[i]:
                     communication.cook_setpoint(set_data)
@@ -570,17 +580,77 @@ def background_thread1():
 
             #################################################################################
             # Codigo para remontaje (calculo de tiempos)
-            #if rm_sets[2] > 0 and rm_sets[4] == 1:
+            #bucle principal de tiempo
+            #if rm_sets[4] == 1: #se habilita el remontaje con enable de la app.py
+            if rm_sets[4] == 1:
+                ciclo_seg    = int(rm_sets[2])*3600*24                 #se configura ciclo de dias a segundos.
+                duracion_seg = int(rm_sets[1])*60                       #se configura duracion de minutos a segundos.
+                periodo_seg  = int(rm_sets[0])*60                      #se configura periodo  de munutos a segundos.
+
+                if ciclo_seg - ciclo_elapsed > 0:
+                    #GPIO.output(PIN_CICLO, True)
+                    c = datetime.datetime.now() - time_save1
+                    ciclo_elapsed = c.days*3600*24 + c.seconds      #tiempo transcurrido
+
+                    ###################################################################################
+                    # Codigo reentrante para periodo y duracion de bomba remontaje
+                    d = datetime.datetime.now() - time_save2
+                    if flag_duty_cycle == 1:
+                        time_save2 = datetime.datetime.now()
+                        d = datetime.datetime.now() - time_save2
+                        flag_duty_cycle = 0
+                        #print "flag_duty_cycle!"
+
+                    if (duracion_seg - d.seconds) > 0:             #descuento tiempo del duty cycle, tiempo en alto.
+                        rm_sets[5] = 1                             #aca encender el pin (enciendo bomba)
+                        #GPIO.output(PIN_RELE, True)
+                        #print "if"
+
+                    elif (periodo_seg - d.seconds) > 0:            #vencido el tiempo en alto, descuento tiempo del periodo, tiempo en bajo.
+                        rm_sets[5] = 0                             #aca apagar el pin (apago la bomba)
+                        #GPIO.output(PIN_RELE, False)
+                        #print "elif"
+
+                    else:
+                        flag_duty_cycle = 1
+                    ###################################################################################
+
+                else:
+                    #rm_sets[5] = 0
+                    #ciclo_elapsed = 0
+                    rm_sets[4] = 0   #finalizado el ciclo, se debe apagar el enable global y Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+                    socketio.emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save }, namespace='/biocl', broadcast=True)
+                    time.sleep(0.01)
+
+            else:
+                ciclo_elapsed = 0
+                rm_sets[5] = 0
+
+                flag_duty_cycle = 1
+
+                time_save1 = datetime.datetime.now()
+                time_save2 = datetime.datetime.now()
+
+                time.sleep(0.01)
 
 
-
+            communication.cook_remontaje(rm_sets)
+            time.sleep(0.01)
             #################################################################################
+
+            try:
+                f = open(DIR + "rm_sets_thread.tx","a+")
+                f.write(str(rm_sets[5]) + "_" + str(c.seconds) + "_" + str(d.seconds) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
+                f.close()
+            except:
+                logging.info("no se pudo guardar en rm_sets_thread.txt")
+                pass
+
+            socketio.sleep(0.1)
 
         except:
             pass
             #logging.info("\n no se actualizaron las mediciones")
-
-        socketio.sleep(0.1)
 
 
 if __name__ == '__main__':

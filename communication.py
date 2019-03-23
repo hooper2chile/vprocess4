@@ -19,15 +19,17 @@ SPEED_MAX_MIX = 1500
 SPEED_MAX = 150
 TEMP_MAX  = 130
 
-T_MAX=1440
-T_MIN=10
+T_MAX = 1440
+T_MIN = 2
+
 BOMBA_REMONTAJE_T_MAX = T_MAX - 1
 BOMBA_REMONTAJE_T_MIN = 1
+
 CICLO_MAX = 20
 CICLO_MIN = 1
 
 
-PH_MIN = 0
+PH_MIN = 1
 PH_MAX = 14
 
 
@@ -210,15 +212,15 @@ def cook_remontaje(rm_sets):
     rm_sets[2] = int(rm_sets[2])    #rm_ciclo
     rm_sets[3] = float(rm_sets[3])  #rm_flujo
     rm_sets[5] = int(rm_sets[5])    #rm_enable
-    
-    rm_sets[5] = int(rm_sets[4])
-    
+
+    #rm_sets[5] = int(rm_sets[4])   #pichicateo para hacer que la bomba funcione directo con la pagina, sin calculo de tiempos
+
     command = None
 
-    periodo = 120
-    duracion = 30
-    ciclo = 1
-    flujo = 2
+    periodo  = 2
+    duracion = 1
+    ciclo  = 1
+    flujo  = 0
     enable = 0
 
     try:
@@ -235,7 +237,7 @@ def cook_remontaje(rm_sets):
         elif rm_sets[0] < 1000 and rm_sets[0] > 0:
             rm_sets[0] = '0' + str(rm_sets[0])
         periodo = str(rm_sets[0])
-
+        rm_sets[0] = int(rm_sets[0])
 
 
         #limites de duracion
@@ -243,7 +245,6 @@ def cook_remontaje(rm_sets):
             rm_sets[1] = BOMBA_REMONTAJE_T_MAX
         elif rm_sets[1] < BOMBA_REMONTAJE_T_MIN:
             rm_sets[1] = BOMBA_REMONTAJE_T_MIN
-
         #str de duracion
         if rm_sets[1] < 10 and rm_sets[1] >= 0:
             rm_sets[1] = '000' + str(rm_sets[1])
@@ -252,7 +253,7 @@ def cook_remontaje(rm_sets):
         elif rm_sets[1] < 1000 and rm_sets[1] > 0:
             rm_sets[1] = '0' + str[rm_sets[1]]
         duracion = str(rm_sets[1])
-
+        rm_sets[1] = int(rm_sets[1])
 
 
         #limites de ciclo
@@ -264,8 +265,7 @@ def cook_remontaje(rm_sets):
         if rm_sets[2] < 10 and rm_sets[2] >= 0:
             rm_sets[2] = '0' + str(rm_sets[2])
         ciclo = str(rm_sets[2])
-
-
+        rm_sets[2] = int(rm_sets[2])
 
         #limites de flujo (ver escala flujemetro manual) rm_sets[3]
         if rm_sets[3] < 0:
@@ -300,10 +300,6 @@ def cook_remontaje(rm_sets):
 
     return True
 ###############################################################################
-
-
-
-
 
 
 

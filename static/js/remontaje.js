@@ -45,10 +45,10 @@ $(document).ready(function() {
         document.getElementById('rm_flujo_input_id').value     = msg.set[3];
         document.getElementById('rm_enable_input_id').checked  = msg.set[4];
 
-        $('#rm_periodo_div_id' ).text('Periodo_ : ' + msg.save[0] + '[MIN]').html();
-        $('#rm_duracion_div_id').text('Duración_: ' + msg.save[1] + '[MIN]').html();
-        $('#rm_ciclo_div_id'   ).text('Ciclo_   : ' + msg.save[2] + '[DIAS]').html();
-        $('#rm_flujo_div_id'   ).text('Flujo_   : ' + msg.save[3] + '[L/min]').html();
+        $('#rm_periodo_div_id' ).text('Periodo         : ' + msg.save[0] + '[MIN]').html();
+        $('#rm_duracion_div_id').text('Tiempo encendido: ' + msg.save[1] + '[MIN]').html();
+        $('#rm_ciclo_div_id'   ).text('Total Dias      : ' + msg.save[2] + '[DIAS]').html();
+        $('#rm_flujo_div_id'   ).text('Flujo           : ' + msg.save[3] + '[L/min]').html();
 
         //para depurar
         console.log('Checkeds Ya Recibidos');
