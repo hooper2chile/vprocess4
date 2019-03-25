@@ -52,6 +52,15 @@ $(document).ready(function() {
         console.log($('#ph_dir').is(':checked'));
         console.log($('#temperatura_dir').is(':checked'));
 
+
+        socket.emit('producto',
+                    { densidad: $('#densidad_input_id').val(),
+                           yan: $('#yan_input_id').val(),
+                            ph: $('#ph_input_id').val(),
+                          brix: $('#brix_input_id').val(),
+                        acidez: $('#acidez_input_id').val()
+                    });
+
         return false;
     });
 
@@ -84,6 +93,15 @@ $(document).ready(function() {
         console.log($('#temperatura_dir').is(':checked'));
     });
 
+    //para escuchar datos de ficha de producto
+    socket.on('producto', function(msg) {
+        document.getElementById('densidad_input_id').value = msg.set[0];
+        document.getElementById('yan_input_id').value      = msg.set[1];
+        document.getElementById('ph_input_id').value       = msg.set[2];
+        document.getElementById('brix_input_id').value     = msg.set[3];
+        document.getElementById('acidez_input_id').value   = msg.set[4];
+
+    });
 
 
 
@@ -105,13 +123,20 @@ $(document).ready(function() {
     //se escuchan desde el servidor señal de reinicio,apagado, grabacion y limpiaza
     //para ser desplegados en todos los clientes.
     socket.on('power', function(msg) {
-        document.getElementById("select").value = msg.set[0]
+        document.getElementById("select").value    = msg.set[0]
         document.getElementById('confirm').checked = msg.set[1]
 
         console.log('Recibiendo Valores de Acción');
         console.log(msg.set[0]);
         console.log(msg.set[1]);
     });
+
+    $('#densidad_div_id' ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#yan_div_id'      ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#ph_div_id'       ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#brix_div_id'     ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#acidez_div_id'   ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#brix_div_id'   ).css({ 'color': 'white', 'font-size': '110%' });
 
 
 });

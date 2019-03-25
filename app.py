@@ -29,6 +29,7 @@ rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para l
 task = ["grabar", False]
 flag_database = False
 
+ficha_producto = [0.0,0.0,0.0,0.0,0.0]
 set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
 
 
@@ -118,14 +119,15 @@ def function_thread():
     #logging.info("\n Cliente Conectado al Thread del Bioreactor\n")
 
     #Se emite durante la primera conexión de un cliente el estado actual de los setpoints
-    emit('Setpoints',       {'set': set_data})
-    emit('ph_calibrar',     {'set': ph_set})
-    emit('od_calibrar',     {'set': od_set})
-    emit('temp_calibrar',   {'set': temp_set})
-    emit('u_calibrar',      {'set': u_set_ph})
-    emit('u_calibrar_temp', {'set': u_set_temp})
-    emit('power',           {'set': task})
-    emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save }, namespace='/biocl', broadcast=True)
+    emit('Setpoints',           {'set': set_data})
+    emit('ph_calibrar',         {'set': ph_set})
+    emit('od_calibrar',         {'set': od_set})
+    emit('temp_calibrar',       {'set': temp_set})
+    emit('u_calibrar',          {'set': u_set_ph})
+    emit('u_calibrar_temp',     {'set': u_set_temp})
+    emit('power',               {'set': task})
+    emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save })
+    emit('producto'           , {'set': ficha_producto})
 
     global thread1
     if thread1 is None:
@@ -519,7 +521,7 @@ def autoclave_functions(dato):
     	rm_sets[4] = "no_llego"
         rm_save = [69,69,69,69,False]
 
-        logging.info("no se pudo evaluar")
+        logging.info("no se pudo evaluar rm_sets")
     #se transmiten los datos de remontaje por communication, al canal ZMQ
     #y desde ahi al micro controlador por serial
     communication.cook_remontaje(rm_sets)
@@ -537,6 +539,39 @@ def autoclave_functions(dato):
         pass
 	    #logging.info("no se pudo guardar en autoclave.txt")
 
+
+@socketio.on('producto', namespace='/biocl')
+def ficha(dato):
+    global ficha_producto
+
+    try:
+        ficha_producto[0] = float(dato['densidad'])
+        ficha_producto[1] = float(dato['yan'])
+        ficha_producto[2] = float(dato['ph'])
+        ficha_producto[3] = float(dato['brix'])
+        ficha_producto[4] = float(dato['acidez'])
+
+    except:
+        ficha_producto[0] = 6
+        ficha_producto[1] = 6
+        ficha_producto[2] = 6
+        ficha_producto[3] = 6
+        ficha_producto[4] = 6
+
+        logging.info("no se pudo evaluar la ficha de producto")
+
+    socketio.emit('producto', {'set':ficha_producto}, namespace='/biocl', broadcast=True)
+    #communication.zmq_client_data_speak_website(ficha_producto)
+
+    try:
+        f = open(DIR + "ficha_producto.txt","a+")
+     	f.write(str(ficha_producto) + '...' + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") +'\n')
+    	f.close()
+        #logging.info("se guardo en autoclave.txt")
+
+    except:
+        pass
+	    #logging.info("no se pudo guardar en autoclave.txt")
 
 
 
@@ -631,20 +666,22 @@ def background_thread1():
                 time_save1 = datetime.datetime.now()
                 time_save2 = datetime.datetime.now()
 
-                time.sleep(0.01)
+                time.sleep(0.05)
 
 
             communication.cook_remontaje(rm_sets)
-            time.sleep(0.01)
+            communication.zmq_client_data_speak_website(str(ficha_producto))
+
+            #time.sleep(0.05)
             #################################################################################
 
-            try:
-                f = open(DIR + "rm_sets_thread.tx","a+")
-                f.write(str(rm_sets[5]) + "_" + str(c.seconds) + "_" + str(d.seconds) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
-                f.close()
-            except:
-                logging.info("no se pudo guardar en rm_sets_thread.txt")
-                pass
+            #try:
+            #    f = open(DIR + "rm_sets_thread.tx","a+")
+            #    f.write(str(rm_sets[5]) + "_" + str(c.seconds) + "_" + str(d.seconds) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
+            #    f.close()
+            #except:
+            #    logging.info("no se pudo guardar en rm_sets_thread.txt")
+            #    pass
 
             socketio.sleep(0.1)
 
@@ -652,6 +689,6 @@ def background_thread1():
             pass
             #logging.info("\n no se actualizaron las mediciones")
 
-
+#test
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)

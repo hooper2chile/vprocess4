@@ -13,7 +13,6 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/socket.io.min.js') }}"></script>
   </head>
 
-
   <body>
     <header> <img src="{{ url_for('static', filename='stylesheets/biocl.jpg') }}" style="width:650px;height:120px;"> </header>
     <nav>
@@ -31,18 +30,18 @@
       {% block content %}
 
       {% endblock %}
-
-        <aside>
-           <h3> Sobre el autor </h3>
+      <!--
+        <aside class="footer">
+           <h3> Ingeniero Civil Electrónico </h3>
                 <p> Email: <a href="mailto:felipe.hooper.c@gmail.com">Correo electrónico </a></p>
         </aside>
+      -->
     </section>
   </div>
-
-
     <footer>
-      <a href="http://www.biocl.cl/">BIOCL, Todos los derechos reservados.</a>
-
+      &emsp;&emsp;&emsp;
+      <h3> <a href="http://www.biocl.cl/">BIOCL, Todos los derechos reservados. </a> </h3>
+      Sobre el autor: <a href="mailto:felipe.hooper.c@gmail.com">Correo electrónico</a>
     </footer>
   </body>
 </html>

@@ -81,85 +81,6 @@
     border-radius: 20px;
 }
 
-.caja6 {
-    font-size: 16px;
-    font-family: verdana;
-    background: #54b5db;/*YellowGreen;#004579;*/
-    width: 200px;
-    height: 75px;
-    padding: 10px;
-    border: 2px solid #000;
-    margin-top: -570px;
-    margin-right: -50px;
-    text-align: left;
-    margin-bottom: 10px;
-    margin-left: 620px;
-    border-radius: 20px;
-}
-
-.caja7 {
-    font-size: 16px;
-    font-family: verdana;
-    background: #54b5db;/*YellowGreen;#004579;*/
-    width: 200px;
-    height: 75px;
-    padding: 10px;
-    border: 2px solid #000;
-    margin-top: 10px;
-    margin-right: -50px;
-    text-align: left;
-    margin-bottom: 10px;
-    margin-left: 620px;
-    border-radius: 20px;
-}
-
-.caja8 {
-    font-size: 16px;
-    font-family: verdana;
-    background: #54b5db;/*YellowGreen;#004579;*/
-    width: 200px;
-    height: 75px;
-    padding: 10px;
-    border: 2px solid #000;
-    margin-top: 10px;
-    margin-right: -50px;
-    text-align: left;
-    margin-bottom: 10px;
-    margin-left: 620px;
-    border-radius: 20px;
-}
-
-.caja9 {
-    font-size: 16px;
-    font-family: verdana;
-    background: #54b5db;/*YellowGreen;#004579;*/
-    width: 200px;
-    height: 75px;
-    padding: 10px;
-    border: 2px solid #000;
-    margin-top: 10px;
-    margin-right: -50px;
-    text-align: left;
-    margin-bottom: 10px;
-    margin-left: 620px;
-    border-radius: 20px;
-}
-
-.caja10 {
-    font-size: 16px;
-    font-family: verdana;
-    background: #54b5db;/*YellowGreen;#004579;*/
-    width: 200px;
-    height: 75px;
-    padding: 10px;
-    border: 2px solid #000;
-    margin-top: 10px;
-    margin-right: -50px;
-    text-align: left;
-    margin-bottom: 142px;
-    margin-left: 620px;
-    border-radius: 20px;
-}
 
 .caja_derecha_arriba1{
   font-size: 18px;
@@ -171,10 +92,10 @@
   border: 2px solid lightblue;
   margin-right: 150px;
   text-align: center;
-  margin-left: 845px;
+  margin-left: 615px;//845px;
 
   margin-bottom: 10px;
-  margin-top: -675px;
+  margin-top: -550px;//-675px;
   border-radius: 50px;
 }
 
@@ -188,7 +109,7 @@
   border: 2px solid lightblue;
   margin-right: 150px;
   text-align: center;
-  margin-left: 845px;
+  margin-left: 615px;//845px;
 
   margin-bottom: 10px;
   margin-top: 10px;
@@ -205,7 +126,7 @@
   border: 2px solid lightblue;
   margin-right: 150px;
   text-align: center;
-  margin-left: 845px;
+  margin-left: 615px;//845px;
 
   margin-bottom: 230px;
   margin-top: 10px;

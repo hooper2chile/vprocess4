@@ -14,6 +14,7 @@ DIR="/home/pi/vprocess4/"
 
 temp_save_set_data = None
 tau_zmq_connect = 0.3 #0.3 [s]: no ha funcionado con menos
+tau_zmq_while_read = 0.3
 
 SPEED_MAX_MIX = 1500
 SPEED_MAX = 150
@@ -60,6 +61,35 @@ def zmq_client():
     time.sleep(tau_zmq_connect)
 
     return socket_sub.recv()
+
+
+###### Funiones para intercambio de datos entre app.py y databse.py: datos desde la web"
+def zmq_client_data_speak_website(data):
+    #####Publisher part: publica las lecturas obtenidas por serial.
+    port_pub = "5554"
+    context_pub = zmq.Context()
+    socket_pub = context_pub.socket(zmq.PUB)
+    socket_pub.bind("tcp://*:%s" % port_pub)
+    topic   = 'w'
+    time.sleep(tau_zmq_connect)
+    socket_pub.send_string("%s %s" % (topic, data))
+    time.sleep(tau_zmq_while_read) #Tiempo de muestreo menor para todas las aplicaciones que recogen datos por ZMQ.
+    return True
+
+
+def zmq_client_data_listen_website():
+    #####Listen measures
+    port_sub = "5554"
+    context_sub = zmq.Context()
+    socket_sub = context_sub.socket(zmq.SUB)
+    socket_sub.connect ("tcp://localhost:%s" % port_sub)
+    topicfilter = "w"
+    socket_sub.setsockopt(zmq.SUBSCRIBE, topicfilter)
+    #espero y retorno valor
+    time.sleep(tau_zmq_connect)
+    data = socket_sub.recv(flags=zmq.NOBLOCK)
+    return data
+###### Funiones para intercambio de datos entre app.py y databse.py: datos desde la web"
 
 
 def calibrate(var, coef):

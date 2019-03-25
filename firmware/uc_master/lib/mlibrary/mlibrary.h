@@ -10,7 +10,7 @@ Adafruit_ADS1115 ads1(0x49);
 #define SPEED_MIN 2.0
 #define SPEED_MAX 150     //[RPM]
 #define TEMP_MAX  60      //[ºC]
-#define NOISE     1.0     //mA
+#define NOISE     0.01    //mA
 
 #define PGA1 0.125F
 #define PGA2 0.0625F
@@ -18,12 +18,6 @@ Adafruit_ADS1115 ads1(0x49);
 
 #define RS 10.0F             // Shunt resistor value (in ohms)
 #define K 1.0 / (10.0 * RS )
-
-#define Gap_temp0 0.5
-#define Gap_temp1 1.0       //1ºC
-#define Gap_temp2 2.0
-#define Gap_temp3 3.0
-#define Gap_temp4 5.0
 
 String message     = "";
 String new_write   = "";
@@ -33,12 +27,6 @@ String new_write_p = "p1440d0001c03e0f0.2\n";
 String new_write_t = "20.0";
 
 boolean stringComplete = false;  // whether the string is complete
-
-/*
-uint8_t myfeed    = 0;
-uint8_t myunload  = 0;
-uint16_t mymix    = 0;
-*/
 
 //RESET SETUP
 char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
@@ -174,20 +162,20 @@ void actuador_umbral(){
   return;
 }
 
-uint8_t i = 0;
-uint8_t j = 0;
-uint8_t k = 0;
+float i = 0;
+float j = 0;
+float k = 0;
 void hamilton_sensors() {
   //Filtros de media exponencial
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
   
-  if ( rst1 == 0 ) i = 1; else i = 0;
-  if ( rst2 == 0 || rst3 == 0 ) j = 1; else j = 0;
-//if ( rst3 == 0 ) k = 1; else k = 0;
+  if ( rst1 == 0 ) i = 1.1; else i = 0;
+  if ( rst2 == 0 ) j = 1.1; else j = 0;
+  if ( rst3 == 0 ) k = 1.1; else k = 0;
 
-  Itemp1 = Itemp1 - ( i + j + k ) * NOISE;
-  Itemp2 = Itemp2 - ( i + j + k ) * NOISE;
+  Itemp1 = Itemp1 + ( i + j + k ) * NOISE;
+  Itemp2 = Itemp2 + ( i + j + k ) * NOISE;
 
   if (Itemp1 >= 4.5 && Itemp1 <= 12.0)   //5.5mA y 12mA
      Temp1 = m0 * Itemp1 + n0;

@@ -22,7 +22,7 @@
 
 
 <form id="setpoints" method="POST" action='#'>
-
+    <font color="white">
     <div class="caja_izquierda_arriba">Alimentar [rpm]: <br>
               <input type="number"
                      id="alimentar"
@@ -34,8 +34,9 @@
               />
               <button  type="submit" class="button_apply"> + </button>
               <br><input  type="checkbox" id="alimentar_rst" /> Deshabilitar
-              <br><input hidden type="checkbox" id="alimentar_dir" /> 
+              <br><input hidden type="checkbox" id="alimentar_dir" />
     </div>
+    </font>
 
 
     <div hidden class="caja_central_arriba"> Mezclar [rpm]:
@@ -56,7 +57,7 @@
       <!CAJA CENTRAL PARA EL DIBUJO>
     </div>
 
-
+    <font color="white">
     <div class="caja_izquierda_centro"> Temperatura [ºC]: <br>
             <input type="number"
                    id="temperatura"
@@ -71,7 +72,7 @@
             <input  type="checkbox" id="temperatura_rst" /> Deshabilitar   <br>
             <input hidden type="checkbox" id="temperatura_dir" />
     </div>
-
+    </font>
 
 
     <div hidden class="caja_izquierda_abajo"> Configurar pH: <br>
@@ -96,6 +97,7 @@
     <div class="caja_derecha_arriba3" id="med3"></div>
     </font>
 
+    <font color="white">
     <div class="caja_derecha_abajo">Descarga [rpm]:
             <br><input  type="number"
                     id="descargar"
@@ -107,13 +109,86 @@
             />
                 <button  type="submit" class="button_apply"> + </button>
             <br><input  type="checkbox" id="descargar_rst"/> Deshabilitar
+    </div>
+    </font>
 
-  </div>
+    <!-- FICHA DE PRODUCTO CONCHA Y TORO -->
 
+
+    <!caja6: ficha de producto: densidad>
+        <div class="caja6">
+          &emsp;&emsp;&emsp;&emsp;&emsp;
+          <div id="densidad_div_id">Densidad:</div>
+            <input type="number"
+                         id="densidad_input_id"
+                         style="width: 50px;"
+                         value="1"
+                         MIN="0"
+                         MAX="2000"
+                         step="0.1"
+            />
+            <button  type="submit" class="button_apply"> + </button>
+    </div>
+
+    <!caja7: ficha de producto: yan>
+        <div class="caja7">
+          &emsp;&emsp;&emsp;&emsp;&emsp;
+          <div id="yan_div_id">Yan:</div>
+            <input type="number"
+                         id="yan_input_id"
+                         style="width: 50px;"
+                         value="1"
+                         MIN="0"
+                         MAX="300"
+                         step="0.1"
+            />
+            <button  type="submit" class="button_apply"> + </button>
+    </div>
+
+    <!caja8: ficha de producto: pH>
+        <div class="caja8">
+          &emsp;&emsp;&emsp;&emsp;&emsp;
+          <div id="ph_div_id">pH:</div>
+            <input type="number"
+                         id="ph_input_id"
+                         style="width: 50px;"
+                         value="1"
+                         MIN="0"
+                         MAX="14"
+                         step="0.1"
+            />
+            <button  type="submit" class="button_apply"> + </button>
+    </div>
+
+    <!caja9: ficha de producto: brix>
+        <div class="caja9">
+          &emsp;&emsp;&emsp;&emsp;&emsp;
+          <div id="brix_div_id">Brix:</div>
+            <input type="number"
+                         id="brix_input_id"
+                         style="width: 50px;"
+                         value="1"
+                         MIN="0"
+                         MAX="150"
+                         step="0.1"
+            />
+            <button  type="submit" class="button_apply"> + </button>
+    </div>
+
+    <!caja10: ficha de producto: Acidez Total>
+        <div class="caja10">
+          &emsp;&emsp;&emsp;&emsp;&emsp;
+          <div id="acidez_div_id">Acidez Total:</div>
+            <input type="number"
+                         id="acidez_input_id"
+                         style="width: 50px;"
+                         value="1"
+                         MIN="0"
+                         MAX="14"
+                         step="0.1"
+            />
+            <button  type="submit" class="button_apply"> + </button>
+    </div>
 </form>
-
-
-
-
-
+<!-- test -->
 {% endblock %}
