@@ -17,9 +17,7 @@
 
 void setup() {
  wdt_disable();
-
  message.reserve(65);
-
  //pinout setting para puente H motor bomba temperatura
  pinMode(PWM2, OUTPUT);
  pinMode(IN3, OUTPUT);
@@ -27,27 +25,21 @@ void setup() {
  analogWrite(PWM2, 0);
  digitalWrite(IN3, HIGH);
  digitalWrite(IN4, HIGH);
-
  //ventilador
- pinMode(13, OUTPUT);
- digitalWrite(13, HIGH);
+ pinMode(5, OUTPUT);
+ digitalWrite(5, HIGH);
  //pinout setting para puente H motor bomba temperatura
-
  //electrovavulas control de temparatura
  pinMode(AGUA_FRIA, OUTPUT);
  pinMode(AGUA_CALIENTE, OUTPUT);
  digitalWrite(AGUA_FRIA, HIGH);
  digitalWrite(AGUA_CALIENTE, HIGH);
  //electrovavulas control de temparatura
-
  //bomba remontaje
  pinMode(REMONTAJE_PIN, OUTPUT);
  digitalWrite(REMONTAJE_PIN, HIGH); //inicio apagado de bomba remontaje
  //bomba remontaje
-
  //setting de giro bombas alimentacion y descarga
- pinMode(5, OUTPUT);
- pinMode(9, OUTPUT);
  pinMode(12, OUTPUT);
  digitalWrite(12, HIGH); //IN2 e IN4 a VCC. IN1 e IN3 estan a GND.
  //setting de giro bombas alimentacion y descarga
@@ -80,7 +72,7 @@ void loop() {
      // fin control temperatura
 
      //###################################################################################
-     bombas(rst1, rst2);
+     //bombas(rst1, rst2);
      //###################################################################################
      wdt_reset();
    }

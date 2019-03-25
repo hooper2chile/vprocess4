@@ -320,9 +320,9 @@ def cook_remontaje(rm_sets):
         published_setpoint(command)
 
         #se respalda el comando
-        f = open(DIR + "remontaje_string.txt","a+")
-     	f.write(str(command) + '\n')  #agregar la hora a este string
-    	f.close()
+        #f = open(DIR + "remontaje_string.txt","a+")
+     	#f.write(str(command) + '\n')  #agregar la hora a este string
+    	#f.close()
 
     except:
         logging.info("no se pudo generar el command para remontaje_string")

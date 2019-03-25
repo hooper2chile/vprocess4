@@ -669,6 +669,7 @@ def background_thread1():
                 time.sleep(0.05)
 
 
+
             communication.cook_remontaje(rm_sets)
             #se envian datos de ingreso manual via web a la base de datos
             myList = ','.join(map(str, ficha_producto))

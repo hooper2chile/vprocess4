@@ -71,10 +71,11 @@ aside{
 
 footer{
   font-size: 16px;
-  background: lightblue;
+  background: #54b5db;
   height: 70px;
   text-align: center;
-  margin-top: 5px;
+  margin-top: -20px;
+  height: 100px;
 }
 
 fieldset {

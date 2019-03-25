@@ -38,7 +38,7 @@ function my_chart(){
               $('#med3_g').text('TEMP2: ' + msg.data[2] + '[C]' ).html();
 
               //muestra el setpoint de ph en el grafico real time.
-              $('#ph_g').text('Temperatura Set: ' + msg.set[2]         ).html();
+              $('#ph_g').text('Temperatura Set: ' + msg.set[4]         ).html();
 
               //grafico ph
               set_ph.shift();
@@ -168,7 +168,7 @@ function my_chart(){
                     data: med_temp, //med_temp
                     fill: false,
                     lineTension: 0.5,
-                    backgroundColor: "green",
+                    backgroundColor: "rgba(0,200,0,0.4)",
                     borderColor: "green",
                     borderCapStyle: 'butt',
                     borderDash: [],

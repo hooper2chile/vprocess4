@@ -148,31 +148,8 @@ void remontaje(int pump_enable) {
 
 //ventilación puente-H
 void cooler(int rst1, int rst2, int rst3) {
-  if ( (rst1 == 1) && (rst2 == 1) && (rst3 == 1) ) digitalWrite(13, HIGH);
-  else digitalWrite(13, LOW );
-  return;
-}
-
-void bombas(int rst1, int rst2) {
-  //bomba alimentacion
-  if ( rst1 == 0) {
-    if ( feed_save != feed ) {
-      feed = feed-8;
-      feed = map(feed, 0, SPEED_MAX, 0, 255);
-      analogWrite(5, feed);
-      feed_save = feed;
-    }
-  } else analogWrite(5, 0);
-
-  //bomba descarga
-  if ( rst2 == 0 ) {
-    if ( unload_save != unload ) {
-      unload = map(unload, 0, SPEED_MAX, 0, 255);
-      analogWrite(9,unload);
-      unload_save = unload;
-    }
-  } else analogWrite(9,0);
-
+  if ( (rst1 == 1) && (rst2 == 1) && (rst3 == 1) ) digitalWrite(5, HIGH);
+  else digitalWrite(5, LOW );
   return;
 }
 
@@ -276,3 +253,4 @@ void crumble() {
 void clean_strings() {
   stringComplete = false;
   message    = "";
+}

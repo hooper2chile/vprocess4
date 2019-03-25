@@ -29,7 +29,7 @@ String new_write_t = "20.0";
 boolean stringComplete = false;  // whether the string is complete
 
 //RESET SETUP
-char rst1 = 1;  char rst2 = 1;  char rst3 = 1;
+uint8_t rst1 = 1;  uint8_t rst2 = 1;  uint8_t rst3 = 1;
 
 //DIRECTION SETUP
 char dir1 = 1;  char dir2 = 1;  char dir3 = 1;
@@ -170,9 +170,9 @@ void hamilton_sensors() {
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
 
-  if ( rst1 == 0 ) i = 1.1; else i = 0;
-  if ( rst2 == 0 ) j = 1.1; else j = 0;
-  if ( rst3 == 0 ) k = 1.1; else k = 0;
+  if ( rst1 == 0 ) i = 0.4; else i = 0;
+  if ( rst2 == 0 ) j = 0.4; else j = 0;
+  if ( rst3 == 0 ) k = 0.4; else k = 0;
 
   Itemp1 = Itemp1 + ( i + j + k ) * NOISE;
   Itemp2 = Itemp2 + ( i + j + k ) * NOISE;
@@ -250,7 +250,7 @@ void broadcast_setpoint(uint8_t select) {
       new_write_t = 't' + String(Temp_) + "\n";
 
       i2c_send_command(new_write_w, 3); //va hacia uc_slave
-      delay(20);
+      delay(5);
       i2c_send_command(new_write_w, 2); //va hacia uc_slave
       delay(20);
       i2c_send_command(new_write_p, 2); //va hacia uc_slave
@@ -280,12 +280,15 @@ void clean_strings() {
   message   = "";
 }
 
-// Validate SETPOINT
+// Validate and crumble SETPOINT
 int validate() {
     //message format write values: wf100u100t150r111d111
-    if ( message[0] == 'w' )
+    if ( message[0] == 'w' ) {
+            rst1 = int(INT(message[14]));  //rst_feed
+            rst2 = int(INT(message[15]));  //rst_unload
+            rst3 = int(INT(message[16]));  //rest_temp
             return 1;
-
+    }
     // Validate CALIBRATE
     else if ( message[0]  == 'c' &&
              (message[2]  == '+' || message[2] == '-') &&
