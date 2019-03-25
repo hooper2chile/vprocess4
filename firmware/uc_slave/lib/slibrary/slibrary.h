@@ -48,7 +48,7 @@ const int colorB = 0;
 #define k9 0.85
 
 #define Gap_temp0 0.5
-#define Gap_temp1 1.0    //1ÂC
+#define Gap_temp1 1.0    //1ï¿½C
 #define Gap_temp2 2.0
 #define Gap_temp3 3.0
 #define Gap_temp4 4.0
@@ -157,7 +157,8 @@ void bombas(int rst1, int rst2) {
   //bomba alimentacion
   if ( rst1 == 0) {
     if ( feed_save != feed ) {
-      feed = map(feed+20, 0, SPEED_MAX, 0, 255);
+      feed = feed-8;
+      feed = map(feed, 0, SPEED_MAX, 0, 255);
       analogWrite(5, feed);
       feed_save = feed;
     }
@@ -200,23 +201,23 @@ void control_temp(int rst3) {
     if ( dTemp <= Gap_temp0 )
       u_temp = k0*umbral_temp;
     else if ( dTemp <= Gap_temp1 )
-      u_temp = k1*umbral_temp;    
+      u_temp = k1*umbral_temp;
     else if ( dTemp <= Gap_temp2 )
-      u_temp = k2*umbral_temp;   
-    else if ( dTemp <= Gap_temp3 )  
-      u_temp = k3*umbral_temp;  
+      u_temp = k2*umbral_temp;
+    else if ( dTemp <= Gap_temp3 )
+      u_temp = k3*umbral_temp;
     else if ( dTemp <= Gap_temp4 )
-      u_temp = k4*umbral_temp; 
+      u_temp = k4*umbral_temp;
     else if ( dTemp <= Gap_temp5 )
-      u_temp = k5*umbral_temp;    
+      u_temp = k5*umbral_temp;
     else if ( dTemp <= Gap_temp6 )
-      u_temp = k6*umbral_temp;   
+      u_temp = k6*umbral_temp;
     else if ( dTemp <= Gap_temp7 )
-      u_temp = k7*umbral_temp;   
+      u_temp = k7*umbral_temp;
     else if ( dTemp <= Gap_temp8 )
-      u_temp = k8*umbral_temp;  
+      u_temp = k8*umbral_temp;
     else if ( dTemp > Gap_temp9  )
-      u_temp = k9*umbral_temp; 
+      u_temp = k9*umbral_temp;
 
     u_temp = map(u_temp, 0, umbral_temp, 0, 255);
     speed_motor(PWM2, u_temp, IN3, IN4);
@@ -275,4 +276,3 @@ void crumble() {
 void clean_strings() {
   stringComplete = false;
   message    = "";
-}

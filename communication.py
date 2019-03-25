@@ -17,8 +17,8 @@ tau_zmq_connect = 0.3 #0.3 [s]: no ha funcionado con menos
 tau_zmq_while_read = 0.3
 
 SPEED_MAX_MIX = 1500
-SPEED_MAX = 150
-TEMP_MAX  = 130
+SPEED_MAX = 100
+TEMP_MAX  = 80
 
 T_MAX = 1440
 T_MIN = 2

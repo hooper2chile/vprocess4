@@ -169,7 +169,7 @@ void hamilton_sensors() {
   //Filtros de media exponencial
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
-  
+
   if ( rst1 == 0 ) i = 1.1; else i = 0;
   if ( rst2 == 0 ) j = 1.1; else j = 0;
   if ( rst3 == 0 ) k = 1.1; else k = 0;
@@ -249,6 +249,8 @@ void broadcast_setpoint(uint8_t select) {
       new_write_t = "";
       new_write_t = 't' + String(Temp_) + "\n";
 
+      i2c_send_command(new_write_w, 3); //va hacia uc_slave
+      delay(20);
       i2c_send_command(new_write_w, 2); //va hacia uc_slave
       delay(20);
       i2c_send_command(new_write_p, 2); //va hacia uc_slave

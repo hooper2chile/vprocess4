@@ -460,3 +460,37 @@ fieldset {
     margin-left: 860px;
     border-radius: 20px;
 }
+
+/*fundo*/
+.caja11 {
+    font-size: 16px;
+    font-family: verdana;
+    background: #54b5db;/*YellowGreen;#004579;*/
+    width: 200px;
+    height: 75px;
+    padding: 10px;
+    border: 2px solid #000;
+    margin-top: -585px;
+    margin-right: -50px;
+    text-align: left;
+    margin-bottom: 0px;
+    margin-left: 1100px;
+    border-radius: 20px;
+}
+
+/*cepa*/
+.caja12 {
+    font-size: 16px;
+    font-family: verdana;
+    background: #54b5db;/*YellowGreen;#004579;*/
+    width: 200px;
+    height: 75px;
+    padding: 10px;
+    border: 2px solid #000;
+    margin-top: 10px;
+    margin-right: -50px;
+    text-align: left;
+    margin-bottom: 400px;
+    margin-left: 1100px;
+    border-radius: 20px;
+}

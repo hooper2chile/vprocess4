@@ -58,7 +58,9 @@ $(document).ready(function() {
                            yan: $('#yan_input_id').val(),
                             ph: $('#ph_input_id').val(),
                           brix: $('#brix_input_id').val(),
-                        acidez: $('#acidez_input_id').val()
+                        acidez: $('#acidez_input_id').val(),
+                         fundo: $('#fundo_input_id').val(),
+                          cepa: $('#cepa_input_id').val()
                     });
 
         return false;
@@ -93,6 +95,7 @@ $(document).ready(function() {
         console.log($('#temperatura_dir').is(':checked'));
     });
 
+
     //para escuchar datos de ficha de producto
     socket.on('producto', function(msg) {
         document.getElementById('densidad_input_id').value = msg.set[0];
@@ -100,9 +103,19 @@ $(document).ready(function() {
         document.getElementById('ph_input_id').value       = msg.set[2];
         document.getElementById('brix_input_id').value     = msg.set[3];
         document.getElementById('acidez_input_id').value   = msg.set[4];
+        document.getElementById('fundo_input_id').value    = msg.set[5];
+        document.getElementById('cepa_input_id').value     = msg.set[6];
+
+        //aca el codigo para insertar los valores guardados
+        $('#densidad_div_id').text('Densidad: ' + msg.save[0] ).html();
+        $('#yan_div_id'     ).text('Yan     : ' + msg.save[1] ).html();
+        $('#ph_div_id'      ).text('pH      : ' + msg.save[2] ).html();
+        $('#brix_div_id'    ).text('Brix    : ' + msg.save[3] ).html();
+        $('#acidez_div_id'  ).text('Acidez  : ' + msg.save[4] ).html();
+        $('#fundo_div_id'   ).text('Fundo   : ' + msg.save[5] ).html();
+        $('#cepa_div_id'    ).text('Cepa    : ' + msg.save[6] ).html();
 
     });
-
 
 
     //se emiten señal de reinicio,apagado, grabacion y limpiaza hacia el servidor
@@ -136,7 +149,9 @@ $(document).ready(function() {
     $('#ph_div_id'       ).css({ 'color': 'white', 'font-size': '110%' });
     $('#brix_div_id'     ).css({ 'color': 'white', 'font-size': '110%' });
     $('#acidez_div_id'   ).css({ 'color': 'white', 'font-size': '110%' });
-    $('#brix_div_id'   ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#brix_div_id'     ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#fundo_div_id'    ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#cepa_div_id'     ).css({ 'color': 'white', 'font-size': '110%' });
 
 
 });

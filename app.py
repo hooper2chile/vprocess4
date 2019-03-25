@@ -29,8 +29,9 @@ rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para l
 task = ["grabar", False]
 flag_database = False
 
-ficha_producto = [0.0,0.0,0.0,0.0,0.0]
-set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
+ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0"]
+ficha_producto_save = ficha_producto
+set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
 
 
 
@@ -127,7 +128,7 @@ def function_thread():
     emit('u_calibrar_temp',     {'set': u_set_temp})
     emit('power',               {'set': task})
     emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save })
-    emit('producto'           , {'set': ficha_producto})
+    emit('producto'           , {'set': ficha_producto, 'save': ficha_producto_save})
 
     global thread1
     if thread1 is None:
@@ -550,17 +551,16 @@ def ficha(dato):
         ficha_producto[2] = float(dato['ph'])
         ficha_producto[3] = float(dato['brix'])
         ficha_producto[4] = float(dato['acidez'])
+        ficha_producto[5] = str(dato['fundo'])
+        ficha_producto[6] = str(dato['cepa'])
+
+        ficha_producto_save = ficha_producto
 
     except:
-        ficha_producto[0] = 6
-        ficha_producto[1] = 6
-        ficha_producto[2] = 6
-        ficha_producto[3] = 6
-        ficha_producto[4] = 6
-
+        ficha_producto = ficha_producto_save
         logging.info("no se pudo evaluar la ficha de producto")
 
-    socketio.emit('producto', {'set':ficha_producto}, namespace='/biocl', broadcast=True)
+    socketio.emit('producto', {'set':ficha_producto, 'save': ficha_producto_save}, namespace='/biocl', broadcast=True)
     #communication.zmq_client_data_speak_website(ficha_producto)
 
     try:
@@ -578,7 +578,7 @@ def ficha(dato):
 #CONFIGURACION DE THREADS
 def background_thread1():
     measures = [0,0,0,0,0,0,0]
-    save_set_data = [0,0,0,0,0,1,1,1,1,1,0,0,0]
+    save_set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
 
     #ciclo_seg    = 30#rm_sets[2]*3600*24                  #se configura ciclo de dias a segundos.
     #duracion_seg = 5#rm_sets[1]*60                        #se configura duracion de minutos a segundos.

@@ -23,13 +23,13 @@
 
 <form id="setpoints" method="POST" action='#'>
     <font color="white">
-    <div class="caja_izquierda_arriba">Alimentar [rpm]: <br>
+    <div class="caja_izquierda_arriba">Alimentar [%Potencia]: <br>
               <input type="number"
                      id="alimentar"
                      style="width: 50px;"
                      value=""
-                     MIN="0"
-                     MAX="150"
+                     MIN="20"
+                     MAX="100"
                      step="1"
               />
               <button  type="submit" class="button_apply"> + </button>
@@ -98,12 +98,12 @@
     </font>
 
     <font color="white">
-    <div class="caja_derecha_abajo">Descarga [rpm]:
+    <div class="caja_derecha_abajo">Descarga [%Potencia]:
             <br><input  type="number"
                     id="descargar"
                     style="width: 50px;"
-                    MIN="0"
-                    MAX="150"
+                    MIN="20"
+                    MAX="100"
                     step="1"
                     value=""
             />
@@ -189,6 +189,37 @@
             />
             <button  type="submit" class="button_apply"> + </button>
     </div>
+
+    <font color="white">
+    <!caja11: ficha de producto: fundo>
+        <div class="caja11">
+          &emsp;&emsp;&emsp;&emsp;&emsp;
+          <div id="fundo_div_id">Fundo:</div>
+            <input type="text"
+                         id="fundo_input_id"
+                         style="width: 50px;"
+                         value="fundo"
+            />
+            <button  type="submit" class="button_apply"> + </button>
+        </div>
+    </font>
+
+    <font color="white">
+    <!caja12: ficha de producto: cepa>
+        <div class="caja12">
+          &emsp;&emsp;&emsp;&emsp;&emsp;
+          <div id="cepa_div_id">Cepa:</div>
+            <input type="text"
+                         id="cepa_input_id"
+                         style="width: 50px;"
+                         value="cepa"
+            />
+            <button  type="submit" class="button_apply"> + </button>
+        </div>
+    </font>
+
+
+
 </form>
 <!-- test -->
 {% endblock %}

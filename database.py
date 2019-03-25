@@ -18,7 +18,7 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     c.execute('CREATE TABLE IF NOT EXISTS TEMP_(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
 
     #TABLA FULL CON TODA LA DATA
-    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, Temp1 REAL, Temp2 REAL, Temp_Promedio REAL, Flujo REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, FUNDO TEXT NOT NULL, CEPA TEXT NOT NULL, Temp1 REAL, Temp2 REAL, T_Promedio REAL, Flujo REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL)')
 
     logging.info("Se crearon las tablas!!!")
 
@@ -28,12 +28,13 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     #INSERCION DE LOS DATOS MEDIDOS
     #TEMP1=: real_data[1];  TEMP2=: real_data[2], TEMP_=: real_data[3]
     try:
+        #Insercion solo de los datos de sensores
         c.execute("INSERT INTO TEMP1 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[1]))
         c.execute("INSERT INTO TEMP2 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[2]))
         c.execute("INSERT INTO TEMP_ VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[3]))
 
         #TABLA FULL CON TODA LA DATA
-        c.execute("INSERT INTO PROCESO  VALUES (NULL,?,?,?,?,?,?,?,?,?,?)", (datetime.datetime.now(), real_data[1], real_data[2], real_data[3], real_data[8], ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4] ))
+        c.execute("INSERT INTO PROCESO  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (datetime.datetime.now(), ficha_producto[5], ficha_producto[6], real_data[1], real_data[2], real_data[3], real_data[8], ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4] ))
 
         logging.info("se insertaron todos los datos en db")
 
