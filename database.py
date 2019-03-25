@@ -18,7 +18,7 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     c.execute('CREATE TABLE IF NOT EXISTS TEMP_(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
 
     #TABLA FULL CON TODA LA DATA
-    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, Temp1 REAL, Temp2 REAL, Temp_Promedio REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, Temp1 REAL, Temp2 REAL, Temp_Promedio REAL, Flujo REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL)')
 
     logging.info("Se crearon las tablas!!!")
 
@@ -33,7 +33,7 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
         c.execute("INSERT INTO TEMP_ VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[3]))
 
         #TABLA FULL CON TODA LA DATA
-        c.execute("INSERT INTO PROCESO  VALUES (NULL,?,?,?,?,?,?,?,?,?)", (datetime.datetime.now(), real_data[1], real_data[2], real_data[3], ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4] ))
+        c.execute("INSERT INTO PROCESO  VALUES (NULL,?,?,?,?,?,?,?,?,?,?)", (datetime.datetime.now(), real_data[1], real_data[2], real_data[3], real_data[8], ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4] ))
 
         logging.info("se insertaron todos los datos en db")
 
@@ -145,8 +145,11 @@ def main():
 
             #ZMQ connection for download data ficha_producto
             try:
-                ficha_producto = socket_sub.recv(flags=zmq.NOBLOCK).split()[1:];
+                ficha_producto = socket_sub.recv(flags=zmq.NOBLOCK).split()[1];
+                ficha_producto = ficha_producto.split(",")
                 ficha_producto_save = ficha_producto
+                logging.info("ficha de producto a continuacion: ")
+                logging.info(ficha_producto)
 
             except zmq.Again:
                 ficha_producto = ficha_producto_save

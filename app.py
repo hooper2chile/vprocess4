@@ -670,7 +670,9 @@ def background_thread1():
 
 
             communication.cook_remontaje(rm_sets)
-            communication.zmq_client_data_speak_website(str(ficha_producto))
+            #se envian datos de ingreso manual via web a la base de datos
+            myList = ','.join(map(str, ficha_producto))
+            communication.zmq_client_data_speak_website(myList)
 
             #time.sleep(0.05)
             #################################################################################
