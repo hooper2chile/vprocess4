@@ -82,34 +82,35 @@
 }
 
 
+/*cajas color medicion de temperatura*/
 .caja_derecha_arriba1{
   font-size: 18px;
   font-family: verdana;
   background: #004579;/*YellowGreen;#004579;*/
-  width: 200px;
+  width: 230px;
   height: 30px;
   padding: 10px;
   border: 2px solid lightblue;
   margin-right: 150px;
   text-align: center;
-  margin-left: 615px;//845px;
+  margin-left: 620px;
 
   margin-bottom: 10px;
-  margin-top: -550px;//-675px;
+  margin-top: -550px;
   border-radius: 50px;
 }
 
 .caja_derecha_arriba2{
   font-size: 18px;
   font-family: verdana;
-  background: #004579;/*YellowGreen;#004579;*/
-  width: 200px;
+  background: #004579;/*YellowGreen;*/
+  width: 230px;
   height: 30px;
   padding: 10px;
   border: 2px solid lightblue;
   margin-right: 150px;
   text-align: center;
-  margin-left: 615px;//845px;
+  margin-left: 620px;
 
   margin-bottom: 10px;
   margin-top: 10px;
@@ -119,20 +120,20 @@
 .caja_derecha_arriba3{
   font-size: 18px;
   font-family: verdana;
-  background: #004579;
-  width: 200px;
+  background: #004579; /*YellowGreen;*/
+  width: 230px;
   height: 30px;
   padding: 10px;
   border: 2px solid lightblue;
   margin-right: 150px;
   text-align: center;
-  margin-left: 615px;//845px;
+  margin-left: 620px;
 
-  margin-bottom: 230px;
+  margin-bottom: 350px;
   margin-top: 10px;
   border-radius: 50px;
 }
-
+/*cajas color medicion de temperatura*/
 
 
 .centrar{

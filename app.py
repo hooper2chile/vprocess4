@@ -29,7 +29,7 @@ rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para l
 task = ["grabar", False]
 flag_database = False
 
-ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0"]
+ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0]
 ficha_producto_save = ficha_producto
 set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
 
@@ -553,6 +553,8 @@ def ficha(dato):
         ficha_producto[4] = float(dato['acidez'])
         ficha_producto[5] = str(dato['fundo'])
         ficha_producto[6] = str(dato['cepa'])
+        ficha_producto[7] = str(dato['lote'])
+        ficha_producto[8] = str(dato['dosis'])
 
         ficha_producto_save = ficha_producto
 

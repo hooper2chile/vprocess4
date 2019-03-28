@@ -120,12 +120,12 @@ fieldset {
 
 }
 
-
+/*cajas color medicion de temperatura*/
 .caja_derecha_arriba1{
   font-size: 18px;
   font-family: verdana;
   background: #004579;/*YellowGreen;#004579;*/
-  width: 200px;
+  width: 230px;
   height: 30px;
   padding: 10px;
   border: 2px solid lightblue;
@@ -138,12 +138,11 @@ fieldset {
   border-radius: 50px;
 }
 
-
 .caja_derecha_arriba2{
   font-size: 18px;
   font-family: verdana;
   background: #004579;/*YellowGreen;*/
-  width: 200px;
+  width: 230px;
   height: 30px;
   padding: 10px;
   border: 2px solid lightblue;
@@ -160,7 +159,7 @@ fieldset {
   font-size: 18px;
   font-family: verdana;
   background: #004579; /*YellowGreen;*/
-  width: 200px;
+  width: 230px;
   height: 30px;
   padding: 10px;
   border: 2px solid lightblue;
@@ -172,6 +171,7 @@ fieldset {
   margin-top: 10px;
   border-radius: 50px;
 }
+/*cajas color medicion de temperatura*/
 
 .caja_izquierda_centro{
   font-size: 16px;
@@ -393,7 +393,7 @@ fieldset {
     margin-right: -50px;
     text-align: left;
     margin-bottom: 10px;
-    margin-left: 860px;
+    margin-left: 880px;
     border-radius: 20px;
 }
 
@@ -409,7 +409,7 @@ fieldset {
     margin-right: -50px;
     text-align: left;
     margin-bottom: 10px;
-    margin-left: 860px;
+    margin-left: 880px;
     border-radius: 20px;
 }
 
@@ -425,7 +425,7 @@ fieldset {
     margin-right: -50px;
     text-align: left;
     margin-bottom: 10px;
-    margin-left: 860px;
+    margin-left: 880px;
     border-radius: 20px;
 }
 
@@ -441,10 +441,11 @@ fieldset {
     margin-right: -50px;
     text-align: left;
     margin-bottom: 10px;
-    margin-left: 860px;
+    margin-left: 880px;
     border-radius: 20px;
 }
 
+/*acidez*/
 .caja10 {
     font-size: 16px;
     font-family: verdana;
@@ -457,7 +458,7 @@ fieldset {
     margin-right: -50px;
     text-align: left;
     margin-bottom: 50px;
-    margin-left: 860px;
+    margin-left: 880px;
     border-radius: 20px;
 }
 
@@ -474,7 +475,7 @@ fieldset {
     margin-right: -50px;
     text-align: left;
     margin-bottom: 0px;
-    margin-left: 1100px;
+    margin-left: 1110px;
     border-radius: 20px;
 }
 
@@ -490,7 +491,42 @@ fieldset {
     margin-top: 10px;
     margin-right: -50px;
     text-align: left;
+    margin-bottom: 10px;
+    margin-left: 1110px;
+    border-radius: 20px;
+}
+
+/*lote*/
+.caja13 {
+    font-size: 16px;
+    font-family: verdana;
+    background: #54b5db;/*YellowGreen;#004579;*/
+    width: 200px;
+    height: 75px;
+    padding: 10px;
+    border: 2px solid #000;
+    margin-top: 10px;
+    margin-right: -50px;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 1110px;
+    border-radius: 20px;
+}
+
+
+/*dosis*/
+.caja14 {
+    font-size: 16px;
+    font-family: verdana;
+    background: #54b5db;/*YellowGreen;#004579;*/
+    width: 200px;
+    height: 75px;
+    padding: 10px;
+    border: 2px solid #000;
+    margin-top: 10px;
+    margin-right: -50px;
+    text-align: left;
     margin-bottom: 400px;
-    margin-left: 1100px;
+    margin-left: 1110px;
     border-radius: 20px;
 }

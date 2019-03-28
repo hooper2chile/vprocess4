@@ -11,9 +11,9 @@ $(document).ready(function() {
 
     //Se escuchan las mediciones de ph, OD, Temp.
     socket.on('Medidas', function(msg) {
-        $('#med1').text('Temp_: ' + msg.data[0] + ' º[C]').html();
-        $('#med2').text('Temp1: ' + msg.data[1] + ' º[C]').html();
-        $('#med3').text('Temp2: ' + msg.data[2] + ' º[C]').html();
+        $('#med1').text('T. Promedio: ' + msg.data[0] + ' º[C]').html();
+        $('#med2').text('T. Sombrero: ' + msg.data[1] + ' º[C]').html();
+        $('#med3').text('T. Mosto   : ' + msg.data[2] + ' º[C]').html();
     });
 
     //se emiten los setpoints hacia el servidor
@@ -60,9 +60,10 @@ $(document).ready(function() {
                           brix: $('#brix_input_id').val(),
                         acidez: $('#acidez_input_id').val(),
                          fundo: $('#fundo_input_id').val(),
-                          cepa: $('#cepa_input_id').val()
+                          cepa: $('#cepa_input_id').val(),
+                          lote: $('#lote_input_id').val(),
+                         dosis: $('#dosis_input_id').val()
                     });
-
         return false;
     });
 
@@ -105,6 +106,8 @@ $(document).ready(function() {
         document.getElementById('acidez_input_id').value   = msg.set[4];
         document.getElementById('fundo_input_id').value    = msg.set[5];
         document.getElementById('cepa_input_id').value     = msg.set[6];
+        document.getElementById('lote_input_id').value     = msg.set[7];
+        document.getElementById('dosis_input_id').value    = msg.set[8];
 
         //aca el codigo para insertar los valores guardados
         $('#densidad_div_id').text('Densidad: ' + msg.save[0] ).html();
@@ -114,7 +117,8 @@ $(document).ready(function() {
         $('#acidez_div_id'  ).text('Acidez  : ' + msg.save[4] ).html();
         $('#fundo_div_id'   ).text('Fundo   : ' + msg.save[5] ).html();
         $('#cepa_div_id'    ).text('Cepa    : ' + msg.save[6] ).html();
-
+        $('#lote_div_id'    ).text('Lote    : ' + msg.save[7] ).html();
+        $('#dosis_div_id'   ).text('Dosis   : ' + msg.save[8] ).html();
     });
 
 
@@ -152,6 +156,6 @@ $(document).ready(function() {
     $('#brix_div_id'     ).css({ 'color': 'white', 'font-size': '110%' });
     $('#fundo_div_id'    ).css({ 'color': 'white', 'font-size': '110%' });
     $('#cepa_div_id'     ).css({ 'color': 'white', 'font-size': '110%' });
-
-
+    $('#lote_div_id'     ).css({ 'color': 'white', 'font-size': '110%' });
+    $('#dosis_div_id'    ).css({ 'color': 'white', 'font-size': '110%' });
 });
