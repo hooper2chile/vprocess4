@@ -101,11 +101,11 @@ def rs232(q1,q2):
                         if action == "read":
                             try:
                                 if ser.is_open:
-                                    logging.info("myserial_r_action_to_uc: %s ", action)
+                                    #logging.info("myserial_r_action_to_uc: %s ", action)
                                     ser.write('r' + '\n')
 
                                     SERIAL_DATA = ser.readline()
-                                    logging.info("myserial_r_reply_uc: %s ", SERIAL_DATA)
+                                    #logging.info("myserial_r_reply_uc: %s ", SERIAL_DATA)
                                     q2.put(SERIAL_DATA)
 
                                 else:
@@ -124,7 +124,7 @@ def rs232(q1,q2):
 
                                 #leyendo la respuesta del uc_master al comando "action" anterior
                                 result = ser.readline().split()
-                                logging.info("myserial_w_reply_uc: %s ", result)
+                                #logging.info("myserial_w_reply_uc: %s ", result)
                                 save_setpoint = action
 
                             except:
