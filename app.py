@@ -29,9 +29,12 @@ rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para l
 task = ["grabar", False]
 flag_database = False
 
-ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0]
-ficha_producto_save = ficha_producto
 set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
+
+ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura set point
+ficha_producto_save = ficha_producto                                #ficha_producto[10] = set_data[0]: bomba1
+                                                                    #ficha_producto[11] = set_data[3]: bomba2
+
 
 
 
@@ -172,6 +175,7 @@ def setpoints(dato):
         elif task[0] == "no_grabar":
             flag_database = "False"
             try:
+                os.system("rm -rf /home/pi/vprocess4/name_db.txt")
                 f = open(DIR + "flag_database.txt","w")
                 f.write(flag_database)
                 f.close()
@@ -501,7 +505,7 @@ def calibrar_u_temp(dato):
 
 #remontaje setpoits
 @socketio.on('remontaje_setpoints', namespace='/biocl')
-def autoclave_functions(dato):
+def remontaje_functions(dato):
     global rm_sets, rm_save
 
     try:
@@ -613,6 +617,11 @@ def background_thread1():
                 if save_set_data[i] != set_data[i]:
                     communication.cook_setpoint(set_data)
                     save_set_data = set_data
+                    #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
+                    ficha_producto[9]  = save_set_data[4]   #setpoint de temperatura
+                    ficha_producto[10] = save_set_data[0]   #bomba1
+                    ficha_producto[11] = save_set_data[3]   #bomba2
+
             ##logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
 
             #################################################################################
@@ -671,9 +680,22 @@ def background_thread1():
                 time.sleep(0.05)
 
 
-
             communication.cook_remontaje(rm_sets)
+            #Se emite nuevo set de remontaje solo si hay cambios en alguno de sus valores
+            #for i in range(0,len(rm_sets)):
+            #    if rm_save[i] != rm_sets[i]:
+            #        communication.cook_remontaje(rm_sets)
+            #        rm_save = rm_sets
+                    #logging.info("\n rm_sets:  %s\n" % rm_sets)
+
+
+
             #se envian datos de ingreso manual via web a la base de datos
+            #for i in range(0, len(ficha_producto)):
+            #    if ficha_producto[i] != ficha_producto_save[i]:
+            #        myList = ','.join(map(str, ficha_producto))
+            #        communication.zmq_client_data_speak_website(myList)
+
             myList = ','.join(map(str, ficha_producto))
             communication.zmq_client_data_speak_website(myList)
 

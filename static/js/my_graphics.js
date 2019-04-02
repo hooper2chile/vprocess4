@@ -33,9 +33,9 @@ function my_chart(){
 
           //mediciones de ph, OD, Temp. Socket regenera el grafico con cada llamada!!!
           socket.on('Medidas', function(msg) {
-              $('#med1_g').text('TEMP_: ' + msg.data[0] + '[C]' ).html();
-              $('#med2_g').text('TEMP1: ' + msg.data[1] + '[C]' ).html();
-              $('#med3_g').text('TEMP2: ' + msg.data[2] + '[C]' ).html();
+              $('#med1_g').text('T. Promedio: ' + msg.data[0] + '[C]' ).html();
+              $('#med2_g').text('T. Sombrero: ' + msg.data[1] + '[C]' ).html();
+              $('#med3_g').text('T. Mosto: ' + msg.data[2] + '[C]' ).html();
 
               //muestra el setpoint de ph en el grafico real time.
               $('#ph_g').text('Temperatura Set: ' + msg.set[4]         ).html();
@@ -54,7 +54,7 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'TEMP_',//'TEMP1 Bioreactor',
+                    label: 'T. Promedio',//'TEMP1 Bioreactor',
                     data: med_ph,
                     fill: false,
                     lineTension: 0.5,
@@ -114,7 +114,7 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'TEMP1 Bioreactor',
+                    label: 'T. Sombrero',
                     data: med_od,
                     fill: false,
                     lineTension: 0.5,
@@ -164,7 +164,7 @@ function my_chart(){
                   labels: time_axis,
 
                   datasets: [{
-                    label: 'TEMP2 Biorreactor',
+                    label: 'T. Mosto',
                     data: med_temp, //med_temp
                     fill: false,
                     lineTension: 0.5,

@@ -29,9 +29,10 @@ BOMBA_REMONTAJE_T_MIN = 1
 CICLO_MAX = 20
 CICLO_MIN = 1
 
-
 PH_MIN = 1
 PH_MAX = 14
+
+command_save = "vacio"
 
 
 #download data measures with client zmq
@@ -237,6 +238,8 @@ def actuador(var,u_set):
 ###############################################################################
 #Se reciben localmente los datos de rm_sets desde app.py
 def cook_remontaje(rm_sets):
+    global command_save
+
     rm_sets[0] = int(rm_sets[0])    #periodo
     rm_sets[1] = int(rm_sets[1])    #rm_duracion
     rm_sets[2] = int(rm_sets[2])    #rm_ciclo
@@ -317,7 +320,10 @@ def cook_remontaje(rm_sets):
 
         #se construye el string de autoclavado
         command = 'p' + periodo + 'd' + duracion + 'c' + ciclo + 'e' + enable + 'f' + flujo + '\n'
-        published_setpoint(command)
+
+        if command_save != command:
+            published_setpoint(command)
+            command_save = command
 
         #se respalda el comando
         #f = open(DIR + "remontaje_string.txt","a+")
