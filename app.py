@@ -635,9 +635,9 @@ def background_thread1():
         temp_ = communication.zmq_client().split()
 
         try:
-            measures[0] = temp_[1]  #Temp_
-            measures[1] = temp_[2]  #Temp1
-            measures[2] = temp_[3]  #Temp2
+            measures[0] = temp_[1]  #Temp_ (T_Promedio)
+            measures[1] = temp_[2]  #Temp1 (T_Sombrero)
+            measures[2] = temp_[3]  #Temp2 (T_Mosto)
             measures[3] = temp_[6]  #Itemp2
             measures[4] = temp_[5]  #Iod
             measures[5] = temp_[7]  #Itemp1
@@ -708,7 +708,7 @@ def background_thread1():
             communication.cook_remontaje(rm_sets)
 
             ficha_producto[12] = rm_sets[5]*rm_sets[4]
-            
+
             myList = ','.join(map(str, ficha_producto))
             communication.zmq_client_data_speak_website(myList)
 

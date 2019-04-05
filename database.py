@@ -12,10 +12,10 @@ flag_database = "False"
 flag_database_local = False
 
 def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
-    #CREACION DE TABLAS TEMP1, TEMP2, TEMP_ (promedio). CADA ITEM ES UNA COLUMNA
-    c.execute('CREATE TABLE IF NOT EXISTS TEMP1(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
-    c.execute('CREATE TABLE IF NOT EXISTS TEMP2(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
-    c.execute('CREATE TABLE IF NOT EXISTS TEMP_(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
+    #CREACION DE TABLAS TEMP1(Sombrero), TEMP2(Mosto), TEMP_ (promedio). CADA ITEM ES UNA COLUMNA
+    c.execute('CREATE TABLE IF NOT EXISTS T_SOMBRERO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS T_MOSTO    (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS T_PROMEDIO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
 
     #TABLA FULL CON TODA LA DATA
     c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA TIMESTAMP NOT NULL, HORA TIMESTAMP NOT NULL, FUNDO TEXT NOT NULL, CEPA TEXT NOT NULL, T_MOSTO REAL, T_SOMBRERO REAL, T_Promedio REAL, T_Setpoint REAL, Flujo REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL, Lote REAL, Dosis REAL, Bomba1 REAL, Bomba2 REAL)')
@@ -30,13 +30,13 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     #T.SOMBRERO=: real_data[1];  T.MOSTO=: real_data[2], T.PROMEDIO=: real_data[3]
     try:
         #Insercion solo de los datos de sensores
-        c.execute("INSERT INTO TEMP1 VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[1]))
-        c.execute("INSERT INTO TEMP2 VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[2]))
-        c.execute("INSERT INTO TEMP_ VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[3]))
+        c.execute("INSERT INTO T_MOSTO    VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[3]))
+        c.execute("INSERT INTO T_SOMBRERO VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[2]))
+        c.execute("INSERT INTO T_PROMEDIO VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[1]))
 
         #TABLA FULL CON TODA LA DATA
         # NULL es para el ID
-        c.execute("INSERT INTO PROCESO  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (datetime.datetime.now().strftime("%Y-%m-%d"), datetime.datetime.now().strftime("%H:%M:%S"), ficha_producto[5], ficha_producto[6], real_data[1], real_data[2], real_data[3], ficha_producto[9], ( float(real_data[8])*float(ficha_producto[12]) ), ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4], ficha_producto[7], ficha_producto[8], ficha_producto[10], ficha_producto[11] ))
+        c.execute("INSERT INTO PROCESO  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (datetime.datetime.now().strftime("%Y-%m-%d"), datetime.datetime.now().strftime("%H:%M:%S"), ficha_producto[5], ficha_producto[6], real_data[3], real_data[2], real_data[1], ficha_producto[9], ( float(real_data[8])*float(ficha_producto[12]) ), ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4], ficha_producto[7], ficha_producto[8], ficha_producto[10], ficha_producto[11] ))
         logging.info("se insertaron todos los datos en db")
 
     except:
@@ -55,11 +55,11 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from TEMP1;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_SOMBRERO.csv' )
-            os.system('sqlite3 -header -csv %s "select * from TEMP2;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_MOSTO.csv'    )
-            os.system('sqlite3 -header -csv %s "select * from TEMP_;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_PROMEDIO.csv' )
+            os.system('sqlite3 -header -csv %s "select * from T_SOMBRERO;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_SOMBRERO.csv' )
+            os.system('sqlite3 -header -csv %s "select * from T_MOSTO;"    > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_MOSTO.csv'    )
+            os.system('sqlite3 -header -csv %s "select * from T_PROMEDIO;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_PROMEDIO.csv' )
 
-            os.system('sqlite3 -header -csv %s "select * from PROCESO;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'PROCESO.csv' )
+            os.system('sqlite3 -header -csv %s "select * from PROCESO;"    > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'PROCESO.csv' )
 
             logging.info("\n Backup CSV REALIZADO \n")
 
