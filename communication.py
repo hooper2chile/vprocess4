@@ -325,11 +325,6 @@ def cook_remontaje(rm_sets):
             published_setpoint(command)
             command_save = command
 
-        #se respalda el comando
-        #f = open(DIR + "remontaje_string.txt","a+")
-     	#f.write(str(command) + '\n')  #agregar la hora a este string
-    	#f.close()
-
     except:
         logging.info("no se pudo generar el command para remontaje_string")
         pass
@@ -344,15 +339,9 @@ def cook_remontaje(rm_sets):
 def cook_setpoint(set_data):
     #format string
     #convert true or false in checkbox to 0 or 1
-    for i in range(5,13):
-        if set_data[i] is True:
-            set_data[i] = 1
-        else:
-            set_data[i] = 0
                                                                                                             # + str(set_data[7]) = rst6
     string_rst = str(set_data[5]) + str(set_data[6]) + str(set_data[7]) + str(set_data[8]) + str(set_data[9]) + str(set_data[7])
     string_dir = str(set_data[10])+ str(set_data[11])+ str(set_data[12]) + '111'
-
 
 ######### para vprocess4 #####################################################
                 #       alimentar  +     ¿?           +  temperatura
@@ -361,33 +350,6 @@ def cook_setpoint(set_data):
                 #       alimentar  +   descarga       +  temperatura
     string_rst2 = str(set_data[5]) + str(set_data[8]) + str(set_data[9])
 ######### para vprocess4 #####################################################
-
-    global temp_save_set_data
-
-    try:
-        set_data[0] = int(set_data[0])   #alimentar
-        set_data[1] = int(set_data[1])   #mezclar
-        set_data[2] = float(set_data[2]) #ph
-        set_data[3] = int(set_data[3])   #descarga
-        set_data[4] = int(set_data[4])   #temperatura
-
-        #rst setting
-        set_data[5] = int(set_data[5])  #alimentar_rst
-        set_data[6] = int(set_data[6])  #mezclar_rst
-        set_data[7] = int(set_data[7])  #ph_rst
-        set_data[8] = int(set_data[8])  #descarga_rst
-        set_data[9] = int(set_data[9])  #temperatura_rst
-
-        #dir setting
-        set_data[10]= int(set_data[10]) #alimentar_dir
-        set_data[11]= int(set_data[11]) #ph_dir
-        set_data[12]= int(set_data[12]) #temperatura_dir
-
-        temp_save_set_data = set_data
-
-    except ValueError:
-        set_data = temp_save_set_data #esto permite reenviar el ultimo si hay una exception
-        #logging.info("exception de set_data")
 
     #threshold setting:
     #alimentar
@@ -426,7 +388,6 @@ def cook_setpoint(set_data):
         set_data[4] = 0
 
 
-
     #format seetting:
     if set_data[0] < 10:
         string_feed = '00' + str(set_data[0])
@@ -434,7 +395,6 @@ def cook_setpoint(set_data):
         string_feed = '0'  + str(set_data[0])
     else:
         string_feed = str(set_data[0])
-
 
 
     if set_data[1] < 10:
@@ -445,7 +405,6 @@ def cook_setpoint(set_data):
         string_mix = '0'   + str(set_data[1])
     else:
         string_mix = str(set_data[1])
-
 
 
     ph_dec = str(set_data[2]-int(set_data[2]))[1:]
@@ -462,14 +421,12 @@ def cook_setpoint(set_data):
             string_ph = str(set_data[2])
 
 
-
     if set_data[3] < 10:
         string_unload = '00' + str(set_data[3])
     elif set_data[3] < 100:
         string_unload = '0'  + str(set_data[3])
     else:
         string_unload = str(set_data[3])
-
 
 
     if set_data[4] < 10:
@@ -480,13 +437,8 @@ def cook_setpoint(set_data):
         string_temp = str(set_data[4])
 
 
-
-    #command = 'wph' + string_ph + 'feed' + string_feed + 'unload' + string_unload + 'mix' + string_mix + \
-    #          'temp' + string_temp + 'rst' + string_rst + 'dir' + string_dir + '\n'
-
     #vprocess4
     command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'd' + string_dir2 + '\n'
-
     logging.info('\n' + command + '\n')
 
     #published for put in queue and write in serial port

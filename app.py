@@ -30,11 +30,17 @@ task = ["grabar", False]
 flag_database = False
 
 set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
+#set_data[8] =: rst2 (reset de bomba2)
+#set_data[9] =: rst3 (reset de bomba temperatura)
+#set_data[5] =: rst1 (reset de bomba1)
+#rm_sets[4]  =: (reset global de bomba remontaje)
+#rm_sets[5]  =: (reset local de bomba remontaje)
 
-ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura set point
+ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0,0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura setpoint
 ficha_producto_save = ficha_producto                                #ficha_producto[10] = set_data[0]: bomba1
                                                                     #ficha_producto[11] = set_data[3]: bomba2
-
+                                                                    #ficha_producto[12] = rm_sets[4]*rm_sets[5] : para saber cuando enciende y cuando apaga el remontaje
+                                                                    #y se multiplica por el flujo en base de datos.
 
 
 
@@ -249,6 +255,31 @@ def setpoints(dato):
     #se reciben los nuevos setpoints
     set_data = [ dato['alimentar'], dato['mezclar'], dato['ph'], dato['descarga'], dato['temperatura'], dato['alimentar_rst'], dato['mezclar_rst'], dato['ph_rst'], dato['descarga_rst'], dato['temperatura_rst'], dato['alimentar_dir'], dato['ph_dir'], dato['temperatura_dir'] ]
 
+    try:
+        set_data[0] = int(set_data[0])   #alimentar
+        set_data[1] = int(set_data[1])   #mezclar
+        set_data[2] = float(set_data[2]) #ph
+        set_data[3] = int(set_data[3])   #descarga
+        set_data[4] = int(set_data[4])   #temperatura
+
+        #rst setting
+        set_data[5] = int(set_data[5])  #alimentar_rst
+        set_data[6] = int(set_data[6])  #mezclar_rst
+        set_data[7] = int(set_data[7])  #ph_rst
+        set_data[8] = int(set_data[8])  #descarga_rst
+        set_data[9] = int(set_data[9])  #temperatura_rst
+
+        #dir setting
+        set_data[10]= int(set_data[10]) #alimentar_dir
+        set_data[11]= int(set_data[11]) #ph_dir
+        set_data[12]= int(set_data[12]) #temperatura_dir
+
+        save_set_data = set_data
+
+    except ValueError:
+        set_data = save_set_data #esto permite reenviar el ultimo si hay una exception
+        logging.info("exception de set_data")
+
     #Con cada cambio en los setpoints, se vuelven a emitir a todos los clientes.
     socketio.emit('Setpoints', {'set': set_data}, namespace='/biocl', broadcast=True)
 
@@ -448,7 +479,6 @@ def calibrar_u_ph(dato):
     global u_set_ph
     #se reciben los parametros para calibración
     #setting = [ dato['u_acido_max'], dato['u_base_max'] ]
-
     try:
         u_set_ph[0] = int(dato['u_acido_max'])
         u_set_ph[1] = int(dato['u_base_max'])
@@ -618,9 +648,9 @@ def background_thread1():
                     communication.cook_setpoint(set_data)
                     save_set_data = set_data
                     #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
-                    ficha_producto[9]  = save_set_data[4]   #setpoint de temperatura
-                    ficha_producto[10] = save_set_data[0]   #bomba1
-                    ficha_producto[11] = save_set_data[3]   #bomba2
+                    ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
+                    ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
+                    ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
 
             ##logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
 
@@ -629,14 +659,14 @@ def background_thread1():
             #bucle principal de tiempo
             #if rm_sets[4] == 1: #se habilita el remontaje con enable de la app.py
             if rm_sets[4] == 1:
-                ciclo_seg    = int(rm_sets[2])*3600*24                 #se configura ciclo de dias a segundos.
-                duracion_seg = int(rm_sets[1])*60                       #se configura duracion de minutos a segundos.
-                periodo_seg  = int(rm_sets[0])*60                      #se configura periodo  de munutos a segundos.
+                ciclo_seg    = int(rm_sets[2])*3600*24             #se configura ciclo de dias a segundos.
+                duracion_seg = int(rm_sets[1])*60                  #se configura duracion de minutos a segundos.
+                periodo_seg  = int(rm_sets[0])*60                  #se configura periodo  de munutos a segundos.
 
                 if ciclo_seg - ciclo_elapsed > 0:
                     #GPIO.output(PIN_CICLO, True)
                     c = datetime.datetime.now() - time_save1
-                    ciclo_elapsed = c.days*3600*24 + c.seconds      #tiempo transcurrido
+                    ciclo_elapsed = c.days*3600*24 + c.seconds     #tiempo transcurrido
 
                     ###################################################################################
                     # Codigo reentrante para periodo y duracion de bomba remontaje
@@ -645,25 +675,20 @@ def background_thread1():
                         time_save2 = datetime.datetime.now()
                         d = datetime.datetime.now() - time_save2
                         flag_duty_cycle = 0
-                        #print "flag_duty_cycle!"
 
                     if (duracion_seg - d.seconds) > 0:             #descuento tiempo del duty cycle, tiempo en alto.
                         rm_sets[5] = 1                             #aca encender el pin (enciendo bomba)
-                        #GPIO.output(PIN_RELE, True)
-                        #print "if"
+
 
                     elif (periodo_seg - d.seconds) > 0:            #vencido el tiempo en alto, descuento tiempo del periodo, tiempo en bajo.
                         rm_sets[5] = 0                             #aca apagar el pin (apago la bomba)
-                        #GPIO.output(PIN_RELE, False)
-                        #print "elif"
+
 
                     else:
                         flag_duty_cycle = 1
                     ###################################################################################
 
                 else:
-                    #rm_sets[5] = 0
-                    #ciclo_elapsed = 0
                     rm_sets[4] = 0   #finalizado el ciclo, se debe apagar el enable global y Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
                     socketio.emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save }, namespace='/biocl', broadcast=True)
                     time.sleep(0.01)
@@ -681,34 +706,11 @@ def background_thread1():
 
 
             communication.cook_remontaje(rm_sets)
-            #Se emite nuevo set de remontaje solo si hay cambios en alguno de sus valores
-            #for i in range(0,len(rm_sets)):
-            #    if rm_save[i] != rm_sets[i]:
-            #        communication.cook_remontaje(rm_sets)
-            #        rm_save = rm_sets
-                    #logging.info("\n rm_sets:  %s\n" % rm_sets)
 
-
-
-            #se envian datos de ingreso manual via web a la base de datos
-            #for i in range(0, len(ficha_producto)):
-            #    if ficha_producto[i] != ficha_producto_save[i]:
-            #        myList = ','.join(map(str, ficha_producto))
-            #        communication.zmq_client_data_speak_website(myList)
-
+            ficha_producto[12] = rm_sets[5]*rm_sets[4]
+            
             myList = ','.join(map(str, ficha_producto))
             communication.zmq_client_data_speak_website(myList)
-
-            #time.sleep(0.05)
-            #################################################################################
-
-            #try:
-            #    f = open(DIR + "rm_sets_thread.tx","a+")
-            #    f.write(str(rm_sets[5]) + "_" + str(c.seconds) + "_" + str(d.seconds) + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") + '\n')
-            #    f.close()
-            #except:
-            #    logging.info("no se pudo guardar en rm_sets_thread.txt")
-            #    pass
 
             socketio.sleep(0.1)
 

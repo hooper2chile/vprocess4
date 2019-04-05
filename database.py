@@ -18,7 +18,7 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     c.execute('CREATE TABLE IF NOT EXISTS TEMP_(ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
 
     #TABLA FULL CON TODA LA DATA
-    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, FUNDO TEXT NOT NULL, CEPA TEXT NOT NULL, T_MOSTO REAL, T_SOMBRERO REAL, T_Promedio REAL, T_Setpoint REAL, Bomba1 REAL, Bomba2 REAL, Flujo REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL, Lote REAL, Dosis REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA TIMESTAMP NOT NULL, HORA TIMESTAMP NOT NULL, FUNDO TEXT NOT NULL, CEPA TEXT NOT NULL, T_MOSTO REAL, T_SOMBRERO REAL, T_Promedio REAL, T_Setpoint REAL, Flujo REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL, Lote REAL, Dosis REAL, Bomba1 REAL, Bomba2 REAL)')
 
 
     logging.info("Se crearon las tablas!!!")
@@ -30,12 +30,13 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     #T.SOMBRERO=: real_data[1];  T.MOSTO=: real_data[2], T.PROMEDIO=: real_data[3]
     try:
         #Insercion solo de los datos de sensores
-        c.execute("INSERT INTO TEMP1 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[1]))
-        c.execute("INSERT INTO TEMP2 VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[2]))
-        c.execute("INSERT INTO TEMP_ VALUES (NULL,?,?)", (datetime.datetime.now(), real_data[3]))
+        c.execute("INSERT INTO TEMP1 VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[1]))
+        c.execute("INSERT INTO TEMP2 VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[2]))
+        c.execute("INSERT INTO TEMP_ VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), real_data[3]))
 
         #TABLA FULL CON TODA LA DATA
-        c.execute("INSERT INTO PROCESO  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (datetime.datetime.now(), ficha_producto[5], ficha_producto[6], real_data[1], real_data[2], real_data[3], ficha_producto[9], real_data[8], ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4], ficha_producto[7], ficha_producto[8], ficha_producto[10], ficha_producto[11] ))
+        # NULL es para el ID
+        c.execute("INSERT INTO PROCESO  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (datetime.datetime.now().strftime("%Y-%m-%d"), datetime.datetime.now().strftime("%H:%M:%S"), ficha_producto[5], ficha_producto[6], real_data[1], real_data[2], real_data[3], ficha_producto[9], ( float(real_data[8])*float(ficha_producto[12]) ), ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4], ficha_producto[7], ficha_producto[8], ficha_producto[10], ficha_producto[11] ))
         logging.info("se insertaron todos los datos en db")
 
     except:
@@ -54,9 +55,9 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
         sqlitebck.copy(connector, bck)
 
         try:
-            os.system('sqlite3 -header -csv %s "select * from TEMP1;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'full_temp1.csv' )
-            os.system('sqlite3 -header -csv %s "select * from TEMP2;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'full_temp2.csv' )
-            os.system('sqlite3 -header -csv %s "select * from TEMP_;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'full_Temp_.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP1;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_SOMBRERO.csv' )
+            os.system('sqlite3 -header -csv %s "select * from TEMP2;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_MOSTO.csv'    )
+            os.system('sqlite3 -header -csv %s "select * from TEMP_;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'T_PROMEDIO.csv' )
 
             os.system('sqlite3 -header -csv %s "select * from PROCESO;" > /home/pi/vprocess4/csv/%s' % (filedb,filedb[28:-3])+'PROCESO.csv' )
 
@@ -82,7 +83,7 @@ def main():
     ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura set point
     ficha_producto_save = ficha_producto                                #ficha_producto[10] = set_data[0]: bomba1
                                                                         #ficha_producto[11] = set_data[3]: bomba2
-    
+
     #####Listen measures - estructura para zmq listen ###################################
     tau_zmq_connect = 0.3
     port_sub = "5554"
@@ -145,7 +146,7 @@ def main():
         while flag_database_local:
 
             #ZMQ connection for download data #string= socket_sub.recv(flags=zmq.NOBLOCK).split()
-            real_data      = communication.zmq_client().split()
+            real_data = communication.zmq_client().split()
 
             #ZMQ connection for download data ficha_producto
             try:
