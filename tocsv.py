@@ -8,8 +8,8 @@ def csv_file(FILE_DB, dt):
 
     FILE_CSV = '/home/pi/vprocess4/csv/' + FILE_DB[31:-3] + 'T=' + str(dt) + '.csv'
 
-    #################  PH  ########################
-    c.execute('SELECT * FROM ph')
+    ################# SOMBRERO ########################
+    c.execute('SELECT * FROM T_SOMBRERO')
     j = 1
     temporal = {}
     #dt = int(sys.argv[2])
@@ -18,19 +18,19 @@ def csv_file(FILE_DB, dt):
         temporal[j] = [ i[1][:-7], i[2] ]
         j+=1
 
-    ############################
+    ###################################################
     i=1
     temp = {}
     while i<=len(temporal)/dt:
         temp[i]=temporal[i*dt]
         i+=1
-    ############################
+    ###################################################
 
     with open(FILE_CSV, 'a+') as fp:
         a = csv.writer(fp)
         k=1
         data = []
-        a.writerow( ['date hour', 'pH'] )
+        a.writerow( ['date hour', 'T_SOMBRERO'] )
         for k in range(1,len(temp)):
             data += [temp[k]]
         a.writerows(data)
@@ -38,8 +38,8 @@ def csv_file(FILE_DB, dt):
 
 
 
-    #################  TEMP  ########################
-    c.execute('SELECT * FROM temp')
+    #################  MOSTO  ########################
+    c.execute('SELECT * FROM T_MOSTO')
     j = 1
     temporal = {}
     #dt = int(sys.argv[2])
@@ -48,56 +48,51 @@ def csv_file(FILE_DB, dt):
         temporal[j] = [ i[1][:-7], i[2] ]
         j+=1
 
-    ############################
+    #################################################
     i=1
     temp = {}
     while i<=len(temporal)/dt:
         temp[i]=temporal[i*dt]
         i+=1
-    ############################
-
-    with open(FILE_CSV, 'a+') as fp:
-        a = csv.writer(fp)
-        k=1
-        data = []
-        a.writerow( [''] )
-        a.writerow( ['date hour', 'Temp_pH'] )
-        for k in range(1,len(temp)):
-            data += [temp[k]]
-        a.writerows(data)
-
-
-
-
-    #################  OD  ########################
-    c.execute('SELECT * FROM od')
-    j = 1
-    temporal = {}
-    #dt = int(sys.argv[2])
-
-    for i in c:
-        temporal[j] = [ i[1][:-7], i[2] ]
-        j+=1
-
-    ############################
-    i=1
-    temp = {}
-    while i<=len(temporal)/dt:
-        temp[i]=temporal[i*dt]
-        i+=1
-    ############################
+    #################################################
 
     with open(FILE_CSV, 'a+') as fp:
         a = csv.writer(fp)
         k=1
         data = []
         a.writerow( [''] )
-        a.writerow( ['date hour', 'OD'] )
+        a.writerow( ['date hour', 'T_MOSTO'] )
         for k in range(1,len(temp)):
             data += [temp[k]]
         a.writerows(data)
 
+    #################  PROMEDIO  ##########################
+    c.execute('SELECT * FROM T_PROMEDIO')
+    j = 1
+    temporal = {}
+    #dt = int(sys.argv[2])
 
+    for i in c:
+        temporal[j] = [ i[1][:-7], i[2] ]
+        j+=1
+
+    ################################################
+    i=1
+    temp = {}
+    while i<=len(temporal)/dt:
+        temp[i]=temporal[i*dt]
+        i+=1
+    ################################################
+
+    with open(FILE_CSV, 'a+') as fp:
+        a = csv.writer(fp)
+        k=1
+        data = []
+        a.writerow( [''] )
+        a.writerow( ['date hour', 'T_PROMEDIO'] )
+        for k in range(1,len(temp)):
+            data += [temp[k]]
+        a.writerows(data)
 
     c.close()
     db.close()
