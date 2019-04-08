@@ -6,7 +6,7 @@ def csv_file(FILE_DB, dt):
     db = sqlite3.connect( FILE_DB )
     c  = db.cursor()
 
-    FILE_CSV = '/home/pi/vprocess4/csv/' + FILE_DB[31:-3] + 'T=' + str(dt) + '.csv'
+    FILE_CSV = '/home/pi/vprocess4/csv/' + FILE_DB[28:-3] + 'T=' + str(dt) + '.csv'
 
     ################# SOMBRERO ########################
     c.execute('SELECT * FROM T_SOMBRERO')
