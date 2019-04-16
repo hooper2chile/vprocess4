@@ -40,12 +40,12 @@ const int colorB = 0;
 #define k1 0.32//0.28
 #define k2 0.35//0.31
 #define k3 0.40//0.35
-#define k4 0.45
-#define k5 0.50
-#define k6 0.55
+#define k4 0.43
+#define k5 0.48
+#define k6 0.53
 #define k7 0.60
-#define k8 0.75
-#define k9 0.85
+#define k8 0.65
+#define k9 0.70
 
 #define Gap_temp0 0.5
 #define Gap_temp1 1.0    //1�C
