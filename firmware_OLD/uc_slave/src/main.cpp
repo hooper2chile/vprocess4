@@ -16,43 +16,47 @@
 #include <slibrary.h>
 
 void setup() {
- wdt_disable();
- message.reserve(65);
- //pinout setting para puente H motor bomba temperatura
- pinMode(PWM2, OUTPUT);
- pinMode(IN3, OUTPUT);
- pinMode(IN4, OUTPUT);
- analogWrite(PWM2, 0);
- digitalWrite(IN3, HIGH);
- digitalWrite(IN4, HIGH);
- //ventilador
- pinMode(5, OUTPUT);
- digitalWrite(5, HIGH);
- //pinout setting para puente H motor bomba temperatura
- //electrovavulas control de temparatura
- pinMode(AGUA_FRIA, OUTPUT);
- pinMode(AGUA_CALIENTE, OUTPUT);
- digitalWrite(AGUA_FRIA, HIGH);
- digitalWrite(AGUA_CALIENTE, HIGH);
- //electrovavulas control de temparatura
- //bomba remontaje
- pinMode(REMONTAJE_PIN, OUTPUT);
- digitalWrite(REMONTAJE_PIN, HIGH); //inicio apagado de bomba remontaje
- //bomba remontaje
- //setting de giro bombas alimentacion y descarga
- pinMode(12, OUTPUT);
- digitalWrite(12, HIGH); //IN2 e IN4 a VCC. IN1 e IN3 estan a GND.
- //setting de giro bombas alimentacion y descarga
+   wdt_disable();
+   message.reserve(65);
+   //pinout setting para puente H motor bomba temperatura
+   pinMode(PWM2, OUTPUT);
+   pinMode(IN3, OUTPUT);
+   pinMode(IN4, OUTPUT);
+   analogWrite(PWM2, 0);
+   digitalWrite(IN3, HIGH);
+   digitalWrite(IN4, HIGH);
+   //ventilador
+   pinMode(5, OUTPUT);
+   digitalWrite(5, HIGH);
+   //pinout setting para puente H motor bomba temperatura
 
- Wire.begin(2);  //se inicia i2c slave con direccion: 2
- Wire.onReceive(receiveEvent); // data slave recieved
 
- Serial.begin(9600);
+   //electrovavulas control de temparatura
+   pinMode(AGUA_FRIA, OUTPUT);
+   pinMode(AGUA_CALIENTE, OUTPUT);
+   digitalWrite(AGUA_FRIA, HIGH);
+   digitalWrite(AGUA_CALIENTE, HIGH);
+   //electrovavulas control de temparatura
 
- lcd.begin(16, 2);
- lcd.setRGB(colorR, colorG, colorB);
+   //bomba remontaje
+   pinMode(REMONTAJE_PIN, OUTPUT);
+   digitalWrite(REMONTAJE_PIN, HIGH); //inicio apagado de bomba remontaje
+   //bomba remontaje
 
- wdt_enable(WDTO_8S);
+   //setting de giro bombas alimentacion y descarga
+   pinMode(12, OUTPUT);
+   digitalWrite(12, HIGH); //IN2 e IN4 a VCC. IN1 e IN3 estan a GND.
+   //setting de giro bombas alimentacion y descarga
+
+   Wire.begin(2);  //se inicia i2c slave con direccion: 2
+   Wire.onReceive(receiveEvent); // data slave recieved
+
+   Serial.begin(9600);
+
+   lcd.begin(16, 2);
+   lcd.setRGB(colorR, colorG, colorB);
+
+   wdt_enable(WDTO_8S);
 }
 
 void loop() {
