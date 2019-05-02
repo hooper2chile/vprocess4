@@ -21,16 +21,16 @@ const int colorB = 0;
 #define AGUA_FRIA      10 //D10 = rele 1 (cable rojo)
 #define AGUA_CALIENTE  11 //D11 = rele 2 (cable amarillo)
 
-#define k0 0.29
-#define k1 0.32//0.28
-#define k2 0.35//0.31
-#define k3 0.40//0.35
-#define k4 0.43
-#define k5 0.48
-#define k6 0.53
-#define k7 0.60
-#define k8 0.65
-#define k9 0.70
+#define k0 0.1
+#define k1 0.2//0.2
+#define k2 0.3//0.3
+#define k3 0.4//0.4
+#define k4 0.5
+#define k5 0.6
+#define k6 0.7
+#define k7 0.8
+#define k8 0.9
+#define k9 1.0
 
 #define Gap_temp0 0.5
 #define Gap_temp1 1.0    //1�C
@@ -43,11 +43,11 @@ const int colorB = 0;
 #define Gap_temp8 11.0   //8.0
 #define Gap_temp9 13.0   //9.0
 
-String  new_write   = "";
-String  new_write0   = "";
+String  new_write   = "wf000u000t000r111d111\n";
+String  new_write0  = "";
 
 String message = "";
-String state = "";
+String state   = "";
 
 boolean stringComplete = false;  // whether the string is complete
 
@@ -72,15 +72,16 @@ uint8_t unload_save = 0;
 uint8_t feed = 0;
 uint8_t feed_save = 0;
 
+uint8_t u_temp_save = 0;
+
+
 //variables control temperatura
 float dTemp  = 0;
 float Temp_ = 0;
-uint8_t u_temp = 0;
+float u_temp = 0;
 float umbral_temp = SPEED_MAX;
 //fin variables control temperatura
-
-uint8_t myfeed    = 0;
-uint8_t myunload  = 0;
+//******
 
 
 //for communication i2c
@@ -182,11 +183,15 @@ void control_temp(int rst3) {
     digitalWrite(AGUA_CALIENTE, HIGH);
     digitalWrite(AGUA_FRIA, HIGH);
   }
+
+  u_temp_save = int(u_temp);
+
   return;
 }
 
-//wf100u100t150r111d111
-//p0031d0002c02e0f0.4
+//Esquema I2C Concha y Toro:
+//TRAMA-Proceso  : wf000u000t029r111d000  //21 caracteres: 22 sumando el '\n'
+//TRAMA-Remontaje: p1440d0001c03e1f0.2    //19 caracteres: 20 sumando el '\n'
 void viewer_message_slave (String command_lcd, int num) {
     if ( num == 1 ) {      //wf
       lcd.setCursor(0,0);
@@ -203,72 +208,46 @@ void viewer_message_slave (String command_lcd, int num) {
     return;
 }
 
-
 //function for transform numbers to string format of message
-void format_message(int var) {
+String format_message(int var) {
   //reset to svar string
   svar = "";
-
   if (var < 10)
     svar = "00"+ String(var);
-
   else if (var < 100)
     svar = "0" + String(var);
-
   else
     svar = String(var);
-
-  return;
+  return svar;
 }
 
-
-
-//Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
+  //se prepara el setpoint para el renvio hacia uc_step_motor.
+  uset_temp = format_message(u_temp_save); //string variable for control: uset_temp_save
+
   switch (select) {
-
     case 0: //only re-tx and update pid uset's.
-      if( new_write[0] == 'w' ) {
-        new_write_w = "";
-        new_write_w = new_write;
-      }
-      else if( new_write[0] == 'p' ) {
-        new_write_p = "";
-        new_write_p = new_write;
-      }
-
-      //se actualiza medicion de temperatura para enviarla a uc_slave
-      new_write_t = "";
-      new_write_t = 't' + String(Temp_) + "\n";
-
-      i2c_send_command(new_write_w, 3); //va hacia uc_slave
-      delay(5);
-      i2c_send_command(new_write_w, 2); //va hacia uc_slave
-      delay(20);
-      i2c_send_command(new_write_p, 2); //va hacia uc_slave
-      delay(20);
-      i2c_send_command(new_write_t, 2); //va hacia uc_slave
-      delay(20);
+      new_write0 = "";
+      //new_write0 = new_write.substring(0,3) + uset_ph + new_write.substring(7,34) + uset_temp + new_write.substring(37,55) + "\n";
+      new_write0 = "wf" + new_write.substring(2,5) + 'u' + new_write.substring(6,9) + 't' + uset_temp + 'r' + new_write.substring(14);
+      mySerial.print(new_write0);
       break;
 
     case 1: //update command and re-tx.
       new_write  = "";
-      new_write  = message + "\n";
-      //i2c_send_command(new_write, 2);
+      //new_write = message.substring(0,3) + uset_ph + message.substring(7,34) + uset_temp + message.substring(37,55) + "\n";
+      new_write  = "wf" + message.substring(2,5)  + 'u' + message.substring(6,9)    + 't' + uset_temp + 'r' + message.substring(14);
+      mySerial.print(new_write);
       break;
 
     default:
       break;
   }
+
   return;
 }
-//Esquema I2C Concha y Toro:
-//TRAMA-Proceso  : wf000u000t009r000d000  //21 caracteres: 22 sumando el '\n'
-//TRAMA-Remontaje: p1440d0001c03e1f0.2    //19 caracteres: 20 sumando el '\n'
 
 
-//******wph08.3feed100unload100mix1500temp022rst111111dir111111
-//******wphb015feed100unload100mix1500temp150rst000000dir111111\n
 void clean_strings() {
   //clean strings
   stringComplete = false;
@@ -279,7 +258,8 @@ void clean_strings() {
 
 int validate_write() {
   if ( message[0] == 'w' ) {
-    Serial.println("uc_slave_echo w: " + message);
+    Serial.println("uc_slave_echo w : " + message);
+    Serial.println("uc_slave_forward: " + new_write0);
     return 1;
   }
   else if ( message[0] == 'p') {

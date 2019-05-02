@@ -1,5 +1,5 @@
 /*
-  * uc_slave
+  * uc_step_motor
   *======================
   * RESET, DIR SETUP
   * rst3, dir2: rst3 is myph_a (acido), dir2 is for two bombs
@@ -210,113 +210,22 @@ void clean_strings() {
 //message format write values: wpha140feed100unload100mix1500temp100rst111111dir111111
 //wphb040feed010unload010mix1500temp010rst000000dir111111
 int validate_write() {
+  if ( message[0] == 'w' ) return 1;
+  else return 0;
 
-  if (
-    message[0] == 'w'                     &&
-
-    message.substring(1, 3)   == "ph"     &&
-    message.substring(7, 11)  == "feed"   &&
-    message.substring(14, 20) == "unload" &&
-    message.substring(23, 26) == "mix"    &&
-    message.substring(30, 34) == "temp"   &&
-    message.substring(37, 40) == "rst"    &&
-    message.substring(46, 49) == "dir"    &&
-
-    //ph number
-    ( message[3] == 'a' || message[3] == 'b'         ) &&
-    ( message.substring(4, 7).toFloat() <= SPEED_MAX ) &&
-
-
-    //feed number
-    ( message.substring(11, 14).toInt() >= 0   ) &&
-    ( message.substring(11, 14).toInt() <= SPEED_MAX ) &&
-
-    //unload number
-    ( message.substring(20, 23).toInt() >= 0   ) &&
-    ( message.substring(20, 23).toInt() <= SPEED_MAX ) &&
-
-    //mix number
-    ( message.substring(26, 30).toInt() >= 0   ) &&
-    ( message.substring(26, 30).toInt() <= 1500) &&
-
-    //temp number
-    ( message.substring(34, 37).toInt() >= 0   ) &&
-    ( message.substring(34, 37).toInt() <= SPEED_MAX ) &&
-
-    //rst bits
-    ( message[40] == iINT(1) || message[40] == iINT(0) ) &&
-    ( message[41] == iINT(1) || message[41] == iINT(0) ) &&
-    ( message[42] == iINT(1) || message[42] == iINT(0) ) &&
-    ( message[43] == iINT(1) || message[43] == iINT(0) ) &&
-    ( message[44] == iINT(1) || message[44] == iINT(0) ) &&
-    ( message[45] == iINT(1) || message[45] == iINT(0) ) &&
-
-    //dir bits
-    ( message[49] == iINT(1) || message[49] == iINT(0) ) &&
-    ( message[50] == iINT(1) || message[50] == iINT(0) ) &&
-    ( message[51] == iINT(1) || message[51] == iINT(0) ) &&
-    ( message[52] == iINT(1) || message[52] == iINT(0) ) &&
-    ( message[53] == iINT(1) || message[53] == iINT(0) ) &&
-    ( message[54] == iINT(1) || message[54] == iINT(0) )
-  )
-  {
-    //Serial.println("GOOD");
-    return 1;
-  }
-
-  else {
-    //Serial.println("BAD");
-    return 0;
-  }
 }
 
 
 void crumble() {  //se puede alivianar usando .toFloat() directamente despues de substring
-  //Serial.println("good");
-  ph_var = message[3];
-  ph_set = message.substring(4, 7);
-
-  feed_var = message.substring(7, 11);
-  feed_set = message.substring(11, 14);
-
-  unload_var = message.substring(14, 20);
-  unload_set = message.substring(20, 23);
-
-  mix_var = message.substring(23, 26);
-  mix_set = message.substring(26, 30);
-
-  temp_var = message.substring(30, 34);
-  temp_set = message.substring(34, 37);
-
-
   //setting setpoints
-  myphset  = ph_set.toFloat();
-  if ( ph_var == 'a' ) {
-    myph_a = myphset;
-    myph_b = 0;
+  myfeed   = message.substring(2,5).toInt();
+  myunload = message.substring(6,9).toInt();
+  //mymix    = mix_set.toInt();
+  mytemp   = message.substring(10,13).toInt();
 
-    rst6 = 1; //1=OFF Base bomb
-  }
-  else if ( ph_var == 'b' ) {
-    myph_a = 0;
-    myph_b = myphset;
-
-    rst3 = 1; //1=OFF Acid Bomb
-  }
-
-
-  myfeed   = feed_set.toInt();
-  myunload = unload_set.toInt();
-  mymix    = mix_set.toInt();
-  mytemp   = temp_set.toInt();
-
-  //setting rst
-  rst1 = INT(message[40]);  rst2 = INT(message[41]);  rst3 = INT(message[42]);
-  rst4 = INT(message[43]);  rst5 = INT(message[44]);  rst6 = INT(message[45]);
-
-  //setting dir
-  dir1 = INT(message[49]);  dir2 = INT(message[50]);  dir3 = INT(message[51]);
-  dir4 = INT(message[52]);  dir5 = INT(message[53]);  dir6 = INT(message[54]);
+  rst1 = int(INT(message[14]));  //rst_feed
+  rst2 = int(INT(message[15]));  //rst_unload
+  rst3 = int(INT(message[16]));  //rest_temp
 
   return;
 }

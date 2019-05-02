@@ -1,17 +1,9 @@
 /*
-  * uc_slave
-  *======================
-  * RESET, DIR SETUP
-  * rst3, dir2: myphset
-  * rst1, dir1: myfeed
-  * rst4, dir456: unload  (dir4 para unload, no se usa)
-  * rst2, dir456: mymix
-  * rst5, dir3: mytemp
-  * rst6, dir6: FREE !
-
-  write by: Felipe Hooper
-  Electronic Engineer
-
+* uc_step_motor
+* 01/05/2019
+* ======================
+* write by: Felipe Hooper
+* Electronic Engineer
 */
 
 #include <avr/wdt.h>
@@ -44,7 +36,6 @@ void loop() {
     if ( validate_write() ) {
       Serial.println("Good message");
 
-
       //se "desmenuza" el command de setpoints
       crumble();
 
@@ -65,17 +56,6 @@ void loop() {
         mytemp_save = mytemp;
       }
 
-      if ( myph_a != myph_a_save ) {
-        time_setup(myph_a, &count_m1_set, &count_m1);  //setear en otra función que reciba este mensaje desde un lazo de control
-        myph_a_save = myph_a;
-      }
-
-      if ( myph_b != myph_b_save ) {
-        time_setup(myph_b, &count_m2_set, &count_m2);  //setear en otra función que reciba este mensaje desde un lazo de control
-        myph_b_save = myph_b;
-      }
-
-
       //RST and DIR SETTING:
       //feed: rst1=0 (enable); dir1=1 (cw), else ccw.
       setup_dir_rst( _BV(RST_FEED), _BV(DIR_FEED),
@@ -84,19 +64,13 @@ void loop() {
 
       //unload: rst4, dir4=null, PORT_2 = NULL.
       setup_dir_rst( _BV(RST_UNLOAD), _BV(NULL),
-                     &myunload, &rst4, NULL,
+                     &myunload, &rst2, NULL,
                      &PORTC,    &PORTC );
 
       //temp: rst5, dir3: PORT_1 distinto a PORT_2.
       setup_dir_rst( _BV(RST_TEMP), _BV(DIR_TEMP),
-                     &mytemp, &rst5, &dir3,
+                     &mytemp, &rst3, &dir3,
                      &PORTC,  &PORTB );
-
-      //PH
-      setup_dir_rst( _BV(RST_PHa), _BV(DIR_PH), &myph_a, &rst3, &dir2, &PORTD, &PORTC );
-      setup_dir_rst( _BV(RST_PHb), _BV(DIR_PH), &myph_b, &rst6, &dir2, &PORTD, &PORTC );
-
-
 
 
       clean_strings();
