@@ -34,7 +34,7 @@ void setup() {
 void loop() {
   if ( stringComplete ) {
     if ( validate_write() ) {
-      Serial.println("Good message");
+      Serial.println("Good message: " +  message);
 
       //se "desmenuza" el command de setpoints
       crumble();
@@ -64,7 +64,7 @@ void loop() {
 
       //unload: rst4, dir4=null, PORT_2 = NULL.
       setup_dir_rst( _BV(RST_UNLOAD), _BV(NULL),
-                     &myunload, &rst2, NULL,
+                     &myunload, &rst2, &dir2,
                      &PORTC,    &PORTC );
 
       //temp: rst5, dir3: PORT_1 distinto a PORT_2.

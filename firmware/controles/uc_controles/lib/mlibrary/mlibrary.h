@@ -13,7 +13,7 @@ const int colorB = 0;
 #define  INT(x)   (x-48)  //ascii convertion
 #define iINT(x)   (x+48)  //inverse ascii convertion
 
-#define SPEED_MAX 100.0 //MIN_to_us/(STEPS*TIME_MIN)
+#define SPEED_MAX 150.0 //MIN_to_us/(STEPS*TIME_MIN)
 #define SPEED_MIN 1
 #define TEMP_MAX  60
 
@@ -33,7 +33,7 @@ const int colorB = 0;
 #define k9 1.0
 
 #define Gap_temp0 0.5
-#define Gap_temp1 1.0    //1�C
+#define Gap_temp1 1.0    //1C
 #define Gap_temp2 2.0
 #define Gap_temp3 3.0
 #define Gap_temp4 4.0
@@ -63,8 +63,8 @@ uint8_t dir1 = 1;  uint8_t dir2 = 1;  uint8_t dir3 = 1;
 
 uint8_t pump_enable = 0;
 
-uint8_t mytemp_set = 0;
-uint8_t mytemp_set_save = 0;
+float mytemp_set = 0;
+float mytemp_set_save = 0;
 
 uint8_t unload = 0;
 uint8_t unload_save = 0;
@@ -77,7 +77,7 @@ uint8_t u_temp_save = 0;
 
 //variables control temperatura
 float dTemp  = 0;
-float Temp_ = 0;
+float Temp_  = 0;
 float u_temp = 0;
 float umbral_temp = SPEED_MAX;
 //fin variables control temperatura
@@ -109,21 +109,18 @@ void serialEvent() {
 
 void crumble() {
     if ( message[0] == 'w' && message[9] == 't' ) {
-      mytemp_set = message.substring(10,13).toInt();
+      mytemp_set = message.substring(10,13).toFloat();
       feed   = message.substring(2,5).toInt();
       unload = message.substring(6,9).toInt();
       rst1 = int(INT(message[14]));  //rst_feed
       rst2 = int(INT(message[15]));  //rst_unload
       rst3 = int(INT(message[16]));  //rest_temp
-    //viewer_message_slave(String(mytemp_set) + ' ' + String(rst3) + ' ' + String(dir3),1);
     }
     else if ( message[0] == 'p' && message[13] == 'e' ) {
       pump_enable = INT(message[14]);
-      //viewer_message_slave(String(pump_enable),2);
-    }
+    } 
     else if (message[0] == 't') {
       Temp_ = message.substring(1).toFloat();
-      //viewer_message_slave(String(Temp_),3);
     }
   return;
 }
@@ -159,7 +156,7 @@ void control_temp(int rst3) {
 
     if ( dTemp <= Gap_temp0 )
       u_temp = k0*umbral_temp;
-    else if ( dTemp <= Gap_temp1 )
+    else if ( dTemp <= Gap_temp1 ) 
       u_temp = k1*umbral_temp;
     else if ( dTemp <= Gap_temp2 )
       u_temp = k2*umbral_temp;
@@ -185,31 +182,22 @@ void control_temp(int rst3) {
   }
 
   u_temp_save = int(u_temp);
+  //uset_temp = String(u_temp);
 
+  Serial.println("mytemp_set:  " + String(mytemp_set));
+  Serial.println("Temp_:       " + String(Temp_));
+  Serial.println("dTemp :      " + String(dTemp));
+  Serial.println("u_temp_save: " + String(u_temp_save));
+  Serial.println("uset_temp:   " + String(uset_temp));
   return;
 }
 
 //Esquema I2C Concha y Toro:
 //TRAMA-Proceso  : wf000u000t029r111d000  //21 caracteres: 22 sumando el '\n'
 //TRAMA-Remontaje: p1440d0001c03e1f0.2    //19 caracteres: 20 sumando el '\n'
-void viewer_message_slave (String command_lcd, int num) {
-    if ( num == 1 ) {      //wf
-      lcd.setCursor(0,0);
-      lcd.print(command_lcd);
-    }
-    else if ( num == 2 ) { //pump_enable
-      lcd.setCursor(10,0);
-      lcd.print(command_lcd);
-    }
-    else if ( num == 3 ) { //Temp_
-      lcd.setCursor(1,1);
-      lcd.print(command_lcd);
-    }
-    return;
-}
 
 //function for transform numbers to string format of message
-String format_message(int var) {
+void format_message(int var) {
   //reset to svar string
   svar = "";
   if (var < 10)
@@ -218,25 +206,24 @@ String format_message(int var) {
     svar = "0" + String(var);
   else
     svar = String(var);
-  return svar;
+  return;
 }
 
 void broadcast_setpoint(uint8_t select) {
   //se prepara el setpoint para el renvio hacia uc_step_motor.
-  uset_temp = format_message(u_temp_save); //string variable for control: uset_temp_save
-
+  format_message(u_temp_save); //string variable for control: uset_temp_save
+  uset_temp = svar;
+  
   switch (select) {
     case 0: //only re-tx and update pid uset's.
       new_write0 = "";
-      //new_write0 = new_write.substring(0,3) + uset_ph + new_write.substring(7,34) + uset_temp + new_write.substring(37,55) + "\n";
-      new_write0 = "wf" + new_write.substring(2,5) + 'u' + new_write.substring(6,9) + 't' + uset_temp + 'r' + new_write.substring(14);
+      new_write0 = "wf" + new_write.substring(2,5) + 'u' + new_write.substring(6,9) + 't' + uset_temp + 'r' + new_write.substring(14,17) + 'd' + "111\n";
       mySerial.print(new_write0);
       break;
 
     case 1: //update command and re-tx.
       new_write  = "";
-      //new_write = message.substring(0,3) + uset_ph + message.substring(7,34) + uset_temp + message.substring(37,55) + "\n";
-      new_write  = "wf" + message.substring(2,5)  + 'u' + message.substring(6,9)    + 't' + uset_temp + 'r' + message.substring(14);
+      new_write  = "wf" + message.substring(2,5)  + 'u' + message.substring(6,9)    + 't' + uset_temp + 'r' + message.substring(14,17)   + 'd' + "111\n";
       mySerial.print(new_write);
       break;
 
@@ -259,7 +246,6 @@ void clean_strings() {
 int validate_write() {
   if ( message[0] == 'w' ) {
     Serial.println("uc_slave_echo w : " + message);
-    Serial.println("uc_slave_forward: " + new_write0);
     return 1;
   }
   else if ( message[0] == 'p') {

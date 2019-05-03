@@ -24,7 +24,7 @@ String new_write   = "";
 String new_write0  = "";
 String new_write_w = "wf000u000t000r111d111";
 String new_write_p = "p1440d0001c03e0f0.2\n";
-String new_write_t = "20.0";
+String new_write_t = "20.0\n";
 
 boolean stringComplete = false;  // whether the string is complete
 
@@ -247,21 +247,19 @@ void broadcast_setpoint(uint8_t select) {
 
       //se actualiza medicion de temperatura para enviarla a uc_slave
       new_write_t = "";
-      new_write_t = 't' + String(Temp_) + "\n";
+      new_write_t = "t" + String(Temp_) + "\n";
 
-      i2c_send_command(new_write_w, 3); //va hacia uc_slave
-      delay(5);
       i2c_send_command(new_write_w, 2); //va hacia uc_slave
-      delay(20);
+      delay(50);
       i2c_send_command(new_write_p, 2); //va hacia uc_slave
-      delay(20);
+      delay(50);
       i2c_send_command(new_write_t, 2); //va hacia uc_slave
-      delay(20);
+      delay(50);
       break;
 
     case 1: //update command and re-tx.
       new_write  = "";
-      new_write  = message + "\n";
+      new_write  = message;// + "\n";
       //i2c_send_command(new_write, 2);
       break;
 

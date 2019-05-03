@@ -47,14 +47,10 @@ void loop() {
 
         if (message[0] == 'w') broadcast_setpoint(1);
         else                   broadcast_setpoint(0);
+	
       }
       else Serial.println("bad validate");
       clean_strings();
-  }
-  else {
-    delay(5);
-    broadcast_setpoint(0);
-
   }
   wdt_reset();
 }
