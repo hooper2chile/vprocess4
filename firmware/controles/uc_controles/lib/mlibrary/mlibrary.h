@@ -17,9 +17,10 @@ const int colorB = 0;
 #define SPEED_MIN 1
 #define TEMP_MAX  60
 
-#define REMONTAJE_PIN  4
-#define AGUA_FRIA      10 //D10 = rele 1 (cable rojo)
-#define AGUA_CALIENTE  11 //D11 = rele 2 (cable amarillo)
+#define REMONTAJE_PIN  A0 //bomba remontaje
+#define AGUA_FRIA      A1 //D10 = rele 1 (cable rojo)
+#define AGUA_CALIENTE  A2 //D11 = rele 2 (cable amarillo)
+#define VENTILADOR     A3 //ventilador
 
 #define k0 0.1
 #define k1 0.2//0.2
@@ -132,6 +133,14 @@ void remontaje(int pump_enable) {
   return;
 }
 
+
+void cooler(int rst1, int rst2, int rst3) {
+  if (rst1 == 0 || rst2 == 0 || rst3 == 0)
+	  digitalWrite(A3, LOW );
+  else    digitalWrite(A3, HIGH);
+
+}
+
 //Control temperatura para agua fria y caliente
 void control_temp(int rst3) {
   if (rst3 == 0) {
@@ -155,25 +164,25 @@ void control_temp(int rst3) {
     }
 
     if ( dTemp <= Gap_temp0 )
-      u_temp = k0*umbral_temp;
+      u_temp = 90;
     else if ( dTemp <= Gap_temp1 ) 
-      u_temp = k1*umbral_temp;
+      u_temp = 95;
     else if ( dTemp <= Gap_temp2 )
-      u_temp = k2*umbral_temp;
+      u_temp = 100;
     else if ( dTemp <= Gap_temp3 )
-      u_temp = k3*umbral_temp;
+      u_temp = 110;
     else if ( dTemp <= Gap_temp4 )
-      u_temp = k4*umbral_temp;
+      u_temp = 120;
     else if ( dTemp <= Gap_temp5 )
-      u_temp = k5*umbral_temp;
+      u_temp = 130;
     else if ( dTemp <= Gap_temp6 )
-      u_temp = k6*umbral_temp;
+      u_temp = 135;
     else if ( dTemp <= Gap_temp7 )
-      u_temp = k7*umbral_temp;
+      u_temp = 140;
     else if ( dTemp <= Gap_temp8 )
-      u_temp = k8*umbral_temp;
+      u_temp = 145;
     else if ( dTemp > Gap_temp9  )
-      u_temp = k9*umbral_temp;
+      u_temp = SPEED_MAX;
   }
   else {
     //el sistema se deja stanby
@@ -182,13 +191,12 @@ void control_temp(int rst3) {
   }
 
   u_temp_save = int(u_temp);
-  //uset_temp = String(u_temp);
-
+  
   Serial.println("mytemp_set:  " + String(mytemp_set));
   Serial.println("Temp_:       " + String(Temp_));
   Serial.println("dTemp :      " + String(dTemp));
-  Serial.println("u_temp_save: " + String(u_temp_save));
-  Serial.println("uset_temp:   " + String(uset_temp));
+  //Serial.println("u_temp_save: " + String(u_temp_save));
+  //Serial.println("uset_temp:   " + String(uset_temp));
   return;
 }
 

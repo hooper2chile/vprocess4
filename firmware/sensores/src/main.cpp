@@ -21,6 +21,9 @@ void setup() {
 
   DDRB = DDRB | (1<<PB0) | (1<<PB5);
   PORTB = (0<<PB0) | (1<<PB5);
+  
+  pinMode(A4, OUTPUT);
+  pinMode(A5, OUTPUT);
 
   message.reserve(65);
   wdt_enable(WDTO_8S);

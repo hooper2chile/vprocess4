@@ -170,12 +170,12 @@ void hamilton_sensors() {
   Itemp1  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(0) + (1 - alpha) * Itemp1;
   Itemp2  = alpha * (PGA1 * K ) * ads1.readADC_SingleEnded(1) + (1 - alpha) * Itemp2;
 
-  if ( rst1 == 0 ) i = 0.4; else i = 0;
-  if ( rst2 == 0 ) j = 0.4; else j = 0;
-  if ( rst3 == 0 ) k = 0.4; else k = 0;
+  if ( rst1 == 0 ) i = 0.35; else i = 0;
+  if ( rst2 == 0 ) j = 0.35; else j = 0;
+  if ( rst3 == 0 ) k = 0.35; else k = 0;
 
-  Itemp1 = Itemp1 + ( i + j + k ) * NOISE;
-  Itemp2 = Itemp2 + ( i + j + k ) * NOISE;
+  Itemp1 = Itemp1 + 0*( i + j + k ) * NOISE;
+  Itemp2 = Itemp2 + 0*( i + j + k ) * NOISE;
 
   if (Itemp1 >= 4.5 && Itemp1 <= 12.0)   //5.5mA y 12mA
      Temp1 = m0 * Itemp1 + n0;
@@ -260,7 +260,7 @@ void broadcast_setpoint(uint8_t select) {
     case 1: //update command and re-tx.
       new_write  = "";
       new_write  = message;// + "\n";
-      //i2c_send_command(new_write, 2);
+      i2c_send_command(new_write, 2);
       break;
 
     default:

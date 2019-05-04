@@ -15,6 +15,16 @@ void setup() {
   Serial.begin(9600);
   mySerial.begin(9600);
 
+  pinMode(A0, OUTPUT); //Bomba remontaje
+  pinMode(A1, OUTPUT); //Valvula 1
+  pinMode(A2, OUTPUT); //Valvula 2
+  pinMode(A3, OUTPUT); //Ventilador
+
+  digitalWrite(A0, HIGH);
+  digitalWrite(A1, HIGH);
+  digitalWrite(A2, HIGH);
+  digitalWrite(A3, HIGH);
+
   message.reserve(65);
 
   DDRB = DDRB | (1<<PB0) | (1<<PB5);
@@ -35,6 +45,8 @@ void loop() {
       if ( validate_write() ) {
         //se "desmenuza" el command de setpoints
         crumble();
+	
+	cooler(rst1, rst2, rst3);
 
         //###################################################################################
         //Codigo para bomba remontaje
