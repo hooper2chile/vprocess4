@@ -12,7 +12,7 @@ USER = "biorreactor1cii"
 PASSWD = "biorreactorCII_1_CyT"
 
 DIR="/home/pi/vprocess4/"
-SPEED_MAX = 100 #100 [rpm]
+SPEED_MAX = 150 #150 [rpm]
 TEMP_MAX  = 50 #130 [C]
 TIME_MAX  = 99  #99 [min]
 
