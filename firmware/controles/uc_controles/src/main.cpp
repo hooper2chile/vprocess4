@@ -62,7 +62,9 @@ void loop() {
 	
       }
       else Serial.println("bad validate");
+  
       clean_strings();
+      wdt_reset();
   }
-  wdt_reset();
+  //wdt_reset();
 }

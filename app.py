@@ -181,7 +181,7 @@ def setpoints(dato):
         elif task[0] == "no_grabar":
             flag_database = "False"
             try:
-                os.system("rm -rf /home/pi/vprocess4/name_db.txt")
+                #os.system("rm -rf /home/pi/vprocess4/name_db.txt")
                 f = open(DIR + "flag_database.txt","w")
                 f.write(flag_database)
                 f.close()

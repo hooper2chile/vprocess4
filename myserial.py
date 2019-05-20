@@ -7,10 +7,10 @@ logging.basicConfig(filename='/home/pi/vprocess4/log/myserial.log', level=loggin
 #5556: for listen data
 #5557: for publisher data
 
-tau_zmq_connect     = 0.5   # 0.3=300 [ms]
-tau_zmq_while_write = 0.25   # 0.5=500 [ms]
-tau_zmq_while_read  = 0.25   # 0.5=500 [ms]
-tau_serial          = 0.08   #0.02  #  0.01=10 [ms]
+tau_zmq_connect     = 0.5  #0.3=300 [ms]
+tau_zmq_while_write = 0.25 #0.5=500 [ms]
+tau_zmq_while_read  = 0.25 #0.4#0.25   # 0.5=500 [ms]
+tau_serial          = 0.01 #0.08   #0.02  #  0.01=10 [ms]
 
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
