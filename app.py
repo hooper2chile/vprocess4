@@ -192,6 +192,7 @@ def setpoints(dato):
 
         elif task[0] == "reiniciar":
             os.system(DIR + "bash killall")
+            os.system("rm -rf /home/pi/vprocess4/database/*.db-journal")
             os.system("sudo reboot")
 
         elif task[0] == "apagar":
