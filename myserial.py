@@ -52,26 +52,43 @@ def speak(q1,q2):
 
         if not q2.empty():
             data = q2.get()
-            socket_pub.send_string("%s %s" % (topic, data))
+            try:
+                socket_pub.send_string("%s %s" % (topic, data))
+
+            except:
+                logging.info("================Exception in speak function by reset in micro-controller===========================")
 
         time.sleep(tau_zmq_while_read) #Tiempo de muestreo menor para todas las aplicaciones que recogen datos por ZMQ.
 
     return True
 
-
+def set_dtr():
+    try:
+        ser = serial.Serial(port='/dev/ttyUSB0', timeout = 0, baudrate = 9600)
+        ser.setDTR(True)
+        time.sleep(1)
+        ser.setDTR(False)
+        time.sleep(1)
+        logging.info("======================================================Se ejecuto SET_DTR()======================================")
+    
+    except:
+        logging.info("---------------------------------------------------- Fallo Ejecucion set_dtr() ---------------------------------")
 
 def rs232(q1,q2):
     save_setpoint = 'wf000u000t000r111d111'
     flag = False
     while not flag:
         try:
-            ser = serial.Serial(port='/dev/ttyUSB0', baudrate=9600)
+            logging.info("---------------------------Try Open SerialPort-USB------------------------------------------------------")
+            ser = serial.Serial(port='/dev/ttyUSB0', timeout = 0, baudrate=9600)
 
             #necesario para setear correctamente el puerto serial
             ser.setDTR(True)
             time.sleep(1)
             ser.setDTR(False)
             time.sleep(1)
+            logging.info("--------------------------------DTR SET READY----------------------------------------------------------")
+            logging.info("Post DTR SET READY: flag = %s", flag)
 
             if flag:
                 #commanda start:  wf000u000t000r111d111
@@ -90,7 +107,7 @@ def rs232(q1,q2):
             flag = ser.is_open
 
             if flag:
-                logging.info('CONEXION SERIAL EXITOSA')
+                logging.info('CONEXION SERIAL EXITOSA, flag= %s', flag)
 
             while ser.is_open:
                 try:
@@ -101,15 +118,19 @@ def rs232(q1,q2):
                         if action == "read":
                             try:
                                 if ser.is_open:
-                                    #logging.info("myserial_r_action_to_uc: %s ", action)
+                                    logging.info("myserial_r_action_to_uc: %s ", action)
                                     ser.write('r' + '\n')
-
                                     SERIAL_DATA = ser.readline()
-                                    #logging.info("myserial_r_reply_uc: %s ", SERIAL_DATA)
+                                    logging.info("myserial_r_reply_uc: %s ", SERIAL_DATA)
                                     q2.put(SERIAL_DATA)
 
                                 else:
-                                    ser.open()
+                                    #ser.open()
+                                    ser.close()    #nuevo
+                                    flag = False   #nuevo
+                                    logging.info("se cierra puerto serial y flag=False, finalmente BREAK!!!")
+                                    break          #nuevo
+
                             except:
                                 logging.error("no se pudo leer SERIAL_DATA del uc")
                                 ser.close()
@@ -124,7 +145,7 @@ def rs232(q1,q2):
 
                                 #leyendo la respuesta del uc_master al comando "action" anterior
                                 result = ser.readline().split()
-                                #logging.info("myserial_w_reply_uc: %s ", result)
+                                logging.info("myserial_w_reply_uc: %s ", result)
                                 save_setpoint = action
 
                             except:
@@ -135,7 +156,13 @@ def rs232(q1,q2):
                                 flag = False
 
                     elif q1.empty():
+                        #logging.info("ELIF: q1.empty()=VACIO, se espera tau_serial para que lleguen datos para escribir: Write")
+                        #set_dtr()
+                        #ser.close()
+                        #flag = False
                         time.sleep(tau_serial)
+                        
+
 
                 except:
                     #print "se entro al while pero no se pudo revisar la cola"
@@ -148,6 +175,7 @@ def rs232(q1,q2):
             logging.info("Sin Conexion Serial")
             flag = False
             time.sleep(2)
+            set_dtr()
 
     logging.info("Fin de myserial.py")
     return True

@@ -11,7 +11,8 @@ logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.I
 
 
 TIME_SYNC = 120#360#60 #3600 #sync for 3600 [s] = 1 [hr]
-ID = '1iYqk0kQ2xsG4EbOznnhFL0tHVX6zXkOY'
+#ID = '1iYqk0kQ2xsG4EbOznnhFL0tHVX6zXkOY'
+ID = '1ShHVAvK7cnIVCW9rFrOQis07sXFLPagT'
 
 time.sleep(15)
 

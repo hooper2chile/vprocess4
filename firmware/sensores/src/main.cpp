@@ -70,6 +70,6 @@ void loop() {
         Serial.println("bad validate:" + message);
       }
     clean_strings();
-    //wdt_reset();
+   // wdt_reset();
   }
 }
