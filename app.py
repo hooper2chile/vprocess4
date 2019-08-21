@@ -202,7 +202,7 @@ def setpoints(dato):
         elif task[0] == "limpiar":
             try:
                 os.system("rm -rf /home/pi/vprocess4/csv/*.csv")
-                os.system("rm -rf /home/pi/vprocss4/log/*.log")
+                os.system("rm -rf /home/pi/vprocess4/log/*.log")
                 os.system("rm -rf /home/pi/vprocess4/log/my.log.*")
                 os.system("rm -rf /home/pi/vprocess4/database/*.db")
                 os.system("rm -rf /home/pi/vprocess4/database/*.db-journal")
