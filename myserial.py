@@ -94,7 +94,7 @@ def rs232(q1,q2):
                 #commanda start:  wf000u000t000r111d111
                 ser.write('wf000u000t000r111d111'+'\n')
                 result = ser.readline().split()
-                #print result
+                print result
                 logging.info("last command: myserial_w_reply_uc: %s ",  result)
 
             elif not flag:
@@ -125,11 +125,11 @@ def rs232(q1,q2):
                                     q2.put(SERIAL_DATA)
 
                                 else:
-                                    #ser.open()
-                                    ser.close()    #nuevo
-                                    flag = False   #nuevo
-                                    logging.info("se cierra puerto serial y flag=False, finalmente BREAK!!!")
-                                    break          #nuevo
+                                    ser.open()
+                                    #ser.close()    #nuevo
+                                    #flag = False   #nuevo
+                                    #logging.info("se cierra puerto serial y flag=False, finalmente BREAK!!!") #nuevo
+                                    #break          #nuevo
 
                             except:
                                 logging.error("no se pudo leer SERIAL_DATA del uc")
@@ -156,26 +156,23 @@ def rs232(q1,q2):
                                 flag = False
 
                     elif q1.empty():
-                        #logging.info("ELIF: q1.empty()=VACIO, se espera tau_serial para que lleguen datos para escribir: Write")
-                        #set_dtr()
-                        #ser.close()
-                        #flag = False
+                        logging.info("ELIF: q1.empty()=VACIO, se espera tau_serial para que lleguen datos para escribir: Write")
                         time.sleep(tau_serial)
                         
 
 
                 except:
-                    #print "se entro al while pero no se pudo revisar la cola"
+                    print "se entro al while pero no se pudo revisar la cola"
                     logging.info("se entro al while pero no se pudo revisar la cola")
 
                 time.sleep(tau_serial)
 
         except serial.SerialException:
-            #print "conexion serial no realizada"
+            print "conexion serial no realizada"
             logging.info("Sin Conexion Serial")
             flag = False
             time.sleep(2)
-            set_dtr()
+            set_dtr() #esta sobrando esto al parecer.
 
     logging.info("Fin de myserial.py")
     return True
