@@ -43,6 +43,8 @@ float Byte4 = 0;  char cByte4[15] = "";
 float Byte5 = 0;  char cByte5[15] = "";
 float Byte6 = 0;  char cByte6[15] = "";
 float Byte7 = 0;  char cByte7[15] = "";  //for Temp2
+//nuevo
+float Byte8 = 0;  char cByte8[15] = "";  //for setpont confirmation
 
 //calibrate function()
 char  var = '0';
@@ -202,6 +204,8 @@ void tx_reply(){
   Serial.print(cByte5);  Serial.print("\t");
   Serial.print(cByte6);  Serial.print("\t");
   Serial.print(cByte7);  Serial.print("\t");
+//nuevo
+  Serial.print(new_write_w);  Serial.print("\t");
 
   //Serial.print(message);
   Serial.print("\n");
@@ -226,6 +230,7 @@ void daqmx() {
   dtostrf(Byte5, 7, 2, cByte5);
   dtostrf(Byte6, 7, 2, cByte6);
   dtostrf(Byte7, 7, 2, cByte7);
+  dtostrf(Byte8, 7, 2, cByte8);
 
   tx_reply();
   return;
