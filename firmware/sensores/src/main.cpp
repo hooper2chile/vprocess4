@@ -63,7 +63,7 @@ void loop() {
               default:
                 break;
           }
-          wdt_reset(); //nuevo
+          //wdt_reset(); //nuevo
           //PORTB = 0<<PB0;
       }
       else {

@@ -12,6 +12,11 @@ tau_zmq_while_write = 0.25 #0.5=500 [ms]
 tau_zmq_while_read  = 0.25 #0.4#0.25   # 0.5=500 [ms]
 tau_serial          = 0.01 #0.08   #0.02  #  0.01=10 [ms]
 
+count = 0
+save_setpoint1 = 'wf000u000t000r111d111'
+setpoint_reply_uc = save_setpoint1
+
+
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
 def listen(q1):
@@ -63,6 +68,8 @@ def speak(q1,q2):
     return True
 
 def set_dtr():
+    global save_setpoint1
+
     try:
         ser = serial.Serial(port='/dev/ttyUSB0', timeout = 0, baudrate = 9600)
         ser.setDTR(True)
@@ -70,12 +77,20 @@ def set_dtr():
         ser.setDTR(False)
         time.sleep(1)
         logging.info("======================================================Se ejecuto SET_DTR()======================================")
-    
+
+        logging.info("===================================================== Send last setpoint's post SET_DTR() ======================")
+        ser.write(save_setpoint1 + '\n')
+        result = ser.readline().split()
+        logging.info("===================================================== save_setpoint1 READY =====================================")
+
     except:
         logging.info("---------------------------------------------------- Fallo Ejecucion set_dtr() ---------------------------------")
 
 def rs232(q1,q2):
-    save_setpoint = 'wf000u000t000r111d111'
+    global save_setpoint1
+    global setpoint_reply_uc
+    global count
+
     flag = False
     while not flag:
         try:
@@ -91,16 +106,14 @@ def rs232(q1,q2):
             logging.info("Post DTR SET READY: flag = %s", flag)
 
             if flag:
-                #commanda start:  wf000u000t000r111d111
-                ser.write('wf000u000t000r111d111'+'\n')
+                ser.write(save_setpoint1 + '\n')
                 result = ser.readline().split()
-                print result
-                logging.info("last command: myserial_w_reply_uc: %s ",  result)
+                logging.info("Primer envio de comando save_setpoint1: %s ",  save_setpoint1)
 
             elif not flag:
                 logging.info("Conexion Serial Re-establecida")
-                logging.info("Reenviando ultimo SETPOINT %s", save_setpoint)
-                ser.write(save_setpoint + '\n')
+                logging.info("Reenviando ultimo SETPOINT %s", save_setpoint1)
+                ser.write(save_setpoint1 + '\n')
                 result = ser.readline().split()
                 logging.info("not flag last command: myserial_w_reply_uc: %s ", result)
 
@@ -121,15 +134,38 @@ def rs232(q1,q2):
                                     logging.info("myserial_r_action_to_uc: %s ", action)
                                     ser.write('r' + '\n')
                                     SERIAL_DATA = ser.readline()
-                                    logging.info("myserial_r_reply_uc: %s ", SERIAL_DATA)
+                                    logging.info("myserial_r_reply_uc: %s", SERIAL_DATA)
                                     q2.put(SERIAL_DATA)
+
+                                    try:
+                                        temp = SERIAL_DATA.split()
+                                        temp = "".join(map(str, temp[8:]))
+
+                                        if temp != "":
+
+                                            setpoint_reply_uc = temp
+                                            logging.info("SETPOINT_REPLY_UC: %s", setpoint_reply_uc)
+
+                                            if setpoint_reply_uc == save_setpoint1:
+                                                logging.info("IGUALES:    (save_setpoint1, setpoint_reply_uc) = (%s,%s) ", save_setpoint1, setpoint_reply_uc)
+
+                                            elif setpoint_reply_uc != save_setpoint1:
+                                                logging.info("DIFERENTES: (save_setpoint1, setpoint_reply_uc) = (%s,%s) ", save_setpoint1, setpoint_reply_uc)
+                                                logging.info("URGENTE: REENVIAR SETPOINT!!!")
+
+                                                logging.info("REENVIANDO SETPOINT A UC _ PERDIDA: %s ", save_setpoint1)
+                                                ser.write(save_setpoint1 + '\n')
+                                                result = ser.readline().split()
+                                                logging.info("RESPUESTA UC A PERDIDA DE SETPOINT: %s ", result)
+
+
+                                    except:
+                                        logging("NO SE PUDO HACER SPLIT")
+
 
                                 else:
                                     ser.open()
-                                    #ser.close()    #nuevo
-                                    #flag = False   #nuevo
-                                    #logging.info("se cierra puerto serial y flag=False, finalmente BREAK!!!") #nuevo
-                                    #break          #nuevo
+                                    logging.info("******************************* Se aplica ser.open() a puerto serial !!! *******************************")
 
                             except:
                                 logging.error("no se pudo leer SERIAL_DATA del uc")
@@ -146,19 +182,24 @@ def rs232(q1,q2):
                                 #leyendo la respuesta del uc_master al comando "action" anterior
                                 result = ser.readline().split()
                                 logging.info("myserial_w_reply_uc: %s ", result)
-                                save_setpoint = action
+
+                                #nuevo
+                                if action[0] == 'w':
+                                    save_setpoint1 = action
+                                    logging.info("************* Se actualizan los save_setpoint1 (write setpoint to UC): %s   *************", save_setpoint1)
+
 
                             except:
                                 logging.info("no se pudo escribir al uc")
-                                save_setpoint = action
+                                #save_setpoint1 = action
                                 logging.info("the last setpoint save")
-                                ser.close()
-                                flag = False
+                                #ser.close()
+                                #flag = False
 
                     elif q1.empty():
-                        logging.info("ELIF: q1.empty()=VACIO, se espera tau_serial para que lleguen datos para escribir: Write")
+                        #logging.info("ELIF: q1.empty()=VACIO, se espera tau_serial para que lleguen datos para enviar al uc")
                         time.sleep(tau_serial)
-                        
+
 
 
                 except:

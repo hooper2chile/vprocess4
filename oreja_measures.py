@@ -1,5 +1,5 @@
 import time, zmq
-tau_zmq_connect = 0.3
+tau_zmq_connect = 0.05
 
 def zmq_client():
     #####Listen measures
@@ -15,6 +15,11 @@ def zmq_client():
         time.sleep(tau_zmq_connect)
         data = socket_sub.recv()
         print data
+        try:
+            text = data.split()
+            print text[9]
+        except:
+            print "vacio"
 
 if __name__=='__main__':
     zmq_client()
