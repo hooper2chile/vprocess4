@@ -1,5 +1,5 @@
 /*
-*  uc_master
+*  uc_controles
 *  Writed by: Felipe Hooper
 *  Electronic Engineer
 */
@@ -21,7 +21,7 @@ void setup() {
 
   DDRB = DDRB | (1<<PB0) | (1<<PB5);
   PORTB = (0<<PB0) | (1<<PB5);
-  
+
   pinMode(A4, OUTPUT);
   pinMode(A5, OUTPUT);
 
@@ -53,13 +53,13 @@ void loop() {
               case 'u':
                 actuador_umbral();
                 break;
-
+              /*
               case 'p': //remontaje set
                 //Serial.println("p :" + message); //debug
                 daqmx();
                 broadcast_setpoint(1);
                 break;
-
+              */
               default:
                 break;
           }

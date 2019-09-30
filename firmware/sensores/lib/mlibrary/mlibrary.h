@@ -21,10 +21,8 @@ Adafruit_ADS1115 ads1(0x49);
 
 String message     = "";
 String new_write   = "";
-String new_write0  = "";
-String new_write_w = "wf000u000t000r111d111";
-String new_write_p = "p1440d0001c03e0f0.2\n";
-String new_write_t = "20.0\n";
+String new_write_w = "wf000u000t000r111e0f0.0t18.1\n";
+//String new_write_t = "20.0\n";
 
 boolean stringComplete = false;  // whether the string is complete
 
@@ -44,7 +42,7 @@ float Byte5 = 0;  char cByte5[15] = "";
 float Byte6 = 0;  char cByte6[15] = "";
 float Byte7 = 0;  char cByte7[15] = "";  //for Temp2
 //nuevo
-float Byte8 = 0;  char cByte8[15] = "";  //for setpont confirmation
+float Byte8 = 0;  char cByte8[15] = "";  //for setpont confirmation //no se necesita: 28-9-19
 
 //calibrate function()
 char  var = '0';
@@ -205,10 +203,10 @@ void tx_reply(){
   Serial.print(cByte6);  Serial.print("\t");
   Serial.print(cByte7);  Serial.print("\t");
 //nuevo
-  Serial.print(new_write_w);  Serial.print("\t");
+  Serial.println(new_write_w);  //Serial.print("\t");
 
   //Serial.print(message);
-  Serial.print("\n");
+  //Serial.print("\n");
 }
 
 void daqmx() {
@@ -239,33 +237,17 @@ void daqmx() {
 //Re-transmition commands to slave micro controller
 void broadcast_setpoint(uint8_t select) {
   switch (select) {
-
-    case 0: //only re-tx and update pid uset's.
-      if( new_write[0] == 'w' ) {
-        new_write_w = "";
-        new_write_w = new_write;
-      }
-      else if( new_write[0] == 'p' ) {
-        new_write_p = "";
-        new_write_p = new_write;
-      }
-
+    case 0: //only re-tx and update uset's.
       //se actualiza medicion de temperatura para enviarla a uc_slave
-      new_write_t = "";
-      new_write_t = "t" + String(Temp_) + "\n";
-
-      i2c_send_command(new_write_w, 2); //va hacia uc_slave
-      delay(50);
-      i2c_send_command(new_write_p, 2); //va hacia uc_slave
-      delay(50);
-      i2c_send_command(new_write_t, 2); //va hacia uc_slave
-      delay(50);
+      new_write = "";
+      new_write = new_write_w;
+      i2c_send_command(new_write, 2); //va hacia uc_slave
       break;
 
     case 1: //update command and re-tx.
-      new_write  = "";
-      new_write  = message;// + "\n";
-      i2c_send_command(new_write, 2);
+      new_write_w  = "";
+      new_write_w  = message.substring(0,23) + "t" + String(Temp_) + "\n";  //message;// + "\n";
+      i2c_send_command(new_write_w, 2);
       break;
 
     default:
@@ -275,8 +257,8 @@ void broadcast_setpoint(uint8_t select) {
 }
 
 //Esquema I2C Concha y Toro:
-//TRAMA-Proceso  : wf000u000t009r000d000  //21 caracteres: 22 sumando el '\n'
-//TRAMA-Remontaje: p1440d0001c03e1f0.2    //19 caracteres: 20 sumando el '\n'
+//TRAMA-Proceso  : wf000u000t009r000e1f0.2
+
 void clean_strings() {
   //clean strings
   stringComplete = false;
@@ -307,12 +289,6 @@ int validate() {
               message[2] == 't' && message[6] == 'e'
             )
           return 1;
-
-    // Validate actions for remontaje - ex autoclave
-    else if ( message[0] == 'p') {
-        flujo = message.substring(16,19).toFloat();
-        return 1;
-    }
 
    // Validate READING
     else if ( message[0] == 'r' )

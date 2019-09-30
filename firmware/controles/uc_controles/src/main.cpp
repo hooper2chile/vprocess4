@@ -12,9 +12,6 @@
 void setup() {
   wdt_disable();
 
-  Serial.begin(9600);
-  mySerial.begin(9600);
-
   pinMode(A0, OUTPUT); //Bomba remontaje
   pinMode(A1, OUTPUT); //Valvula 1
   pinMode(A2, OUTPUT); //Valvula 2
@@ -24,6 +21,9 @@ void setup() {
   digitalWrite(A1, HIGH);
   digitalWrite(A2, HIGH);
   digitalWrite(A3, HIGH);
+
+  Serial.begin(9600);
+  mySerial.begin(9600);
 
   message.reserve(65);
 
@@ -45,8 +45,7 @@ void loop() {
       if ( validate_write() ) {
         //se "desmenuza" el command de setpoints
         crumble();
-	
-	cooler(rst1, rst2, rst3);
+	      cooler(rst1, rst2, rst3);
 
         //###################################################################################
         //Codigo para bomba remontaje
@@ -59,10 +58,10 @@ void loop() {
 
         if (message[0] == 'w') broadcast_setpoint(1);
         else                   broadcast_setpoint(0);
-	
+
       }
       else Serial.println("bad validate");
-  
+
       clean_strings();
       wdt_reset();
   }

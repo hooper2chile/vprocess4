@@ -116,12 +116,10 @@ void crumble() {
       rst1 = int(INT(message[14]));  //rst_feed
       rst2 = int(INT(message[15]));  //rst_unload
       rst3 = int(INT(message[16]));  //rest_temp
-    }
-    else if ( message[0] == 'p' && message[13] == 'e' ) {
-      pump_enable = INT(message[14]);
-    } 
-    else if (message[0] == 't') {
-      Temp_ = message.substring(1).toFloat();
+
+      //trama remontaja unificada el 29-09-19 con la trama de setpoint
+      pump_enable = INT(message[18]);
+      Temp_ = message.substring(24).toFloat();
     }
   return;
 }
@@ -163,26 +161,16 @@ void control_temp(int rst3) {
       dTemp = (-1)*dTemp;
     }
 
-    if ( dTemp <= Gap_temp0 )
-      u_temp = 90;
-    else if ( dTemp <= Gap_temp1 ) 
-      u_temp = 95;
-    else if ( dTemp <= Gap_temp2 )
-      u_temp = 100;
-    else if ( dTemp <= Gap_temp3 )
-      u_temp = 110;
-    else if ( dTemp <= Gap_temp4 )
-      u_temp = 120;
-    else if ( dTemp <= Gap_temp5 )
-      u_temp = 130;
-    else if ( dTemp <= Gap_temp6 )
-      u_temp = 135;
-    else if ( dTemp <= Gap_temp7 )
-      u_temp = 140;
-    else if ( dTemp <= Gap_temp8 )
-      u_temp = 145;
-    else if ( dTemp > Gap_temp9  )
-      u_temp = SPEED_MAX;
+    if ( dTemp <= Gap_temp0 )      u_temp = 90;
+    else if ( dTemp <= Gap_temp1 ) u_temp = 95;
+    else if ( dTemp <= Gap_temp2 ) u_temp = 100;
+    else if ( dTemp <= Gap_temp3 ) u_temp = 110;
+    else if ( dTemp <= Gap_temp4 ) u_temp = 120;
+    else if ( dTemp <= Gap_temp5 ) u_temp = 130;
+    else if ( dTemp <= Gap_temp6 ) u_temp = 135;
+    else if ( dTemp <= Gap_temp7 ) u_temp = 140;
+    else if ( dTemp <= Gap_temp8 ) u_temp = 145;
+    else if ( dTemp > Gap_temp9  ) u_temp = SPEED_MAX;
   }
   else {
     //el sistema se deja stanby
@@ -191,18 +179,18 @@ void control_temp(int rst3) {
   }
 
   u_temp_save = int(u_temp);
-  
+
+  //for debug
+  /*
   Serial.println("mytemp_set:  " + String(mytemp_set));
   Serial.println("Temp_:       " + String(Temp_));
   Serial.println("dTemp :      " + String(dTemp));
-  //Serial.println("u_temp_save: " + String(u_temp_save));
-  //Serial.println("uset_temp:   " + String(uset_temp));
+  Serial.println("u_temp_save: " + String(u_temp_save));
+  Serial.println("uset_temp:   " + String(uset_temp));
+  Serial.println("\n\n");
+  */
   return;
 }
-
-//Esquema I2C Concha y Toro:
-//TRAMA-Proceso  : wf000u000t029r111d000  //21 caracteres: 22 sumando el '\n'
-//TRAMA-Remontaje: p1440d0001c03e1f0.2    //19 caracteres: 20 sumando el '\n'
 
 //function for transform numbers to string format of message
 void format_message(int var) {
@@ -221,7 +209,7 @@ void broadcast_setpoint(uint8_t select) {
   //se prepara el setpoint para el renvio hacia uc_step_motor.
   format_message(u_temp_save); //string variable for control: uset_temp_save
   uset_temp = svar;
-  
+
   switch (select) {
     case 0: //only re-tx and update pid uset's.
       new_write0 = "";
@@ -253,20 +241,11 @@ void clean_strings() {
 
 int validate_write() {
   if ( message[0] == 'w' ) {
-    Serial.println("uc_slave_echo w : " + message);
+    Serial.println("echo: " + message);
     return 1;
   }
-  else if ( message[0] == 'p') {
-    Serial.println("uc_slave_echo p: " + message);
-    return 1;
-  }
-  else if ( message[0] == 't') {
-    Serial.println("uc_slave_echo t: " + message);
-    return 1;
-  }
-
   else {
-    //Serial.println("BAD");
+    Serial.println("BAD command to uc_controles");
     return 0;
   }
 }
