@@ -5,7 +5,7 @@ from flask_socketio import SocketIO, emit, disconnect
 
 import os, sys, time, datetime,logging, communication, reviewDB, tocsv
 
-#logging.basicConfig(filename='/home/pi/vprocess4/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4/log/app.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 #CREDENCIALES PARA PAGINAS WEB
 USER = "biorreactor1cii"
@@ -23,6 +23,8 @@ ph_set = [0,0,0,0]
 od_set = [0,0,0,0]
 temp_set = [0,0,0,0]
 
+rm3     =  0
+rm5     =  0
 rm_sets = [0,0,0,0,0,0]  #se agrega rm_sets[5] para enviar este al uc
 rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para los calculos de tiempo
 
@@ -37,10 +39,10 @@ set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
 #rm_sets[5]  =: (reset local de bomba remontaje)
 
 ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0,0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura setpoint
-ficha_producto_save = ficha_producto                                #ficha_producto[10] = set_data[0]: bomba1
-                                                                    #ficha_producto[11] = set_data[3]: bomba2
-                                                                    #ficha_producto[12] = rm_sets[4]*rm_sets[5] : para saber cuando enciende y cuando apaga el remontaje
-                                                                    #y se multiplica por el flujo en base de datos.
+ficha_producto_save = ficha_producto                                  #ficha_producto[10] = set_data[0]: bomba1
+                                                                      #ficha_producto[11] = set_data[3]: bomba2
+                                                                      #ficha_producto[12] = rm_sets[4]*rm_sets[5] : para saber cuando
+                                                                      #enciende y cuando apaga el remontaje y se multiplica por el flujo en base de datos.
 
 
 
@@ -139,6 +141,7 @@ def function_thread():
     emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save })
     emit('producto'           , {'set': ficha_producto, 'save': ficha_producto_save})
 
+
     global thread1
     if thread1 is None:
         thread1 = socketio.start_background_task(target=background_thread1)
@@ -155,7 +158,7 @@ def setpoints(dato):
     #guardo task en un archivo para depurar
     try:
         f = open(DIR + "task.txt","a+")
-        f.write(task + '\n')
+        f.write(str(task) + '\n')
         f.close()
 
     except:
@@ -292,8 +295,8 @@ def setpoints(dato):
         f.close()
 
     except:
-        pass
-        #logging.info("no se pudo guardar en set_data en setpoints.txt")
+        #pass
+        logging.info("no se pudo guardar en set_data en setpoints.txt")
 
 
 #Sockets de calibración de instrumentación
@@ -545,8 +548,7 @@ def remontaje_functions(dato):
         rm_sets[2] = int(dato['rm_ciclo'])
         rm_sets[3] = float(dato['rm_flujo'])
         rm_sets[4] = int(dato['rm_enable'])
-       #rm_sets[5] = enable local no se recibe desde la pagina, se calcula localmente.
-
+       #rm_sets[5] = enable local no se recibe desde la pagina, se obtiene localmente en base al algoritmo de calculo de tiempos.
         rm_save = rm_sets
 
     except:
@@ -558,9 +560,10 @@ def remontaje_functions(dato):
         rm_save = [69,69,69,69,False]
 
         logging.info("no se pudo evaluar rm_sets")
+
     #se transmiten los datos de remontaje por communication, al canal ZMQ
     #y desde ahi al micro controlador por serial
-    communication.cook_remontaje(rm_sets)
+    #communication.cook_remontaje(rm_sets)    #cambiado el 29-09-19.
 
     #Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
     socketio.emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save }, namespace='/biocl', broadcast=True)
@@ -572,8 +575,8 @@ def remontaje_functions(dato):
         #logging.info("se guardo en autoclave.txt")
 
     except:
-        pass
-	    #logging.info("no se pudo guardar en autoclave.txt")
+        #pass
+	    logging.info("no se pudo guardar en setting de remontaje.txt")
 
 
 @socketio.on('producto', namespace='/biocl')
@@ -604,11 +607,11 @@ def ficha(dato):
         f = open(DIR + "ficha_producto.txt","a+")
      	f.write(str(ficha_producto) + '...' + time.strftime("__Hora__%H_%M_%S__Fecha__%d-%m-%y") +'\n')
     	f.close()
-        #logging.info("se guardo en autoclave.txt")
+        logging.info("se guardo en ficha_producto.txt")
 
     except:
-        pass
-	    #logging.info("no se pudo guardar en autoclave.txt")
+        #pass
+	    logging.info("no se pudo guardar en ficha_producto.txt")
 
 
 
@@ -617,10 +620,6 @@ def background_thread1():
     measures = [0,0,0,0,0,0,0]
     save_set_data = [20,0,0,20,0,1,1,1,1,1,0,0,0]
 
-    #ciclo_seg    = 30#rm_sets[2]*3600*24                  #se configura ciclo de dias a segundos.
-    #duracion_seg = 5#rm_sets[1]*60                        #se configura duracion de minutos a segundos.
-    #periodo_seg  = 10#rm_sets[0]*60                       #se configura periodo  de munutos a segundos.
-
     flag_duty_cycle = 1
     ciclo_elapsed   = 0
 
@@ -628,41 +627,16 @@ def background_thread1():
     time_save2 = datetime.datetime.now()
 
     while True:
-        global set_data, rm_sets, rm_save
-        #se emiten las mediciones y setpoints para medir y graficar
-        socketio.emit('Medidas', {'data': measures, 'set': set_data}, namespace='/biocl')
-
-        #ZMQ DAQmx download data from micro controller
-        temp_ = communication.zmq_client().split()
-
+        global set_data, rm_sets, rm_save, ficha_producto, rm3, rm5
         try:
-            measures[0] = temp_[1]  #Temp_ (T_Promedio)
-            measures[1] = temp_[2]  #Temp1 (T_Sombrero)
-            measures[2] = temp_[3]  #Temp2 (T_Mosto)
-            measures[3] = temp_[6]  #Itemp2
-            measures[4] = temp_[5]  #Iod
-            measures[5] = temp_[7]  #Itemp1
-            measures[6] = temp_[4]  #Iph
-
-            for i in range(0,len(set_data)):
-                if save_set_data[i] != set_data[i]:
-                    communication.cook_setpoint(set_data)
-                    save_set_data = set_data
-                    #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
-                    ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
-                    ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
-                    ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
-
-            ##logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
-
             #################################################################################
             # Codigo para remontaje (calculo de tiempos)
             #bucle principal de tiempo
             #if rm_sets[4] == 1: #se habilita el remontaje con enable de la app.py
             if rm_sets[4] == 1:
-                ciclo_seg    = int(rm_sets[2])*3600*24             #se configura ciclo de dias a segundos.
-                duracion_seg = int(rm_sets[1])*60                  #se configura duracion de minutos a segundos.
-                periodo_seg  = int(rm_sets[0])*60                  #se configura periodo  de munutos a segundos.
+                ciclo_seg    = int(rm_sets[2])*3600*24             #se configura variable "ciclo"    de dias a segundos.
+                duracion_seg = int(rm_sets[1])*60                  #se configura variable "duracion" de minutos a segundos.
+                periodo_seg  = int(rm_sets[0])*60                  #se configura variable "periodo"  de munutos a segundos.
 
                 if ciclo_seg - ciclo_elapsed > 0:
                     #GPIO.output(PIN_CICLO, True)
@@ -692,7 +666,7 @@ def background_thread1():
                 else:
                     rm_sets[4] = 0   #finalizado el ciclo, se debe apagar el enable global y Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
                     socketio.emit('remontaje_setpoints', {'set': rm_sets, 'save': rm_save }, namespace='/biocl', broadcast=True)
-                    time.sleep(0.01)
+                    #time.sleep(0.01)
 
             else:
                 ciclo_elapsed = 0
@@ -703,22 +677,67 @@ def background_thread1():
                 time_save1 = datetime.datetime.now()
                 time_save2 = datetime.datetime.now()
 
-                time.sleep(0.05)
+                #time.sleep(0.05)
+                # Codigo para remontaje (calculo de tiempos)
+                #################################################################################
 
-
-            communication.cook_remontaje(rm_sets)
-
-            ficha_producto[12] = rm_sets[5]*rm_sets[4]
+            ficha_producto[12] = rm_sets[5]*rm_sets[4]    #enable global * enable del calculo de tiempo, para su registro en database
 
             myList = ','.join(map(str, ficha_producto))
-            communication.zmq_client_data_speak_website(myList)
+            communication.zmq_client_data_speak_website(myList)    #para database
 
-            socketio.sleep(0.1)
+            ###### se emite remontaje solo si han cambiado!!! ####################################
+            if rm5 != rm_sets[5] or rm3 != rm_sets[3]:              #rm5 es para enable = 1 o 0 que va al uc y enciende remontaje.
+                communication.cook_setpoint(set_data,rm_sets)       #rm3 es para enviar de inmediato un cambio de flujo al uc y este regrese para la database.
+                rm5 = rm_sets[5]
+                rm3 = rm_sets[3]  #rm3 y rm5 actuan como varibales "save"
+
+            ###### se emite setpoint solo si han cambiado!!! ####################################
+            for i in range(0,len(set_data)):
+                if save_set_data[i] != set_data[i]:
+                    communication.cook_setpoint(set_data,rm_sets)
+                    save_set_data = set_data
+                    #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
+                    ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
+                    ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
+                    ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
+
+
+            logging.info("\n ············· SE recalculan los tiempos de remontaje ·············\n")
+            ###### se emite setpoint solo si han cambiado!!! ####################################
 
         except:
-            pass
-            #logging.info("\n no se actualizaron las mediciones")
+            #pass
+            logging.info("\n ············· no se pudieron recalcular los tiempos de remontaje ·············\n")
 
-#test
+
+        try:
+            #####################################################################################
+            #ZMQ DAQmx download data from micro controller + acondicionamiento de variables
+            temp_ = communication.zmq_client().split()
+
+            measures[0] = temp_[1]  #Temp_ (T_Promedio)
+            measures[1] = temp_[2]  #Temp1 (T_Sombrero)
+            measures[2] = temp_[3]  #Temp2 (T_Mosto)
+            measures[3] = temp_[6]  #Itemp2
+            measures[4] = temp_[5]  #Iod
+            measures[5] = temp_[7]  #Itemp1
+            measures[6] = temp_[4]  #Iph
+            #####################################################################################
+
+            ##logging.info("\n Se ejecuto Thread 1 emitiendo %s\n" % set_data)
+            socketio.sleep(0.025)   #probar con 0.05
+            logging.info("\n SE ACTUALIZARON LAS MEDICIONES y SETPOINTS \n")
+
+
+        except:
+            #pass
+            logging.info("\n NO SE ACTUALIZARON LAS MEDICIONES NI SETPOINTS \n")
+
+
+        #se termina de actualizar y se emiten las mediciones y setpoints para hacia clientes web.-
+        socketio.emit('Medidas', {'data': measures, 'set': set_data}, namespace='/biocl')
+
+
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)

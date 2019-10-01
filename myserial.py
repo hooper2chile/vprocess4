@@ -9,18 +9,18 @@ logging.basicConfig(filename='/home/pi/vprocess4/log/myserial.log', level=loggin
 
 tau_zmq_connect     = 0.5  #0.3=300 [ms]
 tau_zmq_while_write = 0.25 #0.5=500 [ms]
-tau_zmq_while_read  = 0.25 #0.4#0.25   # 0.5=500 [ms]
+tau_zmq_while_read  = 1#0.25 #0.4#0.25   # 0.5=500 [ms]
 tau_serial          = 0.01 #0.08   #0.02  #  0.01=10 [ms]
 
 count = 0
-save_setpoint1 = 'wf000u000t000r111d111'
+save_setpoint1 = 'wf000u000t000r111e0f0.0'
 setpoint_reply_uc = save_setpoint1
 
 
 ##### Queue data: q1 is for put data to   serial port #####
 ##### Queue data: q2 is for get data from serial port #####
 def listen(q1):
-    #####Listen part: escribe en el uc las acciones: w, p, a.
+    #####Listen part: escribe en el uc las acciones: w, etc.
     port_sub = "5556"
     context_sub = zmq.Context()
     socket_sub = context_sub.socket(zmq.SUB)
@@ -49,7 +49,7 @@ def speak(q1,q2):
     context_pub = zmq.Context()
     socket_pub = context_pub.socket(zmq.PUB)
     socket_pub.bind("tcp://*:%s" % port_pub)
-    topic   = 'w'
+    topic   = 'w'#'w'
     time.sleep(tau_zmq_connect)
 
     while True:
@@ -71,7 +71,7 @@ def set_dtr():
     global save_setpoint1
 
     try:
-        ser = serial.Serial(port='/dev/ttyUSB0', timeout = 0, baudrate = 9600)
+        ser = serial.Serial(port='/dev/ttyUSB0', timeout = 1, baudrate = 9600)
         ser.setDTR(True)
         time.sleep(1)
         ser.setDTR(False)
@@ -95,7 +95,7 @@ def rs232(q1,q2):
     while not flag:
         try:
             logging.info("---------------------------Try Open SerialPort-USB------------------------------------------------------")
-            ser = serial.Serial(port='/dev/ttyUSB0', timeout = 0, baudrate=9600)
+            ser = serial.Serial(port='/dev/ttyUSB0', timeout = 1, baudrate=9600)
 
             #necesario para setear correctamente el puerto serial
             ser.setDTR(True)
@@ -134,19 +134,21 @@ def rs232(q1,q2):
                                     logging.info("myserial_r_action_to_uc: %s ", action)
                                     ser.write('r' + '\n')
                                     SERIAL_DATA = ser.readline()
-                                    logging.info("myserial_r_reply_uc: %s", SERIAL_DATA)
-                                    q2.put(SERIAL_DATA)
+                                    if SERIAL_DATA != "":
+                                        logging.info("myserial_r_reply_uc: %s", SERIAL_DATA)
+                                        q2.put(SERIAL_DATA)
+                                    else:
+                                        logging.info("myserial_r_reply_uc_VACIO?: %s", SERIAL_DATA)
 
                                     try:
                                         temp = SERIAL_DATA.split()
                                         temp = "".join(map(str, temp[8:]))
 
                                         if temp != "":
-
                                             setpoint_reply_uc = temp
-                                            logging.info("SETPOINT_REPLY_UC: %s", setpoint_reply_uc)
+                                            logging.info("SETPOINT_REPLY_UC: %s", setpoint_reply_uc[0:23])
 
-                                            if setpoint_reply_uc == save_setpoint1:
+                                            if setpoint_reply_uc[0:23] == save_setpoint1:
                                                 logging.info("IGUALES:    (save_setpoint1, setpoint_reply_uc) = (%s,%s) ", save_setpoint1, setpoint_reply_uc)
 
                                             elif setpoint_reply_uc != save_setpoint1:
@@ -172,7 +174,7 @@ def rs232(q1,q2):
                                 ser.close()
                                 flag = False
 
-                        #Action for write command to serial port
+                        #Action for write command of setpont + remontaje (29-09-19) to serial port
                         else:
                             try:
                                 #escribiendo al uc_master
@@ -186,7 +188,7 @@ def rs232(q1,q2):
                                 #nuevo
                                 if action[0] == 'w':
                                     save_setpoint1 = action
-                                    logging.info("************* Se actualizan los save_setpoint1 (write setpoint to UC): %s   *************", save_setpoint1)
+                                    logging.info("************* Se actualizan save_setpoint1 (write setpoint to UC): %s   *************", save_setpoint1)
 
 
                             except:

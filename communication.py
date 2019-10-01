@@ -2,7 +2,7 @@
 # --*- coding: utf-8 -*--
 import sys, zmq, time, logging
 
-#logging.basicConfig(filename='/home/pi/vprocess4/log/communication.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4/log/communication.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 DIR="/home/pi/vprocess4/"
 
@@ -66,7 +66,7 @@ def zmq_client():
 
 ###### Funiones para intercambio de datos entre app.py y databse.py: datos desde la web"
 def zmq_client_data_speak_website(data):
-    #####Publisher part: publica las lecturas obtenidas por serial.
+    #####Publisher part: publica las lecturas obtenidas.
     port_pub = "5554"
     context_pub = zmq.Context()
     socket_pub = context_pub.socket(zmq.PUB)
@@ -91,6 +91,8 @@ def zmq_client_data_listen_website():
     data = socket_sub.recv(flags=zmq.NOBLOCK)
     return data
 ###### Funiones para intercambio de datos entre app.py y databse.py: datos desde la web"
+
+
 
 
 def calibrate(var, coef):
@@ -235,81 +237,143 @@ def actuador(var,u_set):
         #logging.info("no se pudo guardar set de actuador()")
 
 
-###############################################################################
-#Se reciben localmente los datos de rm_sets desde app.py
-def cook_remontaje(rm_sets):
+
+
+def cook_setpoint(set_data, rm_sets):
     global command_save
 
-    rm_sets[0] = int(rm_sets[0])    #periodo
-    rm_sets[1] = int(rm_sets[1])    #rm_duracion
-    rm_sets[2] = int(rm_sets[2])    #rm_ciclo
-    rm_sets[3] = float(rm_sets[3])  #rm_flujo
-    rm_sets[5] = int(rm_sets[5])    #rm_enable
+    try:
+        #format string
+        #convert true or false in checkbox from web client to 0 or 1                                            # + str(set_data[7]) = rst6
+        string_rst = str(set_data[5]) + str(set_data[6]) + str(set_data[7]) + str(set_data[8]) + str(set_data[9]) + str(set_data[7])
+        string_dir = str(set_data[10])+ str(set_data[11])+ str(set_data[12]) + '111'
 
-    #rm_sets[5] = int(rm_sets[4])   #pichicateo para hacer que la bomba funcione directo con la pagina, sin calculo de tiempos
+        ######### para vprocess4 #####################################################
+                    #       bomba1     +     bomba2       +  temperatura
+        #string_dir2 = str(set_data[10])+ str(set_data[11])+ str(set_data[12])  #en deshuso desde 29-09-19
 
-    command = None
+                    #       bomba1     +   bomba2         +  temperatura
+        string_rst2 = str(set_data[5]) + str(set_data[8]) + str(set_data[9])
+        ######### para vprocess4 #####################################################
 
-    periodo  = 2
-    duracion = 1
-    ciclo  = 1
-    flujo  = 0
-    enable = 0
+        #threshold setting:
+        #alimentar
+        if set_data[0] > SPEED_MAX:     #SPEED_MAX_MIX:
+            set_data[0] = SPEED_MAX     #SPEED_MAX_MIX
+
+        elif set_data[0] < 0:
+            set_data[0] = 0
+
+        #Mezclar
+        if set_data[1] > SPEED_MAX_MIX:  #cambiar a SPEED_MAX_MIX cuando este listo el protocolo que tambien hay que modificar
+            set_data[1] = SPEED_MAX_MIX
+
+        elif set_data[1] < 0:
+            set_data[1] = 0
+
+        #pH
+        if set_data[2] > PH_MAX:
+            set_data[2] = PH_MAX
+
+        elif set_data[2] < PH_MIN:
+            set_data[2] = PH_MIN
+
+        #descarga
+        if set_data[3] > SPEED_MAX:
+            set_data[3] = SPEED_MAX
+
+        elif set_data[3] < 0:
+            set_data[3] = 0
+
+        #temperatura
+        if set_data[4] > TEMP_MAX:
+            set_data[4] = TEMP_MAX
+
+        elif set_data[4] < 0:
+            set_data[4] = 0
+
+
+        #format seetting:
+        if set_data[0] < 10:
+            string_feed = '00' + str(set_data[0])
+        elif set_data[0] < 100:
+            string_feed = '0'  + str(set_data[0])
+        else:
+            string_feed = str(set_data[0])
+
+
+        if set_data[1] < 10:
+            string_mix = '000' + str(set_data[1])
+        elif set_data[1] < 100:
+            string_mix = '00'  + str(set_data[1])
+        elif set_data[1] < 1000:
+            string_mix = '0'   + str(set_data[1])
+        else:
+            string_mix = str(set_data[1])
+
+
+        ph_dec = str(set_data[2]-int(set_data[2]))[1:]
+        if ph_dec == '.0':
+            if set_data[2] < 10:
+                string_ph = '0' + str(set_data[2])
+            else:
+                string_ph = str(set_data[2])
+
+        else:
+            if set_data[2] < 10:
+                string_ph = '0' + str(set_data[2])
+            else:
+                string_ph = str(set_data[2])
+
+
+        if set_data[3] < 10:
+            string_unload = '00' + str(set_data[3])
+        elif set_data[3] < 100:
+            string_unload = '0'  + str(set_data[3])
+        else:
+            string_unload = str(set_data[3])
+
+
+        if set_data[4] < 10:
+            string_temp = '00' + str(set_data[4])
+        elif set_data[4] < 100:
+            string_temp = '0'  + str(set_data[4])
+        else:
+            string_temp = str(set_data[4])
+
+    except:
+        logging.info('\n' + "************** no se pudo construir command setpoints **************"  + '\n')
+
 
     try:
-        #limites de periodo
-        if rm_sets[0] >= T_MAX:
-            rm_sets[0] = T_MAX
-        elif rm_sets[0] <= T_MIN:
-            rm_sets[0] = T_MIN
-        #str de periodo
-        if rm_sets[0] < 10 and rm_sets[0] >= 0:
-            rm_sets[0] = '000' + str(rm_sets[0])
-        elif rm_sets[0] < 100 and rm_sets[0] > 0:
-            rm_sets[0] = '00' + str(rm_sets[0])
-        elif rm_sets[0] < 1000 and rm_sets[0] > 0:
-            rm_sets[0] = '0' + str(rm_sets[0])
-        periodo = str(rm_sets[0])
-        rm_sets[0] = int(rm_sets[0])
+        rm_sets[0] = int(rm_sets[0])    #periodo
+        rm_sets[1] = int(rm_sets[1])    #rm_duracion
+        rm_sets[2] = int(rm_sets[2])    #rm_ciclo
+        rm_sets[3] = float(rm_sets[3])  #rm_flujo
+        #rm_sets[4] = eneble global de la pagina web
+        rm_sets[5] = int(rm_sets[5])    #rm_enable
+        #rm_sets[5] = int(rm_sets[4])   #pichicateo para hacer que la bomba funcione directo con la pagina, sin calculo de tiempos
 
+        command = None
+        flujo  = 0
+        enable = 0
 
-        #limites de duracion
-        if rm_sets[1] >= BOMBA_REMONTAJE_T_MAX:
-            rm_sets[1] = BOMBA_REMONTAJE_T_MAX
-        elif rm_sets[1] < BOMBA_REMONTAJE_T_MIN:
-            rm_sets[1] = BOMBA_REMONTAJE_T_MIN
-        #str de duracion
-        if rm_sets[1] < 10 and rm_sets[1] >= 0:
-            rm_sets[1] = '000' + str(rm_sets[1])
-        elif rm_sets[1] < 100 and rm_sets[1] > 0:
-            rm_sets[1] = '00' + str[rm_sets[1]]
-        elif rm_sets[1] < 1000 and rm_sets[1] > 0:
-            rm_sets[1] = '0' + str[rm_sets[1]]
-        duracion = str(rm_sets[1])
-        rm_sets[1] = int(rm_sets[1])
-
-
-        #limites de ciclo
-        if rm_sets[2] >= CICLO_MAX:
-            rm_sets[2] = CICLO_MAX
-        elif rm_sets[2] < CICLO_MIN:
-            rm_sets[2] = CICLO_MIN
-        #str de ciclo
-        if rm_sets[2] < 10 and rm_sets[2] >= 0:
-            rm_sets[2] = '0' + str(rm_sets[2])
-        ciclo = str(rm_sets[2])
-        rm_sets[2] = int(rm_sets[2])
-
+        #### Formateo y limites para variables de remontaje y flujo
         #limites de flujo (ver escala flujemetro manual) rm_sets[3]
         if rm_sets[3] < 0:
             rm_sets[3] = 0
         elif rm_sets[3] >= 3:
             rm_sets[3] = 3
+
         #str de flujo
-        flujo = str(rm_sets[3])
+        if rm_sets[3] == 3:
+            flujo = str(rm_sets[3]) + '.0' #se asegura el decimal para el caso exacto de flujo = 1 o 2 o 3
+        else:
+            flujo = str(rm_sets[3])
+        #flujo = str(rm_sets[3])
 
 
-        #ajustando flag rm_enable (rm_sets[3])
+        #ajustando flag rm_enable (rm_sets[5])
         if rm_sets[5] is 1:
             rm_sets[5] = 1
         else:
@@ -317,141 +381,26 @@ def cook_remontaje(rm_sets):
         #str flag rm_enable
         enable = str(rm_sets[5])
 
+        #vprocess4
+        command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'e' + enable + 'f' + flujo + '\n'
+        logging.info('\n\n' + command + '\n')
 
-        #se construye el string de autoclavado
-        command = 'p' + periodo + 'd' + duracion + 'c' + ciclo + 'e' + enable + 'f' + flujo + '\n'
-
-        if command_save != command:
-            published_setpoint(command)
-            command_save = command
+        #wf000u000t009r000e1f0.2t20.12
 
     except:
-        logging.info("no se pudo generar el command para remontaje_string")
-        pass
-
-    return True
-###############################################################################
-
-
-
-
-
-def cook_setpoint(set_data):
-    #format string
-    #convert true or false in checkbox to 0 or 1
-                                                                                                            # + str(set_data[7]) = rst6
-    string_rst = str(set_data[5]) + str(set_data[6]) + str(set_data[7]) + str(set_data[8]) + str(set_data[9]) + str(set_data[7])
-    string_dir = str(set_data[10])+ str(set_data[11])+ str(set_data[12]) + '111'
-
-######### para vprocess4 #####################################################
-                #       alimentar  +     ¿?           +  temperatura
-    string_dir2 = str(set_data[10])+ str(set_data[11])+ str(set_data[12])
-
-                #       alimentar  +   descarga       +  temperatura
-    string_rst2 = str(set_data[5]) + str(set_data[8]) + str(set_data[9])
-######### para vprocess4 #####################################################
-
-    #threshold setting:
-    #alimentar
-    if set_data[0] > SPEED_MAX:     #SPEED_MAX_MIX:
-        set_data[0] = SPEED_MAX     #SPEED_MAX_MIX
-
-    elif set_data[0] < 0:
-        set_data[0] = 0
-
-    #Mezclar
-    if set_data[1] > SPEED_MAX_MIX:  #cambiar a SPEED_MAX_MIX cuando este listo el protocolo que tambien hay que modificar
-        set_data[1] = SPEED_MAX_MIX
-
-    elif set_data[1] < 0:
-        set_data[1] = 0
-
-    #pH
-    if set_data[2] > PH_MAX:
-        set_data[2] = PH_MAX
-
-    elif set_data[2] < PH_MIN:
-        set_data[2] = PH_MIN
-
-    #descarga
-    if set_data[3] > SPEED_MAX:
-        set_data[3] = SPEED_MAX
-
-    elif set_data[3] < 0:
-        set_data[3] = 0
-
-    #temperatura
-    if set_data[4] > TEMP_MAX:
-        set_data[4] = TEMP_MAX
-
-    elif set_data[4] < 0:
-        set_data[4] = 0
-
-
-    #format seetting:
-    if set_data[0] < 10:
-        string_feed = '00' + str(set_data[0])
-    elif set_data[0] < 100:
-        string_feed = '0'  + str(set_data[0])
-    else:
-        string_feed = str(set_data[0])
-
-
-    if set_data[1] < 10:
-        string_mix = '000' + str(set_data[1])
-    elif set_data[1] < 100:
-        string_mix = '00'  + str(set_data[1])
-    elif set_data[1] < 1000:
-        string_mix = '0'   + str(set_data[1])
-    else:
-        string_mix = str(set_data[1])
-
-
-    ph_dec = str(set_data[2]-int(set_data[2]))[1:]
-    if ph_dec == '.0':
-        if set_data[2] < 10:
-            string_ph = '0' + str(set_data[2])
-        else:
-            string_ph = str(set_data[2])
-
-    else:
-        if set_data[2] < 10:
-            string_ph = '0' + str(set_data[2])
-        else:
-            string_ph = str(set_data[2])
-
-
-    if set_data[3] < 10:
-        string_unload = '00' + str(set_data[3])
-    elif set_data[3] < 100:
-        string_unload = '0'  + str(set_data[3])
-    else:
-        string_unload = str(set_data[3])
-
-
-    if set_data[4] < 10:
-        string_temp = '00' + str(set_data[4])
-    elif set_data[4] < 100:
-        string_temp = '0'  + str(set_data[4])
-    else:
-        string_temp = str(set_data[4])
-
-
-    #vprocess4
-    command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'd' + string_dir2 + '\n'
-    logging.info('\n' + command + '\n')
+        logging.info('\n' + "************** no se pudo construir command remontaje **************"  + '\n')
 
     #published for put in queue and write in serial port
     published_setpoint(command)
 
     try:
         f = open(DIR + "command.txt","a+")
-        f.write(command)
+        f.write(time.strftime(" Hora__%H_%M_%S__Fecha__%d-%m-%y") + "       " + command  )
         f.close()
 
     except OSError:
-        pass
-        #logging.info("no se pudo guardar el command en el archivo de texto")
+        #pass
+        logging.info('\n' + "no se pudo guardar el command en el archivo de texto" + '\n')
 
     return True
 
