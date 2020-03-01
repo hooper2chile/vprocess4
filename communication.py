@@ -35,7 +35,7 @@ PH_MAX = 14
 command_save = "vacio"
 
 
-#download data measures with client zmq
+#write and post send setpoint, download measures with client zmq
 def published_setpoint(set_data):
     #Publisher set_data commands
     port = "5556"

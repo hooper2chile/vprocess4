@@ -300,7 +300,7 @@ def setpoints(dato):
 
 
 #Sockets de calibración de instrumentación
-#CALIBRACION DE PH
+#CALIBRACION DE PH (En EQUIPO CYT esto es para T. Sombrero)
 @socketio.on('ph_calibrar', namespace='/biocl')
 def calibrar_ph(dato):
     global ph_set
@@ -589,8 +589,8 @@ def ficha(dato):
         ficha_producto[2] = float(dato['ph'])
         ficha_producto[3] = float(dato['brix'])
         ficha_producto[4] = float(dato['acidez'])
-        ficha_producto[5] = str(dato['fundo'])
-        ficha_producto[6] = str(dato['cepa'])
+        ficha_producto[5] = str(dato['fundo']).replace(" ","_")    #mystring.replace(" ", "_")
+        ficha_producto[6] = str(dato['cepa']).replace(" ","_")
         ficha_producto[7] = str(dato['lote'])
         ficha_producto[8] = str(dato['dosis'])
 
@@ -701,6 +701,18 @@ def background_thread1():
                     ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
                     ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
                     ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
+
+
+            ###### se emite setpoint en cada vuelta al loop!!! ####################################
+            #communication.cook_setpoint(set_data,rm_sets)
+            #save_set_data = set_data
+            #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
+
+            #for i in range(0,len(ficha_producto)):
+            #    if ficha_producto_save[i] != ficha_producto[i]:
+            #        ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
+            #        ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
+            #        ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
 
 
             logging.info("\n ············· SE recalculan los tiempos de remontaje ·············\n")

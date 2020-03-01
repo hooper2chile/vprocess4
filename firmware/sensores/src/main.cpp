@@ -30,14 +30,16 @@ void setup() {
 }
 
 void loop() {
-  if ( stringComplete  ) {
+  if ( serial_event  ) {
       if ( validate() ) {
           //PORTB = 1<<PB0;
           switch ( message[0] ) {
               case 'r':
-                hamilton_sensors();
+                rtds_sensors();
                 daqmx();
                 broadcast_setpoint(0);
+                //calibrate_sensor();
+                //Serial.println("CALIBRADO!");
                 break;
 
               case 'w':
@@ -47,7 +49,8 @@ void loop() {
                 break;
 
               case 'c':
-                sensor_calibrate();
+                calibrate_sensor();
+                Serial.println("CALIBRADO!");
                 break;
 
               case 'u':

@@ -29,9 +29,13 @@ string = ['','','','','','','','','','','','','','','','']
 os.system("clear")
 while True:
    
-    string = socket_sub.recv().split()
+    #string = socket_sub.recv().split()
+    string2 = socket_sub.recv()
+    string = string2.split()
     #os.system("clear")
     print "     ,Temp_,  Temp1,   Temp2,    Iph,   Iod,   Itemp1,   Itemp2,  Flujo [L/min] \n"
     print string
+    print "\n"
+    print string2
     print "\n"
     time.sleep(0.1)
