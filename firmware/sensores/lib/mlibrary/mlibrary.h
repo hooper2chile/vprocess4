@@ -129,10 +129,10 @@ rtds_sensors(){
 void calibrate_sensor() {
   // comunicacion a sensor 1
   Wire.beginTransmission(rtd1);
-  Wire.write("cal,27.0");
+  Wire.write("cal,25.5");
   Wire.endTransmission();                                                       //end the I2C data transmission.
 
-  if (strcmp("cal,27.0", "sleep") != 0) {                                     //if the command that has been sent is NOT the sleep command, wait the correct amount of time and request data.
+  if (strcmp("cal,25.5", "sleep") != 0) {                                     //if the command that has been sent is NOT the sleep command, wait the correct amount of time and request data.
     delay(time_);                                                               //wait the correct amount of time for the circuit to complete its instruction.
     Wire.requestFrom(rtd1, 20, 1);                                              //call the circuit and request 20 bytes (this may be more than we need)
     code = Wire.read();                                                         //the first byte is the response code, we read this separately.
@@ -150,10 +150,10 @@ void calibrate_sensor() {
 
   // comunicacion a sensor 2
   Wire.beginTransmission(rtd2);
-  Wire.write("cal,27.0");
+  Wire.write("cal,25.5");
   Wire.endTransmission();                                                       //end the I2C data transmission.
 
-  if (strcmp("cal,27.0", "sleep") != 0) {                                     //if the command that has been sent is NOT the sleep command, wait the correct amount of time and request data.
+  if (strcmp("cal,25.5", "sleep") != 0) {                                     //if the command that has been sent is NOT the sleep command, wait the correct amount of time and request data.
     delay(time_);                                                               //wait the correct amount of time for the circuit to complete its instruction.
     Wire.requestFrom(rtd2, 20, 1);                                              //call the circuit and request 20 bytes (this may be more than we need)
     code = Wire.read();                                                         //the first byte is the response code, we read this separately.
@@ -240,9 +240,9 @@ void tx_reply(){
   Serial.print(cByte6);  Serial.print("\t");
   Serial.print(cByte7);  Serial.print("\t");
 //nuevo
-  Serial.println(new_write_w);  //Serial.print("\t");
-
-  //Serial.print(message);
+  Serial.println(new_write);    // Serial.print("\t");
+  //Serial.print(new_write_w);  Serial.print("\t");
+  //Serial.println(message);
   //Serial.print("\n");
 }
 
@@ -277,7 +277,8 @@ void broadcast_setpoint(uint8_t select) {
     case 0: //only re-tx and update uset's.
       //se actualiza medicion de temperatura para enviarla a uc_slave
       new_write = "";
-      new_write = new_write_w;
+      //new_write = new_write_w;
+      new_write = new_write_w.substring(0,23) + "t" + String(Temp_) + "\n";
       i2c_send_command(new_write, 2); //va hacia uc_slave
       break;
 

@@ -38,6 +38,7 @@ void loop() {
                 rtds_sensors();
                 daqmx();
                 broadcast_setpoint(0);
+		//broadcast_setpoint(1); //probando el 2 de marzo de 2020
                 //calibrate_sensor();
                 //Serial.println("CALIBRADO!");
                 break;
