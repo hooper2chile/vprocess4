@@ -88,6 +88,10 @@ void rtd1_sensor() {
       }
     }
     Temp1 = atof(RTD_data1);
+    if      (Temp1 < 0)   Temp1 = 1;
+    else if (Temp1 > 100) Temp1 = 111;
+    else    Temp1 = Temp1;
+
   }
   serial_event = false;                   //reset the serial event flag.
   return;
@@ -114,6 +118,9 @@ void rtd2_sensor() {
       }
     }
     Temp2 = atof(RTD_data2);
+    if      (Temp2 < 0)   Temp2 = 2;
+    else if (Temp2 > 100) Temp2 = 222;
+    else    Temp2 = Temp2;
   }
   serial_event = false;                   //reset the serial event flag.
   return;
