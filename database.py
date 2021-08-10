@@ -186,10 +186,10 @@ def main():
             else:
                 flag_database_local = False
 
-            f = open(DIR + "/para_basedatos.txt","a+")
+            #f = open(DIR + "/para_basedatos.txt","a+")
             #f.write( str(real_data) + "    " + str(ficha_producto) + "__down__" + "\n" )
-            f.write( str(flag_database_local) + " fuera del while " +"\n" )
-            f.close()
+            #f.write( str(flag_database_local) + " fuera del while " +"\n" )
+            #f.close()
 
 
         except:
@@ -218,10 +218,10 @@ def main():
                 pass
             ########################## ZMQ connections #######################################
 
-            f = open(DIR + "/para_basedatos2.txt","a+")
+            #f = open(DIR + "/para_basedatos2.txt","a+")
             #f.write( str(real_data) + "    " + str(ficha_producto) + "__down__" + "\n" )
-            f.write( str(flag_database_local) + " dentro del while " +"\n" )
-            f.close()
+            #f.write( str(flag_database_local) + " dentro del while " +"\n" )
+            #f.close()
 
 
             delta = end_time - start_time
@@ -256,7 +256,7 @@ def main():
 
 
             #log de grabacion: cada 10 seg (dado el time sleep: TIME_MIN_BD del while) se actualiza el log
-            if i is 50:    #100
+            if i is 60:    #100
                 try:
                     #nuevo 23 julio 2020
                     update_db(real_data, ficha_producto, connector, c, first_time, True)

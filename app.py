@@ -201,12 +201,11 @@ def setpoints(dato):
 
             except:
                 pass
-                logging.info("########################################################### ***********************************    ++++++++++++++++++++++++++++++++++++++   no se pudo guardar el flag_database para iniciar grabacion +++++++++++++++++++++++++++++++++++   ***********************************  #########################################################\n")
+                logging.info("#  no se pudo guardar el flag_database para iniciar grabacion #\n")
 
         elif task[0] == "no_grabar":
             flag_database = "False"
             try:
-                #os.system("rm -rf /home/pi/vprocess4c/name_db.txt")
                 f = open(DIR + "flag_database.txt","w")
                 f.write(flag_database)
                 f.close()

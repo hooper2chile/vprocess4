@@ -1,0 +1,90 @@
+Traceback (most recent call last):
+  File "cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "/home/pi/vprocess4c/cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Traceback (most recent call last):
+  File "/home/pi/vprocess4c/cloud.py", line 9, in <module>
+    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
+    hdlr = FileHandler(filename, mode)
+  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
+    stream = open(self.baseFilename, self.mode)
+IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
