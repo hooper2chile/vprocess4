@@ -1,2 +1,0 @@
-[u'grabar', True]
-[u'no_grabar', True]

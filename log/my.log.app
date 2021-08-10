@@ -553,3 +553,95 @@ ZMQError: Address already in use
 (513) accepted ('192.168.1.136', 55010)
 192.168.1.136 - - [10/Aug/2021 18:54:44] "GET /socket.io/?EIO=3&transport=polling&t=NioHddl&sid=42cd7e1ba9e94689b17af2dbb5a13c1d HTTP/1.1" 200 215 0.001110
 192.168.1.136 - - [10/Aug/2021 18:54:44] "GET /socket.io/?EIO=3&transport=polling&t=NioHddn&sid=8c21c6bd43664a4ebca5482d68a27661 HTTP/1.1" 200 215 0.002869
+192.168.1.136 - - [10/Aug/2021 18:55:11] "GET /socket.io/?EIO=3&transport=websocket&sid=42cd7e1ba9e94689b17af2dbb5a13c1d HTTP/1.1" 200 0 27.138285
+192.168.1.136 - - [10/Aug/2021 18:55:11] "GET /socket.io/?EIO=3&transport=websocket&sid=8c21c6bd43664a4ebca5482d68a27661 HTTP/1.1" 200 0 27.139279
+192.168.1.136 - - [10/Aug/2021 18:55:19] "GET /socket.io/?EIO=3&transport=polling&t=NioHkY0 HTTP/1.1" 200 381 0.002463
+192.168.1.136 - - [10/Aug/2021 18:55:19] "GET /socket.io/?EIO=3&transport=polling&t=NioHkVG HTTP/1.1" 200 381 0.002475
+192.168.1.136 - - [10/Aug/2021 18:55:19] "POST /socket.io/?EIO=3&transport=polling&t=NioHm60&sid=4677d2983f444ad5993d7d7f343e0ebc HTTP/1.1" 200 223 0.018409
+192.168.1.136 - - [10/Aug/2021 18:55:19] "GET /socket.io/?EIO=3&transport=polling&t=NioHm61&sid=4677d2983f444ad5993d7d7f343e0ebc HTTP/1.1" 200 945 0.001414
+(513) accepted ('192.168.1.136', 55012)
+192.168.1.136 - - [10/Aug/2021 18:55:19] "POST /socket.io/?EIO=3&transport=polling&t=NioHm64&sid=83042af894c84ba8acd0a36cba333a71 HTTP/1.1" 200 223 0.016744
+192.168.1.136 - - [10/Aug/2021 18:55:19] "GET /socket.io/?EIO=3&transport=polling&t=NioHm66&sid=83042af894c84ba8acd0a36cba333a71 HTTP/1.1" 200 945 0.001488
+(513) accepted ('192.168.1.136', 55014)
+192.168.1.136 - - [10/Aug/2021 18:55:35] "GET /socket.io/?EIO=3&transport=polling&t=NioHm6q&sid=83042af894c84ba8acd0a36cba333a71 HTTP/1.1" 200 362 0.000968
+192.168.1.136 - - [10/Aug/2021 18:55:35] "GET /socket.io/?EIO=3&transport=polling&t=NioHm6U&sid=4677d2983f444ad5993d7d7f343e0ebc HTTP/1.1" 200 215 0.006417
+192.168.1.136 - - [10/Aug/2021 18:55:36] "GET /socket.io/?EIO=3&transport=polling&t=NioHq91&sid=83042af894c84ba8acd0a36cba333a71 HTTP/1.1" 200 215 0.002929
+192.168.1.136 - - [10/Aug/2021 18:56:03] "GET /socket.io/?EIO=3&transport=websocket&sid=83042af894c84ba8acd0a36cba333a71 HTTP/1.1" 200 0 27.095893
+192.168.1.136 - - [10/Aug/2021 18:56:03] "GET /socket.io/?EIO=3&transport=websocket&sid=4677d2983f444ad5993d7d7f343e0ebc HTTP/1.1" 200 0 43.624857
+(513) accepted ('192.168.1.136', 55016)
+(513) accepted ('192.168.1.136', 55018)
+192.168.1.136 - - [10/Aug/2021 18:57:00] "GET /socket.io/?EIO=3&transport=polling&t=NioI0K0 HTTP/1.1" 200 381 0.002334
+192.168.1.136 - - [10/Aug/2021 18:57:00] "GET /socket.io/?EIO=3&transport=polling&t=NioHx06 HTTP/1.1" 200 381 0.002403
+192.168.1.136 - - [10/Aug/2021 18:57:00] "GET /socket.io/?EIO=3&transport=polling&t=NioHx04 HTTP/1.1" 200 381 0.002471
+192.168.1.136 - - [10/Aug/2021 18:57:00] "GET /socket.io/?EIO=3&transport=polling&t=NioI0Dy HTTP/1.1" 200 381 0.002621
+192.168.1.136 - - [10/Aug/2021 18:57:00] "GET /socket.io/?EIO=3&transport=polling&t=NioI63I HTTP/1.1" 200 381 0.002537
+192.168.1.136 - - [10/Aug/2021 18:57:00] "GET /socket.io/?EIO=3&transport=polling&t=NioI6Kd HTTP/1.1" 200 381 0.002509
+192.168.1.136 - - [10/Aug/2021 18:57:00] "POST /socket.io/?EIO=3&transport=polling&t=NioI8jd&sid=51f5168d27054fe9a20f405e5322c887 HTTP/1.1" 200 223 0.016501
+(513) accepted ('192.168.1.136', 55020)
+(513) accepted ('192.168.1.136', 55022)
+192.168.1.136 - - [10/Aug/2021 18:57:33] "POST /socket.io/?EIO=3&transport=polling&t=NioI8ji&sid=d3dd2824333d49fbaa108d3f4ca269bd HTTP/1.1" 200 223 0.013266
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python2.7/site-packages/eventlet/wsgi.py", line 547, in handle_one_response
+    result = self.application(self.environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/flask_socketio/__init__.py", line 44, in __call__
+    start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/engineio/middleware.py", line 59, in __call__
+    return self.engineio_app.handle_request(environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/socketio/server.py", line 428, in handle_request
+    return self.eio.handle_request(environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/engineio/server.py", line 337, in handle_request
+    socket = self._get_socket(sid)
+  File "/home/pi/.local/lib/python2.7/site-packages/engineio/server.py", line 521, in _get_socket
+    raise KeyError('Session is disconnected')
+KeyError: 'Session is disconnected'
+
+192.168.1.136 - - [10/Aug/2021 18:57:33] "GET /socket.io/?EIO=3&transport=polling&t=NioI8jh&sid=51f5168d27054fe9a20f405e5322c887 HTTP/1.1" 500 1247 0.023612
+192.168.1.136 - - [10/Aug/2021 18:57:33] "POST /socket.io/?EIO=3&transport=polling&t=NioIEqI&sid=51f5168d27054fe9a20f405e5322c887 HTTP/1.1" 400 242 0.011972
+192.168.1.136 - - [10/Aug/2021 18:57:33] "GET /socket.io/?EIO=3&transport=polling&t=NioI8jl&sid=d3dd2824333d49fbaa108d3f4ca269bd HTTP/1.1" 400 218 0.001226
+192.168.1.136 - - [10/Aug/2021 18:57:33] "GET /socket.io/?EIO=3&transport=websocket&sid=51f5168d27054fe9a20f405e5322c887 HTTP/1.1" 400 218 0.001174
+192.168.1.136 - - [10/Aug/2021 18:57:33] "GET /socket.io/?EIO=3&transport=websocket&sid=d3dd2824333d49fbaa108d3f4ca269bd HTTP/1.1" 400 218 0.001306
+192.168.1.136 - - [10/Aug/2021 18:57:48] "GET /socket.io/?EIO=3&transport=polling&t=NioIHLz HTTP/1.1" 200 381 0.002462
+192.168.1.136 - - [10/Aug/2021 18:57:48] "POST /socket.io/?EIO=3&transport=polling&t=NioIH3i&sid=51f5168d27054fe9a20f405e5322c887 HTTP/1.1" 400 242 0.001322
+192.168.1.136 - - [10/Aug/2021 18:57:48] "POST /socket.io/?EIO=3&transport=polling&t=NioIH3y&sid=d3dd2824333d49fbaa108d3f4ca269bd HTTP/1.1" 400 242 0.001280
+192.168.1.136 - - [10/Aug/2021 18:57:48] "GET /socket.io/?EIO=3&transport=polling&t=NioIHJe HTTP/1.1" 200 381 0.003912
+192.168.1.136 - - [10/Aug/2021 18:57:48] "POST /socket.io/?EIO=3&transport=polling&t=NioIGpf&sid=d3dd2824333d49fbaa108d3f4ca269bd HTTP/1.1" 400 242 0.001640
+(513) accepted ('192.168.1.136', 55024)
+192.168.1.136 - - [10/Aug/2021 18:57:48] "POST /socket.io/?EIO=3&transport=polling&t=NioIKV6&sid=3dc1561022594458bfe1fe639521b17b HTTP/1.1" 200 223 0.016245
+192.168.1.136 - - [10/Aug/2021 18:57:48] "POST /socket.io/?EIO=3&transport=polling&t=NioIKVG&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 200 223 0.016551
+192.168.1.136 - - [10/Aug/2021 18:57:48] "GET /socket.io/?EIO=3&transport=polling&t=NioIKV8&sid=3dc1561022594458bfe1fe639521b17b HTTP/1.1" 200 945 0.001536
+192.168.1.136 - - [10/Aug/2021 18:57:48] "GET /socket.io/?EIO=3&transport=polling&t=NioIKVG.0&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 200 945 0.044169
+(513) accepted ('192.168.1.136', 55026)
+192.168.1.136 - - [10/Aug/2021 18:58:12] "GET /socket.io/?EIO=3&transport=polling&t=NioIKWB&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 200 362 0.000961
+192.168.1.136 - - [10/Aug/2021 18:58:12] "GET /socket.io/?EIO=3&transport=polling&t=NioIKWB&sid=3dc1561022594458bfe1fe639521b17b HTTP/1.1" 200 215 0.000953
+192.168.1.136 - - [10/Aug/2021 18:58:12] "GET /socket.io/?EIO=3&transport=websocket&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 200 0 0.004443
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python2.7/site-packages/eventlet/wsgi.py", line 547, in handle_one_response
+    result = self.application(self.environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/flask_socketio/__init__.py", line 44, in __call__
+    start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/engineio/middleware.py", line 59, in __call__
+    return self.engineio_app.handle_request(environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/socketio/server.py", line 428, in handle_request
+    return self.eio.handle_request(environ, start_response)
+  File "/home/pi/.local/lib/python2.7/site-packages/engineio/server.py", line 356, in handle_request
+    socket = self._get_socket(sid)
+  File "/home/pi/.local/lib/python2.7/site-packages/engineio/server.py", line 521, in _get_socket
+    raise KeyError('Session is disconnected')
+KeyError: 'Session is disconnected'
+
+192.168.1.136 - - [10/Aug/2021 18:58:20] "POST /socket.io/?EIO=3&transport=polling&t=NioIQbu&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 500 1247 0.001310
+192.168.1.136 - - [10/Aug/2021 18:58:20] "GET /socket.io/?EIO=3&transport=polling&t=NioIQNU&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 200 211 7.570909
+192.168.1.136 - - [10/Aug/2021 18:58:20] "GET /socket.io/?EIO=3&transport=websocket&sid=3dc1561022594458bfe1fe639521b17b HTTP/1.1" 200 0 31.613976
+192.168.1.136 - - [10/Aug/2021 18:58:20] "GET /socket.io/?EIO=3&transport=polling&t=NioISE1&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 400 218 0.001250
+192.168.1.136 - - [10/Aug/2021 18:58:35] "GET /socket.io/?EIO=3&transport=polling&t=NioISTh HTTP/1.1" 200 381 0.002554
+192.168.1.136 - - [10/Aug/2021 18:58:35] "POST /socket.io/?EIO=3&transport=polling&t=NioISTe&sid=54848bf48b46481e957a0b630b9f355a HTTP/1.1" 400 242 0.001296
+192.168.1.136 - - [10/Aug/2021 18:58:35] "GET /socket.io/?EIO=3&transport=polling&t=NioISjM HTTP/1.1" 200 381 0.002414
+192.168.1.136 - - [10/Aug/2021 18:58:35] "POST /socket.io/?EIO=3&transport=polling&t=NioIVvb&sid=d9c9732e19cc4fd89717c71ff3e8d1a0 HTTP/1.1" 200 223 0.016876
+(513) accepted ('192.168.1.136', 55034)
+192.168.1.136 - - [10/Aug/2021 18:58:35] "POST /socket.io/?EIO=3&transport=polling&t=NioIVvg&sid=eee5d83b1de14ca787fc915b76c9d59c HTTP/1.1" 200 223 0.016304
+192.168.1.136 - - [10/Aug/2021 18:58:35] "GET /socket.io/?EIO=3&transport=polling&t=NioIVvf&sid=d9c9732e19cc4fd89717c71ff3e8d1a0 HTTP/1.1" 200 945 0.039252
+(499) wsgi starting up on http://0.0.0.0:5000

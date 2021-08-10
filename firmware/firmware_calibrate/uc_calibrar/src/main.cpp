@@ -28,6 +28,7 @@ void setup() {
 }
 
 void loop() {
+
   if ( serial_event  ) {
       if ( validate() ) {
           //PORTB = 1<<PB0;
@@ -41,10 +42,12 @@ void loop() {
           //PORTB = 0<<PB0;
       }
       else {
-        Serial.println("bad validate (agua a 25 [°C]):" + message);
+        Serial.println("bad validate (escribir: - calibrar - y tener sensores en agua a 25 [°C]):" + message);
       }
-    atlas_sensors();
     clean_strings();
     wdt_reset();
   }
+  else
+    atlas_sensors();
+    daqmx();
 }

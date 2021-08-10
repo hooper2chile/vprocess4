@@ -76,7 +76,7 @@ void co2_sensor() {
   Wire.endTransmission();                                                       //end the I2C data transmission.
   if (strcmp('r', "sleep") != 0) {                                              //if the command that has been sent is NOT the sleep command, wait the correct amount of time and request data.
     delay(time_);                                                               //wait the correct amount of time for the circuit to complete its instruction.
-    Wire.requestFrom(co2s, 20, 1);                                              //call the circuit and request 20 bytes (this may be more than we need)
+    Wire.requestFrom(co2s, 500, 1);                                              //call the circuit and request 20 bytes (this may be more than we need)
     code = Wire.read();                                                         //the first byte is the response code, we read this separately.
      i = 0;
      while (Wire.available()) {            //are there bytes to receive.
@@ -226,14 +226,13 @@ void tx_reply(){
   //Serial.print(cByte5);       Serial.print("\t");
   //Serial.print(cByte6);       Serial.print("\t");
   //Serial.print(cByte7);       Serial.print("\t");
-  Serial.print("\t");
-  Serial.print("new_write_w: ");  Serial.print(new_write_w.substring(0,22));/* Serial.print("\t"); Serial.print("message: "); Serial.print(message.substring(0,19)); */
+
   Serial.println("");
 }
 
 void daqmx() {
   //data adquisition measures
-  Byte0 = Temp_;
+  Byte0 = 0.5*(Temp1+Temp2);
   Byte1 = Temp1;
   Byte2 = Temp2;
   Byte3 = co2;  //Co2_measure;
@@ -268,8 +267,6 @@ void clean_strings() {
 
 // Validate and crumble SETPOINT
 int validate() {
-    //mejorar el esta funcion, caso "w". julio 15-07-21. FH
-    //message format write values: wf100u100t150r111d111
     // Validate CALIBRATE
     if ( message[0]  == 'c' )
             return 1;
