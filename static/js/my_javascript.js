@@ -14,6 +14,7 @@ $(document).ready(function() {
         $('#med1').text('T. Promedio: ' + msg.data[0] + ' º[C]').html();
         $('#med2').text('T. Sombrero: ' + msg.data[1] + ' º[C]').html();
         $('#med3').text('T. Mosto   : ' + msg.data[2] + ' º[C]').html();
+        $('#med4').text('CO2        : ' + msg.data[3] + ' [ppm]').html();
     });
 
     //se emiten los setpoints hacia el servidor
@@ -115,10 +116,10 @@ $(document).ready(function() {
         $('#ph_div_id'      ).text('pH      : ' + msg.save[2] ).html();
         $('#brix_div_id'    ).text('Brix    : ' + msg.save[3] ).html();
         $('#acidez_div_id'  ).text('Acidez  : ' + msg.save[4] ).html();
-        $('#fundo_div_id'   ).text('Fundo   : ' + msg.save[5] ).html();
-        $('#cepa_div_id'    ).text('Cepa    : ' + msg.save[6] ).html();
-        $('#lote_div_id'    ).text('Lote    : ' + msg.save[7] ).html();
-        $('#dosis_div_id'   ).text('Dosis   : ' + msg.save[8] ).html();
+        $('#fundo_div_id'   ).text('F. Aire [mg/L dia]: ' + msg.save[5] ).html();
+        $('#cepa_div_id'    ).text('F. FDA  [mL/seg]  : ' + msg.save[6] ).html();
+        $('#lote_div_id'    ).text('C. FDA [%m/v]: ' + msg.save[7] ).html();
+        $('#dosis_div_id'   ).text('Dosis FDA [g/hL]   : ' + msg.save[8] ).html();
     });
 
 

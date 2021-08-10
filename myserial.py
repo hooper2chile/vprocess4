@@ -10,7 +10,7 @@ DIR="/home/pi/vprocess4c/"
 tau_serial = 0.5  #0.08   #0.02  #  0.01=10 [ms]
 
 count = 0
-save_setpoint = 'wf000u000t000r111e0'
+save_setpoint = 'wf000u000t000r111e0a0'
 setpoint_reply_uc = save_setpoint
 
 
@@ -92,12 +92,12 @@ def rs232():
                     action = socket_sub.recv(flags=zmq.NOBLOCK).split()[1]
                     if action != "":
                         save_setpoint = action
-                        logging.info("****** Se recibe nuevo setpoint desde app.py: %s .... se actualiza save_setpoint: %s ******", action, save_setpoint)
+                        #logging.info("****** Se recibe nuevo setpoint desde app.py: %s .... se actualiza save_setpoint: %s ******", action, save_setpoint)
                         #de no haberlos se continua enviando el ultimo setpoint (por implementar aca abajo)
 
                 except zmq.Again:
                     action = save_setpoint
-                    logging.info("\n\n____________ zmq.Again except ____________\n\n")
+                    #logging.info("\n\n____________ zmq.Again except ____________\n\n")
 
                 #escribiendo y leyendo al uc_sensores:
                 logging.info("Enviando al uc_sensores: %s  ", action)
@@ -107,14 +107,14 @@ def rs232():
                 SERIAL_DATA = ser.readline()
 
                 #debug######################################################################################
-                print "Action: ", action
-                print "SERIAL_DATA: ", SERIAL_DATA
+                #print "Action: ", action
+                #print "SERIAL_DATA: ", SERIAL_DATA
                 ############################################################################################
 
                 if SERIAL_DATA != "" and len(SERIAL_DATA) > 60:
                     #enviamos la data serial a speaker para su publicacion por zmq en el puerto 5557
                     socket_pub.send_string("%s %s" % (topic, SERIAL_DATA))
-                    logging.info("********* Se Recojen mediciones del UC_SENSORES: %s *******\n\n", SERIAL_DATA)
+                    logging.info("*** Mediciones: %s ***\n", SERIAL_DATA)
 
                 else:
                     pass

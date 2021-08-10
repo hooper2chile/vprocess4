@@ -1,8 +1,3 @@
-/* nueva trama: 6-8-21
-w f 0 2 0 u 0 2 0 t n  0  0  3  r  1  1  1  e  0
-0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
-*/
-
 #include "Arduino.h"
 #include <Wire.h>
 
@@ -323,7 +318,7 @@ void tx_reply(){
   //Serial.print(cByte6);       Serial.print("\t");
   //Serial.print(cByte7);       Serial.print("\t");
   Serial.print("\t");
-  Serial.print("new_write_w: ");  Serial.print(new_write_w.substring(0,20));/* Serial.print("\t"); Serial.print("message: "); Serial.print(message.substring(0,19)); */
+  Serial.print("new_write_w: ");  Serial.print(new_write_w.substring(0,22));/* Serial.print("\t"); Serial.print("message: "); Serial.print(message.substring(0,19)); */
   Serial.println("");
 }
 
@@ -377,7 +372,7 @@ String format_message(int var) {
 void forward() {
       //delay(10);
       new_write_w = "";                                                                  /*message desde 13 hasta el final*/
-      new_write_w = message.substring(0,9) + "t" + temp_select + message.substring(10,13) /*format_message(u_temp)*/ + message.substring(13,20) + "\n";
+      new_write_w = message.substring(0,9) + "t" + temp_select + format_message(u_temp) + message.substring(13,22) + "\n";
       i2c_send_command(new_write_w, 2); //va hacia uc_controles
       message = "";
       //delay(10);
@@ -394,18 +389,22 @@ void control_temp() {
     //CASO: necesito calentar por que setpoint es inferior a la medicion
     if ( dTemp >= -0.1 ) {
       temp_select = "c"; //calentar
+      /*
       delay(1);
       digitalWrite(AGUA_FRIA, HIGH);
       delay(1);
       digitalWrite(AGUA_CALIENTE, LOW);
+      */
     }
     //CASO: necesito enfriar por que medicion es mayor a setpoint
     else if ( dTemp < 0.2 ) {
       temp_select = "e"; //enfriar
+      /*
       delay(1);
       digitalWrite(AGUA_FRIA, LOW);
       delay(1);
       digitalWrite(AGUA_CALIENTE, HIGH);
+      */
       dTemp = (-1)*dTemp;
     }
 
@@ -424,8 +423,8 @@ void control_temp() {
   else {
     temp_select = "n";
     //el sistema se deja stanby
-    digitalWrite(AGUA_CALIENTE, HIGH);
-    digitalWrite(AGUA_FRIA, HIGH);
+    //digitalWrite(AGUA_CALIENTE, HIGH);
+    //digitalWrite(AGUA_FRIA, HIGH);
   }
 
   u_temp_save = int(u_temp);
@@ -435,9 +434,17 @@ void control_temp() {
 
 
 //Esquema I2C Concha y Toro:
-//TRAMA-Proceso  : wf000u000t009r000e1f0.2
+//TRAMA-Proceso  : wf000u000tX009r000e1a1, X={c,e,n}
 
+/* nueva trama: 6-8-21: app.py --> myserial.py --> uc_sensores
+w f 0 2 0 u 0 2 0 t 0  0  3  r  1  1  1  e  0  a  1
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+*/
 
+/* nueva trama: 6-8-21, uc_sensores --> uc_controles!!!
+w f 0 2 0 u 0 2 0 t n  0  0  3  r  1  1  1  e  0  a  1
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+*/
 // Validate and crumble SETPOINT
 int validate() {
     //mejorar el esta funcion, caso "w". julio 15-07-21. FH

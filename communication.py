@@ -182,7 +182,7 @@ def actuador(var,u_set):
     return u_cook
 
 
-def cook_setpoint(set_data, rm_sets):
+def cook_setpoint(set_data, rm_sets, a_sets):
     global command_save
 
     try:
@@ -285,35 +285,41 @@ def cook_setpoint(set_data, rm_sets):
             string_temp = str(set_data[4])
 
     except:
-        logging.info('\n' + "************** no se pudo construir command setpoints **************"  + '\n')
+        pass
+        #logging.info('\n' + "************** no se pudo construir command setpoints **************"  + '\n')
 
 
     try:
         rm_sets[0] = int(rm_sets[0])    #periodo
         rm_sets[1] = int(rm_sets[1])    #rm_duracion
         rm_sets[2] = int(rm_sets[2])    #rm_ciclo
-        rm_sets[3] = float(rm_sets[3])  #rm_flujo
-        #rm_sets[4] = eneble global de la pagina web
+        rm_sets[3] = float(rm_sets[3])    #rm_flujo en deshuso 25-07-21
+        #rm_sets[4] = enable global de la pagina web
         rm_sets[5] = int(rm_sets[5])    #rm_enable
         #rm_sets[5] = int(rm_sets[4])   #pichicateo para hacer que la bomba funcione directo con la pagina, sin calculo de tiempos
 
+
+        a_sets[0] = int(a_sets[0])    #a_periodo
+        a_sets[1] = int(a_sets[1])    #a_duracion
+        a_sets[2] = int(a_sets[2])    #a_ciclo
+        a_sets[3] = int(a_sets[3])    #a_flujo. no se utilizara aun. 25-06-21
+        #a_sets[4] = enable global    de la pagina web
+        a_sets[5] = int(a_sets[5])    #a_enable
+        #rm_sets[5] = int(rm_sets[4])   #pichicateo para hacer que la bomba funcione directo con la pagina, sin calculo de tiempos
+
+
         command = None
-        flujo  = 0
-        enable = 0
+        rm_enable = 0
+        aire_enable = 0
 
-        #### Formateo y limites para variables de remontaje y flujo
-        #limites de flujo (ver escala flujemetro manual) rm_sets[3]
-        if rm_sets[3] < 0:
-            rm_sets[3] = 0
-        elif rm_sets[3] >= 3:
-            rm_sets[3] = 3
 
-        #str de flujo
-        if rm_sets[3] == 3:
-            flujo = str(rm_sets[3]) + '.0' #se asegura el decimal para el caso exacto de flujo = 1 o 2 o 3
+        #ajustando flag aire_enable (a_sets[5])
+        if a_sets[5] is 1:
+            a_sets[5] = 1
         else:
-            flujo = str(rm_sets[3])
-        #flujo = str(rm_sets[3])
+            a_sets[5] = 0
+        #str flag aire_enable
+        aire_enable = str(a_sets[5])
 
 
         #ajustando flag rm_enable (rm_sets[5])
@@ -322,17 +328,18 @@ def cook_setpoint(set_data, rm_sets):
         else:
             rm_sets[5] = 0
         #str flag rm_enable
-        enable = str(rm_sets[5])
+        rm_enable = str(rm_sets[5])
 
         #vprocess4
         #command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'e' + enable + 'f' + flujo + '\n'
-        command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'e' + enable + '\n'
-        logging.info('\n\n' + command + '\n')
+        command = 'w' + 'f' + string_feed + 'u' + string_unload + 't' + string_temp + 'r' + string_rst2 + 'e' + rm_enable + 'a' + aire_enable + '\n'
+        #logging.info('\n\n' + command + '\n')
 
-        #wf000u000t009r000e1f0.2t20.12
+        #wf000u000t009r000e1a1
 
     except:
-        logging.info('\n' + "************** no se pudo construir command remontaje **************"  + '\n')
+        pass
+        #logging.info('\n' + "************** no se pudo construir command SETPOINTS Total **************"  + '\n')
 
     #published for put in queue and write in serial port
     #published_setpoint(command)

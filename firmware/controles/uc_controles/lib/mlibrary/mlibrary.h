@@ -1,16 +1,10 @@
 #include "Arduino.h"
 #include "Wire.h"
 #include "SoftwareSerial.h"
-//#include "rgb_lcd.h"
 
 SoftwareSerial mySerial(2, 3);  //RX(Digital2), TX(Digital3) Software serial port.
 
-/*
-rgb_lcd lcd;
-const int colorR = 255;
-const int colorG = 0;
-const int colorB = 0;
-*/
+
 #define  INT(x)   (x-48)  //ascii convertion
 #define iINT(x)   (x+48)  //inverse ascii convertion
 
@@ -169,7 +163,7 @@ void crumble() {
       pump_enable = INT(message[19]);
       relay_temp = message[10]; // c: caliente, e: frio, n: nada
 
-      //aire_enable = INT(message[21]); //6 agosto 2021: falta agregarlo en la tratama que viene desde app.py/communication.py, luego en uc_sensores en la funcion forward()
+      aire_enable = INT(message[21]); //6 agosto 2021: falta agregarlo en la tratama que viene desde app.py/communication.py, luego en uc_sensores en la funcion forward()
     }
     return;
 }
@@ -198,6 +192,11 @@ void reles_temp(){
 }
 
 
+/* nueva trama: 6-8-21, uc_sensores --> uc_controles!!! wf020u020tn003r111e0a1
+
+w f 0 2 0 u 0 2 0 t n  0  0  3  r  1  1  1  e  0  a  1
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+*/
 int validate_write() {
   if ( message[0] == 'w' && message[9] == 't' && message[14] == 'r' && message[5] == 'u' && message[18] == 'e' && ( message[19] == '0' || message[19] == '1') ) {
     Serial.println("echo: " + message);

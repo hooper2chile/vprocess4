@@ -33,7 +33,8 @@
                      step="1"
               />
               <button  type="submit" class="button_apply"> + </button>
-              <br><input  type="checkbox" id="alimentar_rst" /> Deshabilitar
+              <!--<br><input  type="checkbox" id="alimentar_rst" /> Deshabilitar-->
+              <br><input  type="hidden" id="alimentar_rst" /> 
               <br><input hidden type="checkbox" id="alimentar_dir" />
     </div>
     </font>
@@ -90,11 +91,12 @@
             <input  type="checkbox" id="ph_dir" /> Invertir
     </div>
 
-    <!-- Medicion de Temperaturas -->
+    <!-- Medicion de Temperaturas y co2 -->
     <font color="white">
     <div class="caja_derecha_arriba1" id="med1"></div>
     <div class="caja_derecha_arriba2" id="med2"></div>
     <div class="caja_derecha_arriba3" id="med3"></div>
+    <div class="caja_derecha_arriba3" id="med4"></div>
     </font>
 
     <font color="white">
@@ -191,28 +193,34 @@
     </div>
 
     <font color="white">
-    <!caja11: ficha de producto: fundo>
+    <!caja11: ficha de producto: fundo/ ahora es flujo de aire>
         <div class="caja11">
           &emsp;&emsp;&emsp;&emsp;&emsp;
-          <div id="fundo_div_id">Fundo:</div>
-            <input type="text"
+          <div id="fundo_div_id">F. Aire [mg/L dia]</div>
+            <input type="number"
                          id="fundo_input_id"
                          style="width: 50px;"
-                         value="fundo"
+                         value="0"
+                         MIN="0"
+                         MAX="200"
+                         step="0.1"
             />
             <button  type="submit" class="button_apply"> + </button>
         </div>
     </font>
 
     <font color="white">
-    <!caja12: ficha de producto: cepa>
+    <!caja12: ficha de producto: cepa/ ahora es F. FDA>
         <div class="caja12">
           &emsp;&emsp;&emsp;&emsp;&emsp;
-          <div id="cepa_div_id">Cepa:</div>
-            <input type="text"
+          <div id="cepa_div_id">F. FDA [mL/seg]:</div>
+            <input type="number"
                          id="cepa_input_id"
                          style="width: 50px;"
-                         value="cepa"
+                         value="0"
+                         MIN="0"
+                         MAX="100"
+                         step="0.1"
             />
             <button  type="submit" class="button_apply"> + </button>
         </div>
@@ -222,14 +230,14 @@
     <!caja13: ficha de producto: >
         <div class="caja13">
           &emsp;&emsp;&emsp;&emsp;&emsp;
-          <div id="lote_div_id">Nº Lote:</div>
+          <div id="lote_div_id">C. FDA [%m/v]:</div>
             <input type="number"
                   id="lote_input_id"
                   style="width: 50px;"
                   value="1"
                   MIN="0"
-                  MAX="1000"
-                  step="1"
+                  MAX="100"
+                  step="0.1"
             />
             <button  type="submit" class="button_apply"> + </button>
         </div>
@@ -239,14 +247,14 @@
     <!caja14: ficha de producto: >
         <div class="caja14">
           &emsp;&emsp;&emsp;&emsp;&emsp;
-          <div id="dosis_div_id">Dosis levadura:</div>
+          <div id="dosis_div_id">Dosis FDA [g/hL]:</div>
             <input type="number"
                   id="dosis_input_id"
                   style="width: 50px;"
                   value="1"
                   MIN="0"
-                  MAX="1000"
-                  step="0.01"
+                  MAX="200"
+                  step="0.1"
             />
             <button  type="submit" class="button_apply"> + </button>
         </div>

@@ -25,8 +25,8 @@ temp_set = [0,0,0,0]
 
 rm3     =  0
 rm5     =  0
-rm_sets = [0,0,0,0,0,0]  #se agrega rm_sets[5] para enviar este al uc
-rm_save = [0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para los calculos de tiempo
+rm_sets = [0,0,0,0,0,0,0]  #se agrega rm_sets[5] para enviar este al uc. El 6-8-21: se agrega rm_sets[6](el ultimo), para controlar electrovalvula neumatica para inyeccion de aire
+rm_save = [0,0,0,0,0,0,0]  #mientras que rm_sets[4] se usara solo en app.py para los calculos de tiempo
 
 
 #******** nuevas funciones 4-8-21 ++++++++++++++++++++++++++
@@ -51,15 +51,17 @@ flag_database = False
 set_data = [20, 33, 66, 20, 0,    1,1,1,1,1,0,0,0]  #33 y 66 para test. 17 julio 2021
 #set_data[8] =: rst2 (reset de bomba2)
 #set_data[9] =: rst3 (reset de bomba temperatura)
-#set_data[5] =: rst1 (reset de bomba1)
+#set_data[5] =: rst1 (reset de bomba1).........................#22-07-21: Se utilizara en combinacion con timer de bomba 1. nuevas funciones
 #rm_sets[4]  =: (reset global de bomba remontaje)
 #rm_sets[5]  =: (reset local de bomba remontaje)
-
-ficha_producto = [0.0,0.0,0.0,0.0,0.0,"fundo0","cepa0",0,0.0,0,0,0,0] #ficha_producto[9]=set_data[4]:temparatura setpoint
-ficha_producto_save = ficha_producto                                  #ficha_producto[10] = set_data[0]: bomba1
-                                                                      #ficha_producto[11] = set_data[3]: bomba2
-                                                                      #ficha_producto[12] = rm_sets[4]*rm_sets[5] : para saber cuando
-                                                                      #enciende y cuando apaga el remontaje y se multiplica por el flujo en base de datos.
+#                  [0]  [1]  [2]  [3]  [4]    [5]      [6]  [7] [8] [9][10][11][12]
+#ficha_producto = [0.0, 0.0, 0.0, 0.0, 0.0, "fundo0","cepa0",0, 0.0, 0, 0,  0,  0]    # original, respaldo 25-06-21
+ficha_producto  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0,       0.0, 0, 0.0, 0, 0, 0,  0, 0, 0] #[13] es para 1 ó 0 de Electrovalvula_Aire y [14] que es el ultimo elemento. Y queda flujo remontaje que antes venia del uc (ahora no).
+                                                                        #ficha_producto[9]=set_data[4]:temparatura setpoint
+ficha_producto_save = ficha_producto                                    #ficha_producto[10] = set_data[0]: bomba1
+                                                                        #ficha_producto[11] = set_data[3]: bomba2
+                                                                        #ficha_producto[12] = rm_sets[4]*rm_sets[5] : para saber cuando
+                                                                        #enciende y cuando apaga el remontaje y se multiplica por el flujo en base de datos.
 
 
 
@@ -199,7 +201,7 @@ def setpoints(dato):
 
             except:
                 pass
-                #logging.info("no se pudo guardar el flag_database para iniciar grabacion\n")
+                logging.info("########################################################### ***********************************    ++++++++++++++++++++++++++++++++++++++   no se pudo guardar el flag_database para iniciar grabacion +++++++++++++++++++++++++++++++++++   ***********************************  #########################################################\n")
 
         elif task[0] == "no_grabar":
             flag_database = "False"
@@ -228,7 +230,7 @@ def setpoints(dato):
                 os.system("rm -rf /home/pi/vprocess4c/log/*.log")
                 os.system("rm -rf /home/pi/vprocess4c/log/my.log.*")
                 os.system("rm -rf /home/pi/vprocess4c/database/*.db")
-                os.system("rm -rf /home/pi/vprocess4/database/*.db-journal")
+                os.system("rm -rf /home/pi/vprocess4c/database/*.db-journal")
 
             except:
                 pass
@@ -280,7 +282,7 @@ def setpoints(dato):
     set_data = [ dato['alimentar'], dato['mezclar'], dato['ph'], dato['descarga'], dato['temperatura'], dato['alimentar_rst'], dato['mezclar_rst'], dato['ph_rst'], dato['descarga_rst'], dato['temperatura_rst'], dato['alimentar_dir'], dato['ph_dir'], dato['temperatura_dir'] ]
 
     try:
-        set_data[0] = int(set_data[0])   #alimentar
+        set_data[0] = int(set_data[0])   #alimentar (bomba 1)
         set_data[1] = int(set_data[1])   #mezclar
         set_data[2] = float(set_data[2]) #ph
         set_data[3] = int(set_data[3])   #descarga
@@ -586,16 +588,12 @@ def remontaje_functions(dato):
         rm_sets[2] = int(dato['rm_ciclo'])
         rm_sets[3] = float(dato['rm_flujo'])
         rm_sets[4] = int(dato['rm_enable'])
-       #rm_sets[5] = enable local no se recibe desde la pagina, se obtiene localmente en base al algoritmo de calculo de tiempos.
+        #rm_sets[5] = enable local no se recibe desde la pagina, se obtiene localmente en base al algoritmo de calculo de tiempos.
+        #rm_sets[6] = se utiliza para enviar comando de electrovalvula neumatica para inye de aire.
         rm_save = rm_sets
 
     except:
-        rm_sets[0] = 22
-        rm_sets[1] = 11
-        rm_sets[2] = 11
-    	rm_sets[3] = 11
-    	rm_sets[4] = "no_llego"
-        rm_save = [69,69,69,69,False]
+        rm_sets = rm_save
 
         logging.info("no se pudo evaluar rm_sets")
 
@@ -633,14 +631,16 @@ def aire_functions(dato):
         a_sets[2] = int(dato['a_ciclo'])
         #a_sets[3] = float(dato['a_flujo'])   #4-8-21: hay que evaluar quitarlo.
         a_sets[4] = int(dato['a_enable'])
-       #rm_sets[5] = enable local no se recibe desde la pagina, se obtiene localmente en base al algoritmo de calculo de tiempos.
+
+        #rm_sets[6] = a_sets[4] #6-08-21 pichicateo para reutilizar variable flujo no utilizada en el UC pero ya tratada en communication.py .-
+
         a_save = a_sets
 
     except:
         a_sets[0] = 22
         a_sets[1] = 11
         a_sets[2] = 11
-    	a_sets[3] = 11
+    	a_sets[3] = 0
     	a_sets[4] = "no_llego"
         a_save = [69,69,69,69,False]
 
@@ -724,10 +724,10 @@ def ficha(dato):
         ficha_producto[2] = float(dato['ph'])
         ficha_producto[3] = float(dato['brix'])
         ficha_producto[4] = float(dato['acidez'])
-        ficha_producto[5] = str(dato['fundo']).replace(" ","_")    #mystring.replace(" ", "_")
-        ficha_producto[6] = str(dato['cepa']).replace(" ","_")
-        ficha_producto[7] = str(dato['lote'])
-        ficha_producto[8] = str(dato['dosis'])
+        ficha_producto[5] = float(dato['fundo'])#str(dato['fundo']).replace(" ","_")    # por nuevas funciones se cambia para ser flujo de aire. 28-6-21
+        ficha_producto[6] = float(dato['cepa'])#.replace(" ","_")# por nuevas funciones se cambia para ser flujo de aire. 28-6-21
+        ficha_producto[7] = float(dato['lote'])# por nuevas funciones se cambia para ser flujo de aire. 28-6-21
+        ficha_producto[8] = float(dato['dosis'])# por nuevas funciones se cambia para ser flujo de aire. 28-6-21
 
         ficha_producto_save = ficha_producto
 
@@ -750,16 +750,11 @@ def ficha(dato):
 
 
 
+
+
+
 #CONFIGURACION DE THREADS
 def background_thread1():
-    measures = [0,0,0,0,0,0,0]
-    measures_save = measures
-    save_set_data = [20,20,20,20,0,1,1,1,1,1,0,0,0]
-
-    flag_duty_cycle = 1
-    ciclo_elapsed   = 0
-
-
     topic   = 'w'
     #####Publisher part: publicador zmq para el suscriptor de ficha_producto en la base de datos.
     port_pub = "5554"
@@ -785,11 +780,32 @@ def background_thread1():
     #####Listen measures
 
 
+    measures = [0,0,0,0,0,0,0]
+    measures_save = measures
+    save_set_data = [20,20,20,20,0,1,1,1,1,1,0,0,0]
+
+    flag_duty_cycle = 1
+    ciclo_elapsed   = 0
+
+    flag_duty_cycle_a = 1
+    ciclo_elapsed_a   = 0
+
+    flag_duty_cycle_b = 1
+    ciclo_elapsed_b   = 0
+
+
     time_save1 = datetime.datetime.now()
     time_save2 = datetime.datetime.now()
 
+    time_save1_a = datetime.datetime.now()
+    time_save2_a = datetime.datetime.now()
+
+    time_save1_b = datetime.datetime.now()
+    time_save2_b = datetime.datetime.now()
+
+
     while True:
-        global set_data, rm_sets, rm_save, ficha_producto, rm3, rm5
+        global set_data, rm_sets, rm_save, ficha_producto, rm3, rm5, a_sets, a_save
         try:
             #################################################################################
             # Codigo para remontaje (calculo de tiempos)
@@ -843,42 +859,165 @@ def background_thread1():
                 # Codigo para remontaje (calculo de tiempos)
                 #################################################################################
 
-            ficha_producto[12] = rm_sets[5]*rm_sets[4]    #enable global * enable del calculo de tiempo, para su registro en database
-
-            myList = ','.join(map(str, ficha_producto))
-            #communication.zmq_client_data_speak_website(myList)
-            socket_pub.send_string("%s %s" % (topic, myList))                #se publica ficha_producto por zmq (canal 5554) para database.py. FH: 20-07-21
-
-            ###### se emite remontaje solo si han cambiado!!! ####################################
-            if rm5 != rm_sets[5] or rm3 != rm_sets[3]:                       #rm5 es para enable = 1 o 0 que va al uc y enciende remontaje.
-                #preparar y enviar a myserial.py
-                my_set = communication.cook_setpoint(set_data,rm_sets)       #rm3 es para enviar de inmediato un cambio de flujo al uc y este regrese para la database.
-                socket.send_string("%s %s" % (topic, my_set))                #se reemplaza con my_set. antes era send_setpoint. FH: 20-07-21
-
-                rm5 = rm_sets[5]
-                rm3 = rm_sets[3]  #rm3 y rm5 actuan como varibales "save"
+        except:
+            logging.info("\n ············· no se pudieron recalcular los tiempos de remontaje ·············\n")
 
 
-            ###### se emite setpoint solo si han cambiado!!! ####################################
-            #for i in range(0,len(set_data)):
-            #    if save_set_data[i] != set_data[i]:
-                    #preperaru y enviar a myserial.py
-            my_set = communication.cook_setpoint(set_data,rm_sets)
-            socket.send_string("%s %s" % (topic, my_set))            #se reemplaza con my_set. antes era send_setpoint. FH: 20-07-21
-
-            save_set_data = set_data
-            #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
-            ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
-            ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1
-            ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
 
 
-            #logging.info("\n ············· SE recalculan los tiempos de remontaje ·············\n")
-            ###### se emite setpoint solo si han cambiado!!! ####################################
+        try:
+            #################################################################################
+            # Codigo para electrovalvula aire (calculo de tiempos)
+            #bucle principal de tiempo
+            #if a_sets[4] == 1: #se habilita la electrovalvula con enable de la app.py
+            if a_sets[4] == 1:
+                ciclo_seg_a    = int(a_sets[2])*3600*24             #se configura variable "ciclo"    de dias a segundos.
+                duracion_seg_a = int(a_sets[1])*60                  #se configura variable "duracion" de minutos a segundos.
+                periodo_seg_a  = int(a_sets[0])*60                  #se configura variable "periodo"  de munutos a segundos.
+
+                if ciclo_seg_a - ciclo_elapsed_a > 0:
+                    #GPIO.output(PIN_CICLO, True)
+                    c_a = datetime.datetime.now() - time_save1_a
+                    ciclo_elapsed_a = c_a.days*3600*24 + c_a.seconds     #tiempo transcurrido
+
+                    ###################################################################################
+                    # Codigo reentrante para periodo y duracion de bomba remontaje
+                    d_a = datetime.datetime.now() - time_save2_a
+                    if flag_duty_cycle_a == 1:
+                        time_save2_a = datetime.datetime.now()
+                        d_a = datetime.datetime.now() - time_save2_a
+                        flag_duty_cycle_a = 0
+
+                    if (duracion_seg_a - d_a.seconds) > 0:             #descuento tiempo del duty cycle, tiempo en alto.
+                        a_sets[5] = 1                                  #aca encender el pin (enciendo bomba)
+
+
+                    elif (periodo_seg_a - d_a.seconds) > 0:            #vencido el tiempo en alto, descuento tiempo del periodo, tiempo en bajo.
+                        a_sets[5] = 0                             #aca apagar el pin (apago la bomba)
+
+
+                    else:
+                        flag_duty_cycle_a = 1
+                    ###################################################################################
+
+                else:
+                    a_sets[4] = 0   #finalizado el ciclo, se debe apagar el enable global y Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+                    socketio.emit('aire_setpoints', {'set': a_sets, 'save': a_save }, namespace='/biocl', broadcast=True)
+                    #time.sleep(0.01)
+
+            else:
+                ciclo_elapsed_a = 0
+                a_sets[5] = 0
+
+                flag_duty_cycle_a = 1
+
+                time_save1_a = datetime.datetime.now()
+                time_save2_a = datetime.datetime.now()
+
+                #time.sleep(0.05)
+                # Codigo para timer electrovalvula de aire (calculo de tiempos)
+                #################################################################################
+
 
         except:
-            #pass
-            logging.info("\n ············· no se pudieron recalcular los tiempos de remontaje ·············\n")
+                logging.info("\n ············· no se pudieron recalcular los tiempos de electrovalvula neumatica ·············\n")
+
+
+
+
+
+
+        try:
+            #################################################################################
+            # Codigo para bomba 1 (calculo de tiempos)
+            #bucle principal de tiempo
+            #if b_sets[4] == 1: #se habilita la bomba1 con enable de la app.py
+            if b_sets[4] == 1:
+                ciclo_seg_b    = int(b_sets[2])*3600*24             #se configura variable "ciclo"    de dias a segundos.
+                duracion_seg_b = int(b_sets[1])*60                  #se configura variable "duracion" de minutos a segundos.
+                periodo_seg_b  = int(b_sets[0])*60                  #se configura variable "periodo"  de munutos a segundos.
+
+                if ciclo_seg_b - ciclo_elapsed_b > 0:
+                    #GPIO.output(PIN_CICLO, True)
+                    c_b = datetime.datetime.now() - time_save1_b
+                    ciclo_elapsed_b = c_b.days*3600*24 + c_b.seconds     #tiempo transcurrido
+
+                    ###################################################################################
+                    # Codigo reentrante para periodo y duracion de bomba remontaje
+                    d_b = datetime.datetime.now() - time_save2_b
+                    if flag_duty_cycle_b == 1:
+                        time_save2_b = datetime.datetime.now()
+                        d_b = datetime.datetime.now() - time_save2_b
+                        flag_duty_cycle_b = 0
+
+                    if (duracion_seg_b - d_b.seconds) > 0:             #descuento tiempo del duty cycle, tiempo en alto.
+                        b_sets[5] = 1                                  #aca encender el pin (enciendo bomba)
+
+                    elif (periodo_seg_b - d_b.seconds) > 0:            #vencido el tiempo en alto, descuento tiempo del periodo, tiempo en bajo.
+                        b_sets[5] = 0                                  #aca apagar el pin (apago la bomba)
+
+                    else:
+                        flag_duty_cycle_b = 1
+                    ###################################################################################
+
+                else:
+                    b_sets[4] = 0   #finalizado el ciclo, se debe apagar el enable global y Con cada cambio en los parametros, se vuelven a emitir a todos los clientes.
+                    socketio.emit('bomba_setpoints', {'set': b_sets, 'save': b_save }, namespace='/biocl', broadcast=True)
+                    #time.sleep(0.01)
+
+            else:
+                ciclo_elapsed_b = 0
+                b_sets[5] = 0
+
+                flag_duty_cycle_b = 1
+
+                time_save1_b = datetime.datetime.now()
+                time_save2_b = datetime.datetime.now()
+
+                #time.sleep(0.05)
+                # Codigo para timer bomba 1 (calculo de tiempos)
+                #################################################################################
+
+        except:
+                logging.info("\n ············· no se pudieron recalcular los tiempos de electrovalvula neumatica ·············\n")
+
+
+
+
+
+
+
+        #las actualizaciones de abajo deben ir aqui para que aplique la sentencia "!=" en el envio de datos para ficha_producto hacia la Base de Datos
+        ficha_producto[9]  = save_set_data[4]*(1 - save_set_data[9])  #setpoint de temperatura
+        ficha_producto[10] = save_set_data[0]*(1 - save_set_data[5])  #bomba1   algo acá esta generando fallas!!! 7-8-21: 17:49 pm.
+        ficha_producto[11] = save_set_data[3]*(1 - save_set_data[8])  #bomba2
+
+        ficha_producto[12] = rm_sets[3]*rm_sets[5]*rm_sets[4]    #Flujo_REMONTAJE * enable remontaje global * enable del calculo de tiempo, para su registro en database
+        ficha_producto[13] = a_sets[5]*a_sets[4]     #enable aire      global * enable del calculo de tiempo, para su registro en database... por completar en database.py (20-5-21)
+
+
+        rm5 = rm_sets[5]
+        a5  =  a_sets[5]  #a5 y rm5 actuan como varibales "save"
+
+        set_data[5] = 1 - b_sets[5] #se deja bomba 1 en funcion de la configuracion de timer.
+        save_set_data = set_data
+
+        #socketio.emit('Setpoints', {'set': set_data}, namespace='/biocl', broadcast=True)   #se actualiza estado de los setpoints en cada vuelta del loop
+
+
+
+
+        #se publica ficha_producto por zmq (canal 5554) para database.py. FH: 20-07-21
+        myList = ','.join(map(str, ficha_producto))
+        socket_pub.send_string("%s %s" % (topic, myList))
+
+
+
+        #preparar y enviar a myserial.py
+        my_set = communication.cook_setpoint(set_data,rm_sets,a_sets)    #a5 es para enviar de inmediato un cambio de enable electrovalvula de aire al uc.
+        socket.send_string("%s %s" % (topic, my_set))                    #se reemplaza con my_set. antes era send_setpoint. FH: 20-07-21
+
+
 
 
 
@@ -901,10 +1040,10 @@ def background_thread1():
                 measures[0] = temp_[1]  #Temp_ (T_Promedio)
                 measures[1] = temp_[2]  #Temp1 (T_Sombrero)
                 measures[2] = temp_[3]  #Temp2 (T_Mosto)
-                measures[3] = temp_[6]  #Itemp2
+                measures[3] = temp_[4]  #co2                #nuevas funciones 28-07-21
                 measures[4] = temp_[5]  #Iod
-                measures[5] = temp_[7]  #Itemp1
-                measures[6] = temp_[4]  #Iph
+                measures[5] = temp_[6]  #Itemp1
+                measures[6] = temp_[7]  #Iph
 
                 measures_save = measures
                 #####################################################################################
