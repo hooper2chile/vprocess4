@@ -3675,3 +3675,140 @@ Found 2 local files and 168 remote files
 [0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
 [0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
 Sync finished in 3.965015409s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.381676134s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.577472953s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.527750673s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.710435176s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.431557421s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.440910883s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.682005697s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 168 remote files
+
+1 remote files are missing
+[0001/0001] Uploading backup__Fecha__11-08-21__Hora__13_08_47__PROCESO.csv -> vprocess/backup__Fecha__11-08-21__Hora__13_08_47__PROCESO.csv
+                                                                                                    
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.652131263s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.51539728s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.821582054s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.289330782s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.56050255s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.409796768s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.61237676s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.384812743s
+Starting sync...
+Collecting local and remote file information...
+Found 3 local files and 169 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.627108775s
+Starting sync...
+Collecting local and remote file information...
+Found 4 local files and 169 remote files
+
+1 remote files are missing
+[0001/0001] Uploading backup__Fecha__11-08-21__Hora__13_30_43__PROCESO.csv -> vprocess/backup__Fecha__11-08-21__Hora__13_30_43__PROCESO.csv
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.454818075s
+Starting sync...
+Failed to find root dir: Get https://www.googleapis.com/drive/v3/files/1iYqk0kQ2xsG4EbOznnhFL0tHVX6zXkOY?alt=json&fields=id%2Cname%2CmimeType%2CappProperties: dial tcp: lookup www.googleapis.com on 8.8.8.8:53: dial udp 8.8.8.8:53: connect: network is unreachable
+Starting sync...
+Collecting local and remote file information...
+Found 5 local files and 170 remote files
+
+1 remote files are missing
+[0001/0001] Uploading backup__Fecha__11-08-21__Hora__13_33_45__PROCESO.csv -> vprocess/backup__Fecha__11-08-21__Hora__13_33_45__PROCESO.csv
+                                                                                                    
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.771570569s

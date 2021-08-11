@@ -118,3 +118,92 @@
 192.168.1.136 - - [11/Aug/2021 13:00:21] "POST /socket.io/?EIO=3&transport=polling&t=NisA6F8&sid=177506a754a241c893ff595ba9f4013b HTTP/1.1" 200 223 0.027267
 192.168.1.136 - - [11/Aug/2021 13:00:21] "GET /socket.io/?EIO=3&transport=polling&t=NisA6F9&sid=177506a754a241c893ff595ba9f4013b HTTP/1.1" 200 945 0.002862
 192.168.1.136 - - [11/Aug/2021 13:00:23] "GET /socket.io/?EIO=3&transport=polling&t=NisA6Gn&sid=177506a754a241c893ff595ba9f4013b HTTP/1.1" 200 215 0.005807
+(24240) wsgi starting up on http://0.0.0.0:5000
+(24240) accepted ('192.168.1.136', 59386)
+192.168.1.136 - - [11/Aug/2021 13:08:50] "GET /socket.io/?EIO=3&transport=polling&t=NisC2VS HTTP/1.1" 200 381 0.004717
+(24240) accepted ('192.168.1.136', 59388)
+(24240) accepted ('192.168.1.136', 59390)
+192.168.1.136 - - [11/Aug/2021 13:08:51] "POST /socket.io/?EIO=3&transport=polling&t=NisC2Vq&sid=79a5da7a4837494b9b037ff231122383 HTTP/1.1" 200 223 0.483494
+192.168.1.136 - - [11/Aug/2021 13:08:51] "GET /socket.io/?EIO=3&transport=polling&t=NisC2Vu&sid=79a5da7a4837494b9b037ff231122383 HTTP/1.1" 200 1088 0.001542
+192.168.1.136 - - [11/Aug/2021 13:08:51] "GET /socket.io/?EIO=3&transport=polling&t=NisC2e6&sid=79a5da7a4837494b9b037ff231122383 HTTP/1.1" 200 215 0.000901
+192.168.1.136 - - [11/Aug/2021 13:08:54] "GET /socket.io/?EIO=3&transport=polling&t=NisC3EE HTTP/1.1" 200 381 0.002778
+192.168.1.136 - - [11/Aug/2021 13:08:54] "POST /socket.io/?EIO=3&transport=polling&t=NisC3T9&sid=a0f5724d8b9a44d2beee98b2e18e8665 HTTP/1.1" 200 223 0.015785
+192.168.1.136 - - [11/Aug/2021 13:08:54] "GET /socket.io/?EIO=3&transport=polling&t=NisC3TB&sid=a0f5724d8b9a44d2beee98b2e18e8665 HTTP/1.1" 200 945 0.001449
+(24240) accepted ('192.168.1.136', 59392)
+192.168.1.136 - - [11/Aug/2021 13:08:54] "GET /socket.io/?EIO=3&transport=polling&t=NisC3Tg&sid=a0f5724d8b9a44d2beee98b2e18e8665 HTTP/1.1" 200 215 0.000910
+(24240) accepted ('192.168.1.136', 59460)
+192.168.1.136 - - [11/Aug/2021 13:12:58] "POST / HTTP/1.1" 200 10219 0.079568
+192.168.1.136 - - [11/Aug/2021 13:12:58] "GET /socket.io/?EIO=3&transport=websocket&sid=79a5da7a4837494b9b037ff231122383 HTTP/1.1" 200 0 247.354646
+192.168.1.136 - - [11/Aug/2021 13:13:00] "GET /stylesheets/style.css HTTP/1.1" 304 262 0.019752
+(24240) accepted ('192.168.1.136', 59462)
+(24240) accepted ('192.168.1.136', 59464)
+(24240) accepted ('192.168.1.136', 59466)
+192.168.1.136 - - [11/Aug/2021 13:13:00] "GET /js/jquery.min.js HTTP/1.1" 304 263 0.004662
+192.168.1.136 - - [11/Aug/2021 13:13:00] "GET /js/socket.io.min.js HTTP/1.1" 304 262 0.004764
+192.168.1.136 - - [11/Aug/2021 13:13:00] "GET /js/my_javascript.js HTTP/1.1" 304 261 0.004599
+192.168.1.136 - - [11/Aug/2021 13:13:02] "GET /stylesheets/biocl-01.svg HTTP/1.1" 200 8745 0.004646
+192.168.1.136 - - [11/Aug/2021 13:13:02] "GET /favicon.ico HTTP/1.1" 404 366 0.003471
+192.168.1.136 - - [11/Aug/2021 13:13:02] "GET /stylesheets/biocl.jpg HTTP/1.1" 304 264 0.004707
+192.168.1.136 - - [11/Aug/2021 13:13:02] "GET /socket.io/?EIO=3&transport=polling&t=NisC_M- HTTP/1.1" 200 381 0.002595
+(24240) accepted ('192.168.1.136', 59468)
+192.168.1.136 - - [11/Aug/2021 13:13:02] "POST /socket.io/?EIO=3&transport=polling&t=NisC_rK&sid=6033ae29862f42aca4bf5c181922f1c7 HTTP/1.1" 200 223 0.016638
+192.168.1.136 - - [11/Aug/2021 13:13:04] "GET /socket.io/?EIO=3&transport=polling&t=NisC_rL&sid=6033ae29862f42aca4bf5c181922f1c7 HTTP/1.1" 200 215 1.958713
+(24579) wsgi starting up on http://0.0.0.0:5000
+(24579) accepted ('192.168.1.136', 59644)
+192.168.1.136 - - [11/Aug/2021 13:30:49] "GET /socket.io/?EIO=3&transport=polling&t=NisH4UT HTTP/1.1" 200 381 0.004437
+(24579) accepted ('192.168.1.136', 59646)
+(24579) accepted ('192.168.1.136', 59648)
+192.168.1.136 - - [11/Aug/2021 13:30:50] "POST /socket.io/?EIO=3&transport=polling&t=NisH4Um&sid=25aee9d409d44d71a15c4a39f4a97a73 HTTP/1.1" 200 223 1.197826
+192.168.1.136 - - [11/Aug/2021 13:30:50] "GET /socket.io/?EIO=3&transport=polling&t=NisH4Un&sid=25aee9d409d44d71a15c4a39f4a97a73 HTTP/1.1" 200 1088 0.001444
+192.168.1.136 - - [11/Aug/2021 13:30:50] "GET /socket.io/?EIO=3&transport=polling&t=NisH4nn&sid=25aee9d409d44d71a15c4a39f4a97a73 HTTP/1.1" 200 215 0.000834
+192.168.1.136 - - [11/Aug/2021 13:30:52] "GET /socket.io/?EIO=3&transport=polling&t=NisH4rj HTTP/1.1" 200 381 0.002263
+192.168.1.136 - - [11/Aug/2021 13:30:52] "POST /socket.io/?EIO=3&transport=polling&t=NisH5G-&sid=4d8018190c3d4fd2899b8e6834cafb25 HTTP/1.1" 200 223 0.015105
+(24579) accepted ('192.168.1.136', 59650)
+192.168.1.136 - - [11/Aug/2021 13:30:52] "GET /socket.io/?EIO=3&transport=polling&t=NisH5H1&sid=4d8018190c3d4fd2899b8e6834cafb25 HTTP/1.1" 200 945 0.001306
+192.168.1.136 - - [11/Aug/2021 13:30:52] "GET /socket.io/?EIO=3&transport=polling&t=NisH5HV&sid=4d8018190c3d4fd2899b8e6834cafb25 HTTP/1.1" 200 215 0.000845
+192.168.1.136 - - [11/Aug/2021 13:31:36] "POST / HTTP/1.1" 200 10219 0.082495
+192.168.1.136 - - [11/Aug/2021 13:31:38] "GET /stylesheets/style.css HTTP/1.1" 200 10015 0.019655
+192.168.1.136 - - [11/Aug/2021 13:31:38] "GET /js/jquery.min.js HTTP/1.1" 304 263 0.004790
+(24579) accepted ('192.168.1.136', 59652)
+(24579) accepted ('192.168.1.136', 59654)
+192.168.1.136 - - [11/Aug/2021 13:31:38] "GET /socket.io/?EIO=3&transport=websocket&sid=25aee9d409d44d71a15c4a39f4a97a73 HTTP/1.1" 200 0 47.668098
+192.168.1.136 - - [11/Aug/2021 13:31:38] "GET /js/socket.io.min.js HTTP/1.1" 304 262 0.004530
+192.168.1.136 - - [11/Aug/2021 13:31:38] "GET /js/my_javascript.js HTTP/1.1" 304 261 0.004434
+192.168.1.136 - - [11/Aug/2021 13:31:39] "GET /socket.io/?EIO=3&transport=polling&t=NisHGRK HTTP/1.1" 200 381 0.002380
+192.168.1.136 - - [11/Aug/2021 13:31:39] "GET /stylesheets/biocl-01.svg HTTP/1.1" 200 8745 0.004543
+192.168.1.136 - - [11/Aug/2021 13:31:39] "GET /stylesheets/biocl.jpg HTTP/1.1" 304 264 0.004458
+192.168.1.136 - - [11/Aug/2021 13:31:39] "GET /favicon.ico HTTP/1.1" 404 366 0.004101
+192.168.1.136 - - [11/Aug/2021 13:31:41] "POST /socket.io/?EIO=3&transport=polling&t=NisHGmV&sid=0410ae2055e849648ec51ebb045a3e07 HTTP/1.1" 200 223 0.014921
+192.168.1.136 - - [11/Aug/2021 13:31:41] "GET /socket.io/?EIO=3&transport=polling&t=NisHGmZ&sid=0410ae2055e849648ec51ebb045a3e07 HTTP/1.1" 200 945 0.023300
+(24579) accepted ('192.168.1.136', 59656)
+192.168.1.136 - - [11/Aug/2021 13:31:43] "POST /socket.io/?EIO=3&transport=polling&t=NisHHGf&sid=0410ae2055e849648ec51ebb045a3e07 HTTP/1.1" 200 223 0.005720
+192.168.1.136 - - [11/Aug/2021 13:31:43] "GET /socket.io/?EIO=3&transport=polling&t=NisHHGg&sid=0410ae2055e849648ec51ebb045a3e07 HTTP/1.1" 200 215 0.000816
+192.168.1.136 - - [11/Aug/2021 13:32:07] "POST / HTTP/1.1" 200 10219 0.007789
+192.168.1.136 - - [11/Aug/2021 13:32:07] "GET /socket.io/?EIO=3&transport=websocket&sid=0410ae2055e849648ec51ebb045a3e07 HTTP/1.1" 200 0 25.208895
+192.168.1.136 - - [11/Aug/2021 13:32:09] "GET /js/jquery.min.js HTTP/1.1" 304 263 0.004680
+192.168.1.136 - - [11/Aug/2021 13:32:09] "GET /js/socket.io.min.js HTTP/1.1" 304 262 0.004479
+(24579) accepted ('192.168.1.136', 59658)
+192.168.1.136 - - [11/Aug/2021 13:32:09] "GET /js/my_javascript.js HTTP/1.1" 304 261 0.004384
+192.168.1.136 - - [11/Aug/2021 13:32:09] "GET /stylesheets/style.css HTTP/1.1" 200 10015 0.004413
+192.168.1.136 - - [11/Aug/2021 13:32:09] "GET /stylesheets/biocl.jpg HTTP/1.1" 304 264 0.004498
+192.168.1.136 - - [11/Aug/2021 13:32:09] "GET /stylesheets/biocl-01.svg HTTP/1.1" 200 8745 0.004506
+192.168.1.136 - - [11/Aug/2021 13:32:11] "GET /socket.io/?EIO=3&transport=polling&t=NisHNvz HTTP/1.1" 200 381 0.002153
+192.168.1.136 - - [11/Aug/2021 13:32:11] "GET /favicon.ico HTTP/1.1" 404 366 0.003208
+192.168.1.136 - - [11/Aug/2021 13:32:11] "POST /socket.io/?EIO=3&transport=polling&t=NisHOOm&sid=3b609488865445bf95a6919210ae2ec3 HTTP/1.1" 200 223 0.014563
+(24579) accepted ('192.168.1.136', 59660)
+192.168.1.136 - - [11/Aug/2021 13:32:11] "GET /socket.io/?EIO=3&transport=polling&t=NisHOOo&sid=3b609488865445bf95a6919210ae2ec3 HTTP/1.1" 200 955 0.001310
+192.168.1.136 - - [11/Aug/2021 13:32:11] "GET /socket.io/?EIO=3&transport=polling&t=NisHOPI&sid=3b609488865445bf95a6919210ae2ec3 HTTP/1.1" 200 215 0.003792
+sh: 1: /home/pi/vprocess4c/bash: not found
+(494) wsgi starting up on http://0.0.0.0:5000
+(494) accepted ('192.168.1.136', 59720)
+192.168.1.136 - - [11/Aug/2021 13:34:33] "GET /socket.io/?EIO=3&transport=polling&t=NisHxhy HTTP/1.1" 200 381 0.010961
+(494) accepted ('192.168.1.136', 59722)
+(494) accepted ('192.168.1.136', 59724)
+192.168.1.136 - - [11/Aug/2021 13:34:34] "POST /socket.io/?EIO=3&transport=polling&t=NisHxiM&sid=23ea8927bbfd439e8f9facfc3119691e HTTP/1.1" 200 223 0.851220
+192.168.1.136 - - [11/Aug/2021 13:34:34] "GET /socket.io/?EIO=3&transport=polling&t=NisHxiN&sid=23ea8927bbfd439e8f9facfc3119691e HTTP/1.1" 200 1095 0.002965
+192.168.1.136 - - [11/Aug/2021 13:34:35] "GET /socket.io/?EIO=3&transport=polling&t=NisHxwQ&sid=23ea8927bbfd439e8f9facfc3119691e HTTP/1.1" 200 215 0.000854
+192.168.1.136 - - [11/Aug/2021 13:34:35] "GET /socket.io/?EIO=3&transport=polling&t=NisHxxY HTTP/1.1" 200 381 0.002263
+192.168.1.136 - - [11/Aug/2021 13:34:35] "POST /socket.io/?EIO=3&transport=polling&t=NisHyG6&sid=435eb92bbb2b400593c189d3cd3f376d HTTP/1.1" 200 223 0.015892
+(494) accepted ('192.168.1.136', 59726)
+192.168.1.136 - - [11/Aug/2021 13:34:35] "GET /socket.io/?EIO=3&transport=polling&t=NisHyG8&sid=435eb92bbb2b400593c189d3cd3f376d HTTP/1.1" 200 945 0.001299
+192.168.1.136 - - [11/Aug/2021 13:34:35] "GET /socket.io/?EIO=3&transport=polling&t=NisHyGe&sid=435eb92bbb2b400593c189d3cd3f376d HTTP/1.1" 200 215 0.000908

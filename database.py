@@ -13,6 +13,10 @@ TIME_MIN_BD = 1 #1  # 1 [s]
 flag_database = "False"
 flag_database_local = False
 
+real_data_2_save = 0
+real_data_3_save = 0
+real_data_4_save = 0
+
 ia, ib, ic = 0,0,0
 
 
@@ -36,29 +40,27 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
                                                                                                                                                                                              #Densidad_Opt       #TASA_Crec          #Etanol       #sustrato_i       #mezclador           #bomba1             #bomba2          #Temp_setpoint     #Temp_measure     #pH_setpoint     #pH_measure
     try:
         #sensor t_sombrero anti-ceros
-        if float(real_data[2]) != 0 and ia < 10:
+        if float(real_data[2]) != 0:
             real_data_2_save = float(real_data[2])
-            ia = 0
+
         else:
             real_data[2] = real_data_2_save
-            ia = ia + 1
+
 
         #sensor t_mosto anti-ceros
-        if float(real_data[3]) != 0 and ib < 10:
+        if float(real_data[3]) != 0:
             real_data_3_save = float(real_data[3])
-            ib = 0
+
         else:
             real_data[3] = real_data_3_save
-            ib = ib + 1
+
 
         #sensor c02 anti-ceros
-        if float(real_data[4]) != 0 and ic < 10::
+        if float(real_data[4]) != 0:
             real_data_4_save = float(real_data[4])
-            ic = 0
+
         else:
             real_data[4] = real_data_4_save
-            ic = ic + 1
-
 
 
 
