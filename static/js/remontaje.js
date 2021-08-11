@@ -47,7 +47,7 @@ $(document).ready(function() {
         document.getElementById('rm_enable_input_id').checked  = msg.set[4];
 
         $('#rm_periodo_div_id' ).text('Periodo         : ' + msg.save[0] + '[MIN]').html();
-        $('#rm_duracion_div_id').text('Tiempo encendido: ' + msg.save[1] + '[MIN]').html();
+        $('#rm_duracion_div_id').text('Ton Remontaje   : ' + msg.save[1] + '[MIN]').html();
         $('#rm_ciclo_div_id'   ).text('Total Dias      : ' + msg.save[2] + '[DIAS]').html();
         $('#rm_flujo_div_id'   ).text('Flujo           : ' + msg.save[3] + '[L/min]').html();
 
@@ -101,7 +101,7 @@ socket.on('aire_setpoints', function(msg) {
     document.getElementById('a_enable_input_id').checked  = msg.set[4];
 
     $('#a_periodo_div_id' ).text('Periodo         : ' + msg.save[0] + '[MIN]').html();
-    $('#a_duracion_div_id').text('Tiempo encendido: ' + msg.save[1] + '[MIN]').html();
+    $('#a_duracion_div_id').text('Ton Aire: ' + msg.save[1] + '[MIN]').html();
     $('#a_ciclo_div_id'   ).text('Total Dias      : ' + msg.save[2] + '[DIAS]').html();
     //$('#b_flujo_div_id'   ).text('Flujo           : ' + msg.save[3] + '[L/min]').html();
 
@@ -151,7 +151,7 @@ socket.on('bomba_setpoints', function(msg) {
     document.getElementById('b_enable_input_id').checked  = msg.set[4];
 
     $('#b_periodo_div_id' ).text('Periodo         : ' + msg.save[0] + '[MIN]').html();
-    $('#b_duracion_div_id').text('Tiempo encendido: ' + msg.save[1] + '[MIN]').html();
+    $('#b_duracion_div_id').text('Ton Bomba_1     : ' + msg.save[1] + '[MIN]').html();
     $('#b_ciclo_div_id'   ).text('Total Dias      : ' + msg.save[2] + '[DIAS]').html();
     //$('#a_flujo_div_id'   ).text('Flujo           : ' + msg.save[3] + '[L/min]').html();
 

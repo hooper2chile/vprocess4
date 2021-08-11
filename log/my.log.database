@@ -1,0 +1,4 @@
+  File "database.py", line 55
+    if float(real_data[4]) != 0 and ic < 10::
+                                            ^
+SyntaxError: invalid syntax

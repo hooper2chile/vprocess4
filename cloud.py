@@ -6,7 +6,7 @@
 
 import os, sys, time, datetime, logging
 
-logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename='/home/pi/vprocess4c/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 
@@ -16,9 +16,9 @@ ID = '1iYqk0kQ2xsG4EbOznnhFL0tHVX6zXkOY'
 
 time.sleep(15)
 
-gdrive = '/home/pi/vprocess4/config/./gdrive-linux-rpi'
-DIR1   = ' ' #'/home/pi/vprocess4/config/'
-DIR2   = '/home/pi/vprocess4/csv/'
+gdrive = '/home/pi/vprocess4c/config/./gdrive-linux-rpi'
+DIR1   = ' ' #'/home/pi/vprocess4c/config/'
+DIR2   = '/home/pi/vprocess4c/csv/'
 
 
 while True:

@@ -350,8 +350,8 @@ def cook_setpoint(set_data, rm_sets, a_sets):
         f.close()
 
     except OSError:
-        #pass
-        logging.info('\n' + "no se pudo guardar el command en el archivo de texto" + '\n')
+        pass
+        #logging.info('\n' + "no se pudo guardar el command en el archivo de texto" + '\n')
 
     return command
 

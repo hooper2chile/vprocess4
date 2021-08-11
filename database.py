@@ -4,21 +4,22 @@
 '''
     Adquisición de datos por sockets (ZMQ) para la base de datos.
 '''
-import os, sys, time, datetime, sqlite3, sqlitebck, logging, communication, zmq
+import os, sys, time, datetime, sqlite3, sqlitebck, logging, zmq
 
 DIR="/home/pi/vprocess4c"
 
-logging.basicConfig(filename = DIR + '/log/database.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(filename = DIR + '/log/database2.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 TIME_MIN_BD = 1 #1  # 1 [s]
 flag_database = "False"
 flag_database_local = False
 
+ia, ib, ic = 0,0,0
 
 
 def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     #CREACION DE TABLAS TEMP1(Sombrero), TEMP2(Mosto), TEMP_ (promedio). CADA ITEM ES UNA COLUMNA
     # CREAR TABLAS SI NO EXISTEN!!!!
-    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA TIMESTAMP NOT NULL, HORA TIMESTAMP NOT NULL, T_MOSTO REAL, T_SOMBRERO REAL, T_Promedio REAL, T_Setpoint REAL, Flujo_REMONTAJE REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL, Lote REAL, Dosis REAL, Bomba1 REAL, Bomba2 REAL, Electrovalvula_Aire REAL, CEPA REAL, FLUJO_AIRE REAL, co2 REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS PROCESO (ID INTEGER PRIMARY KEY autoincrement, FECHA TIMESTAMP NOT NULL, HORA TIMESTAMP NOT NULL, T_MOSTO REAL, T_SOMBRERO REAL, T_Promedio REAL, T_Setpoint REAL, Flujo_REMONTAJE REAL, Densidad REAL, Yan REAL, pH REAL, Brix REAL, Acidez REAL, Concentracion_FDA REAL, Dosis_FDA REAL, Bomba1 REAL, Bomba2 REAL, Electrovalvula_Aire REAL, FLUJO_FDA REAL, FLUJO_AIRE REAL, CO2 REAL)')
 
     #CREACION DE TABLAS TEMP1(Sombrero), TEMP2(Mosto), TEMP_ (promedio). CADA ITEM ES UNA COLUMNA
     c.execute('CREATE TABLE IF NOT EXISTS T_SOMBRERO (ID INTEGER PRIMARY KEY autoincrement, FECHA_HORA TIMESTAMP NOT NULL, MAGNITUD REAL)')
@@ -34,17 +35,45 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     #INSERCION DE LOS DATOS MEDIDOS, TABLA FULL CON TODA LA DATA, NULL es para el ID
                                                                                                                                                                                              #Densidad_Opt       #TASA_Crec          #Etanol       #sustrato_i       #mezclador           #bomba1             #bomba2          #Temp_setpoint     #Temp_measure     #pH_setpoint     #pH_measure
     try:
+        #sensor t_sombrero anti-ceros
+        if float(real_data[2]) != 0 and ia < 10:
+            real_data_2_save = float(real_data[2])
+            ia = 0
+        else:
+            real_data[2] = real_data_2_save
+            ia = ia + 1
+
+        #sensor t_mosto anti-ceros
+        if float(real_data[3]) != 0 and ib < 10:
+            real_data_3_save = float(real_data[3])
+            ib = 0
+        else:
+            real_data[3] = real_data_3_save
+            ib = ib + 1
+
+        #sensor c02 anti-ceros
+        if float(real_data[4]) != 0 and ic < 10::
+            real_data_4_save = float(real_data[4])
+            ic = 0
+        else:
+            real_data[4] = real_data_4_save
+            ic = ic + 1
+
+
+
+
         real_data_1 = (float(real_data[3]) + float(real_data[2]))/2  #temperatura promedio entre T_MOSTO y T_SOMBRERO
         real_data_2 =  float(real_data[4])                       #medicion de co2 [ppm]
         #comp1 = float(ficha_producto[12])#round(float(ficha_producto[14])*ficha_producto[12],2)                                                                                                                                                                            #Densidad_Opt       #TASA_Crec          #Etanol       #sustrato_i       #mezclador           #bomba1             #bomba2          #Temp_setpoint     #Temp_measure     #pH_setpoint     #pH_measure
 
-        logging.info("DATOS FLOAT SE insertan datos en db")
-        print "Datos Float obtenidos !!!!"
+        #logging.info("DATOS FLOAT SE insertan datos en db")
+        #print "Datos Float obtenidos !!!!"
 
 
     except:
-        print "Datos Float NO fueron obtenidos !!!!"
-        logging.info("no se pudo insertar datos en db ??????????????")
+        pass
+        #print "Datos Float NO fueron obtenidos !!!!"
+        #logging.info("no se pudo insertar datos en db ??????????????")
 
 
 
@@ -52,10 +81,10 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
     try:
         c.execute("INSERT INTO PROCESO  VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (datetime.datetime.now().strftime("%Y-%m-%d"), datetime.datetime.now().strftime("%H:%M:%S"), round(float(real_data[3]),2), round(float(real_data[2]),2), round(real_data_1,2), ficha_producto[9], ficha_producto[12], ficha_producto[0], ficha_producto[1], ficha_producto[2], ficha_producto[3], ficha_producto[4], ficha_producto[7], ficha_producto[8], ficha_producto[10], ficha_producto[11], ficha_producto[13], ficha_producto[6], ficha_producto[5], real_data_2 ))
         #Insercion solo de los datos de sensores
-        print "TABLA GRANDE OK!!!! en db"
+        #print "TABLA GRANDE OK!!!! en db"
 
     except:
-        print "no se pudo insertar datos TABLA GRANDE  en db"
+        #print "no se pudo insertar datos TABLA GRANDE  en db"
         pass
 
 
@@ -65,15 +94,16 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
         c.execute("INSERT INTO T_SOMBRERO VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), round(float(real_data[2]),2)))
         c.execute("INSERT INTO T_PROMEDIO VALUES (NULL,?,?)", (datetime.datetime.now().strftime("%Y-%m-%d,%H:%M:%S"), round(float(real_data[1]),2)))
 
-        print "Datos Insertados !!!"
-        logging.info("se insertaron todos los datos en db")
+        #print "Datos Insertados !!!"
+        #logging.info("se insertaron todos los datos en db")
 
         #time.sleep(0.5)
 
     except:
+        pass
         #print "no se pudo insertar dato en db"
-        print "Fallo al Insertar Dato !!!"
-        logging.info("no se pudo insertar datos en db")
+        #print "Fallo al Insertar Dato !!!"
+        #logging.info("no se pudo insertar datos en db")
 
     #se guardan los datos agregados en la db
     connector.commit()
@@ -93,10 +123,11 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
             #os.system('sqlite3 -header -csv %s "select * from T_PROMEDIO;" > /home/pi/vprocess4c/csv/%s' % (filedb,filedb[28:-3])+'T_PROMEDIO.csv' )
 
             os.system('sqlite3 -header -csv %s "select * from PROCESO;"    > /home/pi/vprocess4c/csv/%s' % (filedb,filedb[28:-3])+'PROCESO.csv' )
-            logging.info("\n Backup CSV REALIZADO \n")
+            #logging.info("\n Backup CSV REALIZADO \n")
 
         except:
-            logging.info("\n Backup FULL NO REALIZADO, NO REALIZADO \n")
+            pass
+            #logging.info("\n Backup FULL NO REALIZADO, NO REALIZADO \n")
 
 
         try:
@@ -106,8 +137,9 @@ def update_db(real_data, ficha_producto, connector, c, first_time, BACKUP):
             f.close()
 
         except:
+            pass
             #print "no se pudo guardar el nombre de la DB para ser revisada en app.py"
-            logging.info("no se pudo guardar el nombre de la DB para ser revisada en app.py")
+            #logging.info("no se pudo guardar el nombre de la DB para ser revisada en app.py")
 
         return True
 

@@ -103,8 +103,8 @@ char RTD_data2[20];               //we make a 20 byte character array to hold in
 
 //co2 variables
 char co2_data[20];
-float co2   = 0;
-
+float co2   = 1;
+float co2_save = 2;
 
 
 byte in_char = 0;                //used as a 1 byte buffer to store in bound bytes from the RTD Circuit.
@@ -136,7 +136,12 @@ void co2_sensor() {
         break;                            //exit the while loop.
       }
     }
-    co2 = atof(co2_data);
+    //co2 = atof(co2_data);
+    co2 = float(atoi(co2_data));
+
+    //if (co2 != 0) co2_save = co2;
+    //else          co2 = co2_save;
+
   }
   serial_event = false;                   //reset the serial event flag.
   return;

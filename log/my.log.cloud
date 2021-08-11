@@ -1,100 +1,3677 @@
-Traceback (most recent call last):
-  File "cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "/home/pi/vprocess4c/cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "/home/pi/vprocess4c/cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
-Traceback (most recent call last):
-  File "/home/pi/vprocess4c/cloud.py", line 9, in <module>
-    logging.basicConfig(filename='/home/pi/vprocess4/log/cloud.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-  File "/usr/lib/python2.7/logging/__init__.py", line 1547, in basicConfig
-    hdlr = FileHandler(filename, mode)
-  File "/usr/lib/python2.7/logging/__init__.py", line 913, in __init__
-    StreamHandler.__init__(self, self._open())
-  File "/usr/lib/python2.7/logging/__init__.py", line 943, in _open
-    stream = open(self.baseFilename, self.mode)
-IOError: [Errno 2] No such file or directory: '/home/pi/vprocess4/log/cloud.log'
+Starting sync...
+Collecting local and remote file information...
+Found 1 local files and 167 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.408653905s
+Starting sync...
+Collecting local and remote file information...
+Found 1 local files and 167 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.526235201s
+Starting sync...
+Collecting local and remote file information...
+Found 1 local files and 167 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.514706754s
+Starting sync...
+Collecting local and remote file information...
+Found 1 local files and 167 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.246021753s
+Starting sync...
+Collecting local and remote file information...
+Found 1 local files and 167 remote files
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 2.681301887s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 167 remote files
+
+1 remote files are missing
+[0001/0001] Uploading backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+
+1 local files has changed
+[0001/0001] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.596361534s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.480105231s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.556063708s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.777618817s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.681737307s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.882954038s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.76464276s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.650216538s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.321686421s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.95305284s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.100766697s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.800179642s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.844500011s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.927113108s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.118521443s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.130339059s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.875342805s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.198623407s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.935970638s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.786599059s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.94736548s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.51796485s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.592217117s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.631760511s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.547692507s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.80836692s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.834501201s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.909069448s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.074302399s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.53559667s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.76767388s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.435227833s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.815311423s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.920062517s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.502355873s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.875506613s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.916829181s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.089391272s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.606262769s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.124031939s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.89779245s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.928538592s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.070602247s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.230463284s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.942131152s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.40122572s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.012244447s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.471347309s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.845235129s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.520140051s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.361610381s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.455748279s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.006742238s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.414734607s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.81035886s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.640281082s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.903496827s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.991762679s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.151437931s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.916115309s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.664005695s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.799218786s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.965435972s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.646728203s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.765036327s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.658795866s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.099821502s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.962282489s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.035284178s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.05693881s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.049818347s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.990178901s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.809075403s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.922157182s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.983218037s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.768433388s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.322195052s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.704229156s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.353710392s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.638105441s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.947392002s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.986970073s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.992560327s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 5.081181788s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.976626312s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.064242158s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.081893788s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.604849607s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.88703356s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.979327909s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.255146588s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.08636608s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.191530009s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.161118853s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.657776103s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.037827889s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.700160323s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.807100376s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.352978622s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.617115341s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.611105757s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.370996804s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.352575847s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.002828338s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.496716043s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.355977157s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.59852321s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.923717637s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.034661346s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.055045207s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 18.656604951s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.155198294s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.993689827s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.613838935s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.665442117s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.806539897s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.900005983s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.458629903s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.622559207s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.252376497s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.74462851s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 5.525075912s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.54830512s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.501999411s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.661693692s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.287848849s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.709364768s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.707890501s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.917279591s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.652323554s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.580283556s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.906858314s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.57002123s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.881794296s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.49729013s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.415888523s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.697702513s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.552517845s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.45162358s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.969269745s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.576116926s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.468737674s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.305874263s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.620886888s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.151451933s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.634295948s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.064667306s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.529496881s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.794753493s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.266422506s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.185142513s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.267200255s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.847794468s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.819914796s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.643514455s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.674308884s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.833886108s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.522684379s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.405103746s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.827304425s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.021433181s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.532770676s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.003932302s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.228004299s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.719159053s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.389168242s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.973305324s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.815064677s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.71759123s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.09568699s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.745339064s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.366246312s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.51067348s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.74712664s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.015003527s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.906706867s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.921344668s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.264059117s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.81569687s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.0882548s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.97792627s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.973397444s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.756699893s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.415669583s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.585627685s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.440073655s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.190661169s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.81687034s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.772759135s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.973785164s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.931510092s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.703653234s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.38638654s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.76787727s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.253240755s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.743623585s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.343375588s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.726451447s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.562112789s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.806220387s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.42085964s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.00177984s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.769683492s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.642074457s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.089941553s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.816486654s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.453596936s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.054122647s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.385818589s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.28069597s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.566607795s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 18.350660477s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.86677978s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.123129294s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.195866001s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.06184741s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.826478321s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.020735576s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.507457081s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.98047417s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.082206396s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.640396398s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.944949014s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 5.170386497s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.047336961s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.769875424s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.361215913s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.747788281s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.670123028s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.843173412s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 5.197477445s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.496914417s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.396750812s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.90415539s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.386559121s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.750926908s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.91952838s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.348431883s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.132366342s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.450890277s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.50202291s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.112167919s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.505518398s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.228810308s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.576384931s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.449415561s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.97599397s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.218304294s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.507632809s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.574365221s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.337079482s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.884650182s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.066268587s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.603758945s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.67545277s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.879440918s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.455863155s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.586530666s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.627103685s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.497888917s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.542841035s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.695691412s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.504512374s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.52507966s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.779322201s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.69829865s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.813568538s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.247929064s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.2874755s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.416269099s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.834103962s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.1412529s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.468801438s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.633593912s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.722375524s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.167670916s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.587452218s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.604929217s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.67661703s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.202506241s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.120521481s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.899775486s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.363874685s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.496408263s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.699945854s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.63988878s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.269873595s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.190916544s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.016281919s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.598469983s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.636641141s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.071443362s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.502964606s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.275986743s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.746149799s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.477566958s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.942843869s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.694499616s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.46592313s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.319857739s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.467115845s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.921081196s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.488891456s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.410475426s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.748261428s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.58146826s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.996038014s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.606893724s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.409958403s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.554702577s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.416487314s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.375392527s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.209524312s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.553991928s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.224601723s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.837772612s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.649654192s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.788538567s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.01526116s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.593932938s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.497930483s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.963052545s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.616510525s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.490473315s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.165242054s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.951499425s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.564643396s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.410340899s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.550888454s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.487997171s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.1402976s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.521957363s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.504738407s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.311734438s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.59496069s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.845215159s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.848864432s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.15366891s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.245716115s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.815170622s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.614125096s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.955568336s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.657884635s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.468195151s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.056874243s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.470294375s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.127467421s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.632124547s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.618503864s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.029304336s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.71876954s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.798561957s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.883240907s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.559678425s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.762664815s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.232292684s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.59634564s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.48543549s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.080630358s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.911563325s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.085630398s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.622254872s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.007375266s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.881943106s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.504891838s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.915292023s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 17.623633679s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.896891774s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.886778306s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.461624607s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.062533846s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.605998409s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.806553751s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.61014981s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.150446753s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.609555619s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.326043836s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.018210218s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.402970353s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.548109791s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.725337943s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.440664671s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.903810975s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.73330045s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.026602318s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.689072908s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.777407441s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.648773659s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.906883342s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.801664231s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.726968925s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.690253778s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.541976697s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.817524061s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.025260566s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.009131305s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.676654939s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.494606509s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.763451431s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.714923517s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.422160434s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.717614616s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.767266917s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.031228334s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.909648709s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.762419609s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.900072651s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.73510434s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.952756008s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.696347826s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.102048172s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.7690358s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.472396336s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.905513945s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.821753598s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.717616782s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.661049572s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.918401345s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.060607272s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.953372908s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.310867155s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.68869067s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.818479517s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.561658606s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.865146247s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.524257905s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.521576282s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.724659828s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.762546965s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.045145111s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.735220183s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.016416592s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.60720677s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.468428249s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.700692039s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.672498722s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.635720771s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.613914844s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.017711715s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.691537498s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.163575212s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.859853019s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.601869919s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.559902537s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.73023795s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.281501865s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.764836158s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.400729616s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.830501473s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 4.162962249s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.561435129s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.62635475s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.869765361s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.505384157s
+Starting sync...
+Collecting local and remote file information...
+Found 2 local files and 168 remote files
+
+2 local files has changed
+[0001/0002] Updating backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv -> vprocess/backup__Fecha__10-08-21__Hora__20_53_57__PROCESO.csv
+[0002/0002] Updating gdrive_sync.txt -> vprocess/gdrive_sync.txt
+Sync finished in 3.965015409s
